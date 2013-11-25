@@ -27,3 +27,30 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 	OTHER DEALINGS IN THE SOFTWARE.
 */
+
+#ifndef ARGS__EXCEPTIONS_HPP__INCLUDED
+#define ARGS__EXCEPTIONS_HPP__INCLUDED
+
+// C++ include.
+#include <stdexcept>
+
+
+namespace Args {
+
+//
+// BaseException
+//
+
+//! Base exception of the library.
+class BaseException
+	:	public std::logic_error
+{
+public:
+	explicit BaseException( const std::string & what );
+
+	virtual ~BaseException();
+}; // class BaseException
+
+} /* namespace Args */
+
+#endif // ARGS__EXCEPTIONS_HPP__INCLUDED
