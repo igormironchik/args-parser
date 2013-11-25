@@ -5,7 +5,7 @@ require 'Args/version'
 MxxRu::Cpp::lib_target {
 
 	target( "Args." + Args::VERSION )
-	implib_path( "lib" )
+	target_root( "lib" )
 
 	cpp_source( "arg.cpp" )
 	cpp_source( "arg_iface.cpp" )
