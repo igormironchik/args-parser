@@ -78,6 +78,9 @@ public:
 
 	//! \return Is this argument defined?
 	virtual bool isDefined() const = 0;
+
+	//! \return Name of the argument.
+	virtual const std::string & name() const = 0;
 }; // class ArgIface
 
 } /* namespace Args */

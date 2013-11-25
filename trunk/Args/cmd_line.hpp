@@ -27,3 +27,49 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 	OTHER DEALINGS IN THE SOFTWARE.
 */
+
+#ifndef ARGS__CMD_LINE_HPP__INCLUDED
+#define ARGS__CMD_LINE_HPP__INCLUDED
+
+// Args include.
+#include <Args/utils.hpp>
+#include <Args/context.hpp>
+#include <Args/arg_iface.hpp>
+
+// C++ include.
+#include <list>
+
+
+namespace Args {
+
+//
+// CmdLine
+//
+
+/*!
+	CmdLine is class that holds all rguments and parse
+	command line arguments in the correspondence with holded
+	arguments.
+*/
+class CmdLine final {
+public:
+	CmdLine( int argc, char ** argv );
+
+	//! Add argument.
+	void addArg( ArgIface * arg );
+
+	//! Parse arguments.
+	void parse();
+
+private:
+	DISABLE_COPY( CmdLine )
+
+	// Context.
+	Context m_context;
+	//! Arguments.
+	std::list< ArgIface* > m_args;
+}; // class CmdLine
+
+} /* namespace Args */
+
+#endif // ARGS__CMD_LINE_HPP__INCLUDED
