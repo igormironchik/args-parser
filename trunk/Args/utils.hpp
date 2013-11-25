@@ -28,62 +28,21 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// Args include.
-#include <Args/context.hpp>
+#ifndef ARGS__UTILS_HPP__INCLUDED
+#define ARGS__UTILS_HPP__INCLUDED
 
 
 namespace Args {
 
 //
-// Context
+// DISABLE_COPY
 //
 
-Context::Context( const ContextInternal & items )
-	:	m_context( items )
-	,	m_it( m_context.begin() )
-{
-}
-
-ContextInternal::iterator
-Context::begin()
-{
-	return m_it;
-}
-
-ContextInternal::iterator
-Context::end()
-{
-	return m_context.end();
-}
-
-bool
-Context::atEnd()
-{
-	return ( begin() == end() );
-}
-
-ContextInternal::iterator
-Context::next()
-{
-	if( atEnd() )
-		return end();
-	else
-		return m_it++;
-}
-
-void
-Context::putBack()
-{
-	if( begin() == m_context.begin() )
-		return;
-	else
-		--m_it;
-}
-
-void
-Context::prepend( const std::string & what )
-{
-	m_it = m_context.insert( m_it, what );
-}
+//! Macro for disabling copy.
+#define DISABLE_COPY( Class ) \
+	Class( const Class & ); \
+	Class & operator= ( const Class & );
 
 } /* namespace Args */
+
+#endif // ARGS__UTILS_HPP__INCLUDED

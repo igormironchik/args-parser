@@ -13,4 +13,5 @@ MxxRu::Cpp::lib_target {
 	cpp_source( "context.cpp" )
 	cpp_source( "exceptions.cpp" )
 	cpp_source( "multi_arg.cpp" )
+	cpp_source( "utils.cpp" )
 }
