@@ -10,6 +10,6 @@ Just run build.rb which is a Ruby program and a project file.
 
 REQUIREMENTS
 
-For compiling QtArg you should have installed:
+For compiling Args you should have installed:
  * Ruby programming language (http://www.ruby-lang.org/en/)
  * mxx_ru Ruby gem (http://rubyforge.org/projects/mxx-ru/)
