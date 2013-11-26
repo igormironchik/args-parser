@@ -97,7 +97,7 @@ protected:
 	*/
 	virtual void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< char > & flags,
+		std::list< std::string > & flags,
 		//! All known names.
 		std::list< std::string > & names ) const = 0;
 

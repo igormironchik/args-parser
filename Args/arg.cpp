@@ -30,6 +30,11 @@
 
 // Args include.
 #include <Args/arg.hpp>
+#include <Args/context.hpp>
+#include <Args/exceptions.hpp>
+
+// C++ include.
+#include <algorithm>
 
 
 namespace Args {
@@ -81,7 +86,19 @@ Arg::isItYou( const std::string & name )
 void
 Arg::process( Context & context )
 {
-
+	if( !isWithValue() )
+		m_isDefined = true;
+	else
+	{
+		if( !context.atEnd() )
+		{
+			m_value = *context.next();
+			m_isDefined = true;
+		}
+		else
+			throw BaseException( std::string( "Argument \"" ) +
+				name() + "\" requires value but it's not presented." );
+	}
 }
 
 const std::string &
@@ -94,16 +111,54 @@ Arg::name() const
 }
 
 void
-Arg::checkCorrectnessBeforeParsing( std::list< char > & flags,
+Arg::checkCorrectnessBeforeParsing( std::list< std::string > & flags,
 	std::list< std::string > & names ) const
 {
+	if( !m_flag.empty() )
+	{
+		if( isCorrectFlag( m_flag ) )
+		{
+			auto it = std::find( flags.begin(), flags.end(), m_flag );
 
+			if( it != flags.end() )
+				throw BaseException( std::string( "Redefinition of argument "
+					"witg flag \"" ) + m_flag + "\"." );
+			else
+				flags.push_back( m_flag );
+		}
+		else
+			throw BaseException( std::string( "Dissallowed flag \"" ) +
+				m_flag + "\"." );
+	}
+
+	if( !m_name.empty() )
+	{
+		if( isCorrectName( m_name ) )
+		{
+			auto it = std::find( names.begin(), names.end(), m_name );
+
+			if( it != names.end() )
+				throw BaseException( std::string( "Redefinition of argument "
+					"with name \"" ) + m_name + "\"." );
+			else
+				names.push_back( m_name );
+		}
+		else
+			throw BaseException( std::string( "Dissallowed name \"" ) +
+				m_name + "\"." );
+	}
+
+	if( m_flag.empty() && m_name.empty() )
+		throw BaseException( std::string( "Arguments with empty flag and name "
+			"are dissallowed." ) );
 }
 
 void
 Arg::checkCorrectnessAfterParsing() const
 {
-
+	if( isRequired() && !isDefined() )
+		throw BaseException( std::string( "Undefined required argument \"" ) +
+			name() + "\"." );
 }
 
 bool

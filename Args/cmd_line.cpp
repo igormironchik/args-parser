@@ -125,7 +125,7 @@ CmdLine::parse()
 void
 CmdLine::checkCorrectnessBeforeParsing() const
 {
-	std::list< char > flags;
+	std::list< std::string > flags;
 	std::list< std::string > names;
 
 	std::for_each( m_args.begin(), m_args.end(),
