@@ -31,6 +31,9 @@
 #ifndef ARGS__UTILS_HPP__INCLUDED
 #define ARGS__UTILS_HPP__INCLUDED
 
+// C++ include.
+#include <string>
+
 
 namespace Args {
 
@@ -42,6 +45,22 @@ namespace Args {
 #define DISABLE_COPY( Class ) \
 	Class( const Class & ); \
 	Class & operator= ( const Class & );
+
+
+//
+// isArgument
+//
+
+//! \return Is word an argument?
+bool isArgument( const std::string & word );
+
+
+//
+// isFlag
+//
+
+//! \return Is word a flag?
+bool isFlag( const std::string & word );
 
 } /* namespace Args */
 
