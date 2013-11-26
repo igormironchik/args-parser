@@ -33,6 +33,7 @@
 
 // C++ include.
 #include <string>
+#include <list>
 
 
 namespace Args {
@@ -73,14 +74,31 @@ public:
 		//! Context of the command line.
 		Context & context ) = 0;
 
-	//! \return Is this argument required?
-	virtual bool isRequired() const = 0;
+	/*!
+		\return Name of the argument.
 
-	//! \return Is this argument defined?
-	virtual bool isDefined() const = 0;
-
-	//! \return Name of the argument.
+		If name is empty returned value should be a flag.
+		I.e. for example "-t" or "--timeout"
+	*/
 	virtual const std::string & name() const = 0;
+
+	/*!
+		Check correctness of the argument before parsing.
+
+		Implementation of this method must add his flag
+		and name to the \arg flags and \arg names.
+	*/
+	virtual void checkCorrectnessBeforeParsing(
+		//! All known flags.
+		std::list< char > & flags,
+		//! All known names.
+		std::list< std::string > & names ) const = 0;
+
+	//! Check correctness of the argument after parsing.
+	virtual void checkCorrectnessAfterParsing() const = 0;
+
+	//! \return Is this argument with value?
+	virtual bool isWithValue() const = 0;
 }; // class ArgIface
 
 } /* namespace Args */

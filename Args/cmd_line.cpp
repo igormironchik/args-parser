@@ -78,7 +78,83 @@ CmdLine::addArg( ArgIface * arg )
 void
 CmdLine::parse()
 {
+	checkCorrectnessBeforeParsing();
 
+	while( !m_context.atEnd() )
+	{
+		std::string word = *m_context.next();
+
+		const size_t eqIt = word.find( '=' );
+
+		if( eqIt != std::string::npos )
+		{
+			const std::string value = word.substr( eqIt + 1 );
+
+			if( !value.empty() )
+				m_context.prepend( value );
+
+			word = word.substr( 0, eqIt );
+		}
+
+		if( isArgument( word ) )
+			findArgument( word )->process( m_context );
+		else if( isFlag( word ) )
+		{
+			for( size_t i = 1, length = word.length(); i < length; ++i )
+			{
+				const std::string flag = std::string( "-" ) + word[ i ];
+
+				ArgIface * arg = findArgument( flag );
+
+				if( i < length - 1 && arg->isWithValue() )
+					throw BaseException( std::string( "Only last argument in "
+						"flags combo can have value. Flags combo is\"" ) +
+						word + "\"." );
+				else
+					arg->process( m_context );
+			}
+		}
+		else
+			throw BaseException( std::string( "Unknown argument \"" ) +
+				word + "\"." );
+	}
+
+	checkCorrectnessAfterParsing();
+}
+
+void
+CmdLine::checkCorrectnessBeforeParsing() const
+{
+	std::list< char > flags;
+	std::list< std::string > names;
+
+	std::for_each( m_args.begin(), m_args.end(),
+		[ &flags, &names ] ( ArgIface * arg )
+			{ arg->checkCorrectnessBeforeParsing( flags, names ); }
+	);
+}
+
+void
+CmdLine::checkCorrectnessAfterParsing() const
+{
+	std::for_each( m_args.begin(), m_args.end(),
+		[] ( ArgIface * arg )
+			{ arg->checkCorrectnessAfterParsing(); }
+	);
+}
+
+ArgIface *
+CmdLine::findArgument( const std::string & name )
+{
+	std::list< ArgIface* >::iterator it = std::find_if( m_args.begin(),
+		m_args.end(), [ &name ] ( ArgIface * arg ) -> bool
+			{ return ( arg->isItYou( name ) != nullptr ); } );
+
+	if( it != m_args.end() )
+		return (*it)->isItYou( name );
+	else
+		throw BaseException( std::string( "Unknown argument \"" ) +
+			name + "\"." );
 }
 
 } /* namespace Args */
