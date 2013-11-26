@@ -47,9 +47,24 @@ class Context;
 
 //! Interface for arguments.
 class ArgIface {
+
+	friend class CmdLine;
+
 public:
 	virtual ~ArgIface();
 
+	/*!
+		\return Name of the argument.
+
+		If name is empty returned value should be a flag.
+		I.e. for example "-t" or "--timeout"
+	*/
+	virtual const std::string & name() const = 0;
+
+	//! \return Is this argument with value?
+	virtual bool isWithValue() const = 0;
+
+protected:
 	/*!
 		\return Argument for the given \arg name name.
 
@@ -75,14 +90,6 @@ public:
 		Context & context ) = 0;
 
 	/*!
-		\return Name of the argument.
-
-		If name is empty returned value should be a flag.
-		I.e. for example "-t" or "--timeout"
-	*/
-	virtual const std::string & name() const = 0;
-
-	/*!
 		Check correctness of the argument before parsing.
 
 		Implementation of this method must add his flag
@@ -96,9 +103,6 @@ public:
 
 	//! Check correctness of the argument after parsing.
 	virtual void checkCorrectnessAfterParsing() const = 0;
-
-	//! \return Is this argument with value?
-	virtual bool isWithValue() const = 0;
 }; // class ArgIface
 
 } /* namespace Args */
