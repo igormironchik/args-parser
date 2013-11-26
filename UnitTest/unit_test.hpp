@@ -184,7 +184,7 @@ void TestName##Class::testBody()
 //
 
 #define CHECK_CONDITION( Condition ) \
-	if( !Condition ) \
+	if( !(Condition) ) \
 	{ \
 		std::ostringstream stream; \
 		stream << "     file: \"" << __FILE__ \
