@@ -62,6 +62,22 @@ bool isArgument( const std::string & word );
 //! \return Is word a flag?
 bool isFlag( const std::string & word );
 
+
+//
+// isCorrectFlag
+//
+
+//! \return Is flag correct?
+bool isCorrectFlag( const std::string & flag );
+
+
+//
+// isCorrectName
+//
+
+//! \return Is name correct?
+bool isCorrectName( const std::string & name );
+
 } /* namespace Args */
 
 #endif // ARGS__UTILS_HPP__INCLUDED

@@ -31,6 +31,9 @@
 // Args include.
 #include <Args/utils.hpp>
 
+// C++ include.
+#include <regex>
+
 
 namespace Args {
 
@@ -47,7 +50,7 @@ isArgument( const std::string & word )
 		return true;
 	else
 		return false;
-}
+} // isArgument
 
 
 //
@@ -66,6 +69,56 @@ isFlag( const std::string & word )
 	}
 
 	return false;
-}
+} // isFlag
+
+
+//
+// isCorrectFlag
+//
+
+bool
+isCorrectFlag( const std::string & flag )
+{
+	if( flag.empty() || flag.length() > 1 )
+		return false;
+
+	static const std::string availableSymbols( "0123456789"
+		"abcdefghijklmnopqrstuvwxyz"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+
+	if( availableSymbols.find( flag ) == std::string::npos )
+		return false;
+
+	return true;
+} // isCorrectFlag
+
+
+//
+// isCorrectName
+//
+
+bool
+isCorrectName( const std::string & name )
+{
+	if( name.empty() )
+		return false;
+
+	std::regex r( "\\s" );
+
+	if( std::regex_search( name, r ) )
+		return false;
+
+	static const std::string availableSymbols( "0123456789"
+		"abcdefghijklmnopqrstuvwxyz"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" );
+
+	for( const char & c : name )
+	{
+		if( availableSymbols.find( c ) == std::string::npos )
+			return false;
+	}
+
+	return true;
+} // isCorrectName
 
 } /* namespace Args */
