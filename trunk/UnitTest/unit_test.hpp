@@ -187,9 +187,9 @@ void TestName##Class::testBody()
 	if( !Condition ) \
 	{ \
 		std::ostringstream stream; \
-		stream << "file: \"" << __FILE__ \
+		stream << "     file: \"" << __FILE__ \
 			<< "\" line: " << __LINE__ << "\n" \
-			<< "  !( " << #Condition << " ) [FAILED]"; \
+			<< "     ( " << #Condition << " ) [FAILED]"; \
  \
 		throw std::runtime_error( stream.str() ); \
 	}
