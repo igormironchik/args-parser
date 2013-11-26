@@ -118,24 +118,28 @@ TestCase::addTest( const std::shared_ptr< Test > & test )
 void
 TestCase::runAllTests()
 {
-	std::cout << name() << " started..." << std::endl;
+	std::cout << "Test case \"" << name() << "\" started..." << std::endl;
 
 	size_t i = 1;
 
 	for( auto & t : m_tests )
 	{
+		std::cout << " ";
+
 		std::cout.width( 2 );
 		std::cout.fill( '0' );
 
-		std::cout << " " << i << ". "
-			<< t->name() << "... ";
+		std::cout << i << ". \""
+			<< t->name() << "\"... ";
 
 		t->runTest();
 
 		std::cout << "[OK]" << std::endl;
+
+		++i;
 	}
 
-	std::cout << name() << " finished..." << std::endl;
+	std::cout << "Test case \"" << name() << "\" finished..." << std::endl;
 }
 
 
