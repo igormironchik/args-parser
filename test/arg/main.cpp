@@ -119,7 +119,7 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	catch( const BaseException & x )
 	{
 		CHECK_CONDITION(
-			x.what() == std::string( "Undefined required argument \"port\"." ) )
+			x.what() == std::string( "Undefined required argument \"--port\"." ) )
 	}
 }
 
