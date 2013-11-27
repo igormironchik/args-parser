@@ -75,7 +75,6 @@ TEST( ContextTestCase, TestContext )
 	CHECK_CONDITION( *ctx.next() == "localhost" )
 
 	CHECK_CONDITION( ctx.atEnd() == true )
-
 }
 
 

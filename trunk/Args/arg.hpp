@@ -53,7 +53,7 @@ public:
 	//! Construct argument with flag \arg flag and name \arg name.
 	Arg(
 		//! Flag for this argument.
-		const char & flag,
+		char flag,
 		//! Name for this argument.
 		const std::string & name,
 		//! Is this argument with value?
@@ -64,7 +64,7 @@ public:
 	//! Construct argument only with flag \arg flag, without name.
 	explicit Arg(
 		//! Flag for this argument.
-		const char & flag,
+		char flag,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?

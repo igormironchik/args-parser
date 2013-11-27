@@ -33,7 +33,6 @@
 #include <Args/exceptions.hpp>
 
 // C++ include.
-#include <utility>
 #include <algorithm>
 
 
@@ -44,7 +43,7 @@ namespace Args {
 //
 
 //! Make context from the argc and argv.
-ContextInternal && makeContext( int argc, char ** argv )
+ContextInternal makeContext( int argc, char ** argv )
 {
 	ContextInternal context;
 
@@ -52,7 +51,7 @@ ContextInternal && makeContext( int argc, char ** argv )
 	for( int i = 1; i < argc; ++i )
 		context.push_back( argv[ i ] );
 
-	return std::move( context );
+	return context;
 } // makeContext
 
 
