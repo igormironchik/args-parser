@@ -12,6 +12,8 @@ MxxRu::Cpp::lib_target {
 	cpp_source( "cmd_line.cpp" )
 	cpp_source( "context.cpp" )
 	cpp_source( "exceptions.cpp" )
+	cpp_source( "help.cpp" )
+	cpp_source( "help_printer.cpp" )
 	cpp_source( "multi_arg.cpp" )
 	cpp_source( "utils.cpp" )
 }
