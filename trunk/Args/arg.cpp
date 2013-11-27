@@ -110,13 +110,13 @@ Arg::process( Context & context )
 			name() + "\" already defined." );
 }
 
-const std::string &
+std::string
 Arg::name() const
 {
 	if( !m_name.empty() )
-		return m_name;
+		return "--" + m_name;
 	else
-		return m_flag;
+		return "-" + m_flag;
 }
 
 void

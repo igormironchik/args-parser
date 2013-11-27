@@ -87,7 +87,7 @@ public:
 		If name is empty returned value should be a flag.
 		I.e. for example "-t" or "--timeout"
 	*/
-	virtual const std::string & name() const;
+	virtual std::string name() const;
 
 	//! \return Is this argument with value?
 	virtual bool isWithValue() const;
