@@ -61,6 +61,17 @@ public:
 		//! Is this argument required?
 		bool isRequired = false );
 
+	//! Construct argument with flag \arg flag and name \arg name.
+	Arg(
+		//! Flag for this argument.
+		char flag,
+		//! Name for this argument.
+		const char * name,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false );
+
 	//! Construct argument only with flag \arg flag, without name.
 	explicit Arg(
 		//! Flag for this argument.
@@ -90,13 +101,19 @@ public:
 	virtual std::string name() const;
 
 	//! \return Is this argument with value?
-	virtual bool isWithValue() const;
+	bool isWithValue() const;
+	//! Set is this argument with value.
+	void setWithValue( bool on = true );
 
 	//! \return Is this argument required?
-	virtual bool isRequired() const;
+	bool isRequired() const;
+	//! Set required.
+	void setRequired( bool on = true );
 
 	//! \return Is this argument defined?
-	virtual bool isDefined() const;
+	bool isDefined() const;
+	//! Set defined.
+	void setDefined( bool on = true );
 
 	//! \return Value of this argument.
 	virtual const std::string & value() const;

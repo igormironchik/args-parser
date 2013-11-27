@@ -53,6 +53,16 @@ Arg::Arg( char flag, const std::string & name,
 {
 }
 
+Arg::Arg( char flag, const char * name,
+	bool isWithValue, bool isRequired )
+	:	m_isWithValue( isWithValue )
+	,	m_isRequired( isRequired )
+	,	m_flag( 1, flag )
+	,	m_name( name )
+	,	m_isDefined( false )
+{
+}
+
 Arg::Arg( char flag,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
@@ -92,13 +102,13 @@ Arg::process( Context & context )
 	if( !isDefined() )
 	{
 		if( !isWithValue() )
-			m_isDefined = true;
+			setDefined( true );
 		else
 		{
 			if( !context.atEnd() )
 			{
 				m_value = *context.next();
-				m_isDefined = true;
+				setDefined( true );
 			}
 			else
 				throw BaseException( std::string( "Argument \"" ) +
@@ -176,16 +186,34 @@ Arg::isWithValue() const
 	return m_isWithValue;
 }
 
+void
+Arg::setWithValue( bool on )
+{
+	m_isWithValue = on;
+}
+
 bool
 Arg::isRequired() const
 {
 	return m_isRequired;
 }
 
+void
+Arg::setRequired( bool on )
+{
+	m_isRequired = on;
+}
+
 bool
 Arg::isDefined() const
 {
 	return m_isDefined;
+}
+
+void
+Arg::setDefined( bool on )
+{
+	m_isDefined = on;
 }
 
 const std::string &
