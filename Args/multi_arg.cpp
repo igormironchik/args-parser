@@ -115,6 +115,8 @@ MultiArg::process( Context & context )
 
 			if( last != begin )
 			{
+				setDefined( true );
+
 				begin = context.next();
 
 				while( begin !=last )
@@ -136,7 +138,11 @@ MultiArg::process( Context & context )
 				name() + "\" require value that wasn't presented." );
 	}
 	else
+	{
+		setDefined( true );
+
 		++m_count;
+	}
 }
 
 } /* namespace Args */
