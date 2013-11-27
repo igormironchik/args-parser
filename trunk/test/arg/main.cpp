@@ -93,7 +93,11 @@ TEST( ArgTestCase, TestUndefinedArg )
 	{
 		CHECK_CONDITION(
 			x.what() == std::string( "Unknown argument \"--port\"." ) )
+
+		return;
 	}
+
+	CHECK_CONDITION( false )
 }
 
 TEST( ArgTestCase, TestUndefinedRequiredArg )
@@ -120,7 +124,11 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	{
 		CHECK_CONDITION(
 			x.what() == std::string( "Undefined required argument \"--port\"." ) )
+
+		return;
 	}
+
+	CHECK_CONDITION( false )
 }
 
 

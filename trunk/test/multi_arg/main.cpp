@@ -155,7 +155,11 @@ TEST( MultiArgTestCase, NotDefinedValue )
 	{
 		CHECK_CONDITION( x.what() == std::string( "Argument \"--multi"
 			"\" require value that wasn't presented." ) )
+
+		return;
 	}
+
+	CHECK_CONDITION( false )
 }
 
 TEST( MultiArgTestCase, NotDefinedValue2 )
@@ -183,7 +187,11 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	{
 		CHECK_CONDITION( x.what() == std::string( "Argument \"--multi"
 			"\" require value that wasn't presented." ) )
+
+		return;
 	}
+
+	CHECK_CONDITION( false )
 }
 
 
