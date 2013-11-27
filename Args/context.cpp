@@ -31,6 +31,9 @@
 // Args include.
 #include <Args/context.hpp>
 
+// C++ include.
+#include <utility>
+
 
 namespace Args {
 
@@ -38,8 +41,8 @@ namespace Args {
 // Context
 //
 
-Context::Context( ContextInternal && items )
-	:	m_context( items )
+Context::Context( ContextInternal items )
+	:	m_context( std::move( items ) )
 	,	m_it( m_context.begin() )
 {
 }

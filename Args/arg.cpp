@@ -43,20 +43,22 @@ namespace Args {
 // Arg
 //
 
-Arg::Arg( const char & flag, const std::string & name,
+Arg::Arg( char flag, const std::string & name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
 	,	m_flag( 1, flag )
 	,	m_name( name )
+	,	m_isDefined( false )
 {
 }
 
-Arg::Arg( const char & flag,
+Arg::Arg( char flag,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
 	,	m_flag( 1, flag )
+	,	m_isDefined( false )
 {
 }
 
@@ -65,6 +67,7 @@ Arg::Arg( const std::string & name,
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
 	,	m_name( name )
+	,	m_isDefined( false )
 {
 }
 
@@ -86,19 +89,25 @@ Arg::isItYou( const std::string & name )
 void
 Arg::process( Context & context )
 {
-	if( !isWithValue() )
-		m_isDefined = true;
-	else
+	if( !isDefined() )
 	{
-		if( !context.atEnd() )
-		{
-			m_value = *context.next();
+		if( !isWithValue() )
 			m_isDefined = true;
-		}
 		else
-			throw BaseException( std::string( "Argument \"" ) +
-				name() + "\" requires value but it's not presented." );
+		{
+			if( !context.atEnd() )
+			{
+				m_value = *context.next();
+				m_isDefined = true;
+			}
+			else
+				throw BaseException( std::string( "Argument \"" ) +
+					name() + "\" requires value but it's not presented." );
+		}
 	}
+	else
+		throw BaseException( std::string( "Argument \"" ) +
+			name() + "\" already defined." );
 }
 
 const std::string &
