@@ -51,6 +51,19 @@ public:
 	virtual ~BaseException();
 }; // class BaseException
 
+
+//
+// HelpHasBeenPrintedException
+//
+
+//! This exception notifies about that help has been printed.
+class HelpHasBeenPrintedException final
+	:	public BaseException
+{
+public:
+	HelpHasBeenPrintedException();
+}; // class HelpHasBeenPrintedException
+
 } /* namespace Args */
 
 #endif // ARGS__EXCEPTIONS_HPP__INCLUDED

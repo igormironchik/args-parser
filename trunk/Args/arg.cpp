@@ -283,7 +283,10 @@ Arg::setDescription( const std::string & desc )
 const std::string &
 Arg::longDescription() const
 {
-	return m_longDescription;
+	if( !m_longDescription.empty() )
+		return m_longDescription;
+	else
+		return m_description;
 }
 
 void
