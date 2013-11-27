@@ -121,6 +121,12 @@ CmdLine::parse()
 	checkCorrectnessAfterParsing();
 }
 
+const std::list< ArgIface* > &
+CmdLine::arguments() const
+{
+	return m_args;
+}
+
 void
 CmdLine::checkCorrectnessBeforeParsing() const
 {

@@ -50,6 +50,7 @@ Arg::Arg( char flag, const std::string & name,
 	,	m_flag( 1, flag )
 	,	m_name( name )
 	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
 {
 }
 
@@ -60,6 +61,7 @@ Arg::Arg( char flag, const char * name,
 	,	m_flag( 1, flag )
 	,	m_name( name )
 	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
 {
 }
 
@@ -69,6 +71,7 @@ Arg::Arg( char flag,
 	,	m_isRequired( isRequired )
 	,	m_flag( 1, flag )
 	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
 {
 }
 
@@ -78,6 +81,7 @@ Arg::Arg( const std::string & name,
 	,	m_isRequired( isRequired )
 	,	m_name( name )
 	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
 {
 }
 
@@ -107,7 +111,7 @@ Arg::process( Context & context )
 		{
 			if( !context.atEnd() )
 			{
-				m_value = *context.next();
+				setValue( *context.next() );
 				setDefined( true );
 			}
 			else
@@ -220,6 +224,72 @@ const std::string &
 Arg::value() const
 {
 	return m_value;
+}
+
+void
+Arg::setValue( const std::string & v )
+{
+	m_value = v;
+}
+
+const std::string &
+Arg::flag() const
+{
+	return m_flag;
+}
+
+void
+Arg::setFlag( char f )
+{
+	m_flag = std::string( 1, f );
+}
+
+const std::string &
+Arg::argumentName() const
+{
+	return m_name;
+}
+
+void
+Arg::setArgumentName( const std::string & name )
+{
+	m_name = name;
+}
+
+const std::string &
+Arg::valueSpecifier() const
+{
+	return m_valueSpecifier;
+}
+
+void
+Arg::setValueSpecifier( const std::string & vs )
+{
+	m_valueSpecifier = vs;
+}
+
+const std::string &
+Arg::description() const
+{
+	return m_description;
+}
+
+void
+Arg::setDescription( const std::string & desc )
+{
+	m_description = desc;
+}
+
+const std::string &
+Arg::longDescription() const
+{
+	return m_longDescription;
+}
+
+void
+Arg::setLongDescription( const std::string & desc )
+{
+	m_longDescription = desc;
 }
 
 } /* namespace Args */

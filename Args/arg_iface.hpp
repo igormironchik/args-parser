@@ -64,6 +64,21 @@ public:
 	//! \return Is this argument with value?
 	virtual bool isWithValue() const = 0;
 
+	//! \return Flag.
+	virtual const std::string & flag() const = 0;
+
+	//! \return Argument name.
+	virtual const std::string & argumentName() const = 0;
+
+	//! \return Value specifier.
+	virtual const std::string & valueSpecifier() const = 0;
+
+	//! \return Description of the argument.
+	virtual const std::string & description() const = 0;
+
+	//! \return Long description of the argument.
+	virtual const std::string & longDescription() const = 0;
+
 protected:
 	/*!
 		\return Argument for the given \arg name name.
