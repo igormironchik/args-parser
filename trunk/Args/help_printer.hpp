@@ -31,8 +31,63 @@
 #ifndef ARGS__HELP_PRINTER_HPP__INCLUDED
 #define ARGS__HELP_PRINTER_HPP__INCLUDED
 
+// C++ include.
+#include <string>
+
+// Args include.
+#include <Args/utils.hpp>
+
 
 namespace Args {
+
+class CmdLine;
+
+
+//
+// HelpPrinter
+//
+
+/*!
+	HelpPrinter is a class that prints help.
+*/
+class HelpPrinter {
+public:
+	HelpPrinter();
+
+	virtual ~HelpPrinter();
+
+	//! Print help for all arguments.
+	virtual void print();
+
+	//! Print help for the given \arg name argument.
+	virtual void print(
+		//! Name of the argument. I.e. "-t" or "--timeout".
+		const std::string & name );
+
+	//! Set executable name.
+	virtual void setExecutable( const std::string & exe );
+
+	//! Set description for the application.
+	virtual void setAppDescription( const std::string & desc );
+
+	//! Set command line.
+	virtual void setCmdLine( CmdLine * cmd );
+
+	//! Set line length for the help.
+	virtual void setLineLength( size_t length );
+
+private:
+	DISABLE_COPY( HelpPrinter )
+
+	//! Executable name.
+	std::string m_exeName;
+	//! Application description.
+	std::string m_appDescription;
+	//! Command line.
+	CmdLine * m_cmdLine;
+	//! Line length.
+	size_t m_lineLength;
+}; // class HelpPrinter
 
 } /* namespace Args */
 

@@ -61,13 +61,17 @@ public:
 	//! Parse arguments.
 	void parse();
 
+	//! \return Argument for the given name.
+	ArgIface * findArgument( const std::string & name );
+
+	//! \return All arguments.
+	const std::list< ArgIface* > & arguments() const;
+
 private:
 	//! Check correctness of the arguments before parsing.
 	void checkCorrectnessBeforeParsing() const;
 	//! Check correctness of the arguments after parsing.
 	void checkCorrectnessAfterParsing() const;
-	//! \return Argument for the given name.
-	ArgIface * findArgument( const std::string & name );
 
 private:
 	DISABLE_COPY( CmdLine )

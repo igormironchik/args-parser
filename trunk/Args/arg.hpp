@@ -117,6 +117,33 @@ public:
 
 	//! \return Value of this argument.
 	virtual const std::string & value() const;
+	//! Set value.
+	void setValue( const std::string & v );
+
+	//! \return Flag.
+	const std::string & flag() const;
+	//! Set flag.
+	void setFlag( char f );
+
+	//! \return Argument name.
+	const std::string & argumentName() const;
+	//! Set argument name.
+	void setArgumentName( const std::string & name );
+
+	//! \return Value specifier.
+	const std::string & valueSpecifier() const;
+	//! Set value specifier.
+	void setValueSpecifier( const std::string & vs );
+
+	//! \return Description of the argument.
+	const std::string & description() const;
+	//! Set description.
+	void setDescription( const std::string & desc );
+
+	//! \return Long description of the argument.
+	const std::string & longDescription() const;
+	//! Set long description.
+	void setLongDescription( const std::string & desc );
 
 protected:
 	/*!
@@ -173,6 +200,12 @@ private:
 	std::string m_flag;
 	//! Name of this argument.
 	std::string m_name;
+	//! Value specifier.
+	std::string m_valueSpecifier;
+	//! Description.
+	std::string m_description;
+	//! Long description.
+	std::string m_longDescription;
 }; // class ArgIface
 
 } /* namespace Args */
