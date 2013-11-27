@@ -31,8 +31,47 @@
 #ifndef ARGS__HELP_HPP__INCLUDED
 #define ARGS__HELP_HPP__INCLUDED
 
+// Args include.
+#include <Args/arg.hpp>
+#include <Args/help_printer.hpp>
+
 
 namespace Args {
+
+class CmdLine;
+
+
+//
+// Help
+//
+
+//! Help argument.
+class Help final
+	:	public Arg
+{
+public:
+	explicit Help( CmdLine * cmd,
+		bool throwExceptionOnPrint = true );
+
+	//! \return Help printer.
+	HelpPrinter & printer();
+
+protected:
+	/*!
+		Process argument's staff, for example take values from
+		context. This method invokes exactly at that moment when
+		parser has found this argument.
+	*/
+	virtual void process(
+		//! Context of the command line.
+		Context & context );
+
+private:
+	//! Printer.
+	HelpPrinter m_printer;
+	//! Throw or not exception?
+	bool m_throwExceptionOnPrint;
+}; // class Help
 
 } /* namespace Args */
 

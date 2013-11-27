@@ -47,4 +47,14 @@ BaseException::~BaseException()
 {
 }
 
+
+//
+// HelpHasBeenPrintedException
+//
+
+HelpHasBeenPrintedException::HelpHasBeenPrintedException()
+	:	BaseException( "Help has been printed." )
+{
+}
+
 } /* namespace Args */
