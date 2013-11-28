@@ -64,6 +64,9 @@ public:
 	//! \return Is this argument with value?
 	virtual bool isWithValue() const = 0;
 
+	//! \return Is this argument required?
+	virtual bool isRequired() const = 0;
+
 	//! \return Flag.
 	virtual const std::string & flag() const = 0;
 
