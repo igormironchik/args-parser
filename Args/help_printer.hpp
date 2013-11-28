@@ -33,6 +33,7 @@
 
 // C++ include.
 #include <string>
+#include <list>
 
 // Args include.
 #include <Args/utils.hpp>
@@ -41,6 +42,7 @@
 namespace Args {
 
 class CmdLine;
+class ArgIface;
 
 
 //
@@ -75,6 +77,15 @@ public:
 
 	//! Set line length for the help.
 	virtual void setLineLength( size_t length );
+
+protected:
+	//! \return List of words with usage string for the argument.
+	std::list< std::string > createUsageString( ArgIface * arg );
+	//! List of words from string.
+	std::list< std::string > splitToWords( const std::string & s );
+	//! Print string with given margins.
+	void printString( const std::list< std::string > & words,
+		size_t currentPos, size_t leftMargin, size_t rightMargin );
 
 private:
 	DISABLE_COPY( HelpPrinter )
