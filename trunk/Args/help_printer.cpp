@@ -63,15 +63,18 @@ printOffset( size_t currentPos, size_t leftMargin )
 }
 
 static inline void
-calcMAxFlagAndName( ArgIface * arg, size_t & maxFlag, size_t & maxName )
+calcMaxFlagAndName( ArgIface * arg, size_t & maxFlag, size_t & maxName )
 {
 	size_t f = 1;
 	size_t n = arg->argumentName().length();
 
-	if( n > 0 )
-		n += 3 + arg->valueSpecifier().length();
-	else
-		f += 3 + arg->valueSpecifier().length();
+	if( arg->isWithValue() )
+	{
+		if( n > 0 )
+			n += 3 + arg->valueSpecifier().length();
+		else
+			f += 3 + arg->valueSpecifier().length();
+	}
 
 	if( f > maxFlag )
 		maxFlag = f;
@@ -98,7 +101,7 @@ HelpPrinter::print()
 			else
 				optional.push_back( arg );
 
-			calcMAxFlagAndName( arg, maxFlag, maxName );
+			calcMaxFlagAndName( arg, maxFlag, maxName );
 		}
 	);
 
