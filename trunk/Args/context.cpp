@@ -41,7 +41,7 @@ namespace Args {
 // Context
 //
 
-Context::Context( ContextInternal items )
+Context::Context( const ContextInternal & items )
 	:	m_context( std::move( items ) )
 	,	m_it( m_context.begin() )
 {
