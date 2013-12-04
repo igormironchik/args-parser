@@ -91,19 +91,18 @@ int main( int argc, char ** argv )
 	help.printer().setAppDescription( "This application just show "
 		"the power of Args." );
 
-	/*
-		Now add our argument to the command line.
-	*/
-	cmd.addArg( &host );
-	cmd.addArg( &port );
-	cmd.addArg( &timeout );
-	cmd.addArg( &help );
-
-	/*
-		Now parse our arguments.
-	*/
-
 	try {
+		/*
+			Now add our argument to the command line.
+		*/
+		cmd.addArg( &host );
+		cmd.addArg( &port );
+		cmd.addArg( &timeout );
+		cmd.addArg( &help );
+
+		/*
+			Now parse our arguments.
+		*/
 		cmd.parse();
 	}
 	catch( const Args::HelpHasBeenPrintedException & )
