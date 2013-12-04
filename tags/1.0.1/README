@@ -1,0 +1,15 @@
+This is Args version 1.0.0.
+
+Args is a small C++ library for parsing command line arguments.
+
+
+COMPILING ARGS
+
+Just run build.rb which is a Ruby program and a project file.
+
+
+REQUIREMENTS
+
+For compiling Args you should have installed:
+ * Ruby programming language (http://www.ruby-lang.org/en/)
+ * mxx_ru Ruby gem (http://rubyforge.org/projects/mxx-ru/)
