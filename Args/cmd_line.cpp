@@ -67,11 +67,17 @@ CmdLine::CmdLine( int argc, char ** argv )
 void
 CmdLine::addArg( ArgIface * arg )
 {
-	if( std::find( m_args.begin(), m_args.end(), arg ) == m_args.end() )
-		m_args.push_back( arg );
+	if( arg )
+	{
+		if( std::find( m_args.begin(), m_args.end(), arg ) == m_args.end() )
+			m_args.push_back( arg );
+		else
+			throw BaseException( std::string( "Argument \"" ) +
+				arg->name() + "\" already in the command line parser." );
+	}
 	else
-		throw BaseException( std::string( "Argument \"" ) +
-			arg->name() + "\" already in the command line parser." );
+		throw BaseException( std::string( "Attempt to add nullptr to the "
+			"command line as argument." ) );
 }
 
 void
