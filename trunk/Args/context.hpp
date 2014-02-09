@@ -59,7 +59,7 @@ typedef std::list< std::string > ContextInternal;
 */
 class Context final {
 public:
-	explicit Context( const ContextInternal & items );
+	explicit Context( ContextInternal items );
 
 	//! \return Iterator to the first item in the context.
 	ContextInternal::iterator begin();
