@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -34,6 +34,7 @@
 // C++ include.
 #include <list>
 #include <string>
+#include <utility>
 
 // Args include.
 #include <Args/utils.hpp>
@@ -87,6 +88,60 @@ private:
 	//! Iterator to the current item in the context.
 	ContextInternal::iterator m_it;
 }; // class Context
+
+
+//
+// Context
+//
+
+inline
+Context::Context( ContextInternal items )
+	:	m_context( std::move( items ) )
+	,	m_it( m_context.begin() )
+{
+}
+
+inline ContextInternal::iterator
+Context::begin()
+{
+	return m_it;
+}
+
+inline ContextInternal::iterator
+Context::end()
+{
+	return m_context.end();
+}
+
+inline bool
+Context::atEnd()
+{
+	return ( begin() == end() );
+}
+
+inline ContextInternal::iterator
+Context::next()
+{
+	if( atEnd() )
+		return end();
+	else
+		return m_it++;
+}
+
+inline void
+Context::putBack()
+{
+	if( begin() == m_context.begin() )
+		return;
+	else
+		--m_it;
+}
+
+inline void
+Context::prepend( const std::string & what )
+{
+	m_it = m_context.insert( m_it, what );
+}
 
 } /* namespace Args */
 

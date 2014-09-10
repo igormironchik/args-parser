@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -122,6 +122,16 @@ protected:
 	//! Check correctness of the argument after parsing.
 	virtual void checkCorrectnessAfterParsing() const = 0;
 }; // class ArgIface
+
+
+//
+// ArgIface
+//
+
+inline
+ArgIface::~ArgIface()
+{
+}
 
 } /* namespace Args */
 

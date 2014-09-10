@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -38,6 +38,8 @@
 #include <memory>
 #include <stdexcept>
 #include <sstream>
+#include <exception>
+#include <iostream>
 
 
 //
@@ -193,5 +195,164 @@ void TestName##Class::testBody()
  \
 		throw std::runtime_error( stream.str() ); \
 	}
+
+
+//
+// Test
+//
+
+inline
+Test::Test( const std::string & name )
+	:	m_name( name )
+{
+}
+
+inline
+Test::~Test()
+{
+}
+
+inline const std::string &
+Test::name() const
+{
+	return m_name;
+}
+
+inline void
+Test::runTest()
+{
+	try {
+		testBody();
+	}
+	catch( const std::exception & x )
+	{
+		std::cout << "[FAILED]" << std::endl;
+		std::cout << x.what();
+
+		exit( 1 );
+	}
+	catch( ... )
+	{
+		std::cout << "[FAILED]" << std::endl;
+		std::cout << "  Unexpected exception.";
+
+		exit( 1 );
+	}
+}
+
+
+//
+// TestInfo
+//
+
+inline
+TestInfo::TestInfo( const std::string & testCaseName,
+	const std::shared_ptr< Test > & test )
+{
+	UnitTest::instance().createTestCaseIfNotExists( testCaseName )->
+		addTest( test );
+}
+
+
+//
+// TestCase
+//
+
+inline
+TestCase::TestCase( const std::string & name )
+	:	m_name( name )
+{
+}
+
+inline
+TestCase::~TestCase()
+{
+}
+
+inline const std::string &
+TestCase::name() const
+{
+	return m_name;
+}
+
+inline void
+TestCase::addTest( const std::shared_ptr< Test > & test )
+{
+	m_tests.push_back( test );
+}
+
+inline void
+TestCase::runAllTests()
+{
+	std::cout << "Test case \"" << name() << "\" started..." << std::endl;
+
+	size_t i = 1;
+
+	for( auto & t : m_tests )
+	{
+		std::cout << " ";
+
+		std::cout.width( 2 );
+		std::cout.fill( '0' );
+
+		std::cout << i << ". \""
+			<< t->name() << "\"... ";
+
+		t->runTest();
+
+		std::cout << "[OK]" << std::endl;
+
+		++i;
+	}
+
+	std::cout << "Test case \"" << name() << "\" finished..." << std::endl;
+}
+
+
+//
+// UnitTest
+//
+
+inline
+UnitTest::UnitTest()
+{
+}
+
+inline
+UnitTest::~UnitTest()
+{
+}
+
+inline UnitTest &
+UnitTest::instance()
+{
+	static UnitTest unit;
+
+	return unit;
+}
+
+inline TestCase *
+UnitTest::createTestCaseIfNotExists( const std::string & name )
+{
+	auto it = m_testCases.find( name );
+
+	if( it == m_testCases.end() )
+	{
+		auto p = m_testCases.insert(
+			std::pair< std::string, std::shared_ptr< TestCase > >( name,
+				std::shared_ptr< TestCase > ( new TestCase( name ) ) ) );
+
+		it = p.first;
+	}
+
+	return it->second.get();
+}
+
+inline void
+UnitTest::runAllTests()
+{
+	for( auto & p : m_testCases )
+		p.second->runAllTests();
+}
 
 #endif // UNITTEST__UNIT_TEST_HPP__INCLUDED

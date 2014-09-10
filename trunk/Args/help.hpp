@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -34,6 +34,9 @@
 // Args include.
 #include <Args/arg.hpp>
 #include <Args/help_printer.hpp>
+#include <Args/context.hpp>
+#include <Args/utils.hpp>
+#include <Args/exceptions.hpp>
 
 
 namespace Args {
@@ -72,6 +75,53 @@ private:
 	//! Throw or not exception?
 	bool m_throwExceptionOnPrint;
 }; // class Help
+
+
+//
+// Help
+//
+
+inline
+Help::Help( CmdLine * cmd, bool throwExceptionOnPrint )
+	:	Arg( 'h', "help", true )
+	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
+{
+	setDescription( "Print this help." );
+	setLongDescription( "Print this help." );
+
+	m_printer.setCmdLine( cmd );
+}
+
+inline HelpPrinter &
+Help::printer()
+{
+	return m_printer;
+}
+
+inline void
+Help::process( Context & context )
+{
+	if( !context.atEnd() )
+	{
+		const std::string arg = *context.next();
+
+		if( isArgument( arg ) || isFlag( arg ) )
+			m_printer.print( arg );
+		else
+		{
+			context.putBack();
+
+			m_printer.print();
+		}
+	}
+	else
+		m_printer.print();
+
+	setDefined( true );
+
+	if( m_throwExceptionOnPrint )
+		throw HelpHasBeenPrintedException();
+}
 
 } /* namespace Args */
 

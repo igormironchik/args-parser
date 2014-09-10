@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -34,6 +34,11 @@
 // Args include.
 #include <Args/arg_iface.hpp>
 #include <Args/utils.hpp>
+#include <Args/context.hpp>
+#include <Args/exceptions.hpp>
+
+// C++ include.
+#include <algorithm>
 
 
 namespace Args {
@@ -206,7 +211,269 @@ private:
 	std::string m_description;
 	//! Long description.
 	std::string m_longDescription;
-}; // class ArgIface
+}; // class Arg
+
+
+//
+// Arg
+//
+
+inline
+Arg::Arg( char flag, const std::string & name,
+	bool isWithValue, bool isRequired )
+	:	m_isWithValue( isWithValue )
+	,	m_isRequired( isRequired )
+	,	m_flag( 1, flag )
+	,	m_name( name )
+	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
+{
+}
+
+inline
+Arg::Arg( char flag, const char * name,
+	bool isWithValue, bool isRequired )
+	:	m_isWithValue( isWithValue )
+	,	m_isRequired( isRequired )
+	,	m_flag( 1, flag )
+	,	m_name( name )
+	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
+{
+}
+
+inline
+Arg::Arg( char flag,
+	bool isWithValue, bool isRequired )
+	:	m_isWithValue( isWithValue )
+	,	m_isRequired( isRequired )
+	,	m_flag( 1, flag )
+	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
+{
+}
+
+inline
+Arg::Arg( const std::string & name,
+	bool isWithValue, bool isRequired )
+	:	m_isWithValue( isWithValue )
+	,	m_isRequired( isRequired )
+	,	m_name( name )
+	,	m_isDefined( false )
+	,	m_valueSpecifier( "arg" )
+{
+}
+
+inline
+Arg::~Arg()
+{
+}
+
+inline ArgIface *
+Arg::isItYou( const std::string & name )
+{
+	if( isArgument( name ) && name.substr( 2 ) == m_name )
+		return this;
+	else if( isFlag( name ) && name.substr( 1 ) == m_flag )
+		return this;
+	else
+		return nullptr;
+}
+
+inline void
+Arg::process( Context & context )
+{
+	if( !isDefined() )
+	{
+		if( !isWithValue() )
+			setDefined( true );
+		else
+		{
+			if( !context.atEnd() )
+			{
+				setValue( *context.next() );
+				setDefined( true );
+			}
+			else
+				throw BaseException( std::string( "Argument \"" ) +
+					name() + "\" requires value but it's not presented." );
+		}
+	}
+	else
+		throw BaseException( std::string( "Argument \"" ) +
+			name() + "\" already defined." );
+}
+
+inline std::string
+Arg::name() const
+{
+	if( !m_name.empty() )
+		return "--" + m_name;
+	else
+		return "-" + m_flag;
+}
+
+inline void
+Arg::checkCorrectnessBeforeParsing( std::list< std::string > & flags,
+	std::list< std::string > & names ) const
+{
+	if( !m_flag.empty() )
+	{
+		if( isCorrectFlag( m_flag ) )
+		{
+			auto it = std::find( flags.begin(), flags.end(), m_flag );
+
+			if( it != flags.end() )
+				throw BaseException( std::string( "Redefinition of argument "
+					"witg flag \"" ) + m_flag + "\"." );
+			else
+				flags.push_back( m_flag );
+		}
+		else
+			throw BaseException( std::string( "Dissallowed flag \"" ) +
+				m_flag + "\"." );
+	}
+
+	if( !m_name.empty() )
+	{
+		if( isCorrectName( m_name ) )
+		{
+			auto it = std::find( names.begin(), names.end(), m_name );
+
+			if( it != names.end() )
+				throw BaseException( std::string( "Redefinition of argument "
+					"with name \"" ) + m_name + "\"." );
+			else
+				names.push_back( m_name );
+		}
+		else
+			throw BaseException( std::string( "Dissallowed name \"" ) +
+				m_name + "\"." );
+	}
+
+	if( m_flag.empty() && m_name.empty() )
+		throw BaseException( std::string( "Arguments with empty flag and name "
+			"are dissallowed." ) );
+}
+
+inline void
+Arg::checkCorrectnessAfterParsing() const
+{
+	if( isRequired() && !isDefined() )
+		throw BaseException( std::string( "Undefined required argument \"" ) +
+			name() + "\"." );
+}
+
+inline bool
+Arg::isWithValue() const
+{
+	return m_isWithValue;
+}
+
+inline void
+Arg::setWithValue( bool on )
+{
+	m_isWithValue = on;
+}
+
+inline bool
+Arg::isRequired() const
+{
+	return m_isRequired;
+}
+
+inline void
+Arg::setRequired( bool on )
+{
+	m_isRequired = on;
+}
+
+inline bool
+Arg::isDefined() const
+{
+	return m_isDefined;
+}
+
+inline void
+Arg::setDefined( bool on )
+{
+	m_isDefined = on;
+}
+
+inline const std::string &
+Arg::value() const
+{
+	return m_value;
+}
+
+inline void
+Arg::setValue( const std::string & v )
+{
+	m_value = v;
+}
+
+inline const std::string &
+Arg::flag() const
+{
+	return m_flag;
+}
+
+inline void
+Arg::setFlag( char f )
+{
+	m_flag = std::string( 1, f );
+}
+
+inline const std::string &
+Arg::argumentName() const
+{
+	return m_name;
+}
+
+inline void
+Arg::setArgumentName( const std::string & name )
+{
+	m_name = name;
+}
+
+inline const std::string &
+Arg::valueSpecifier() const
+{
+	return m_valueSpecifier;
+}
+
+inline void
+Arg::setValueSpecifier( const std::string & vs )
+{
+	m_valueSpecifier = vs;
+}
+
+inline const std::string &
+Arg::description() const
+{
+	return m_description;
+}
+
+inline void
+Arg::setDescription( const std::string & desc )
+{
+	m_description = desc;
+}
+
+inline const std::string &
+Arg::longDescription() const
+{
+	if( !m_longDescription.empty() )
+		return m_longDescription;
+	else
+		return m_description;
+}
+
+inline void
+Arg::setLongDescription( const std::string & desc )
+{
+	m_longDescription = desc;
+}
 
 } /* namespace Args */
 
