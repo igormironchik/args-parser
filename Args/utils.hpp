@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -33,6 +33,7 @@
 
 // C++ include.
 #include <string>
+#include <regex>
 
 
 namespace Args {
@@ -52,7 +53,16 @@ namespace Args {
 //
 
 //! \return Is word an argument?
-bool isArgument( const std::string & word );
+static inline bool
+isArgument( const std::string & word )
+{
+	const size_t it = word.find( "--" );
+
+	if( it == 0 )
+		return true;
+	else
+		return false;
+} // isArgument
 
 
 //
@@ -60,7 +70,19 @@ bool isArgument( const std::string & word );
 //
 
 //! \return Is word a flag?
-bool isFlag( const std::string & word );
+static inline bool
+isFlag( const std::string & word )
+{
+	if( !isArgument( word ) )
+	{
+		const size_t it = word.find( '-' );
+
+		if( it == 0 )
+			return true;
+	}
+
+	return false;
+} // isFlag
 
 
 //
@@ -68,7 +90,21 @@ bool isFlag( const std::string & word );
 //
 
 //! \return Is flag correct?
-bool isCorrectFlag( const std::string & flag );
+static inline bool
+isCorrectFlag( const std::string & flag )
+{
+	if( flag.empty() || flag.length() > 1 )
+		return false;
+
+	static const std::string availableSymbols( "0123456789"
+		"abcdefghijklmnopqrstuvwxyz"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+
+	if( availableSymbols.find( flag ) == std::string::npos )
+		return false;
+
+	return true;
+} // isCorrectFlag
 
 
 //
@@ -76,7 +112,29 @@ bool isCorrectFlag( const std::string & flag );
 //
 
 //! \return Is name correct?
-bool isCorrectName( const std::string & name );
+static inline bool
+isCorrectName( const std::string & name )
+{
+	if( name.empty() )
+		return false;
+
+	std::regex r( "\\s" );
+
+	if( std::regex_search( name, r ) )
+		return false;
+
+	static const std::string availableSymbols( "0123456789"
+		"abcdefghijklmnopqrstuvwxyz"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" );
+
+	for( const char & c : name )
+	{
+		if( availableSymbols.find( c ) == std::string::npos )
+			return false;
+	}
+
+	return true;
+} // isCorrectName
 
 } /* namespace Args */
 

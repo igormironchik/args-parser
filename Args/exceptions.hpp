@@ -4,7 +4,7 @@
 
 	\author Igor Mironchik (igor.mironchik at gmail dot com).
 
-	Copyright (c) 2013 Igor Mironchik
+	Copyright (c) 2013-2014 Igor Mironchik
 
 	Permission is hereby granted, free of charge, to any person
 	obtaining a copy of this software and associated documentation
@@ -63,6 +63,33 @@ class HelpHasBeenPrintedException final
 public:
 	HelpHasBeenPrintedException();
 }; // class HelpHasBeenPrintedException
+
+
+//
+// BaseException
+//
+
+inline
+BaseException::BaseException( const std::string & what )
+	:	std::logic_error( what )
+{
+}
+
+inline
+BaseException::~BaseException()
+{
+}
+
+
+//
+// HelpHasBeenPrintedException
+//
+
+inline
+HelpHasBeenPrintedException::HelpHasBeenPrintedException()
+	:	BaseException( "Help has been printed." )
+{
+}
 
 } /* namespace Args */
 
