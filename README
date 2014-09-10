@@ -1,6 +1,6 @@
-This is Args version 1.0.0.
+This is Args.
 
-Args is a small C++ library for parsing command line arguments.
+Args is a small C++ header-only library for parsing command line arguments.
 
 
 COMPILING ARGS
