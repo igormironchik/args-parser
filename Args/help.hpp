@@ -38,6 +38,9 @@
 #include <Args/utils.hpp>
 #include <Args/exceptions.hpp>
 
+// C++ include.
+#include <iostream>
+
 
 namespace Args {
 
@@ -106,16 +109,16 @@ Help::process( Context & context )
 		const std::string arg = *context.next();
 
 		if( isArgument( arg ) || isFlag( arg ) )
-			m_printer.print( arg );
+			m_printer.print( arg, std::cout );
 		else
 		{
 			context.putBack();
 
-			m_printer.print();
+			m_printer.print( std::cout );
 		}
 	}
 	else
-		m_printer.print();
+		m_printer.print( std::cout );
 
 	setDefined( true );
 

@@ -37,6 +37,7 @@
 #include <iostream>
 #include <algorithm>
 #include <functional>
+#include <ostream>
 
 // Args include.
 #include <Args/utils.hpp>
@@ -64,12 +65,16 @@ public:
 	virtual ~HelpPrinter();
 
 	//! Print help for all arguments.
-	virtual void print();
+	virtual void print(
+		//! Output stream for the printing help.
+		std::ostream & to );
 
 	//! Print help for the given \arg name argument.
 	virtual void print(
 		//! Name of the argument. I.e. "-t" or "--timeout".
-		const std::string & name );
+		const std::string & name,
+		//! Output stream for the printing help.
+		std::ostream & to );
 
 	//! Set executable name.
 	virtual void setExecutable( const std::string & exe );
@@ -89,7 +94,8 @@ protected:
 	//! List of words from string.
 	std::list< std::string > splitToWords( const std::string & s );
 	//! Print string with given margins.
-	void printString( const std::list< std::string > & words,
+	void printString( std::ostream & to,
+		const std::list< std::string > & words,
 		size_t currentPos, size_t leftMargin, size_t rightMargin );
 
 private:
@@ -123,10 +129,10 @@ HelpPrinter::~HelpPrinter()
 }
 
 static inline void
-printOffset( size_t currentPos, size_t leftMargin )
+printOffset( std::ostream & to, size_t currentPos, size_t leftMargin )
 {
 	if( currentPos < leftMargin )
-		std::cout << std::string( leftMargin - currentPos, ' ' );
+		to << std::string( leftMargin - currentPos, ' ' );
 }
 
 static inline void
@@ -151,7 +157,7 @@ calcMaxFlagAndName( ArgIface * arg, size_t & maxFlag, size_t & maxName )
 }
 
 inline void
-HelpPrinter::print()
+HelpPrinter::print( std::ostream & to )
 {
 	std::list< ArgIface* > required;
 	std::list< ArgIface* > optional;
@@ -195,106 +201,106 @@ HelpPrinter::print()
 	std::for_each( optional.begin(), optional.end(),
 		createUsageAndAppend );
 
-	printString( splitToWords( m_appDescription ), 0, 0, 0 );
+	printString( to, splitToWords( m_appDescription ), 0, 0, 0 );
 
-	std::cout << std::endl << std::endl;
+	to << std::endl << std::endl;
 
-	std::cout << "Usage: ";
+	to << "Usage: ";
 
-	printString( usage, 7, 7, 7 );
+	printString( to, usage, 7, 7, 7 );
 
-	std::cout << std::endl << std::endl;
+	to << std::endl << std::endl;
 
 	std::function< void ( ArgIface* ) > printArg =
-		[=] ( ArgIface * arg )
+		[ & ] ( ArgIface * arg )
 		{
 			size_t pos = 0;
 
 			if( !arg->flag().empty() )
 			{
-				std::cout << ' ';
+				to << ' ';
 				++pos;
-				std::cout << '-' << arg->flag();
+				to << '-' << arg->flag();
 				pos += arg->flag().length() + 1;
 
 				if( !arg->argumentName().empty() )
 				{
-					std::cout << ',';
+					to << ',';
 					++pos;
 				}
 				else if( arg->isWithValue() )
 				{
-					std::cout << " <" << arg->valueSpecifier() << '>';
+					to << " <" << arg->valueSpecifier() << '>';
 					pos += arg->valueSpecifier().length() + 3;
 				}
 			}
 			else
 			{
-				printOffset( pos, maxFlag + 1 );
+				printOffset( to, pos, maxFlag + 1 );
 				pos += maxFlag + 1;
 			}
 
 			if( !arg->argumentName().empty() )
 			{
-				std::cout << ' ';
+				to << ' ';
 				++pos;
-				std::cout << "--" << arg->argumentName();
+				to << "--" << arg->argumentName();
 				pos += arg->argumentName().length() + 2;
 
 				if( arg->isWithValue() )
 				{
-					std::cout << " <" << arg->valueSpecifier() << '>';
+					to << " <" << arg->valueSpecifier() << '>';
 					pos += arg->valueSpecifier().length() + 3;
 				}
 			}
 
-			printOffset( pos, beforeDescription );
+			printOffset( to, pos, beforeDescription );
 			pos = beforeDescription;
 
-			printString( splitToWords( arg->description() ), pos,
+			printString( to, splitToWords( arg->description() ), pos,
 				beforeDescription, 0 );
 
-			std::cout << std::endl << std::endl;
+			to << std::endl << std::endl;
 		};
 
 	if( !required.empty() )
 	{
-		std::cout << "Required arguments:" << std::endl;
+		to << "Required arguments:" << std::endl;
 
 		std::for_each( required.begin(), required.end(), printArg );
 	}
 
 	if( !optional.empty() )
 	{
-		std::cout << "Optional arguments:" << std::endl;
+		to << "Optional arguments:" << std::endl;
 
 		std::for_each( optional.begin(), optional.end(), printArg );
 	}
 }
 
 inline void
-HelpPrinter::print( const std::string & name )
+HelpPrinter::print( const std::string & name, std::ostream & to )
 {
 	try {
 		ArgIface * arg = m_cmdLine->findArgument( name );
 
 		std::list< std::string > usage = createUsageString( arg );
 
-		std::cout << "Usage: ";
+		to << "Usage: ";
 
 		std::for_each( usage.begin(), usage.end(),
-			[] ( const std::string & s )
-				{ std::cout << s << ' '; }
+			[ & ] ( const std::string & s )
+				{ to << s << ' '; }
 		);
 
-		std::cout << std::endl << std::endl;
+		to << std::endl << std::endl;
 
-		printString( splitToWords( arg->longDescription() ),
+		printString( to, splitToWords( arg->longDescription() ),
 			0, 7, 7 );
 	}
 	catch( const BaseException & )
 	{
-		print();
+		print( to );
 	}
 }
 
@@ -404,7 +410,8 @@ HelpPrinter::splitToWords( const std::string & s )
 }
 
 inline void
-HelpPrinter::printString( const std::list< std::string > & words,
+HelpPrinter::printString( std::ostream & to,
+	const std::list< std::string > & words,
 	size_t currentPos, size_t leftMargin, size_t rightMargin )
 {
 	size_t maxLineLength = m_lineLength -
@@ -420,7 +427,7 @@ HelpPrinter::printString( const std::list< std::string > & words,
 		{
 			if( makeOffset )
 			{
-				printOffset( currentPos, leftMargin );
+				printOffset( to, currentPos, leftMargin );
 
 				makeOffset = false;
 			}
@@ -429,12 +436,12 @@ HelpPrinter::printString( const std::list< std::string > & words,
 			{
 				length += word.length();
 
-				std::cout << word;
+				to << word;
 
 				if( length < maxLineLength )
 				{
 					++length;
-					std::cout << ' ';
+					to << ' ';
 				}
 			}
 			else
@@ -445,18 +452,18 @@ HelpPrinter::printString( const std::list< std::string > & words,
 
 				maxLineLength = m_lineLength - leftMargin - rightMargin;
 
-				std::cout << std::endl;
+				to << std::endl;
 
-				printOffset( currentPos, leftMargin );
+				printOffset( to, currentPos, leftMargin );
 
-				std::cout << word;
+				to << word;
 
 				length += word.length();
 
 				if( length < maxLineLength )
 				{
 					++length;
-					std::cout << ' ';
+					to << ' ';
 				}
 			}
 		}
