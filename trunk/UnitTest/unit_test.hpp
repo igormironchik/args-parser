@@ -76,7 +76,7 @@ private:
 class TestInfo final {
 public:
 	TestInfo( const std::string & testCaseName,
-		const std::shared_ptr< Test > & test );
+		std::shared_ptr< Test > test );
 }; // class TestInfo
 
 
@@ -95,7 +95,7 @@ public:
 	const std::string & name() const;
 
 	//! Add new test.
-	void addTest( const std::shared_ptr< Test > & test );
+	void addTest( std::shared_ptr< Test > test );
 
 	//! Run all tests.
 	void runAllTests();
@@ -168,8 +168,7 @@ public: \
 }; \
  \
 TestInfo TestName##Class::testInfo = \
-	TestInfo( #TestCaseName, std::shared_ptr< Test > ( \
-		new TestName##Class() ) ); \
+	TestInfo( #TestCaseName, std::make_shared< TestName##Class > () ); \
 void TestName##Class::testBody()
 
 
@@ -247,7 +246,7 @@ Test::runTest()
 
 inline
 TestInfo::TestInfo( const std::string & testCaseName,
-	const std::shared_ptr< Test > & test )
+	std::shared_ptr< Test > test )
 {
 	UnitTest::instance().createTestCaseIfNotExists( testCaseName )->
 		addTest( test );
@@ -276,7 +275,7 @@ TestCase::name() const
 }
 
 inline void
-TestCase::addTest( const std::shared_ptr< Test > & test )
+TestCase::addTest( std::shared_ptr< Test > test )
 {
 	m_tests.push_back( test );
 }
@@ -340,7 +339,7 @@ UnitTest::createTestCaseIfNotExists( const std::string & name )
 	{
 		auto p = m_testCases.insert(
 			std::pair< std::string, std::shared_ptr< TestCase > >( name,
-				std::shared_ptr< TestCase > ( new TestCase( name ) ) ) );
+				std::make_shared< TestCase > ( name ) ) );
 
 		it = p.first;
 	}
