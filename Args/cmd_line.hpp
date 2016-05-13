@@ -55,7 +55,7 @@ namespace Args {
 */
 class CmdLine final {
 public:
-	CmdLine( int argc, char ** argv );
+	CmdLine( int argc, const char * const * argv );
 
 	//! Add argument.
 	void addArg( ArgIface * arg );
@@ -91,7 +91,7 @@ private:
 
 //! Make context from the argc and argv.
 static inline ContextInternal
-makeContext( int argc, char ** argv )
+makeContext( int argc, const char * const * argv )
 {
 	ContextInternal context;
 
@@ -108,7 +108,7 @@ makeContext( int argc, char ** argv )
 //
 
 inline
-CmdLine::CmdLine( int argc, char ** argv )
+CmdLine::CmdLine( int argc, const char * const * argv )
 	:	m_context( makeContext( argc, argv ) )
 {
 }

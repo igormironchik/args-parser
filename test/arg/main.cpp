@@ -43,7 +43,7 @@ using namespace Args;
 TEST( ArgTestCase, TestAllIsOk )
 {
 	const int argc = 7;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-t", "100",
 		"--port", "4545",
 		"--host", "any" };
@@ -73,7 +73,7 @@ TEST( ArgTestCase, TestAllIsOk )
 TEST( ArgTestCase, TestUndefinedArg )
 {
 	const int argc = 7;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-t", "100",
 		"--port", "4545",
 		"--host", "any" };
@@ -103,7 +103,7 @@ TEST( ArgTestCase, TestUndefinedArg )
 TEST( ArgTestCase, TestUndefinedRequiredArg )
 {
 	const int argc = 5;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-t", "100",
 		"--host", "any" };
 

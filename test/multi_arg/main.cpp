@@ -44,7 +44,7 @@ using namespace Args;
 TEST( MultiArgTestCase, TestAllIsOk )
 {
 	const int argc = 10;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-m", "100",
 		"-m", "200",
 		"-m", "300",
@@ -87,7 +87,7 @@ TEST( MultiArgTestCase, TestAllIsOk )
 TEST( MultiArgTestCase, TestAllIsOk2 )
 {
 	const int argc = 11;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-m", "100",
 		"-m", "200",
 		"-m", "300",
@@ -136,7 +136,7 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 TEST( MultiArgTestCase, NotDefinedValue )
 {
 	const int argc = 8;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-m", "100",
 		"-m", "200",
 		"-m", "300",
@@ -165,7 +165,7 @@ TEST( MultiArgTestCase, NotDefinedValue )
 TEST( MultiArgTestCase, NotDefinedValue2 )
 {
 	const int argc = 9;
-	char * argv[ argc ] = { "program.exe",
+	const char * argv[ argc ] = { "program.exe",
 		"-m", "100",
 		"-m", "200",
 		"-m", "300",
