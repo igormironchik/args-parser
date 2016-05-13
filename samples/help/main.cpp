@@ -111,7 +111,7 @@ int main( int argc, char ** argv )
 	}
 	catch( const Args::BaseException & x )
 	{
-		std::cout << x.what();
+		std::cout << x.what() << std::endl;
 
 		return 1;
 	}
