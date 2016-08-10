@@ -296,6 +296,8 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 
 		printString( to, splitToWords( arg->longDescription() ),
 			0, 7, 7 );
+
+		to << std::endl << std::endl;
 	}
 	catch( const BaseException & )
 	{
