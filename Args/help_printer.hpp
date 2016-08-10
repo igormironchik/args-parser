@@ -376,7 +376,7 @@ HelpPrinter::createUsageString( ArgIface * arg )
 static inline bool
 isSpaceChar( const char & c )
 {
-	static const std::string spaceChars = " \n\t\r";
+	static const std::string spaceChars = " \n\t\r ";
 
 	return ( spaceChars.find( c ) != std::string::npos );
 }
