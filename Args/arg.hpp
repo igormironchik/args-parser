@@ -56,7 +56,7 @@ class Arg
 {
 public:
 	//! Construct argument with flag \arg flag and name \arg name.
-	Arg(
+	explicit Arg(
 		//! Flag for this argument.
 		char flag,
 		//! Name for this argument.
@@ -67,7 +67,7 @@ public:
 		bool isRequired = false );
 
 	//! Construct argument with flag \arg flag and name \arg name.
-	Arg(
+	explicit Arg(
 		//! Flag for this argument.
 		char flag,
 		//! Name for this argument.

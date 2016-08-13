@@ -56,7 +56,7 @@ class MultiArg
 {
 public:
 	//! Construct argument with flag \arg flag and name \arg name.
-	MultiArg(
+	explicit MultiArg(
 		//! Flag for this argument.
 		char flag,
 		//! Name for this argument.
@@ -67,7 +67,7 @@ public:
 		bool isRequired = false );
 
 	//! Construct argument with flag \arg flag and name \arg name.
-	MultiArg(
+	explicit MultiArg(
 		//! Flag for this argument.
 		char flag,
 		//! Name for this argument.
@@ -216,7 +216,7 @@ MultiArg::process( Context & context )
 
 				begin = context.next();
 
-				while( begin !=last )
+				while( begin != last )
 				{
 					m_values.push_back( *begin );
 
