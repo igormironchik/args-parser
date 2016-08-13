@@ -223,9 +223,9 @@ Arg::Arg( char flag, const std::string & name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
+	,	m_isDefined( false )
 	,	m_flag( 1, flag )
 	,	m_name( name )
-	,	m_isDefined( false )
 	,	m_valueSpecifier( "arg" )
 {
 }
@@ -235,9 +235,9 @@ Arg::Arg( char flag, const char * name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
+	,	m_isDefined( false )
 	,	m_flag( 1, flag )
 	,	m_name( name )
-	,	m_isDefined( false )
 	,	m_valueSpecifier( "arg" )
 {
 }
@@ -247,8 +247,8 @@ Arg::Arg( char flag,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
-	,	m_flag( 1, flag )
 	,	m_isDefined( false )
+	,	m_flag( 1, flag )
 	,	m_valueSpecifier( "arg" )
 {
 }
@@ -258,8 +258,8 @@ Arg::Arg( const std::string & name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
-	,	m_name( name )
 	,	m_isDefined( false )
+	,	m_name( name )
 	,	m_valueSpecifier( "arg" )
 {
 }
