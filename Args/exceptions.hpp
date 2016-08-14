@@ -48,7 +48,7 @@ class BaseException
 public:
 	explicit BaseException( const std::string & what );
 
-	virtual ~BaseException();
+	virtual ~BaseException() noexcept;
 }; // class BaseException
 
 
@@ -76,7 +76,7 @@ BaseException::BaseException( const std::string & what )
 }
 
 inline
-BaseException::~BaseException()
+BaseException::~BaseException() noexcept
 {
 }
 

@@ -108,9 +108,9 @@ protected:
 		context. This method invokes exactly at that moment when
 		parser has found this argument.
 	*/
-	virtual void process(
+	void process(
 		//! Context of the command line.
-		Context & context );
+		Context & context ) override;
 
 private:
 	DISABLE_COPY( MultiArg )

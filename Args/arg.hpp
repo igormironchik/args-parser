@@ -94,15 +94,15 @@ public:
 		If name is empty returned value should be a flag.
 		I.e. for example "-t" or "--timeout"
 	*/
-	virtual std::string name() const;
+	std::string name() const override;
 
 	//! \return Is this argument with value?
-	bool isWithValue() const;
+	bool isWithValue() const override;
 	//! Set is this argument with value.
 	void setWithValue( bool on = true );
 
 	//! \return Is this argument required?
-	bool isRequired() const;
+	bool isRequired() const override;
 	//! Set required.
 	void setRequired( bool on = true );
 
@@ -117,27 +117,27 @@ public:
 	void setValue( const std::string & v );
 
 	//! \return Flag.
-	const std::string & flag() const;
+	const std::string & flag() const override;
 	//! Set flag.
 	void setFlag( char f );
 
 	//! \return Argument name.
-	const std::string & argumentName() const;
+	const std::string & argumentName() const override;
 	//! Set argument name.
 	void setArgumentName( const std::string & name );
 
 	//! \return Value specifier.
-	const std::string & valueSpecifier() const;
+	const std::string & valueSpecifier() const override;
 	//! Set value specifier.
 	void setValueSpecifier( const std::string & vs );
 
 	//! \return Description of the argument.
-	const std::string & description() const;
+	const std::string & description() const override;
 	//! Set description.
 	void setDescription( const std::string & desc );
 
 	//! \return Long description of the argument.
-	const std::string & longDescription() const;
+	const std::string & longDescription() const override;
 	//! Set long description.
 	void setLongDescription( const std::string & desc );
 
@@ -150,21 +150,21 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name \arg name.
 	*/
-	virtual ArgIface * isItYou(
+	ArgIface * isItYou(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & name );
+		const std::string & name ) override;
 
 	/*!
 		Process argument's staff, for example take values from
 		context. This method invokes exactly at that moment when
 		parser has found this argument.
 	*/
-	virtual void process(
+	void process(
 		//! Context of the command line.
-		Context & context );
+		Context & context ) override;
 
 	/*!
 		Check correctness of the argument before parsing.
@@ -172,14 +172,14 @@ protected:
 		Implementation of this method must add his flag
 		and name to the \arg flags and \arg names.
 	*/
-	virtual void checkCorrectnessBeforeParsing(
+	void checkCorrectnessBeforeParsing(
 		//! All known flags.
 		std::list< std::string > & flags,
 		//! All known names.
-		std::list< std::string > & names ) const;
+		std::list< std::string > & names ) const override;
 
 	//! Check correctness of the argument after parsing.
-	virtual void checkCorrectnessAfterParsing() const;
+	void checkCorrectnessAfterParsing() const override;
 
 private:
 	DISABLE_COPY( Arg )
