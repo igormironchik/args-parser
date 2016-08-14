@@ -56,22 +56,12 @@ class Arg
 {
 public:
 	//! Construct argument with flag \arg flag and name \arg name.
-	explicit Arg(
+	template< typename T >
+	Arg(
 		//! Flag for this argument.
 		char flag,
 		//! Name for this argument.
-		const std::string & name,
-		//! Is this argument with value?
-		bool isWithValue = false,
-		//! Is this argument required?
-		bool isRequired = false );
-
-	//! Construct argument with flag \arg flag and name \arg name.
-	explicit Arg(
-		//! Flag for this argument.
-		char flag,
-		//! Name for this argument.
-		const char * name,
+		T && name,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?
@@ -87,9 +77,10 @@ public:
 		bool isRequired = false );
 
 	//! Construct argument only with name \arg name, without flag.
+	template< typename T >
 	explicit Arg(
 		//! Name for this argument.
-		const std::string & name,
+		T && name,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?
@@ -218,26 +209,14 @@ private:
 // Arg
 //
 
-inline
-Arg::Arg( char flag, const std::string & name,
+template< typename T >
+Arg::Arg( char flag, T && name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
 	,	m_isDefined( false )
 	,	m_flag( 1, flag )
-	,	m_name( name )
-	,	m_valueSpecifier( "arg" )
-{
-}
-
-inline
-Arg::Arg( char flag, const char * name,
-	bool isWithValue, bool isRequired )
-	:	m_isWithValue( isWithValue )
-	,	m_isRequired( isRequired )
-	,	m_isDefined( false )
-	,	m_flag( 1, flag )
-	,	m_name( name )
+	,	m_name( std::forward< T > ( name ) )
 	,	m_valueSpecifier( "arg" )
 {
 }
@@ -253,13 +232,13 @@ Arg::Arg( char flag,
 {
 }
 
-inline
-Arg::Arg( const std::string & name,
+template< typename T >
+Arg::Arg( T && name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
 	,	m_isDefined( false )
-	,	m_name( name )
+	,	m_name( std::forward< T > ( name ) )
 	,	m_valueSpecifier( "arg" )
 {
 }

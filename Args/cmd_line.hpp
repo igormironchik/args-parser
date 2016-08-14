@@ -60,6 +60,9 @@ public:
 	//! Add argument.
 	void addArg( ArgIface * arg );
 
+	//! Add argument.
+	void addArg( ArgIface & arg );
+
 	//! Parse arguments.
 	void parse();
 
@@ -127,6 +130,12 @@ CmdLine::addArg( ArgIface * arg )
 	else
 		throw BaseException( std::string( "Attempt to add nullptr to the "
 			"command line as argument." ) );
+}
+
+inline void
+CmdLine::addArg( ArgIface & arg )
+{
+	addArg( &arg );
 }
 
 inline void

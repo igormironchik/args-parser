@@ -56,22 +56,12 @@ class MultiArg
 {
 public:
 	//! Construct argument with flag \arg flag and name \arg name.
-	explicit MultiArg(
+	template< typename T >
+	MultiArg(
 		//! Flag for this argument.
 		char flag,
 		//! Name for this argument.
-		const std::string & name,
-		//! Is this argument with value?
-		bool isWithValue = false,
-		//! Is this argument required?
-		bool isRequired = false );
-
-	//! Construct argument with flag \arg flag and name \arg name.
-	explicit MultiArg(
-		//! Flag for this argument.
-		char flag,
-		//! Name for this argument.
-		const char * name,
+		T && name,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?
@@ -87,9 +77,10 @@ public:
 		bool isRequired = false );
 
 	//! Construct argument only with name \arg name, without flag.
+	template< typename T >
 	explicit MultiArg(
 		//! Name for this argument.
-		const std::string & name,
+		T && name,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?
@@ -135,18 +126,10 @@ private:
 // MultiArg
 //
 
-inline
-MultiArg::MultiArg( char flag, const std::string & name,
+template< typename T >
+MultiArg::MultiArg( char flag, T && name,
 	bool isWithValue, bool isRequired )
-	:	Arg( flag, name, isWithValue, isRequired )
-	,	m_count( 0 )
-{
-}
-
-inline
-MultiArg::MultiArg( char flag, const char * name,
-	bool isWithValue, bool isRequired )
-	:	Arg( flag, name, isWithValue, isRequired )
+	:	Arg( flag, std::forward< T > ( name ), isWithValue, isRequired )
 	,	m_count( 0 )
 {
 }
@@ -159,10 +142,10 @@ MultiArg::MultiArg( char flag,
 {
 }
 
-inline
-MultiArg::MultiArg( const std::string & name,
+template< typename T >
+MultiArg::MultiArg( T && name,
 	bool isWithValue, bool isRequired )
-	:	Arg( name, isWithValue, isRequired )
+	:	Arg( std::forward< T > ( name ), isWithValue, isRequired )
 	,	m_count( 0 )
 {
 }
