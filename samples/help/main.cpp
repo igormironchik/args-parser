@@ -86,9 +86,9 @@ int main( int argc, char ** argv )
 		// We want that help trows excpetion on help print.
 		true );
 	// Set executable name to the help printer.
-	help.printer().setExecutable( argv[ 0 ] );
+	help.setExecutable( argv[ 0 ] );
 	//! And set description of the application.
-	help.printer().setAppDescription( "This application just show "
+	help.setAppDescription( "This application just show "
 		"the power of Args." );
 
 	try {

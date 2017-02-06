@@ -62,6 +62,15 @@ public:
 	//! \return Help printer.
 	HelpPrinter & printer();
 
+	//! Set executable name.
+	void setExecutable( const std::string & exe );
+
+	//! Set description for the application.
+	void setAppDescription( const std::string & desc );
+
+	//! Set line length for the help.
+	void setLineLength( size_t length );
+
 protected:
 	/*!
 		Process argument's staff, for example take values from
@@ -99,6 +108,24 @@ inline HelpPrinter &
 Help::printer()
 {
 	return m_printer;
+}
+
+inline void
+Help::setExecutable( const std::string & exe )
+{
+	m_printer.setExecutable( exe );
+}
+
+inline void
+Help::setAppDescription( const std::string & desc )
+{
+	m_printer.setAppDescription( desc );
+}
+
+inline void
+Help::setLineLength( size_t length )
+{
+	m_printer.setLineLength( length );
 }
 
 inline void
