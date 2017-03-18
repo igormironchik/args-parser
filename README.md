@@ -107,21 +107,21 @@ int main( int argc, char ** argv )
     /*
       Now add our argument to the command line.
     */
-    cmd.addArg( &amp;host );
-    cmd.addArg( &amp;port );
-    cmd.addArg( &amp;timeout );
-    cmd.addArg( &amp;help );
+    cmd.addArg( &host );
+    cmd.addArg( &port );
+    cmd.addArg( &timeout );
+    cmd.addArg( &help );
 
     /*
       Now parse our arguments.
     */
     cmd.parse();
   }
-  catch( const Args::HelpHasBeenPrintedException &amp; )
+  catch( const Args::HelpHasBeenPrintedException & )
   {
     return 0;
   }
-  catch( const Args::BaseException &amp; x )
+  catch( const Args::BaseException & x )
   {
     std::cout << x.what();
 
