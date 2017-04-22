@@ -84,12 +84,12 @@ public:
 
 protected:
 	/*!
-		\return Argument for the given \arg name name.
+		\return Argument for the given name.
 
 		\retval Pointer to the ArgIface if this argument handles
-			argument with the given \arg name name.
+			argument with the given name.
 		\retval nullptr if this argument doesn't know about
-			argument with name \arg name.
+			argument with name.
 	*/
 	virtual ArgIface * isItYou(
 		/*!
@@ -111,7 +111,7 @@ protected:
 		Check correctness of the argument before parsing.
 
 		Implementation of this method must add his flag
-		and name to the \arg flags and \arg names.
+		and name to the flags and names.
 	*/
 	virtual void checkCorrectnessBeforeParsing(
 		//! All known flags.

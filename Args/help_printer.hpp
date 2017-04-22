@@ -68,7 +68,7 @@ public:
 		//! Output stream for the printing help.
 		std::ostream & to );
 
-	//! Print help for the given \arg name argument.
+	//! Print help for the given argument.
 	virtual void print(
 		//! Name of the argument. I.e. "-t" or "--timeout".
 		const std::string & name,

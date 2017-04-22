@@ -55,7 +55,7 @@ class Arg
 	:	public ArgIface
 {
 public:
-	//! Construct argument with flag \arg flag and name \arg name.
+	//! Construct argument with flag and name.
 	template< typename T >
 	Arg(
 		//! Flag for this argument.
@@ -67,7 +67,7 @@ public:
 		//! Is this argument required?
 		bool isRequired = false );
 
-	//! Construct argument only with flag \arg flag, without name.
+	//! Construct argument only with flag, without name.
 	explicit Arg(
 		//! Flag for this argument.
 		char flag,
@@ -76,7 +76,7 @@ public:
 		//! Is this argument required?
 		bool isRequired = false );
 
-	//! Construct argument only with name \arg name, without flag.
+	//! Construct argument only with name, without flag.
 	template< typename T >
 	explicit Arg(
 		//! Name for this argument.
@@ -143,12 +143,12 @@ public:
 
 protected:
 	/*!
-		\return Argument for the given \arg name name.
+		\return Argument for the given name.
 
 		\retval Pointer to the ArgIface if this argument handles
-			argument with the given \arg name name.
+			argument with the given name.
 		\retval nullptr if this argument doesn't know about
-			argument with name \arg name.
+			argument with name.
 	*/
 	ArgIface * isItYou(
 		/*!
@@ -170,7 +170,7 @@ protected:
 		Check correctness of the argument before parsing.
 
 		Implementation of this method must add his flag
-		and name to the \arg flags and \arg names.
+		and name to the flags and names.
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.

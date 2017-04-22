@@ -55,7 +55,7 @@ class MultiArg
 	:	public Arg
 {
 public:
-	//! Construct argument with flag \arg flag and name \arg name.
+	//! Construct argument with flag and name.
 	template< typename T >
 	MultiArg(
 		//! Flag for this argument.
@@ -67,7 +67,7 @@ public:
 		//! Is this argument required?
 		bool isRequired = false );
 
-	//! Construct argument only with flag \arg flag, without name.
+	//! Construct argument only with flag, without name.
 	explicit MultiArg(
 		//! Flag for this argument.
 		char flag,
@@ -76,7 +76,7 @@ public:
 		//! Is this argument required?
 		bool isRequired = false );
 
-	//! Construct argument only with name \arg name, without flag.
+	//! Construct argument only with name, without flag.
 	template< typename T >
 	explicit MultiArg(
 		//! Name for this argument.
