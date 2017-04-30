@@ -355,7 +355,10 @@ HelpPrinter::setCmdLine( CmdLine * cmd )
 inline void
 HelpPrinter::setLineLength( size_t length )
 {
-	m_lineLength = length;
+	if( length > 40 )
+		m_lineLength = length;
+	else
+		m_lineLength = 40;
 }
 
 inline std::list< std::string >
