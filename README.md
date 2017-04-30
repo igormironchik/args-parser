@@ -13,7 +13,7 @@ Just run build.rb which is a Ruby program and a project file or use QMake projec
 For compiling Args you should have installed:
 
  * Ruby programming language (http://www.ruby-lang.org/en/)
- * mxx_ru Ruby gem (http://rubyforge.org/projects/mxx-ru/)
+ * mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
 
 or
  * QMake
