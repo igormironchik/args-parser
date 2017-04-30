@@ -164,7 +164,6 @@ TEST( GroupCase, TestAllOfFailed )
 	Arg host( 'h', std::string( "host" ), true );
 
 	AllOfGroup g( "all_of" );
-	g.setRequired( true );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );

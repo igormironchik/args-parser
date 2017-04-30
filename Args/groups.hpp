@@ -34,6 +34,9 @@
 // Args include.
 #include <Args/group_iface.hpp>
 
+// C++ include.
+#include <algorithm>
+
 
 namespace Args {
 
@@ -171,6 +174,27 @@ protected:
 					"\" is not allowed to " +
 					"be in AllOf group \"" + name() + "\"." );
 		}
+	}
+
+	//! Check correctness of the argument after parsing.
+	void checkCorrectnessAfterParsing() const override
+	{
+		GroupIface::checkCorrectnessAfterParsing();
+
+		bool defined = false;
+
+		bool all = std::all_of( children().cbegin(), children().cend(),
+			[ & ] ( const auto & arg )
+			{
+				if( arg->isDefined() )
+					defined = true;
+
+				return arg->isDefined();
+			} );
+
+		if( defined && !all )
+			throw BaseException( std::string( "All arguments in "
+				"AllOf group \"" ) + name() + "\" should be defined." );
 	}
 }; // class AllOfGroup
 
