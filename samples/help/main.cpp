@@ -32,7 +32,6 @@
 #include <Args/arg.hpp>
 #include <Args/help.hpp>
 #include <Args/cmd_line.hpp>
-#include <Args/help_printer.hpp>
 #include <Args/exceptions.hpp>
 
 // C++ include.
