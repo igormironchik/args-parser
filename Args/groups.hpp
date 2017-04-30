@@ -183,7 +183,7 @@ protected:
 
 		bool defined = false;
 
-		bool all = std::all_of( children().cbegin(), children().cend(),
+		const bool all = std::all_of( children().cbegin(), children().cend(),
 			[ & ] ( const auto & arg )
 			{
 				if( arg->isDefined() )
