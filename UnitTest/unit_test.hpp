@@ -197,6 +197,49 @@ void TestName##Class::testBody()
 
 
 //
+// CHECK_THROW
+//
+
+#define CHECK_THROW( Func, Exception ) \
+{ \
+	bool exception_thrown__ = false; \
+	try { \
+		Func; \
+	} \
+	catch( const Exception & ) { \
+		exception_thrown__ = true; \
+	} \
+	catch( const std::exception & x ) { \
+		std::ostringstream stream; \
+		stream << "     file: \"" << __FILE__ \
+			<< "\" line: " << __LINE__ << "\n" \
+			<< "     expected exception: " << #Exception << "\n" \
+			<< "     but caught: " << typeid( x ).name() << " [FAILED]"; \
+ \
+		throw std::runtime_error( stream.str() ); \
+	} \
+	catch( ... ) { \
+		std::ostringstream stream; \
+		stream << "     file: \"" << __FILE__ \
+			<< "\" line: " << __LINE__ << "\n" \
+			<< "     expected exception: " << #Exception << "\n" \
+			<< "     but caught: unknown exception [FAILED]"; \
+ \
+		throw std::runtime_error( stream.str() ); \
+	} \
+	if( !exception_thrown__ ) { \
+		std::ostringstream stream; \
+		stream << "     file: \"" << __FILE__ \
+			<< "\" line: " << __LINE__ << "\n" \
+			<< "     expected exception: " << #Exception << "\n" \
+			<< "     but nothing thrown [FAILED]"; \
+ \
+		throw std::runtime_error( stream.str() ); \
+	} \
+}
+
+
+//
 // Test
 //
 

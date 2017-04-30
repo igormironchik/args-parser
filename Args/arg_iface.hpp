@@ -49,6 +49,7 @@ class Context;
 class ArgIface {
 
 	friend class CmdLine;
+	friend class GroupIface;
 
 public:
 	virtual ~ArgIface();
@@ -66,6 +67,9 @@ public:
 
 	//! \return Is this argument required?
 	virtual bool isRequired() const = 0;
+
+	//! \return Is this argument defined?
+	virtual bool isDefined() const = 0;
 
 	//! \return Flag.
 	virtual const std::string & flag() const = 0;

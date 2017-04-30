@@ -107,7 +107,7 @@ public:
 	void setRequired( bool on = true );
 
 	//! \return Is this argument defined?
-	bool isDefined() const;
+	bool isDefined() const override;
 	//! Set defined.
 	void setDefined( bool on = true );
 

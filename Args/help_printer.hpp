@@ -42,6 +42,7 @@
 #include <Args/utils.hpp>
 #include <Args/cmd_line.hpp>
 #include <Args/exceptions.hpp>
+#include <Args/group_iface.hpp>
 
 
 namespace Args {
@@ -164,18 +165,29 @@ HelpPrinter::print( std::ostream & to )
 	size_t maxFlag = 0;
 	size_t maxName = 0;
 
-	std::for_each( m_cmdLine->arguments().begin(),
-		m_cmdLine->arguments().end(),
-		[ & ] ( ArgIface * arg )
+	std::function< void( ArgIface* ) > findArgs = [ & ] ( ArgIface * arg )
 		{
-			if( arg->isRequired() )
-				required.push_back( arg );
-			else
-				optional.push_back( arg );
+			GroupIface * g = dynamic_cast< GroupIface* > ( arg );
 
-			calcMaxFlagAndName( arg, maxFlag, maxName );
-		}
-	);
+			if( g )
+			{
+				std::for_each( g->children().cbegin(),
+					g->children().cend(), findArgs );
+			}
+			else
+			{
+				if( arg->isRequired() )
+					required.push_back( arg );
+				else
+					optional.push_back( arg );
+
+				calcMaxFlagAndName( arg, maxFlag, maxName );
+			}
+		};
+
+	std::for_each( m_cmdLine->arguments().cbegin(),
+		m_cmdLine->arguments().cend(),
+		findArgs );
 
 	maxFlag += 2;
 	maxName += 2;
@@ -191,13 +203,13 @@ HelpPrinter::print( std::ostream & to )
 		{
 			const std::list< std::string > words = createUsageString( arg );
 
-			usage.insert( usage.end(), words.begin(), words.end() );
+			usage.insert( usage.end(), words.cbegin(), words.cend() );
 		};
 
-	std::for_each( required.begin(), required.end(),
+	std::for_each( required.cbegin(), required.cend(),
 		createUsageAndAppend );
 
-	std::for_each( optional.begin(), optional.end(),
+	std::for_each( optional.cbegin(), optional.cend(),
 		createUsageAndAppend );
 
 	printString( to, splitToWords( m_appDescription ), 0, 0, 0 );
@@ -266,14 +278,14 @@ HelpPrinter::print( std::ostream & to )
 	{
 		to << "Required arguments:" << std::endl;
 
-		std::for_each( required.begin(), required.end(), printArg );
+		std::for_each( required.cbegin(), required.cend(), printArg );
 	}
 
 	if( !optional.empty() )
 	{
 		to << "Optional arguments:" << std::endl;
 
-		std::for_each( optional.begin(), optional.end(), printArg );
+		std::for_each( optional.cbegin(), optional.cend(), printArg );
 	}
 }
 
@@ -287,7 +299,7 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 
 		to << "Usage: ";
 
-		std::for_each( usage.begin(), usage.end(),
+		std::for_each( usage.cbegin(), usage.cend(),
 			[ & ] ( const std::string & s )
 				{ to << s << ' '; }
 		);
@@ -389,7 +401,7 @@ HelpPrinter::splitToWords( const std::string & s )
 	std::string word;
 	std::list< std::string > result;
 
-	std::for_each( s.begin(), s.end(),
+	std::for_each( s.cbegin(), s.cend(),
 		[ &word, &result ] ( const char & c )
 		{
 			if( isSpaceChar( c ) )
@@ -423,7 +435,7 @@ HelpPrinter::printString( std::ostream & to,
 
 	bool makeOffset = ( currentPos < leftMargin );
 
-	std::for_each( words.begin(), words.end(),
+	std::for_each( words.cbegin(), words.cend(),
 		[ & ] ( const std::string & word )
 		{
 			if( makeOffset )

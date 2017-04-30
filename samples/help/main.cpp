@@ -95,10 +95,10 @@ int main( int argc, char ** argv )
 		/*
 			Now add our argument to the command line.
 		*/
-		cmd.addArg( &host );
-		cmd.addArg( &port );
-		cmd.addArg( &timeout );
-		cmd.addArg( &help );
+		cmd.addArg( host );
+		cmd.addArg( port );
+		cmd.addArg( timeout );
+		cmd.addArg( help );
 
 		/*
 			Now parse our arguments.

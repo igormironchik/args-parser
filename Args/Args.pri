@@ -9,4 +9,6 @@ HEADERS += $$PWD/arg_iface.hpp \
 	$$PWD/help_printer.hpp \
 	$$PWD/help.hpp \
 	$$PWD/multi_arg.hpp \
-	$$PWD/utils.hpp
+	$$PWD/utils.hpp \
+    $$PWD/group_iface.hpp \
+    $$PWD/groups.hpp
