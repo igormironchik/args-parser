@@ -284,9 +284,6 @@ HelpPrinter::print( std::ostream & to )
 				}
 			}
 
-			printOffset( to, pos, beforeDescription );
-			pos = beforeDescription;
-
 			printString( to, splitToWords( arg->description() ), pos,
 				beforeDescription, 0 );
 
@@ -447,9 +444,21 @@ HelpPrinter::printString( std::ostream & to,
 	const std::list< std::string > & words,
 	size_t currentPos, size_t leftMargin, size_t rightMargin )
 {
-	size_t maxLineLength = m_lineLength -
-		( currentPos < leftMargin ? leftMargin - currentPos : currentPos ) -
-		rightMargin;
+	const size_t occupied = leftMargin + rightMargin;
+
+	size_t maxLineLength = ( occupied < m_lineLength ?
+		m_lineLength - occupied : 0 );
+
+	if( maxLineLength < 20 )
+	{
+		to << "\n\n";
+
+		maxLineLength = m_lineLength - 20;
+
+		currentPos = 0;
+		leftMargin = 20;
+		rightMargin = 0;
+	}
 
 	size_t length = 0;
 
