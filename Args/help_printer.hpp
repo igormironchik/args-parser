@@ -43,6 +43,7 @@
 #include <Args/cmd_line.hpp>
 #include <Args/exceptions.hpp>
 #include <Args/group_iface.hpp>
+#include <Args/groups.hpp>
 
 
 namespace Args {
@@ -90,7 +91,7 @@ public:
 
 protected:
 	//! \return List of words with usage string for the argument.
-	std::list< std::string > createUsageString( ArgIface * arg );
+	std::list< std::string > createUsageString( ArgIface * arg, bool required );
 	//! List of words from string.
 	std::list< std::string > splitToWords( const std::string & s );
 	//! Print string with given margins.
@@ -165,24 +166,37 @@ HelpPrinter::print( std::ostream & to )
 	size_t maxFlag = 0;
 	size_t maxName = 0;
 
+	bool requiredAllOfGroup = false;
+
 	std::function< void( ArgIface* ) > findArgs = [ & ] ( ArgIface * arg )
 		{
+			const bool tmp = requiredAllOfGroup;
+
 			GroupIface * g = dynamic_cast< GroupIface* > ( arg );
 
 			if( g )
 			{
+				if( g->isRequired() && dynamic_cast< AllOfGroup* > ( g ) )
+					requiredAllOfGroup = true;
+				else
+					requiredAllOfGroup = false;
+
 				std::for_each( g->children().cbegin(),
 					g->children().cend(), findArgs );
+
+				requiredAllOfGroup = tmp;
 			}
 			else
 			{
-				if( arg->isRequired() )
+				if( arg->isRequired() || requiredAllOfGroup )
 					required.push_back( arg );
 				else
 					optional.push_back( arg );
 
 				calcMaxFlagAndName( arg, maxFlag, maxName );
 			}
+
+
 		};
 
 	std::for_each( m_cmdLine->arguments().cbegin(),
@@ -198,16 +212,21 @@ HelpPrinter::print( std::ostream & to )
 
 	usage.push_back( m_exeName );
 
+	bool requiredFlag = true;
+
 	std::function< void ( ArgIface* ) > createUsageAndAppend =
 		[ & ] ( ArgIface * arg )
 		{
-			const std::list< std::string > words = createUsageString( arg );
+			const std::list< std::string > words = createUsageString( arg,
+				requiredFlag );
 
 			usage.insert( usage.end(), words.cbegin(), words.cend() );
 		};
 
 	std::for_each( required.cbegin(), required.cend(),
 		createUsageAndAppend );
+
+	requiredFlag = false;
 
 	std::for_each( optional.cbegin(), optional.cend(),
 		createUsageAndAppend );
@@ -295,7 +314,8 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 	try {
 		ArgIface * arg = m_cmdLine->findArgument( name );
 
-		std::list< std::string > usage = createUsageString( arg );
+		std::list< std::string > usage = createUsageString( arg,
+			arg->isRequired() );
 
 		to << "Usage: ";
 
@@ -342,13 +362,13 @@ HelpPrinter::setLineLength( size_t length )
 }
 
 inline std::list< std::string >
-HelpPrinter::createUsageString( ArgIface * arg )
+HelpPrinter::createUsageString( ArgIface * arg, bool required )
 {
 	std::list< std::string > result;
 
 	std::string usage;
 
-	if( !arg->isRequired() )
+	if( !required )
 		usage.append( "[ " );
 
 	if( !arg->flag().empty() )
@@ -379,7 +399,7 @@ HelpPrinter::createUsageString( ArgIface * arg )
 		usage.append( ">" );
 	}
 
-	if( !arg->isRequired() )
+	if( !required )
 		usage.append( " ]" );
 
 	result.push_back( usage );
