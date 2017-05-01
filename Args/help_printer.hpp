@@ -728,7 +728,17 @@ HelpPrinter::print( Command * cmd, const std::string & name,
 		if( arg )
 			print( arg, to );
 		else
-			print( cmd->name(), to );
+		{
+			try {
+				arg = m_cmdLine->findArgument( name );
+
+				print( arg, to );
+			}
+			catch( const BaseException & )
+			{
+				print( cmd->name(), to );
+			}
+		}
 	}
 	else
 		print( to );
