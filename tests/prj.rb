@@ -8,4 +8,5 @@ MxxRu::Cpp::composite_target() {
 	required_prj( "tests/auto/arg/prj.ut.rb" )
 	required_prj( "tests/auto/multi_arg/prj.ut.rb" )
 	required_prj( "tests/auto/groups/prj.ut.rb" )
+	required_prj( "tests/auto/command/prj.ut.rb" )
 }

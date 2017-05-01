@@ -5,5 +5,6 @@ SUBDIRS = arg \
 	context \
 	flag_and_name \
 	multi_arg \
-	groups
+	groups \
+	command
 	
