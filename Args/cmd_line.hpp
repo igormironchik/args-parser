@@ -36,6 +36,7 @@
 #include <Args/context.hpp>
 #include <Args/arg_iface.hpp>
 #include <Args/exceptions.hpp>
+#include <Args/command.hpp>
 
 // C++ include.
 #include <list>
@@ -85,6 +86,8 @@ private:
 	Context m_context;
 	//! Arguments.
 	std::list< ArgIface* > m_args;
+	//! Current command.
+	Command * m_command;
 }; // class CmdLine
 
 
@@ -113,6 +116,7 @@ makeContext( int argc, const char * const * argv )
 inline
 CmdLine::CmdLine( int argc, const char * const * argv )
 	:	m_context( makeContext( argc, argv ) )
+	,	m_command( nullptr )
 {
 }
 
@@ -220,10 +224,32 @@ CmdLine::findArgument( const std::string & name )
 			{ return ( arg->isItYou( name ) != nullptr ); } );
 
 	if( it != m_args.end() )
+	{
+		Command * tmp = dynamic_cast< Command* > ( *it );
+
+		if( tmp )
+		{
+			if( m_command )
+				throw BaseException( std::string( "Only one command can be "
+					"specified. But you entered \"" ) + m_command->name() +
+					"\" and \"" + tmp->name() + "\"." );
+
+			m_command = tmp;
+		}
+	}
+
+	if( it != m_args.end() )
 		return (*it)->isItYou( name );
-	else
-		throw BaseException( std::string( "Unknown argument \"" ) +
-			name + "\"." );
+	else if( m_command )
+	{
+		ArgIface * tmp = m_command->isItYourChild( name );
+
+		if( tmp )
+			return tmp;
+	}
+
+	throw BaseException( std::string( "Unknown argument \"" ) +
+		name + "\"." );
 }
 
 } /* namespace Args */

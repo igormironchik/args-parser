@@ -51,6 +51,8 @@ namespace Args {
 class Command final
 	:	public GroupIface
 {
+	friend class CmdLine;
+
 public:
 	//! Option to the command.
 	enum CommandOption {
@@ -179,8 +181,24 @@ protected:
 	{
 		if( name() == n )
 			return this;
-		else
-			return GroupIface::isItYou( n );
+	}
+
+	/*!
+		\return Argument for the given name.
+
+		\retval Pointer to the ArgIface if this argument handles
+			argument with the given name.
+		\retval nullptr if this argument doesn't know about
+			argument with name.
+	*/
+	ArgIface * isItYourChild(
+		/*!
+			Name of the argument. Can be for example "-t" or
+			"--timeout".
+		*/
+		const std::string & name )
+	{
+		return GroupIface::isItYou( name );
 	}
 
 	/*!
