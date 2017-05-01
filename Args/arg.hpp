@@ -300,16 +300,18 @@ Arg::checkCorrectnessBeforeParsing( std::list< std::string > & flags,
 	{
 		if( isCorrectFlag( m_flag ) )
 		{
-			auto it = std::find( flags.begin(), flags.end(), m_flag );
+			const std::string flag = std::string( "-" ) + m_flag;
+
+			auto it = std::find( flags.begin(), flags.end(), flag );
 
 			if( it != flags.end() )
 				throw BaseException( std::string( "Redefinition of argument "
-					"witg flag \"" ) + m_flag + "\"." );
+					"witg flag \"" ) + flag + "\"." );
 			else
-				flags.push_back( m_flag );
+				flags.push_back( flag );
 		}
 		else
-			throw BaseException( std::string( "Dissallowed flag \"" ) +
+			throw BaseException( std::string( "Dissallowed flag \"-" ) +
 				m_flag + "\"." );
 	}
 
@@ -317,16 +319,18 @@ Arg::checkCorrectnessBeforeParsing( std::list< std::string > & flags,
 	{
 		if( isCorrectName( m_name ) )
 		{
-			auto it = std::find( names.begin(), names.end(), m_name );
+			const std::string name = std::string( "--" ) + m_name;
+
+			auto it = std::find( names.begin(), names.end(), name );
 
 			if( it != names.end() )
 				throw BaseException( std::string( "Redefinition of argument "
-					"with name \"" ) + m_name + "\"." );
+					"with name \"" ) + name + "\"." );
 			else
-				names.push_back( m_name );
+				names.push_back( name );
 		}
 		else
-			throw BaseException( std::string( "Dissallowed name \"" ) +
+			throw BaseException( std::string( "Dissallowed name \"--" ) +
 				m_name + "\"." );
 	}
 

@@ -28,6 +28,12 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
+/*!
+	\file
+
+	\warning If you are including this file you should include command.hpp too.
+*/
+
 #ifndef ARGS__GROUP_IFACE_HPP__INCLUDED
 #define ARGS__GROUP_IFACE_HPP__INCLUDED
 
@@ -44,6 +50,9 @@
 
 namespace Args {
 
+class Command;
+
+
 //
 // GroupIface
 //
@@ -52,6 +61,10 @@ namespace Args {
 class GroupIface
 	:	public ArgIface
 {
+public:
+	//! Dummy empty string.
+	static const std::string m_dummyEmptyString;
+
 public:
 	//! List of child arguments.
 	typedef std::list< ArgIface* > Arguments;
@@ -75,9 +88,15 @@ public:
 
 	//! Add argument.
 	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value >::type
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value &&
+		!std::is_base_of< Command, T >::value >::type
 	addArg( T & arg )
 	{
+		if( dynamic_cast< Command* > ( &arg ) )
+			throw BaseException( std::string( "Commands not allowed in groups. "
+				"You are trying to add command \"" ) + arg.name() +
+				"\" to group \"" + name() + "\"." );
+
 		if( std::find( m_children.cbegin(), m_children.cend(), &arg ) ==
 			m_children.cend() )
 				m_children.push_back( &arg );
@@ -85,9 +104,15 @@ public:
 
 	//! Add argument.
 	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value >::type
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value &&
+		!std::is_base_of< Command, T >::value >::type
 	addArg( T * arg )
 	{
+		if( dynamic_cast< Command* > ( arg ) )
+			throw BaseException( std::string( "Commands not allowed in groups. "
+				"You are trying to add command \"" ) + arg->name() +
+				"\" to group \"" + name() + "\"." );
+
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
 				m_children.push_back( arg );
@@ -117,7 +142,7 @@ public:
 	}
 
 	//! Set required flag.
-	void setRequired( bool on = true )
+	virtual void setRequired( bool on = true )
 	{
 		m_required = on;
 	}
@@ -221,8 +246,6 @@ protected:
 private:
 	DISABLE_COPY( GroupIface )
 
-	//! Dummy empty string.
-	static const std::string m_dummyEmptyString;
 	//! List of children.
 	Arguments m_children;
 	//! Name.

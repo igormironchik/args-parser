@@ -36,6 +36,7 @@
 #include <Args/groups.hpp>
 #include <Args/cmd_line.hpp>
 #include <Args/exceptions.hpp>
+#include <Args/command.hpp>
 
 
 using namespace Args;

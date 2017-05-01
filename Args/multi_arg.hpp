@@ -35,9 +35,11 @@
 #include <Args/arg.hpp>
 #include <Args/context.hpp>
 #include <Args/exceptions.hpp>
+#include <Args/value_utils.hpp>
+#include <Args/utils.hpp>
 
 // C++ include.
-#include <algorithm>
+#include <utility>
 
 
 namespace Args {
@@ -184,38 +186,9 @@ MultiArg::process( Context & context )
 {
 	if( isWithValue() )
 	{
-		if( !context.atEnd() )
-		{
-			auto begin = context.begin();
-
-			auto last = std::find_if( context.begin(), context.end(),
-				[] ( const std::string & v ) -> bool
-					{ return ( isArgument( v ) || isFlag( v ) ); }
-			);
-
-			if( last != begin )
-			{
-				setDefined( true );
-
-				begin = context.next();
-
-				while( begin != last )
-				{
-					m_values.push_back( *begin );
-
-					begin = context.next();
-				}
-
-				if( last != context.end() )
-					context.putBack();
-			}
-			else
-				throw BaseException( std::string( "Argument \"" ) +
-					name() + "\" require value that wasn't presented." );
-		}
-		else
-			throw BaseException( std::string( "Argument \"" ) +
-				name() + "\" require value that wasn't presented." );
+		setDefined( eatValues( context, m_values,
+			std::string( "Argument \"" ) +
+				name() + "\" require value that wasn't presented." ) );
 	}
 	else
 	{

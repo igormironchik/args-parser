@@ -28,6 +28,12 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
+/*!
+	\file
+
+	\warning If you are including this file you should include command.hpp too.
+*/
+
 #ifndef ARGS__GROUPS_HPP__INCLUDED
 #define ARGS__GROUPS_HPP__INCLUDED
 

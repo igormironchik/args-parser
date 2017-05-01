@@ -49,6 +49,14 @@ namespace Args {
 
 
 //
+// UNUSED
+//
+
+//! Macro to supress warning about unused argument.
+#define UNUSED( Var ) Var;
+
+
+//
 // isArgument
 //
 
