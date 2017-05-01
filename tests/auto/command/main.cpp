@@ -79,6 +79,166 @@ TEST( CommandCase, TestAllIsOk )
 	CHECK_CONDITION( *it == "500" )
 }
 
+TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
+{
+	const int argc = 5;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "100", "4545", "500" };
+
+	CmdLine cmd( argc, argv );
+
+	Arg f( 'f', true, true );
+
+	Command c( "add", Command::CommandWithManyValues );
+	c.addArg( f );
+
+	cmd.addArg( c );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( CommandCase, TestManyArgs )
+{
+	const int argc = 5;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "100", "4545", "500" };
+
+	CmdLine cmd( argc, argv );
+
+	Arg f( 'f', true, true );
+
+	Command c( "add", Command::CommandWithSingleValue );
+	c.addArg( f );
+
+	cmd.addArg( c );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( CommandCase, TestRedefinition )
+{
+	const int argc = 3;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "del" };
+
+	CmdLine cmd( argc, argv );
+
+	Command c( "add" );
+	Command d( "del" );
+
+	cmd.addArg( c );
+	cmd.addArg( d );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( CommandCase, TestNotDefinedCommand )
+{
+	const int argc = 1;
+	const char * argv[ argc ] = { "program.exe" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command c( "add" );
+	Command d( "del" );
+
+	cmd.addArg( c );
+	cmd.addArg( d );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( CommandCase, TestAllIsOk2 )
+{
+	const int argc = 7;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "100", "4545", "500",
+		"-f", "local" };
+
+	CmdLine cmd( argc, argv );
+
+	Arg f( 'f', true );
+
+	Command c( "add", Command::CommandWithManyValues );
+	c.addArg( f );
+
+	cmd.addArg( c );
+
+	cmd.parse();
+
+	CHECK_CONDITION( f.isDefined() == true )
+	CHECK_CONDITION( f.value() == "local" )
+
+	CHECK_CONDITION( c.isDefined() == true )
+	CHECK_CONDITION( c.value() == "100" )
+	CHECK_CONDITION( c.values().size() == 3 )
+
+	auto it = c.values().begin();
+
+	CHECK_CONDITION( *it == "100" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "4545" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "500" )
+}
+
+TEST( CommandCase, TestAllIsOk3 )
+{
+	const int argc = 5;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "100", "4545", "500" };
+
+	CmdLine cmd( argc, argv );
+
+	Arg f( 'f', true );
+
+	Command c( "add", Command::CommandWithManyValues );
+	c.addArg( f );
+
+	cmd.addArg( c );
+
+	cmd.parse();
+
+	CHECK_CONDITION( f.isDefined() == false )
+
+	CHECK_CONDITION( c.isDefined() == true )
+	CHECK_CONDITION( c.value() == "100" )
+	CHECK_CONDITION( c.values().size() == 3 )
+
+	auto it = c.values().begin();
+
+	CHECK_CONDITION( *it == "100" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "4545" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "500" )
+}
+
+TEST( CommandCase, TestAllIsOk4 )
+{
+	const int argc = 1;
+	const char * argv[ argc ] = { "program.exe" };
+
+	CmdLine cmd( argc, argv );
+
+	Command c( "add" );
+	Command d( "del" );
+
+	cmd.addArg( c );
+	cmd.addArg( d );
+
+	CHECK_CONDITION( c.isDefined() == false )
+	CHECK_CONDITION( d.isDefined() == false )
+}
+
 
 int main()
 {
