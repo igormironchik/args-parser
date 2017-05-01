@@ -347,7 +347,8 @@ TestCase::runAllTests()
 		++i;
 	}
 
-	std::cout << "Test case \"" << name() << "\" finished..." << std::endl;
+	std::cout << "Test case \"" << name() << "\" finished..." << std::endl
+		<< std::endl;
 }
 
 
