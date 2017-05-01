@@ -45,30 +45,38 @@ TEST( CommandCase, TestAllIsOk )
 {
 	const int argc = 7;
 	const char * argv[ argc ] = { "program.exe",
-		"-t", "100",
-		"--port", "4545",
-		"--host", "any" };
+		"add", "100", "4545", "500",
+		"-f", "local" };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg f( 'f', true, true );
 
-	cmd.addArg( &timeout );
-	cmd.addArg( &port );
-	cmd.addArg( &host );
+	Command c( "add", Command::CommandWithManyValues );
+	c.addArg( f );
+
+	cmd.addArg( c );
 
 	cmd.parse();
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == "100" )
+	CHECK_CONDITION( f.isDefined() == true )
+	CHECK_CONDITION( f.value() == "local" )
 
-	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == "4545" )
+	CHECK_CONDITION( c.isDefined() == true )
+	CHECK_CONDITION( c.value() == "100" )
+	CHECK_CONDITION( c.values().size() == 3 )
 
-	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == "any" )
+	auto it = c.values().begin();
+
+	CHECK_CONDITION( *it == "100" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "4545" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "500" )
 }
 
 
