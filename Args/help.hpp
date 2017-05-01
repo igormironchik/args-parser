@@ -59,9 +59,6 @@ public:
 	explicit Help( CmdLine * cmd,
 		bool throwExceptionOnPrint = true );
 
-	//! \return Help printer.
-	HelpPrinter & printer();
-
 	//! Set executable name.
 	void setExecutable( const std::string & exe );
 
@@ -86,6 +83,8 @@ private:
 	HelpPrinter m_printer;
 	//! Throw or not exception?
 	bool m_throwExceptionOnPrint;
+	//! Command line.
+	CmdLine * m_cmdLine;
 }; // class Help
 
 
@@ -97,17 +96,12 @@ inline
 Help::Help( CmdLine * cmd, bool throwExceptionOnPrint )
 	:	Arg( 'h', "help", true )
 	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
+	,	m_cmdLine( cmd )
 {
 	setDescription( "Print this help." );
 	setLongDescription( "Print this help." );
 
 	m_printer.setCmdLine( cmd );
-}
-
-inline HelpPrinter &
-Help::printer()
-{
-	return m_printer;
 }
 
 inline void
@@ -135,13 +129,40 @@ Help::process( Context & context )
 	{
 		const std::string arg = *context.next();
 
+		// Argument or flag.
 		if( isArgument( arg ) || isFlag( arg ) )
 			m_printer.print( arg, std::cout );
+		// Command?
 		else
 		{
-			context.putBack();
+			try {
+				ArgIface * tmp = m_cmdLine->findArgument( arg );
 
-			m_printer.print( std::cout );
+				Command * cmd = dynamic_cast< Command* > ( tmp );
+
+				// Command.
+				if( cmd )
+				{
+					if( !context.atEnd() )
+					{
+						const std::string cmdArg = *context.next();
+
+						// Argument or flag of command.
+						if( isArgument( cmdArg ) || isFlag( cmdArg ) )
+							m_printer.print( cmd, cmdArg, std::cout );
+						else
+							m_printer.print( arg, std::cout );
+					}
+					else
+						m_printer.print( arg, std::cout );
+				}
+				else
+					m_printer.print( std::cout );
+			}
+			catch( const BaseException & )
+			{
+				m_printer.print( std::cout );
+			}
 		}
 	}
 	else

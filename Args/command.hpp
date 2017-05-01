@@ -52,6 +52,7 @@ class Command final
 	:	public GroupIface
 {
 	friend class CmdLine;
+	friend class HelpPrinter;
 
 public:
 	//! Option to the command.
