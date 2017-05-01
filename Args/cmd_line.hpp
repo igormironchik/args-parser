@@ -56,7 +56,16 @@ namespace Args {
 */
 class CmdLine final {
 public:
-	CmdLine( int argc, const char * const * argv );
+	//! Command line options.
+	enum CmdLineOpts {
+		//! No special options.
+		Empty = 0,
+		//! Command should be defined.
+		CommandIsRequired = 1
+	}; // enum CmdLineOpts
+
+	CmdLine( int argc, const char * const * argv,
+		CmdLineOpts opt = Empty );
 
 	//! Add argument.
 	void addArg( ArgIface * arg );
@@ -88,6 +97,8 @@ private:
 	std::list< ArgIface* > m_args;
 	//! Current command.
 	Command * m_command;
+	//! Option.
+	CmdLineOpts m_opt;
 }; // class CmdLine
 
 
@@ -114,9 +125,10 @@ makeContext( int argc, const char * const * argv )
 //
 
 inline
-CmdLine::CmdLine( int argc, const char * const * argv )
+CmdLine::CmdLine( int argc, const char * const * argv, CmdLineOpts opt )
 	:	m_context( makeContext( argc, argv ) )
 	,	m_command( nullptr )
+	,	m_opt( opt )
 {
 }
 
@@ -214,6 +226,9 @@ CmdLine::checkCorrectnessAfterParsing() const
 		[] ( ArgIface * arg )
 			{ arg->checkCorrectnessAfterParsing(); }
 	);
+
+	if( m_opt == CommandIsRequired && !m_command )
+		throw BaseException( "Not specified command." );
 }
 
 inline ArgIface *
