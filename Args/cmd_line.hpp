@@ -194,8 +194,34 @@ CmdLine::parse()
 			}
 		}
 		else
-			throw BaseException( std::string( "Unknown argument \"" ) +
-				word + "\"." );
+		{
+			ArgIface * tmp = findArgument( word );
+
+			if( tmp )
+			{
+				Command * cmd = dynamic_cast< Command* > ( tmp );
+
+				if( cmd )
+				{
+					if( m_command )
+						throw BaseException( std::string( "Only one command can be "
+							"specified. But you entered \"" ) + m_command->name() +
+							"\" and \"" + cmd->name() + "\"." );
+					else
+					{
+						m_command = cmd;
+
+						m_command->process( m_context );
+					}
+				}
+				else
+					throw BaseException( std::string( "Unknown argument \"" ) +
+						word + "\"." );
+			}
+			else
+				throw BaseException( std::string( "Unknown argument \"" ) +
+					word + "\"." );
+		}
 	}
 
 	checkCorrectnessAfterParsing();
@@ -213,7 +239,19 @@ CmdLine::checkCorrectnessBeforeParsing() const
 	std::list< std::string > flags;
 	std::list< std::string > names;
 
-	std::for_each( m_args.begin(), m_args.end(),
+	std::list< ArgIface* > cmds;
+
+	std::for_each( m_args.cbegin(), m_args.cend(),
+		[ &cmds, &flags, &names ] ( ArgIface * arg )
+		{
+			if( dynamic_cast< Command* > ( arg ) )
+				cmds.push_back( arg );
+			else
+				arg->checkCorrectnessBeforeParsing( flags, names );
+		}
+	);
+
+	std::for_each( cmds.cbegin(), cmds.cend(),
 		[ &flags, &names ] ( ArgIface * arg )
 			{ arg->checkCorrectnessBeforeParsing( flags, names ); }
 	);
@@ -243,14 +281,7 @@ CmdLine::findArgument( const std::string & name )
 		Command * tmp = dynamic_cast< Command* > ( *it );
 
 		if( tmp )
-		{
-			if( m_command )
-				throw BaseException( std::string( "Only one command can be "
-					"specified. But you entered \"" ) + m_command->name() +
-					"\" and \"" + tmp->name() + "\"." );
-
-			m_command = tmp;
-		}
+			return tmp;
 	}
 
 	if( it != m_args.end() )

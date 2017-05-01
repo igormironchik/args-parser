@@ -1,4 +1,5 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS = help
+SUBDIRS = help \
+	sample_with_commands

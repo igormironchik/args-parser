@@ -426,6 +426,10 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 			std::for_each( m_cmdLine->arguments().cbegin(),
 				m_cmdLine->arguments().cend(), gf );
 
+			gmaxFlag += 2;
+			gmaxName += 2;
+			gmaxCommand += 2;
+
 			// Prepare arguments of command.
 			std::list< ArgIface* > required;
 			std::list< ArgIface* > optional;
@@ -445,6 +449,10 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 
 			std::for_each( cmd->children().cbegin(),
 				cmd->children().cend(), f );
+
+			maxFlag += 2;
+			maxName += 2;
+			maxCommand += 2;
 
 			// Print.
 			printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );

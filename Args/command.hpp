@@ -182,6 +182,8 @@ protected:
 	{
 		if( name() == n )
 			return this;
+		else
+			return nullptr;
 	}
 
 	/*!
@@ -276,7 +278,10 @@ protected:
 			throw BaseException( std::string( "Dissallowed name \"" ) +
 				name() + "\" for the command." );
 
-		GroupIface::checkCorrectnessBeforeParsing( flags, names );
+		std::list< std::string > ftmp = flags;
+		std::list< std::string > ntmp = names;
+
+		GroupIface::checkCorrectnessBeforeParsing( ftmp, ntmp );
 	}
 
 	//! Check correctness of the argument after parsing.
