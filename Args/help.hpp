@@ -143,20 +143,12 @@ Help::process( Context & context )
 				if( cmd )
 				{
 					if( !context.atEnd() )
-					{
-						const std::string cmdArg = *context.next();
-
-						// Argument or flag of command.
-						if( isArgument( cmdArg ) || isFlag( cmdArg ) )
-							m_printer.print( cmd, cmdArg, std::cout );
-						else
-							m_printer.print( arg, std::cout );
-					}
+						m_printer.print( cmd, *context.next(), std::cout );
 					else
 						m_printer.print( arg, std::cout );
 				}
 				else
-					m_printer.print( std::cout );
+					m_printer.print( arg, std::cout );
 			}
 			catch( const BaseException & )
 			{

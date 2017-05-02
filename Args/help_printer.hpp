@@ -165,7 +165,8 @@ static inline void
 calcMaxFlagAndName( ArgIface * arg, size_t & maxFlag, size_t & maxName )
 {
 	size_t f = 1;
-	size_t n = arg->argumentName().length();
+	size_t n = ( !arg->argumentName().empty() ? arg->argumentName().length() :
+		arg->name().length() );
 
 	if( arg->isWithValue() )
 	{
@@ -268,6 +269,19 @@ HelpPrinter::printOnlyFor( ArgIface * arg, std::ostream & to,
 		++pos;
 		to << "--" << arg->argumentName();
 		pos += arg->argumentName().length() + 2;
+
+		if( arg->isWithValue() )
+		{
+			to << " <" << arg->valueSpecifier() << '>';
+			pos += arg->valueSpecifier().length() + 3;
+		}
+	}
+	else
+	{
+		to << ' ';
+		++pos;
+		to << arg->name();
+		pos += arg->name().length();
 
 		if( arg->isWithValue() )
 		{
@@ -593,6 +607,8 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 		usage.append( "--" );
 		usage.append( arg->argumentName() );
 	}
+	else
+		usage.append( arg->name() );
 
 	if( arg->isWithValue() )
 	{

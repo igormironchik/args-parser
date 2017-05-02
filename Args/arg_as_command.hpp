@@ -28,8 +28,8 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef ARGS__POSITIONAL_HPP__INCLUDED
-#define ARGS__POSITIONAL_HPP__INCLUDED
+#ifndef ARGS__ARG_AS_COMMAND_HPP__INCLUDED
+#define ARGS__ARG_AS_COMMAND_HPP__INCLUDED
 
 // Args include.
 #include <Args/arg_iface.hpp>
@@ -44,12 +44,12 @@
 namespace Args {
 
 //
-// PositionalArg
+// ArgAsCommand
 //
 
 //! This is argument with name without dashes. It can has no value,
 //! one value or several values.
-class PositionalArg
+class ArgAsCommand
 	:	public ArgIface
 {
 public:
@@ -64,7 +64,7 @@ public:
 	}; // enum Options
 
 	template< typename T >
-	explicit PositionalArg( T && name,
+	explicit ArgAsCommand( T && name,
 		bool required = false,
 		Options opt = NoValue )
 		:	m_name( std::forward< T > ( name ) )
@@ -96,7 +96,7 @@ public:
 		}
 	}
 
-	~PositionalArg()
+	~ArgAsCommand()
 	{
 	}
 
@@ -283,7 +283,7 @@ protected:
 	}
 
 private:
-	DISABLE_COPY( PositionalArg )
+	DISABLE_COPY( ArgAsCommand )
 
 	//! Dummy empty string.
 	static const std::string m_emptyString;
@@ -304,10 +304,10 @@ private:
 	std::string m_longDesc;
 	//! Values.
 	std::list< std::string > m_values;
-}; // class PositionalArg
+}; // class ArgAsCommand
 
-const std::string PositionalArg::m_emptyString;
+const std::string ArgAsCommand::m_emptyString;
 
 } /* namespace Args */
 
-#endif // ARGS__POSITIONAL_HPP__INCLUDED
+#endif // ARGS__ARG_AS_COMMAND_HPP__INCLUDED
