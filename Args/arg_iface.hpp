@@ -35,10 +35,14 @@
 #include <string>
 #include <list>
 
+// Args include.
+#include <Args/utils.hpp>
+
 
 namespace Args {
 
 class Context;
+class CmdLine;
 
 
 //
@@ -52,7 +56,14 @@ class ArgIface {
 	friend class GroupIface;
 
 public:
-	virtual ~ArgIface();
+	ArgIface()
+		:	m_cmdLine( nullptr )
+	{
+	}
+
+	virtual ~ArgIface()
+	{
+	}
 
 	/*!
 		\return Name of the argument.
@@ -85,6 +96,12 @@ public:
 
 	//! \return Long description of the argument.
 	virtual const std::string & longDescription() const = 0;
+
+	//! \return Command line parser.
+	CmdLine * cmdLine() const
+	{
+		return m_cmdLine;
+	}
 
 protected:
 	/*!
@@ -125,17 +142,19 @@ protected:
 
 	//! Check correctness of the argument after parsing.
 	virtual void checkCorrectnessAfterParsing() const = 0;
+
+	//! Set command line parser.
+	virtual void setCmdLine( CmdLine * cmdLine )
+	{
+		m_cmdLine = cmdLine;
+	}
+
+private:
+	DISABLE_COPY( ArgIface )
+
+	//! Command line parser.
+	CmdLine * m_cmdLine;
 }; // class ArgIface
-
-
-//
-// ArgIface
-//
-
-inline
-ArgIface::~ArgIface()
-{
-}
 
 } /* namespace Args */
 

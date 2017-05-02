@@ -69,7 +69,7 @@ int main( int argc, char ** argv )
 		Arg recursieve( 'r', "recurcieve", false, false );
 		recursieve.setDescription( "Do operation recurcively?" );
 
-		Help help( &cmd, true );
+		Help help;
 		help.setAppDescription(
 			"This application just show power of the Args help." );
 		help.setExecutable( argv[0] );

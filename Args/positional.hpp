@@ -32,7 +32,13 @@
 #define ARGS__POSITIONAL_HPP__INCLUDED
 
 // Args include.
-#include <Args/arg.hpp>
+#include <Args/arg_iface.hpp>
+#include <Args/utils.hpp>
+#include <Args/exceptions.hpp>
+#include <Args/cmd_line.hpp>
+
+// C++ include.
+#include <list>
 
 
 namespace Args {
@@ -40,6 +46,267 @@ namespace Args {
 //
 // PositionalArg
 //
+
+//! This is argument with name without dashes. It can has no value,
+//! one value or several values.
+class PositionalArg
+	:	public ArgIface
+{
+public:
+	//! Options of the argument.
+	enum Options {
+		//! Without value.
+		NoValue = 0,
+		//! With single value.
+		OneValue = 1,
+		//! With several values.
+		ManyValues = 2
+	}; // enum Options
+
+	template< typename T >
+	explicit PositionalArg( T && name,
+		bool required = false,
+		Options opt = NoValue )
+		:	m_name( std::forward< T > ( name ) )
+		,	m_opt( opt )
+		,	m_required( required )
+		,	m_defined( false )
+	{
+		if( isArgument( name ) || isFlag( name ) )
+			throw BaseException( std::string( "Positional argument's name can't "
+				"start with \"-\" whereas you are trying to set name to \"" ) +
+				name + "\"." );
+
+		switch( m_opt )
+		{
+			case OneValue :
+			{
+				m_valueSpecifier = "arg";
+			}
+				break;
+
+			case ManyValues :
+			{
+				m_valueSpecifier = "args";
+			}
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	~PositionalArg()
+	{
+	}
+
+	/*!
+		\return Name of the argument.
+
+		If name is empty returned value should be a flag.
+		I.e. for example "-t" or "--timeout"
+	*/
+	std::string name() const override
+	{
+		return m_name;
+	}
+
+	bool isWithValue() const override
+	{
+		switch( m_opt )
+		{
+			case OneValue :
+			case ManyValues :
+				return true;
+
+			default :
+				return false;
+		}
+	}
+
+	bool isRequired() const override
+	{
+		return m_required;
+	}
+
+	//! \return Is this argument defined?
+	bool isDefined() const override
+	{
+		return m_defined;
+	}
+
+	//! \return Flag.
+	const std::string & flag() const override
+	{
+		return m_emptyString;
+	}
+
+	const std::string & argumentName() const override
+	{
+		return m_emptyString;
+	}
+
+	//! \return Value specifier.
+	const std::string & valueSpecifier() const override
+	{
+		return m_valueSpecifier;
+	}
+
+	//! Set value specifier.
+	void setValueSpecifier( const std::string & s )
+	{
+		m_valueSpecifier = s;
+	}
+
+	//! \return Description of the argument.
+	const std::string & description() const override
+	{
+		return m_desc;
+	}
+
+	//! Set description.
+	void setDescription( const std::string & desc )
+	{
+		m_desc = desc;
+	}
+
+	//! \return Long description of the argument.
+	const std::string & longDescription() const override
+	{
+		if( !m_longDesc.empty() )
+			return m_longDesc;
+		else
+			return m_desc;
+	}
+
+	//! Set long description.
+	void setLongDescription( const std::string & desc )
+	{
+		m_longDesc = desc;
+	}
+
+protected:
+	/*!
+		\return Argument for the given name.
+
+		\retval Pointer to the ArgIface if this argument handles
+			argument with the given name.
+		\retval nullptr if this argument doesn't know about
+			argument with name.
+	*/
+	ArgIface * isItYou(
+		/*!
+			Name of the argument. Can be for example "-t" or
+			"--timeout".
+		*/
+		const std::string & name ) override
+	{
+		if( m_name == name )
+			return this;
+		else
+			return nullptr;
+	}
+
+	/*!
+		Process argument's staff, for example take values from
+		context. This method invokes exactly at that moment when
+		parser has found this argument.
+	*/
+	void process(
+		//! Context of the command line.
+		Context & context ) override
+	{
+		m_defined = true;
+
+		switch( m_opt )
+		{
+			case ManyValues :
+			{
+				eatValues( context, m_values,
+					std::string( "Positional argument \"" ) +
+						m_name + "\" require value that wasn't presented.",
+					cmdLine() );
+			}
+				break;
+
+			case OneValue :
+			{
+				try {
+					m_values.push_back( eatOneValue( context, cmdLine() ) );
+				}
+				catch( const BaseException & )
+				{
+					throw BaseException( std::string( "Positional argument \"" ) +
+						m_name + "\" require value that wasn't presented." );
+				}
+			}
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/*!
+		Check correctness of the argument before parsing.
+
+		Implementation of this method must add his flag
+		and name to the flags and names.
+	*/
+	void checkCorrectnessBeforeParsing(
+		//! All known flags.
+		std::list< std::string > & flags,
+		//! All known names.
+		std::list< std::string > & names ) const override
+	{
+		if( isCorrectName( m_name ) )
+		{
+			auto it = std::find( names.begin(), names.end(), m_name );
+
+			if( it != names.end() )
+				throw BaseException( std::string( "Redefinition of argument "
+					"with name \"" ) + m_name + "\"." );
+			else
+				names.push_back( m_name );
+		}
+		else
+			throw BaseException( std::string( "Dissallowed name \"" ) +
+				m_name + "\" for the positional argument." );
+	}
+
+	//! Check correctness of the argument after parsing.
+	void checkCorrectnessAfterParsing() const override
+	{
+		if( isRequired() && !isDefined() )
+			throw BaseException( std::string( "Undefined required argument \"" ) +
+				m_name + "\"." );
+	}
+
+private:
+	DISABLE_COPY( PositionalArg )
+
+	//! Dummy empty string.
+	static const std::string m_emptyString;
+
+	//! Name.
+	std::string m_name;
+	//! Option.
+	Options m_opt;
+	//! Is required?
+	bool m_required;
+	//! Is defined?
+	bool m_defined;
+	//! Value specifier.
+	std::string m_valueSpecifier;
+	//! Description.
+	std::string m_desc;
+	//! Long description.
+	std::string m_longDesc;
+	//! Values.
+	std::list< std::string > m_values;
+}; // class PositionalArg
+
+const std::string PositionalArg::m_emptyString;
 
 } /* namespace Args */
 

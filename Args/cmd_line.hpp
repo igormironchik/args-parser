@@ -138,7 +138,11 @@ CmdLine::addArg( ArgIface * arg )
 	if( arg )
 	{
 		if( std::find( m_args.begin(), m_args.end(), arg ) == m_args.end() )
+		{
+			arg->setCmdLine( this );
+
 			m_args.push_back( arg );
+		}
 		else
 			throw BaseException( std::string( "Argument \"" ) +
 				arg->name() + "\" already in the command line parser." );
@@ -193,6 +197,7 @@ CmdLine::parse()
 					arg->process( m_context );
 			}
 		}
+		// Command or positional argument.
 		else
 		{
 			ArgIface * tmp = findArgument( word );
@@ -215,8 +220,7 @@ CmdLine::parse()
 					}
 				}
 				else
-					throw BaseException( std::string( "Unknown argument \"" ) +
-						word + "\"." );
+					tmp->process( m_context );
 			}
 			else
 				throw BaseException( std::string( "Unknown argument \"" ) +

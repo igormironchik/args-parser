@@ -33,7 +33,6 @@
 
 // Args include.
 #include <Args/utils.hpp>
-#include <Args/context.hpp>
 #include <Args/exceptions.hpp>
 
 // C++ include.
@@ -47,17 +46,35 @@ namespace Args {
 //
 
 //! Eat values in context.
-template< typename Container >
-bool eatValues( Context & context, Container & container,
-	const std::string & errorDescription )
+template< typename Container, typename Cmd, typename Ctx >
+bool eatValues( Ctx & context, Container & container,
+	const std::string & errorDescription, Cmd * cmdLine )
 {
+	if( !cmdLine )
+		throw BaseException( "Argument is not under command line parser." );
+
 	if( !context.atEnd() )
 	{
 		auto begin = context.begin();
 
 		auto last = std::find_if( context.begin(), context.end(),
-			[] ( const std::string & v ) -> bool
-				{ return ( isArgument( v ) || isFlag( v ) ); }
+			[ & ] ( const std::string & v ) -> bool
+			{
+				if( isArgument( v ) || isFlag( v ) )
+					return true;
+				else
+				{
+					try {
+						cmdLine->findArgument( v );
+
+						return true;
+					}
+					catch( const BaseException & )
+					{
+						return false;
+					}
+				}
+			}
 		);
 
 		if( last != begin )
@@ -81,6 +98,41 @@ bool eatValues( Context & context, Container & container,
 	}
 	else
 		throw BaseException( errorDescription );
+}
+
+
+//
+// eatOneValue
+//
+
+//! Eat one value.
+template< typename Cmd, typename Ctx >
+std::string eatOneValue( Ctx & context, Cmd * cmdLine )
+{
+	if( !cmdLine )
+		throw BaseException( "Argument is not under command line parser." );
+
+	if( !context.atEnd() )
+	{
+		auto val = context.next();
+
+		if( !isArgument( *val ) && !isFlag( *val ) )
+		{
+			try {
+				cmdLine->findArgument( *val );
+			}
+			catch( const BaseException & )
+			{
+				return *val;
+			}
+		}
+
+		context.putBack();
+
+		throw BaseException( "Can't eat value." );
+	}
+	else
+		throw BaseException( "Can't eat value." );
 }
 
 } /* namespace Args */

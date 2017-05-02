@@ -81,9 +81,7 @@ int main( int argc, char ** argv )
 	/*
 		We create help now.
 	*/
-	Args::Help help( &cmd,
-		// We want that help trows excpetion on help print.
-		true );
+	Args::Help help;
 	// Set executable name to the help printer.
 	help.setExecutable( argv[ 0 ] );
 	//! And set description of the application.

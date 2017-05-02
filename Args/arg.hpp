@@ -36,6 +36,7 @@
 #include <Args/utils.hpp>
 #include <Args/context.hpp>
 #include <Args/exceptions.hpp>
+#include <Args/value_utils.hpp>
 
 // C++ include.
 #include <algorithm>
@@ -268,14 +269,16 @@ Arg::process( Context & context )
 			setDefined( true );
 		else
 		{
-			if( !context.atEnd() )
-			{
-				setValue( *context.next() );
+			try {
+				setValue( eatOneValue( context, cmdLine() ) );
+
 				setDefined( true );
 			}
-			else
+			catch( const BaseException & )
+			{
 				throw BaseException( std::string( "Argument \"" ) +
 					name() + "\" requires value but it's not presented." );
+			}
 		}
 	}
 	else

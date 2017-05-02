@@ -44,9 +44,6 @@
 
 namespace Args {
 
-class CmdLine;
-
-
 //
 // Help
 //
@@ -56,8 +53,7 @@ class Help final
 	:	public Arg
 {
 public:
-	explicit Help( CmdLine * cmd,
-		bool throwExceptionOnPrint = true );
+	Help( bool throwExceptionOnPrint = true );
 
 	//! Set executable name.
 	void setExecutable( const std::string & exe );
@@ -78,13 +74,19 @@ protected:
 		//! Context of the command line.
 		Context & context ) override;
 
+	//! Set command line parser.
+	virtual void setCmdLine( CmdLine * cmdLine )
+	{
+		Arg::setCmdLine( cmdLine );
+
+		m_printer.setCmdLine( cmdLine );
+	}
+
 private:
 	//! Printer.
 	HelpPrinter m_printer;
 	//! Throw or not exception?
 	bool m_throwExceptionOnPrint;
-	//! Command line.
-	CmdLine * m_cmdLine;
 }; // class Help
 
 
@@ -93,15 +95,12 @@ private:
 //
 
 inline
-Help::Help( CmdLine * cmd, bool throwExceptionOnPrint )
+Help::Help( bool throwExceptionOnPrint )
 	:	Arg( 'h', "help", true )
 	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
-	,	m_cmdLine( cmd )
 {
 	setDescription( "Print this help." );
 	setLongDescription( "Print this help." );
-
-	m_printer.setCmdLine( cmd );
 }
 
 inline void
@@ -136,7 +135,7 @@ Help::process( Context & context )
 		else
 		{
 			try {
-				ArgIface * tmp = m_cmdLine->findArgument( arg );
+				ArgIface * tmp = cmdLine()->findArgument( arg );
 
 				Command * cmd = dynamic_cast< Command* > ( tmp );
 

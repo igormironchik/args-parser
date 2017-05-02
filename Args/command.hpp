@@ -227,29 +227,21 @@ protected:
 			{
 				eatValues( ctx, m_values,
 					std::string( "Command \"" ) +
-						name() + "\" require value that wasn't presented." );
+						name() + "\" require value that wasn't presented.",
+					cmdLine() );
 			}
 				break;
 
 			case CommandWithSingleValue :
 			{
-				if( !ctx.atEnd() )
-				{
-					auto val = ctx.next();
-
-					if( !isArgument( *val ) && !isFlag( *val ) )
-						m_values.push_back( *val );
-					else
-					{
-						ctx.putBack();
-
-						throw BaseException( std::string( "Command \"" ) +
-							name() + "\" require value that wasn't presented." );
-					}
+				try {
+					m_values.push_back( eatOneValue( ctx, cmdLine() ) );
 				}
-				else
+				catch( const BaseException & )
+				{
 					throw BaseException( std::string( "Command \"" ) +
 						name() + "\" require value that wasn't presented." );
+				}
 			}
 				break;
 

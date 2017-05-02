@@ -188,7 +188,8 @@ MultiArg::process( Context & context )
 	{
 		setDefined( eatValues( context, m_values,
 			std::string( "Argument \"" ) +
-				name() + "\" require value that wasn't presented." ) );
+				name() + "\" require value that wasn't presented.",
+			cmdLine() ) );
 	}
 	else
 	{

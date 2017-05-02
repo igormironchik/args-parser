@@ -245,6 +245,15 @@ protected:
 				name() + "\"" );
 	}
 
+	//! Set command line parser.
+	void setCmdLine( CmdLine * cmdLine ) override
+	{
+		ArgIface::setCmdLine( cmdLine );
+
+		for( const auto & arg : m_children )
+			arg->setCmdLine( cmdLine );
+	}
+
 private:
 	DISABLE_COPY( GroupIface )
 
