@@ -36,6 +36,7 @@
 #include <Args/utils.hpp>
 #include <Args/context.hpp>
 #include <Args/value_utils.hpp>
+#include <Args/enums.hpp>
 
 // C++ include.
 #include <list>
@@ -55,19 +56,9 @@ class Command final
 	friend class HelpPrinter;
 
 public:
-	//! Option to the command.
-	enum CommandOption {
-		//! Without value.
-		CommandWithoutValue = 1,
-		//! With single value.
-		CommandWithSingleValue = 2,
-		//! With many values.
-		CommandWithManyValues = 3
-	}; // enum CommandOption
-
 	template< typename T >
 	explicit Command( T && name,
-		CommandOption opt = CommandWithoutValue )
+		ValueOptions opt = NoValue )
 		:	GroupIface( std::forward< T > ( name ) )
 		,	m_opt( opt )
 		,	m_isDefined( false )
@@ -79,13 +70,13 @@ public:
 
 		switch( m_opt )
 		{
-			case CommandWithSingleValue :
+			case OneValue :
 			{
 				m_valueSpecifier = "arg";
 			}
 				break;
 
-			case CommandWithManyValues :
+			case ManyValues :
 			{
 				m_valueSpecifier = "args";
 			}
@@ -109,8 +100,7 @@ public:
 	//! \return Is this argument with value?
 	bool isWithValue() const override
 	{
-		return ( m_opt == CommandWithSingleValue ||
-			m_opt == CommandWithManyValues );
+		return ( m_opt == OneValue || m_opt == ManyValues );
 	}
 
 	//! Set required flag.
@@ -223,7 +213,7 @@ protected:
 
 		switch( m_opt )
 		{
-			case CommandWithManyValues :
+			case ManyValues :
 			{
 				eatValues( ctx, m_values,
 					std::string( "Command \"" ) +
@@ -232,7 +222,7 @@ protected:
 			}
 				break;
 
-			case CommandWithSingleValue :
+			case OneValue :
 			{
 				try {
 					m_values.push_back( eatOneValue( ctx, cmdLine() ) );
@@ -293,7 +283,7 @@ private:
 	DISABLE_COPY( Command )
 
 	//! Option.
-	CommandOption m_opt;
+	ValueOptions m_opt;
 	//! Value specifier.
 	std::string m_valueSpecifier;
 	//! Description.

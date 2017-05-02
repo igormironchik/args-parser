@@ -36,6 +36,7 @@
 #include <Args/utils.hpp>
 #include <Args/exceptions.hpp>
 #include <Args/cmd_line.hpp>
+#include <Args/enums.hpp>
 
 // C++ include.
 #include <list>
@@ -53,20 +54,10 @@ class ArgAsCommand
 	:	public ArgIface
 {
 public:
-	//! Options of the argument.
-	enum Options {
-		//! Without value.
-		NoValue = 0,
-		//! With single value.
-		OneValue = 1,
-		//! With several values.
-		ManyValues = 2
-	}; // enum Options
-
 	template< typename T >
 	explicit ArgAsCommand( T && name,
 		bool required = false,
-		Options opt = NoValue )
+		ValueOptions opt = NoValue )
 		:	m_name( std::forward< T > ( name ) )
 		,	m_opt( opt )
 		,	m_required( required )
@@ -185,6 +176,21 @@ public:
 		m_longDesc = desc;
 	}
 
+	//! \return First value of this argument.
+	const std::string & value() const
+	{
+		if( !m_values.empty() )
+			return m_values.front();
+		else
+			return m_emptyString;
+	}
+
+	//! \return All values for this argument.
+	const std::list< std::string > & values() const
+	{
+		return m_values;
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.
@@ -291,7 +297,7 @@ private:
 	//! Name.
 	std::string m_name;
 	//! Option.
-	Options m_opt;
+	ValueOptions m_opt;
 	//! Is required?
 	bool m_required;
 	//! Is defined?
