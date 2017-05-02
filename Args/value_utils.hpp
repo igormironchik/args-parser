@@ -49,7 +49,7 @@ namespace Args {
 //! Eat values in context.
 template< typename Container >
 bool eatValues( Context & context, Container & container,
-	const std::string errorDescription )
+	const std::string & errorDescription )
 {
 	if( !context.atEnd() )
 	{
