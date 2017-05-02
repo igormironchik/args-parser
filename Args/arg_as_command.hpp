@@ -64,7 +64,7 @@ public:
 		,	m_defined( false )
 	{
 		if( isArgument( name ) || isFlag( name ) )
-			throw BaseException( std::string( "Positional argument's name can't "
+			throw BaseException( std::string( "ArgAsCommand's name can't "
 				"start with \"-\" whereas you are trying to set name to \"" ) +
 				name + "\"." );
 
@@ -222,35 +222,41 @@ protected:
 		//! Context of the command line.
 		Context & context ) override
 	{
-		m_defined = true;
-
-		switch( m_opt )
+		if( !isDefined() )
 		{
-			case ValueOptions::ManyValues :
-			{
-				eatValues( context, m_values,
-					std::string( "Positional argument \"" ) +
-						m_name + "\" require value that wasn't presented.",
-					cmdLine() );
-			}
-				break;
+			m_defined = true;
 
-			case ValueOptions::OneValue :
+			switch( m_opt )
 			{
-				try {
-					m_values.push_back( eatOneValue( context, cmdLine() ) );
-				}
-				catch( const BaseException & )
+				case ValueOptions::ManyValues :
 				{
-					throw BaseException( std::string( "Positional argument \"" ) +
-						m_name + "\" require value that wasn't presented." );
+					eatValues( context, m_values,
+						std::string( "Argument \"" ) +
+							m_name + "\" require value that wasn't presented.",
+						cmdLine() );
 				}
-			}
-				break;
+					break;
 
-			default :
-				break;
+				case ValueOptions::OneValue :
+				{
+					try {
+						m_values.push_back( eatOneValue( context, cmdLine() ) );
+					}
+					catch( const BaseException & )
+					{
+						throw BaseException( std::string( "Argument \"" ) +
+							m_name + "\" require value that wasn't presented." );
+					}
+				}
+					break;
+
+				default :
+					break;
+			}
 		}
+		else
+			throw BaseException( std::string( "Argument \"" ) + m_name +
+				"\" already defined." );
 	}
 
 	/*!
@@ -277,7 +283,7 @@ protected:
 		}
 		else
 			throw BaseException( std::string( "Dissallowed name \"" ) +
-				m_name + "\" for the positional argument." );
+				m_name + "\" for the argument." );
 	}
 
 	//! Check correctness of the argument after parsing.
