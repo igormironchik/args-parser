@@ -52,7 +52,7 @@ TEST( CommandCase, TestAllIsOk )
 
 	Arg f( 'f', true, true );
 
-	Command c( "add", ManyValues );
+	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -99,7 +99,7 @@ TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
 
 	Arg f( 'f', true, true );
 
-	Command c( "add", ManyValues );
+	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -117,7 +117,7 @@ TEST( CommandCase, TestManyArgs )
 
 	Arg f( 'f', true, true );
 
-	Command c( "add", OneValue );
+	Command c( "add", ValueOptions::OneValue );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -169,7 +169,7 @@ TEST( CommandCase, TestAllIsOk2 )
 
 	Arg f( 'f', true );
 
-	Command c( "add", ManyValues );
+	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -206,7 +206,7 @@ TEST( CommandCase, TestAllIsOk3 )
 
 	Arg f( 'f', true );
 
-	Command c( "add", ManyValues );
+	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );

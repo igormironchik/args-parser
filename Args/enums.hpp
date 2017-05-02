@@ -38,7 +38,7 @@ namespace Args {
 //
 
 //! Options for value property.
-enum ValueOptions {
+enum class ValueOptions {
 	//! No values.
 	NoValue = 0,
 	//! One value.

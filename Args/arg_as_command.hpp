@@ -57,7 +57,7 @@ public:
 	template< typename T >
 	explicit ArgAsCommand( T && name,
 		bool required = false,
-		ValueOptions opt = NoValue )
+		ValueOptions opt = ValueOptions::NoValue )
 		:	m_name( std::forward< T > ( name ) )
 		,	m_opt( opt )
 		,	m_required( required )
@@ -70,13 +70,13 @@ public:
 
 		switch( m_opt )
 		{
-			case OneValue :
+			case ValueOptions::OneValue :
 			{
 				m_valueSpecifier = "arg";
 			}
 				break;
 
-			case ManyValues :
+			case ValueOptions::ManyValues :
 			{
 				m_valueSpecifier = "args";
 			}
@@ -106,8 +106,8 @@ public:
 	{
 		switch( m_opt )
 		{
-			case OneValue :
-			case ManyValues :
+			case ValueOptions::OneValue :
+			case ValueOptions::ManyValues :
 				return true;
 
 			default :
@@ -226,7 +226,7 @@ protected:
 
 		switch( m_opt )
 		{
-			case ManyValues :
+			case ValueOptions::ManyValues :
 			{
 				eatValues( context, m_values,
 					std::string( "Positional argument \"" ) +
@@ -235,7 +235,7 @@ protected:
 			}
 				break;
 
-			case OneValue :
+			case ValueOptions::OneValue :
 			{
 				try {
 					m_values.push_back( eatOneValue( context, cmdLine() ) );

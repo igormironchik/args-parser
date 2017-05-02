@@ -58,7 +58,7 @@ class Command final
 public:
 	template< typename T >
 	explicit Command( T && name,
-		ValueOptions opt = NoValue )
+		ValueOptions opt = ValueOptions::NoValue )
 		:	GroupIface( std::forward< T > ( name ) )
 		,	m_opt( opt )
 		,	m_isDefined( false )
@@ -70,13 +70,13 @@ public:
 
 		switch( m_opt )
 		{
-			case OneValue :
+			case ValueOptions::OneValue :
 			{
 				m_valueSpecifier = "arg";
 			}
 				break;
 
-			case ManyValues :
+			case ValueOptions::ManyValues :
 			{
 				m_valueSpecifier = "args";
 			}
@@ -100,7 +100,8 @@ public:
 	//! \return Is this argument with value?
 	bool isWithValue() const override
 	{
-		return ( m_opt == OneValue || m_opt == ManyValues );
+		return ( m_opt == ValueOptions::OneValue ||
+			m_opt == ValueOptions::ManyValues );
 	}
 
 	//! Set required flag.
@@ -213,7 +214,7 @@ protected:
 
 		switch( m_opt )
 		{
-			case ManyValues :
+			case ValueOptions::ManyValues :
 			{
 				eatValues( ctx, m_values,
 					std::string( "Command \"" ) +
@@ -222,7 +223,7 @@ protected:
 			}
 				break;
 
-			case OneValue :
+			case ValueOptions::OneValue :
 			{
 				try {
 					m_values.push_back( eatOneValue( ctx, cmdLine() ) );
