@@ -94,23 +94,21 @@ int main( int argc, char ** argv )
   /*
     We create help now.
   */
-  Args::Help help( &amp;cmd,
-    // We want that help throws excpetion on help print.
-    true );
+  Args::Help help;
   // Set executable name to the help printer.
-  help.printer().setExecutable( argv[ 0 ] );
+  help.setExecutable( argv[ 0 ] );
   //! And set description of the application.
-  help.printer().setAppDescription( "This application just show "
+  help.setAppDescription( "This application just show "
     "the power of Args." );
 
   try {
     /*
       Now add our argument to the command line.
     */
-    cmd.addArg( &host );
-    cmd.addArg( &port );
-    cmd.addArg( &timeout );
-    cmd.addArg( &help );
+    cmd.addArg( host );
+    cmd.addArg( port );
+    cmd.addArg( timeout );
+    cmd.addArg( help );
 
     /*
       Now parse our arguments.
