@@ -46,6 +46,7 @@
 #include <list>
 #include <type_traits>
 #include <algorithm>
+#include <utility>
 
 
 namespace Args {
@@ -69,9 +70,10 @@ public:
 	//! List of child arguments.
 	typedef std::list< ArgIface* > Arguments;
 
-	explicit GroupIface( const std::string & name,
+	template< typename T >
+	explicit GroupIface( T && name,
 		bool required = false )
-		:	m_name( name )
+		:	m_name( std::forward< T > ( name ) )
 		,	m_required( required )
 	{
 	}

@@ -55,9 +55,10 @@ class OnlyOneGroup final
 	:	public GroupIface
 {
 public:
-	explicit OnlyOneGroup( const std::string & name,
+	template< typename T >
+	explicit OnlyOneGroup( T && name,
 		bool required = false )
-		:	GroupIface( name, required )
+		:	GroupIface( std::forward< T > ( name ), required )
 	{
 	}
 
@@ -135,9 +136,10 @@ class AllOfGroup final
 	:	public GroupIface
 {
 public:
-	explicit AllOfGroup( const std::string & name,
+	template< typename T >
+	explicit AllOfGroup( T && name,
 		bool required = false )
-		:	GroupIface( name, required )
+		:	GroupIface( std::forward< T > ( name ), required )
 	{
 	}
 
@@ -214,9 +216,10 @@ class AtLeastOneGroup final
 	:	public GroupIface
 {
 public:
-	explicit AtLeastOneGroup( const std::string & name,
+	template< typename T >
+	explicit AtLeastOneGroup( T && name,
 		bool required = false )
-		:	GroupIface( name, required )
+		:	GroupIface( std::forward< T > ( name ), required )
 	{
 	}
 

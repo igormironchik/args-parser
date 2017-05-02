@@ -65,9 +65,10 @@ public:
 		CommandWithManyValues = 3
 	}; // enum CommandOption
 
-	explicit Command( const std::string & name,
+	template< typename T >
+	explicit Command( T && name,
 		CommandOption opt = CommandWithoutValue )
-		:	GroupIface( name )
+		:	GroupIface( std::forward< T > ( name ) )
 		,	m_opt( opt )
 		,	m_isDefined( false )
 	{
