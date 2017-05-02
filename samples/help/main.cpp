@@ -34,8 +34,6 @@
 #include <Args/cmd_line.hpp>
 #include <Args/exceptions.hpp>
 
-#include <Args/arg_as_command.hpp>
-
 // C++ include.
 #include <iostream>
 
@@ -90,10 +88,6 @@ int main( int argc, char ** argv )
 	help.setAppDescription( "This application just show "
 		"the power of Args." );
 
-	Args::ArgAsCommand p( "pos", false, Args::ArgAsCommand::OneValue );
-	p.setDescription( "Position." );
-	p.setValueSpecifier( "x,y" );
-
 	try {
 		/*
 			Now add our argument to the command line.
@@ -102,7 +96,6 @@ int main( int argc, char ** argv )
 		cmd.addArg( port );
 		cmd.addArg( timeout );
 		cmd.addArg( help );
-		cmd.addArg( p );
 
 		/*
 			Now parse our arguments.
