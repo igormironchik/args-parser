@@ -197,7 +197,7 @@ CmdLine::parse()
 					arg->process( m_context );
 			}
 		}
-		// Command or positional argument.
+		// Command?
 		else
 		{
 			ArgIface * tmp = findArgument( word );
@@ -219,6 +219,7 @@ CmdLine::parse()
 						m_command->process( m_context );
 					}
 				}
+				// Argument is as a command
 				else
 					tmp->process( m_context );
 			}
