@@ -268,15 +268,15 @@ Test::runTest()
 	}
 	catch( const std::exception & x )
 	{
-		std::cout << "[FAILED]" << std::endl;
-		std::cout << x.what();
+		std::cout << "[FAILED]" << std::endl << std::endl;
+		std::cout << x.what() << std::endl;
 
 		exit( 1 );
 	}
 	catch( ... )
 	{
-		std::cout << "[FAILED]" << std::endl;
-		std::cout << "  Unexpected exception.";
+		std::cout << "[FAILED]" << std::endl << std::endl;
+		std::cout << "  Unexpected exception." << std::endl;
 
 		exit( 1 );
 	}
