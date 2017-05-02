@@ -13,5 +13,4 @@ HEADERS += $$PWD/arg_iface.hpp \
     $$PWD/group_iface.hpp \
     $$PWD/groups.hpp \
 	$$PWD/command.hpp \
-	$$PWD/value_utils.hpp \
-	$$PWD/positional.hpp
+	$$PWD/value_utils.hpp
