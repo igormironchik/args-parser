@@ -79,6 +79,16 @@ TEST( CommandCase, TestAllIsOk )
 	CHECK_CONDITION( *it == "500" )
 }
 
+TEST( CommandCase, WrongName1 )
+{
+	CHECK_THROW( Command c( "-a" ), BaseException )
+}
+
+TEST( CommandCase, WrongName2 )
+{
+	CHECK_THROW( Command c( "--name" ), BaseException )
+}
+
 TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
 {
 	const int argc = 5;

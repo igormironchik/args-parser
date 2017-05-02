@@ -71,6 +71,11 @@ public:
 		,	m_opt( opt )
 		,	m_isDefined( false )
 	{
+		if( isArgument( name ) || isFlag( name ) )
+			throw BaseException( std::string( "Command's name can't "
+				"start with \"-\" whereas you are trying to set name to \"" ) +
+				name + "\"." );
+
 		switch( m_opt )
 		{
 			case CommandWithSingleValue :
