@@ -43,7 +43,7 @@
 using namespace Args;
 
 
-TEST( ArgAsCommandCase, TestAllIsOk )
+TEST( ArgAsCommandCase, TestWithArg )
 {
 	const int argc = 5;
 	const char * argv[ argc ] = { "program.exe",
@@ -99,6 +99,180 @@ TEST( ArgAsCommandCase, TestManyValues )
 	++it;
 
 	CHECK_CONDITION( *it == "400" )
+}
+
+TEST( ArgAsCommandCase, TestNoValue )
+{
+	const int argc = 2;
+	const char * argv[ argc ] = { "program.exe",
+		"pos" };
+
+	CmdLine cmd( argc, argv );
+
+	ArgAsCommand p( "pos", true );
+
+	cmd.addArg( p );
+
+	cmd.parse();
+
+	CHECK_CONDITION( p.isDefined() == true )
+	CHECK_CONDITION( p.values().size() == 0 )
+	CHECK_CONDITION( p.value().empty() )
+}
+
+TEST( ArgAsCommandCase, TestUnderCommand )
+{
+	const int argc = 4;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "file", "out.txt" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command add( "add" );
+	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+
+	cmd.parse();
+
+	CHECK_CONDITION( add.isDefined() == true )
+
+	CHECK_CONDITION( file.isDefined() == true )
+	CHECK_CONDITION( file.values().size() == 1 )
+	CHECK_CONDITION( file.value() == "out.txt" )
+}
+
+TEST( ArgAsCommandCase, TestWrongName )
+{
+	CHECK_THROW( ArgAsCommand( "-pos" ), BaseException )
+	CHECK_THROW( ArgAsCommand( "--pos" ), BaseException )
+}
+
+TEST( ArgAsCommandCase, TestUnderCommandNotDefinedRequired )
+{
+	const int argc = 2;
+	const char * argv[ argc ] = { "program.exe",
+		"add" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command add( "add" );
+	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue )
+{
+	const int argc = 3;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "file" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command add( "add" );
+	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue2 )
+{
+	const int argc = 4;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "file", "-t" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command add( "add" );
+	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+	Arg t( 't' );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+	cmd.addArg( t );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
+{
+	const int argc = 6;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "file", "1.txt", "2.txt", "-t" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command add( "add" );
+	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+	Arg t( 't' );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+	cmd.addArg( t );
+
+	cmd.parse();
+
+	CHECK_CONDITION( add.isDefined() == true )
+
+	CHECK_CONDITION( file.isDefined() == true )
+
+	CHECK_CONDITION( file.values().size() == 2 )
+
+	auto it = file.values().cbegin();
+
+	CHECK_CONDITION( *it == "1.txt" )
+
+	++it;
+
+	CHECK_CONDITION( *it == "2.txt" )
+
+	CHECK_CONDITION( t.isDefined() == true )
+}
+
+TEST( ArgAsCommandCase, TestAlreadyDefined )
+{
+	const int argc = 4;
+	const char * argv[ argc ] = { "program.exe",
+		"file", "1.txt", "file" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+
+	cmd.addArg( file );
+
+	CHECK_THROW( cmd.parse(), BaseException )
+}
+
+TEST( ArgAsCommandCase, TestNameRedefinition )
+{
+	const int argc = 3;
+	const char * argv[ argc ] = { "program.exe",
+		"add", "add" };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	Command add( "add" );
+	ArgAsCommand file( "add", true, ValueOptions::ManyValues );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+
+	CHECK_THROW( cmd.parse(), BaseException )
 }
 
 int main()
