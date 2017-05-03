@@ -49,8 +49,10 @@ namespace Args {
 // ArgAsCommand
 //
 
-//! This is argument with name without dashes. It can has no value,
-//! one value or several values.
+/*!
+	This is argument with name without dashes. It can has no value,
+	one value or several values.
+*/
 class ArgAsCommand
 	:	public ArgIface
 {
