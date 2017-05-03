@@ -38,7 +38,6 @@
 #include "exceptions.hpp"
 #include "groups.hpp"
 #include "help.hpp"
-#include "help_printer.hpp"
 #include "multi_arg.hpp"
 
 #endif // ARGS__ALL_HPP__INCLUDED
