@@ -48,7 +48,7 @@ namespace Args {
 //! Eat values in context.
 template< typename Container, typename Cmd, typename Ctx >
 bool eatValues( Ctx & context, Container & container,
-	const std::string & errorDescription, Cmd * cmdLine )
+	const String & errorDescription, Cmd * cmdLine )
 {
 	if( !cmdLine )
 		throw BaseException( "Argument is not under command line parser." );
@@ -58,7 +58,7 @@ bool eatValues( Ctx & context, Container & container,
 		auto begin = context.begin();
 
 		auto last = std::find_if( context.begin(), context.end(),
-			[ & ] ( const std::string & v ) -> bool
+			[ & ] ( const String & v ) -> bool
 			{
 				if( isArgument( v ) || isFlag( v ) )
 					return true;
@@ -107,7 +107,7 @@ bool eatValues( Ctx & context, Container & container,
 
 //! Eat one value.
 template< typename Cmd, typename Ctx >
-std::string eatOneValue( Ctx & context, Cmd * cmdLine )
+String eatOneValue( Ctx & context, Cmd * cmdLine )
 {
 	if( !cmdLine )
 		throw BaseException( "Argument is not under command line parser." );

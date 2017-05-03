@@ -49,7 +49,7 @@ TEST( MultiArgTestCase, TestAllIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', std::string( "multi" ), true );
+	MultiArg multi( 'm', String( "multi" ), true );
 
 	cmd.addArg( &multi );
 
@@ -93,8 +93,8 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', std::string( "multi" ), true );
-	Arg timeout( 't', std::string( "timeout" ) );
+	MultiArg multi( 'm', String( "multi" ), true );
+	Arg timeout( 't', String( "timeout" ) );
 
 	cmd.addArg( &multi );
 	cmd.addArg( &timeout );
@@ -141,7 +141,7 @@ TEST( MultiArgTestCase, NotDefinedValue )
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', std::string( "multi" ), true );
+	MultiArg multi( 'm', String( "multi" ), true );
 
 	cmd.addArg( &multi );
 
@@ -150,7 +150,7 @@ TEST( MultiArgTestCase, NotDefinedValue )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.what() == std::string( "Argument \"--multi"
+		CHECK_CONDITION( x.what() == String( "Argument \"--multi"
 			"\" require value that wasn't presented." ) )
 
 		return;
@@ -171,8 +171,8 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', std::string( "multi" ), true );
-	Arg timeout( 't', std::string( "timeout" ) );
+	MultiArg multi( 'm', String( "multi" ), true );
+	Arg timeout( 't', String( "timeout" ) );
 
 	cmd.addArg( &multi );
 	cmd.addArg( &timeout );
@@ -182,7 +182,7 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.what() == std::string( "Argument \"--multi"
+		CHECK_CONDITION( x.what() == String( "Argument \"--multi"
 			"\" require value that wasn't presented." ) )
 
 		return;

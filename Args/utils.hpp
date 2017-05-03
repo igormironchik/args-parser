@@ -32,8 +32,10 @@
 #define ARGS__UTILS_HPP__INCLUDED
 
 // C++ include.
-#include <string>
 #include <regex>
+
+// Args include.
+#include "types.hpp"
 
 
 namespace Args {
@@ -62,7 +64,7 @@ namespace Args {
 
 //! \return Is word an argument?
 static inline bool
-isArgument( const std::string & word )
+isArgument( const String & word )
 {
 	const size_t it = word.find( "--" );
 
@@ -79,7 +81,7 @@ isArgument( const std::string & word )
 
 //! \return Is word a flag?
 static inline bool
-isFlag( const std::string & word )
+isFlag( const String & word )
 {
 	if( !isArgument( word ) )
 	{
@@ -99,16 +101,16 @@ isFlag( const std::string & word )
 
 //! \return Is flag correct?
 static inline bool
-isCorrectFlag( const std::string & flag )
+isCorrectFlag( const String & flag )
 {
 	if( flag.empty() || flag.length() > 1 )
 		return false;
 
-	static const std::string availableSymbols( "0123456789"
+	static const String availableSymbols( "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
 
-	if( availableSymbols.find( flag ) == std::string::npos )
+	if( availableSymbols.find( flag ) == String::npos )
 		return false;
 
 	return true;
@@ -121,7 +123,7 @@ isCorrectFlag( const std::string & flag )
 
 //! \return Is name correct?
 static inline bool
-isCorrectName( const std::string & name )
+isCorrectName( const String & name )
 {
 	if( name.empty() )
 		return false;
@@ -131,13 +133,13 @@ isCorrectName( const std::string & name )
 	if( std::regex_search( name, r ) )
 		return false;
 
-	static const std::string availableSymbols( "0123456789"
+	static const String availableSymbols( "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" );
 
 	for( const char & c : name )
 	{
-		if( availableSymbols.find( c ) == std::string::npos )
+		if( availableSymbols.find( c ) == String::npos )
 			return false;
 	}
 

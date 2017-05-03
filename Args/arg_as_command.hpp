@@ -39,9 +39,6 @@
 #include "enums.hpp"
 #include "types.hpp"
 
-// C++ include.
-#include <list>
-
 
 namespace Args {
 
@@ -67,7 +64,7 @@ public:
 		,	m_defined( false )
 	{
 		if( isArgument( name ) || isFlag( name ) )
-			throw BaseException( std::string( "ArgAsCommand's name can't "
+			throw BaseException( String( "ArgAsCommand's name can't "
 				"start with \"-\" whereas you are trying to set name to \"" ) +
 				name + "\"." );
 
@@ -100,7 +97,7 @@ public:
 		If name is empty returned value should be a flag.
 		I.e. for example "-t" or "--timeout"
 	*/
-	std::string name() const override
+	String name() const override
 	{
 		return m_name;
 	}
@@ -130,42 +127,42 @@ public:
 	}
 
 	//! \return Flag.
-	const std::string & flag() const override
+	const String & flag() const override
 	{
 		return m_emptyString;
 	}
 
-	const std::string & argumentName() const override
+	const String & argumentName() const override
 	{
 		return m_emptyString;
 	}
 
 	//! \return Value specifier.
-	const std::string & valueSpecifier() const override
+	const String & valueSpecifier() const override
 	{
 		return m_valueSpecifier;
 	}
 
 	//! Set value specifier.
-	void setValueSpecifier( const std::string & s )
+	void setValueSpecifier( const String & s )
 	{
 		m_valueSpecifier = s;
 	}
 
 	//! \return Description of the argument.
-	const std::string & description() const override
+	const String & description() const override
 	{
 		return m_desc;
 	}
 
 	//! Set description.
-	void setDescription( const std::string & desc )
+	void setDescription( const String & desc )
 	{
 		m_desc = desc;
 	}
 
 	//! \return Long description of the argument.
-	const std::string & longDescription() const override
+	const String & longDescription() const override
 	{
 		if( !m_longDesc.empty() )
 			return m_longDesc;
@@ -174,13 +171,13 @@ public:
 	}
 
 	//! Set long description.
-	void setLongDescription( const std::string & desc )
+	void setLongDescription( const String & desc )
 	{
 		m_longDesc = desc;
 	}
 
 	//! \return First value of this argument.
-	const std::string & value() const
+	const String & value() const
 	{
 		if( !m_values.empty() )
 			return m_values.front();
@@ -208,7 +205,7 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & name ) override
+		const String & name ) override
 	{
 		if( m_name == name )
 			return this;
@@ -234,7 +231,7 @@ protected:
 				case ValueOptions::ManyValues :
 				{
 					eatValues( context, m_values,
-						std::string( "Argument \"" ) +
+						String( "Argument \"" ) +
 							m_name + "\" require value that wasn't presented.",
 						cmdLine() );
 				}
@@ -247,7 +244,7 @@ protected:
 					}
 					catch( const BaseException & )
 					{
-						throw BaseException( std::string( "Argument \"" ) +
+						throw BaseException( String( "Argument \"" ) +
 							m_name + "\" require value that wasn't presented." );
 					}
 				}
@@ -258,7 +255,7 @@ protected:
 			}
 		}
 		else
-			throw BaseException( std::string( "Argument \"" ) + m_name +
+			throw BaseException( String( "Argument \"" ) + m_name +
 				"\" already defined." );
 	}
 
@@ -281,13 +278,13 @@ protected:
 			auto it = std::find( names.begin(), names.end(), m_name );
 
 			if( it != names.end() )
-				throw BaseException( std::string( "Redefinition of argument "
+				throw BaseException( String( "Redefinition of argument "
 					"with name \"" ) + m_name + "\"." );
 			else
 				names.push_back( m_name );
 		}
 		else
-			throw BaseException( std::string( "Dissallowed name \"" ) +
+			throw BaseException( String( "Dissallowed name \"" ) +
 				m_name + "\" for the argument." );
 	}
 
@@ -295,7 +292,7 @@ protected:
 	void checkCorrectnessAfterParsing() const override
 	{
 		if( isRequired() && !isDefined() )
-			throw BaseException( std::string( "Undefined required argument \"" ) +
+			throw BaseException( String( "Undefined required argument \"" ) +
 				m_name + "\"." );
 	}
 
@@ -303,10 +300,10 @@ private:
 	DISABLE_COPY( ArgAsCommand )
 
 	//! Dummy empty string.
-	static const std::string m_emptyString;
+	static const String m_emptyString;
 
 	//! Name.
-	std::string m_name;
+	String m_name;
 	//! Option.
 	ValueOptions m_opt;
 	//! Is required?
@@ -314,16 +311,16 @@ private:
 	//! Is defined?
 	bool m_defined;
 	//! Value specifier.
-	std::string m_valueSpecifier;
+	String m_valueSpecifier;
 	//! Description.
-	std::string m_desc;
+	String m_desc;
 	//! Long description.
-	std::string m_longDesc;
+	String m_longDesc;
 	//! Values.
 	StringList m_values;
 }; // class ArgAsCommand
 
-const std::string ArgAsCommand::m_emptyString;
+const String ArgAsCommand::m_emptyString;
 
 } /* namespace Args */
 

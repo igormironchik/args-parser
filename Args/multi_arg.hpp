@@ -92,7 +92,7 @@ public:
 	virtual ~MultiArg();
 
 	//! \return First value of this argument.
-	virtual const std::string & value() const;
+	virtual const String & value() const;
 
 	//! \return All values for this argument.
 	virtual const StringList & values() const;
@@ -158,7 +158,7 @@ MultiArg::~MultiArg()
 {
 }
 
-inline const std::string &
+inline const String &
 MultiArg::value() const
 {
 	if( !m_values.empty() )
@@ -188,7 +188,7 @@ MultiArg::process( Context & context )
 	if( isWithValue() )
 	{
 		setDefined( eatValues( context, m_values,
-			std::string( "Argument \"" ) +
+			String( "Argument \"" ) +
 				name() + "\" require value that wasn't presented.",
 			cmdLine() ) );
 	}

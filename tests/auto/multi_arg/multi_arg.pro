@@ -6,4 +6,6 @@ QT -= core gui
 
 INCLUDEPATH = ../../..
 
+include( ../../../config.pri )
+
 SOURCES = main.cpp

@@ -96,7 +96,7 @@ public:
 		If name is empty returned value should be a flag.
 		I.e. for example "-t" or "--timeout"
 	*/
-	std::string name() const override;
+	String name() const override;
 
 	//! \return Is this argument with value?
 	bool isWithValue() const override;
@@ -114,34 +114,34 @@ public:
 	void setDefined( bool on = true );
 
 	//! \return Value of this argument.
-	virtual const std::string & value() const;
+	virtual const String & value() const;
 	//! Set value.
-	void setValue( const std::string & v );
+	void setValue( const String & v );
 
 	//! \return Flag.
-	const std::string & flag() const override;
+	const String & flag() const override;
 	//! Set flag.
 	void setFlag( char f );
 
 	//! \return Argument name.
-	const std::string & argumentName() const override;
+	const String & argumentName() const override;
 	//! Set argument name.
-	void setArgumentName( const std::string & name );
+	void setArgumentName( const String & name );
 
 	//! \return Value specifier.
-	const std::string & valueSpecifier() const override;
+	const String & valueSpecifier() const override;
 	//! Set value specifier.
-	void setValueSpecifier( const std::string & vs );
+	void setValueSpecifier( const String & vs );
 
 	//! \return Description of the argument.
-	const std::string & description() const override;
+	const String & description() const override;
 	//! Set description.
-	void setDescription( const std::string & desc );
+	void setDescription( const String & desc );
 
 	//! \return Long description of the argument.
-	const std::string & longDescription() const override;
+	const String & longDescription() const override;
 	//! Set long description.
-	void setLongDescription( const std::string & desc );
+	void setLongDescription( const String & desc );
 
 protected:
 	/*!
@@ -157,7 +157,7 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & name ) override;
+		const String & name ) override;
 
 	/*!
 		Process argument's staff, for example take values from
@@ -193,17 +193,17 @@ private:
 	//! Is this argument defined?
 	bool m_isDefined;
 	//! Value of this argument.
-	std::string m_value;
+	String m_value;
 	//! Flag of this argument.
-	std::string m_flag;
+	String m_flag;
 	//! Name of this argument.
-	std::string m_name;
+	String m_name;
 	//! Value specifier.
-	std::string m_valueSpecifier;
+	String m_valueSpecifier;
 	//! Description.
-	std::string m_description;
+	String m_description;
 	//! Long description.
-	std::string m_longDescription;
+	String m_longDescription;
 }; // class Arg
 
 
@@ -251,7 +251,7 @@ Arg::~Arg()
 }
 
 inline ArgIface *
-Arg::isItYou( const std::string & name )
+Arg::isItYou( const String & name )
 {
 	if( isArgument( name ) && name.substr( 2 ) == m_name )
 		return this;
@@ -277,17 +277,17 @@ Arg::process( Context & context )
 			}
 			catch( const BaseException & )
 			{
-				throw BaseException( std::string( "Argument \"" ) +
+				throw BaseException( String( "Argument \"" ) +
 					name() + "\" requires value but it's not presented." );
 			}
 		}
 	}
 	else
-		throw BaseException( std::string( "Argument \"" ) +
+		throw BaseException( String( "Argument \"" ) +
 			name() + "\" already defined." );
 }
 
-inline std::string
+inline String
 Arg::name() const
 {
 	if( !m_name.empty() )
@@ -304,18 +304,18 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 	{
 		if( isCorrectFlag( m_flag ) )
 		{
-			const std::string flag = std::string( "-" ) + m_flag;
+			const String flag = String( "-" ) + m_flag;
 
 			auto it = std::find( flags.begin(), flags.end(), flag );
 
 			if( it != flags.end() )
-				throw BaseException( std::string( "Redefinition of argument "
+				throw BaseException( String( "Redefinition of argument "
 					"witg flag \"" ) + flag + "\"." );
 			else
 				flags.push_back( flag );
 		}
 		else
-			throw BaseException( std::string( "Dissallowed flag \"-" ) +
+			throw BaseException( String( "Dissallowed flag \"-" ) +
 				m_flag + "\"." );
 	}
 
@@ -323,23 +323,23 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 	{
 		if( isCorrectName( m_name ) )
 		{
-			const std::string name = std::string( "--" ) + m_name;
+			const String name = String( "--" ) + m_name;
 
 			auto it = std::find( names.begin(), names.end(), name );
 
 			if( it != names.end() )
-				throw BaseException( std::string( "Redefinition of argument "
+				throw BaseException( String( "Redefinition of argument "
 					"with name \"" ) + name + "\"." );
 			else
 				names.push_back( name );
 		}
 		else
-			throw BaseException( std::string( "Dissallowed name \"--" ) +
+			throw BaseException( String( "Dissallowed name \"--" ) +
 				m_name + "\"." );
 	}
 
 	if( m_flag.empty() && m_name.empty() )
-		throw BaseException( std::string( "Arguments with empty flag and name "
+		throw BaseException( String( "Arguments with empty flag and name "
 			"are dissallowed." ) );
 }
 
@@ -347,7 +347,7 @@ inline void
 Arg::checkCorrectnessAfterParsing() const
 {
 	if( isRequired() && !isDefined() )
-		throw BaseException( std::string( "Undefined required argument \"" ) +
+		throw BaseException( String( "Undefined required argument \"" ) +
 			name() + "\"." );
 }
 
@@ -387,19 +387,19 @@ Arg::setDefined( bool on )
 	m_isDefined = on;
 }
 
-inline const std::string &
+inline const String &
 Arg::value() const
 {
 	return m_value;
 }
 
 inline void
-Arg::setValue( const std::string & v )
+Arg::setValue( const String & v )
 {
 	m_value = v;
 }
 
-inline const std::string &
+inline const String &
 Arg::flag() const
 {
 	return m_flag;
@@ -408,46 +408,46 @@ Arg::flag() const
 inline void
 Arg::setFlag( char f )
 {
-	m_flag = std::string( 1, f );
+	m_flag = String( 1, f );
 }
 
-inline const std::string &
+inline const String &
 Arg::argumentName() const
 {
 	return m_name;
 }
 
 inline void
-Arg::setArgumentName( const std::string & name )
+Arg::setArgumentName( const String & name )
 {
 	m_name = name;
 }
 
-inline const std::string &
+inline const String &
 Arg::valueSpecifier() const
 {
 	return m_valueSpecifier;
 }
 
 inline void
-Arg::setValueSpecifier( const std::string & vs )
+Arg::setValueSpecifier( const String & vs )
 {
 	m_valueSpecifier = vs;
 }
 
-inline const std::string &
+inline const String &
 Arg::description() const
 {
 	return m_description;
 }
 
 inline void
-Arg::setDescription( const std::string & desc )
+Arg::setDescription( const String & desc )
 {
 	m_description = desc;
 }
 
-inline const std::string &
+inline const String &
 Arg::longDescription() const
 {
 	if( !m_longDescription.empty() )
@@ -457,7 +457,7 @@ Arg::longDescription() const
 }
 
 inline void
-Arg::setLongDescription( const std::string & desc )
+Arg::setLongDescription( const String & desc )
 {
 	m_longDescription = desc;
 }

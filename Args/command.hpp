@@ -39,9 +39,6 @@
 #include "enums.hpp"
 #include "types.hpp"
 
-// C++ include.
-#include <list>
-
 
 namespace Args {
 
@@ -65,7 +62,7 @@ public:
 		,	m_isDefined( false )
 	{
 		if( isArgument( name ) || isFlag( name ) )
-			throw BaseException( std::string( "Command's name can't "
+			throw BaseException( String( "Command's name can't "
 				"start with \"-\" whereas you are trying to set name to \"" ) +
 				name + "\"." );
 
@@ -112,29 +109,29 @@ public:
 	}
 
 	//! \return Value specifier.
-	const std::string & valueSpecifier() const override
+	const String & valueSpecifier() const override
 	{
 		return m_valueSpecifier;
 	}
 	//! Set value specifier.
-	void setValueSpecifier( const std::string & vs )
+	void setValueSpecifier( const String & vs )
 	{
 		m_valueSpecifier = vs;
 	}
 
 	//! \return Description of the argument.
-	const std::string & description() const override
+	const String & description() const override
 	{
 		return m_description;
 	}
 	//! Set description.
-	void setDescription( const std::string & desc )
+	void setDescription( const String & desc )
 	{
 		m_description = desc;
 	}
 
 	//! \return Long description of the argument.
-	const std::string & longDescription() const override
+	const String & longDescription() const override
 	{
 		if( !m_longDescription.empty() )
 			return m_longDescription;
@@ -142,13 +139,13 @@ public:
 			return m_description;
 	}
 	//! Set long description.
-	void setLongDescription( const std::string & desc )
+	void setLongDescription( const String & desc )
 	{
 		m_longDescription = desc;
 	}
 
 	//! \return First value of this argument.
-	const std::string & value() const
+	const String & value() const
 	{
 		if( !m_values.empty() )
 			return m_values.front();
@@ -176,7 +173,7 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & n ) override
+		const String & n ) override
 	{
 		if( name() == n )
 			return this;
@@ -197,7 +194,7 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & name )
+		const String & name )
 	{
 		return GroupIface::isItYou( name );
 	}
@@ -218,7 +215,7 @@ protected:
 			case ValueOptions::ManyValues :
 			{
 				eatValues( ctx, m_values,
-					std::string( "Command \"" ) +
+					String( "Command \"" ) +
 						name() + "\" require value that wasn't presented.",
 					cmdLine() );
 			}
@@ -231,7 +228,7 @@ protected:
 				}
 				catch( const BaseException & )
 				{
-					throw BaseException( std::string( "Command \"" ) +
+					throw BaseException( String( "Command \"" ) +
 						name() + "\" require value that wasn't presented." );
 				}
 			}
@@ -259,13 +256,13 @@ protected:
 			auto it = std::find( names.begin(), names.end(), name() );
 
 			if( it != names.end() )
-				throw BaseException( std::string( "Redefinition of command "
+				throw BaseException( String( "Redefinition of command "
 					"with name \"" ) + name() + "\"." );
 			else
 				names.push_back( name() );
 		}
 		else
-			throw BaseException( std::string( "Dissallowed name \"" ) +
+			throw BaseException( String( "Dissallowed name \"" ) +
 				name() + "\" for the command." );
 
 		StringList ftmp = flags;
@@ -287,11 +284,11 @@ private:
 	//! Option.
 	ValueOptions m_opt;
 	//! Value specifier.
-	std::string m_valueSpecifier;
+	String m_valueSpecifier;
 	//! Description.
-	std::string m_description;
+	String m_description;
 	//! Long description.
-	std::string m_longDescription;
+	String m_longDescription;
 	//! Is defined.
 	bool m_isDefined;
 	//! Values.

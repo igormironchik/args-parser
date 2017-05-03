@@ -31,10 +31,6 @@
 #ifndef ARGS__ARG_IFACE_HPP__INCLUDED
 #define ARGS__ARG_IFACE_HPP__INCLUDED
 
-// C++ include.
-#include <string>
-#include <list>
-
 // Args include.
 #include "utils.hpp"
 #include "types.hpp"
@@ -72,7 +68,7 @@ public:
 		If name is empty returned value should be a flag.
 		I.e. for example "-t" or "--timeout"
 	*/
-	virtual std::string name() const = 0;
+	virtual String name() const = 0;
 
 	//! \return Is this argument with value?
 	virtual bool isWithValue() const = 0;
@@ -84,19 +80,19 @@ public:
 	virtual bool isDefined() const = 0;
 
 	//! \return Flag.
-	virtual const std::string & flag() const = 0;
+	virtual const String & flag() const = 0;
 
 	//! \return Argument name.
-	virtual const std::string & argumentName() const = 0;
+	virtual const String & argumentName() const = 0;
 
 	//! \return Value specifier.
-	virtual const std::string & valueSpecifier() const = 0;
+	virtual const String & valueSpecifier() const = 0;
 
 	//! \return Description of the argument.
-	virtual const std::string & description() const = 0;
+	virtual const String & description() const = 0;
 
 	//! \return Long description of the argument.
-	virtual const std::string & longDescription() const = 0;
+	virtual const String & longDescription() const = 0;
 
 	//! \return Command line parser.
 	CmdLine * cmdLine() const
@@ -118,7 +114,7 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & name ) = 0;
+		const String & name ) = 0;
 
 	/*!
 		Process argument's staff, for example take values from

@@ -78,7 +78,7 @@ public:
 	void parse();
 
 	//! \return Argument for the given name.
-	ArgIface * findArgument( const std::string & name );
+	ArgIface * findArgument( const String & name );
 
 	//! \return All arguments.
 	const std::list< ArgIface* > & arguments() const;
@@ -145,11 +145,11 @@ CmdLine::addArg( ArgIface * arg )
 			m_args.push_back( arg );
 		}
 		else
-			throw BaseException( std::string( "Argument \"" ) +
+			throw BaseException( String( "Argument \"" ) +
 				arg->name() + "\" already in the command line parser." );
 	}
 	else
-		throw BaseException( std::string( "Attempt to add nullptr to the "
+		throw BaseException( String( "Attempt to add nullptr to the "
 			"command line as argument." ) );
 }
 
@@ -166,13 +166,13 @@ CmdLine::parse()
 
 	while( !m_context.atEnd() )
 	{
-		std::string word = *m_context.next();
+		String word = *m_context.next();
 
 		const size_t eqIt = word.find( '=' );
 
-		if( eqIt != std::string::npos )
+		if( eqIt != String::npos )
 		{
-			const std::string value = word.substr( eqIt + 1 );
+			const String value = word.substr( eqIt + 1 );
 
 			if( !value.empty() )
 				m_context.prepend( value );
@@ -186,12 +186,12 @@ CmdLine::parse()
 		{
 			for( size_t i = 1, length = word.length(); i < length; ++i )
 			{
-				const std::string flag = std::string( "-" ) + word[ i ];
+				const String flag = String( "-" ) + word[ i ];
 
 				ArgIface * arg = findArgument( flag );
 
 				if( i < length - 1 && arg->isWithValue() )
-					throw BaseException( std::string( "Only last argument in "
+					throw BaseException( String( "Only last argument in "
 						"flags combo can have value. Flags combo is\"" ) +
 						word + "\"." );
 				else
@@ -210,7 +210,7 @@ CmdLine::parse()
 				if( cmd )
 				{
 					if( m_command )
-						throw BaseException( std::string( "Only one command can be "
+						throw BaseException( String( "Only one command can be "
 							"specified. But you entered \"" ) + m_command->name() +
 							"\" and \"" + cmd->name() + "\"." );
 					else
@@ -225,7 +225,7 @@ CmdLine::parse()
 					tmp->process( m_context );
 			}
 			else
-				throw BaseException( std::string( "Unknown argument \"" ) +
+				throw BaseException( String( "Unknown argument \"" ) +
 					word + "\"." );
 		}
 	}
@@ -276,7 +276,7 @@ CmdLine::checkCorrectnessAfterParsing() const
 }
 
 inline ArgIface *
-CmdLine::findArgument( const std::string & name )
+CmdLine::findArgument( const String & name )
 {
 	std::list< ArgIface* >::iterator it = std::find_if( m_args.begin(),
 		m_args.end(), [ &name ] ( ArgIface * arg ) -> bool
@@ -300,7 +300,7 @@ CmdLine::findArgument( const std::string & name )
 			return tmp;
 	}
 
-	throw BaseException( std::string( "Unknown argument \"" ) +
+	throw BaseException( String( "Unknown argument \"" ) +
 		name + "\"." );
 }
 

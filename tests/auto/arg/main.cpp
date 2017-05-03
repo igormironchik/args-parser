@@ -48,9 +48,9 @@ TEST( ArgTestCase, TestAllIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &port );
@@ -78,8 +78,8 @@ TEST( ArgTestCase, TestUndefinedArg )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg host( std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg host( String( "host" ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &host );
@@ -90,7 +90,7 @@ TEST( ArgTestCase, TestUndefinedArg )
 	catch( const BaseException & x )
 	{
 		CHECK_CONDITION(
-			x.what() == std::string( "Unknown argument \"--port\"." ) )
+			x.what() == String( "Unknown argument \"--port\"." ) )
 
 		return;
 	}
@@ -107,9 +107,9 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true, true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true, true );
+	Arg host( 'h', String( "host" ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &port );
@@ -121,7 +121,7 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	catch( const BaseException & x )
 	{
 		CHECK_CONDITION(
-			x.what() == std::string( "Undefined required argument \"--port\"." ) )
+			x.what() == String( "Undefined required argument \"--port\"." ) )
 
 		return;
 	}

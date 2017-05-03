@@ -37,9 +37,7 @@
 #include "context.hpp"
 #include "utils.hpp"
 #include "exceptions.hpp"
-
-// C++ include.
-#include <iostream>
+#include "types.hpp"
 
 
 namespace Args {
@@ -56,10 +54,10 @@ public:
 	Help( bool throwExceptionOnPrint = true );
 
 	//! Set executable name.
-	void setExecutable( const std::string & exe );
+	void setExecutable( const String & exe );
 
 	//! Set description for the application.
-	void setAppDescription( const std::string & desc );
+	void setAppDescription( const String & desc );
 
 	//! Set line length for the help.
 	void setLineLength( size_t length );
@@ -104,13 +102,13 @@ Help::Help( bool throwExceptionOnPrint )
 }
 
 inline void
-Help::setExecutable( const std::string & exe )
+Help::setExecutable( const String & exe )
 {
 	m_printer.setExecutable( exe );
 }
 
 inline void
-Help::setAppDescription( const std::string & desc )
+Help::setAppDescription( const String & desc )
 {
 	m_printer.setAppDescription( desc );
 }
@@ -126,11 +124,11 @@ Help::process( Context & context )
 {
 	if( !context.atEnd() )
 	{
-		const std::string arg = *context.next();
+		const String arg = *context.next();
 
 		// Argument or flag.
 		if( isArgument( arg ) || isFlag( arg ) )
-			m_printer.print( arg, std::cout );
+			m_printer.print( arg, outStream() );
 		// Command?
 		else
 		{
@@ -143,21 +141,21 @@ Help::process( Context & context )
 				if( cmd )
 				{
 					if( !context.atEnd() )
-						m_printer.print( cmd, *context.next(), std::cout );
+						m_printer.print( cmd, *context.next(), outStream() );
 					else
-						m_printer.print( arg, std::cout );
+						m_printer.print( arg, outStream() );
 				}
 				else
-					m_printer.print( arg, std::cout );
+					m_printer.print( arg, outStream() );
 			}
 			catch( const BaseException & )
 			{
-				m_printer.print( std::cout );
+				m_printer.print( outStream() );
 			}
 		}
 	}
 	else
-		m_printer.print( std::cout );
+		m_printer.print( outStream() );
 
 	setDefined( true );
 

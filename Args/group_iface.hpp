@@ -65,7 +65,7 @@ class GroupIface
 {
 public:
 	//! Dummy empty string.
-	static const std::string m_dummyEmptyString;
+	static const String m_dummyEmptyString;
 
 public:
 	//! List of child arguments.
@@ -96,7 +96,7 @@ public:
 	addArg( T & arg )
 	{
 		if( dynamic_cast< Command* > ( &arg ) )
-			throw BaseException( std::string( "Commands not allowed in groups. "
+			throw BaseException( String( "Commands not allowed in groups. "
 				"You are trying to add command \"" ) + arg.name() +
 				"\" to group \"" + name() + "\"." );
 
@@ -112,7 +112,7 @@ public:
 	addArg( T * arg )
 	{
 		if( dynamic_cast< Command* > ( arg ) )
-			throw BaseException( std::string( "Commands not allowed in groups. "
+			throw BaseException( String( "Commands not allowed in groups. "
 				"You are trying to add command \"" ) + arg->name() +
 				"\" to group \"" + name() + "\"." );
 
@@ -127,7 +127,7 @@ public:
 		If name is empty returned value should be a flag.
 		I.e. for example "-t" or "--timeout"
 	*/
-	std::string name() const override
+	String name() const override
 	{
 		return m_name;
 	}
@@ -151,31 +151,31 @@ public:
 	}
 
 	//! \return Flag.
-	const std::string & flag() const override
+	const String & flag() const override
 	{
 		return m_dummyEmptyString;
 	}
 
 	//! \return Argument name.
-	const std::string & argumentName() const override
+	const String & argumentName() const override
 	{
 		return m_dummyEmptyString;
 	}
 
 	//! \return Value specifier.
-	const std::string & valueSpecifier() const override
+	const String & valueSpecifier() const override
 	{
 		return m_dummyEmptyString;
 	}
 
 	//! \return Description of the argument.
-	const std::string & description() const override
+	const String & description() const override
 	{
 		return m_dummyEmptyString;
 	}
 
 	//! \return Long description of the argument.
-	const std::string & longDescription() const override
+	const String & longDescription() const override
 	{
 		return m_dummyEmptyString;
 	}
@@ -194,7 +194,7 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const std::string & name ) override
+		const String & name ) override
 	{
 		for( auto & arg : m_children )
 		{
@@ -242,7 +242,7 @@ protected:
 
 		if( isRequired() && !isDefined() )
 			throw BaseException(
-				std::string( "Not defined required argument \"" ) +
+				String( "Not defined required argument \"" ) +
 				name() + "\"" );
 	}
 
@@ -261,12 +261,12 @@ private:
 	//! List of children.
 	Arguments m_children;
 	//! Name.
-	std::string m_name;
+	String m_name;
 	//! Is required?
 	bool m_required;
 }; // class GroupIface
 
-const std::string GroupIface::m_dummyEmptyString;
+const String GroupIface::m_dummyEmptyString;
 
 } /* namespace Args */
 

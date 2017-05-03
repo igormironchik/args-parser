@@ -31,15 +31,64 @@
 #ifndef ARGS__TYPES_HPP__INCLUDED
 #define ARGS__TYPES_HPP__INCLUDED
 
+#ifdef ARGS_WSTRING_BUILD
+
 // C++ include.
 #include <string>
 #include <list>
+#include <iostream>
+
+#elif defined( ARGS_QSTRING_BUILD )
+
+#else
+
+// C++ include.
+#include <string>
+#include <list>
+#include <iostream>
+
+#endif
 
 
 namespace Args {
 
+#ifdef ARGS_WSTRING_BUILD
+
+//! String type.
+using String = std::wstring;
+
 //! List of strings.
-using StringList = std::list< std::string >;
+using StringList = std::list< String >;
+
+//! Out stream type.
+using OutStreamType = std::wostream;
+
+//! Output stream.
+static OutStreamType & outStream()
+{
+	return std::wcout;
+}
+
+#elif defined( ARGS_QSTRING_BUILD )
+
+#else
+
+//! String type.
+using String = std::string;
+
+//! List of strings.
+using StringList = std::list< String >;
+
+//! Out stream type.
+using OutStreamType = std::ostream;
+
+//! Output stream.
+static OutStreamType & outStream()
+{
+	return std::cout;
+}
+
+#endif
 
 } /* namespace Args */
 

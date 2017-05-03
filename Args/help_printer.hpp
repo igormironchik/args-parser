@@ -32,11 +32,9 @@
 #define ARGS__HELP_PRINTER_HPP__INCLUDED
 
 // C++ include.
-#include <string>
 #include <list>
 #include <algorithm>
 #include <functional>
-#include <ostream>
 
 // Args include.
 #include "utils.hpp"
@@ -70,29 +68,29 @@ public:
 	//! Print help for all arguments.
 	void print(
 		//! Output stream for the printing help.
-		std::ostream & to );
+		OutStreamType & to );
 
 	//! Print help for the given argument.
 	void print(
 		//! Name of the argument. I.e. "-t" or "--timeout".
-		const std::string & name,
+		const String & name,
 		//! Output stream for the printing help.
-		std::ostream & to );
+		OutStreamType & to );
 
 	//! Print help for command's argument.
 	void print(
 		//! Command.
 		Command * cmd,
 		//! Name of the argument. I.e. "-t" or "--timeout".
-		const std::string & name,
+		const String & name,
 		//! Output stream for the printing help.
-		std::ostream & to );
+		OutStreamType & to );
 
 	//! Set executable name.
-	void setExecutable( const std::string & exe );
+	void setExecutable( const String & exe );
 
 	//! Set description for the application.
-	void setAppDescription( const std::string & desc );
+	void setAppDescription( const String & desc );
 
 	//! Set command line.
 	void setCmdLine( CmdLine * cmd );
@@ -105,13 +103,13 @@ private:
 	StringList createUsageString( ArgIface * arg,
 		bool required ) const;
 	//! List of words from string.
-	StringList splitToWords( const std::string & s ) const;
+	StringList splitToWords( const String & s ) const;
 	//! Print string with given margins.
-	void printString( std::ostream & to,
+	void printString( OutStreamType & to,
 		const StringList & words,
 		size_t currentPos, size_t leftMargin, size_t rightMargin ) const;
 	//! Print help for the argument.
-	void print( ArgIface * arg, std::ostream & to ) const;
+	void print( ArgIface * arg, OutStreamType & to ) const;
 	//! Sort argument.
 	void sortArg( ArgIface * arg,
 		std::list< Command* > & commands,
@@ -122,16 +120,16 @@ private:
 		std::size_t & maxCommand,
 		bool requiredAllOfGroup = false ) const;
 	//! Print help only for argument.
-	void printOnlyFor( ArgIface * arg, std::ostream & to,
+	void printOnlyFor( ArgIface * arg, OutStreamType & to,
 		std::size_t beforeDescription, std::size_t maxFlag ) const;
 
 private:
 	DISABLE_COPY( HelpPrinter )
 
 	//! Executable name.
-	std::string m_exeName;
+	String m_exeName;
 	//! Application description.
-	std::string m_appDescription;
+	String m_appDescription;
 	//! Command line.
 	CmdLine * m_cmdLine;
 	//! Line length.
@@ -156,10 +154,10 @@ HelpPrinter::~HelpPrinter()
 }
 
 static inline void
-printOffset( std::ostream & to, size_t currentPos, size_t leftMargin )
+printOffset( OutStreamType & to, size_t currentPos, size_t leftMargin )
 {
 	if( currentPos < leftMargin )
-		to << std::string( leftMargin - currentPos, ' ' );
+		to << String( leftMargin - currentPos, ' ' );
 }
 
 static inline void
@@ -235,7 +233,7 @@ HelpPrinter::sortArg( ArgIface * arg,
 }
 
 inline void
-HelpPrinter::printOnlyFor( ArgIface * arg, std::ostream & to,
+HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
 	std::size_t beforeDescription, std::size_t maxFlag ) const
 {
 	size_t pos = 0;
@@ -298,7 +296,7 @@ HelpPrinter::printOnlyFor( ArgIface * arg, std::ostream & to,
 }
 
 inline void
-HelpPrinter::print( std::ostream & to )
+HelpPrinter::print( OutStreamType & to )
 {
 	std::list< ArgIface* > required;
 	std::list< ArgIface* > optional;
@@ -412,7 +410,7 @@ HelpPrinter::print( std::ostream & to )
 }
 
 inline void
-HelpPrinter::print( const std::string & name, std::ostream & to )
+HelpPrinter::print( const String & name, OutStreamType & to )
 {
 	try {
 		ArgIface * arg = m_cmdLine->findArgument( name );
@@ -531,7 +529,7 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 }
 
 inline void
-HelpPrinter::print( ArgIface * arg, std::ostream & to ) const
+HelpPrinter::print( ArgIface * arg, OutStreamType & to ) const
 {
 	StringList usage = createUsageString( arg,
 		arg->isRequired() );
@@ -539,7 +537,7 @@ HelpPrinter::print( ArgIface * arg, std::ostream & to ) const
 	to << "Usage: ";
 
 	std::for_each( usage.cbegin(), usage.cend(),
-		[ & ] ( const std::string & s )
+		[ & ] ( const String & s )
 			{ to << s << ' '; }
 	);
 
@@ -552,13 +550,13 @@ HelpPrinter::print( ArgIface * arg, std::ostream & to ) const
 }
 
 inline void
-HelpPrinter::setExecutable( const std::string & exe )
+HelpPrinter::setExecutable( const String & exe )
 {
 	m_exeName = exe;
 }
 
 inline void
-HelpPrinter::setAppDescription( const std::string & desc )
+HelpPrinter::setAppDescription( const String & desc )
 {
 	m_appDescription = desc;
 }
@@ -583,7 +581,7 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 {
 	StringList result;
 
-	std::string usage;
+	String usage;
 
 	if( !required )
 		usage.append( "[ " );
@@ -629,15 +627,15 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 static inline bool
 isSpaceChar( const char & c )
 {
-	static const std::string spaceChars = " \n\t\r ";
+	static const String spaceChars = " \n\t\r ";
 
-	return ( spaceChars.find( c ) != std::string::npos );
+	return ( spaceChars.find( c ) != String::npos );
 }
 
 inline StringList
-HelpPrinter::splitToWords( const std::string & s ) const
+HelpPrinter::splitToWords( const String & s ) const
 {
-	std::string word;
+	String word;
 	StringList result;
 
 	std::for_each( s.cbegin(), s.cend(),
@@ -662,7 +660,7 @@ HelpPrinter::splitToWords( const std::string & s ) const
 }
 
 inline void
-HelpPrinter::printString( std::ostream & to,
+HelpPrinter::printString( OutStreamType & to,
 	const StringList & words,
 	size_t currentPos, size_t leftMargin, size_t rightMargin ) const
 {
@@ -687,7 +685,7 @@ HelpPrinter::printString( std::ostream & to,
 	bool makeOffset = ( currentPos < leftMargin );
 
 	std::for_each( words.cbegin(), words.cend(),
-		[ & ] ( const std::string & word )
+		[ & ] ( const String & word )
 		{
 			if( makeOffset )
 			{
@@ -735,8 +733,8 @@ HelpPrinter::printString( std::ostream & to,
 }
 
 inline void
-HelpPrinter::print( Command * cmd, const std::string & name,
-	std::ostream & to )
+HelpPrinter::print( Command * cmd, const String & name,
+	OutStreamType & to )
 {
 	if( cmd )
 	{

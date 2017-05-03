@@ -32,8 +32,6 @@
 #define ARGS__CONTEXT_HPP__INCLUDED
 
 // C++ include.
-#include <list>
-#include <string>
 #include <utility>
 
 // Args include.
@@ -79,7 +77,7 @@ public:
 	void putBack();
 
 	//! Prepend context with new item.
-	void prepend( const std::string & what );
+	void prepend( const String & what );
 
 private:
 	DISABLE_COPY( Context )
@@ -139,7 +137,7 @@ Context::putBack()
 }
 
 inline void
-Context::prepend( const std::string & what )
+Context::prepend( const String & what )
 {
 	m_it = m_context.insert( m_it, what );
 }

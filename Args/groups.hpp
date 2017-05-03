@@ -97,7 +97,7 @@ protected:
 		for( const auto & arg : children() )
 		{
 			if( arg->isRequired() )
-				throw BaseException( std::string( "Required argument \"" ) +
+				throw BaseException( String( "Required argument \"" ) +
 					arg->name() +
 					"\" is not allowed to " +
 					"be in OnlyOne group \"" + name() + "\"." );
@@ -116,7 +116,7 @@ protected:
 			if( arg->isDefined() )
 			{
 				if( defined )
-					throw BaseException( std::string( "Only one argument can "
+					throw BaseException( String( "Only one argument can "
 						"be defined in OnlyOne group \"" ) + name() + "\". " +
 						"Whereas defined \"" + defined->name() +
 						"\" and \"" + arg->name() + "\"." );
@@ -178,7 +178,7 @@ protected:
 		for( const auto & arg : children() )
 		{
 			if( arg->isRequired() )
-				throw BaseException( std::string( "Required argument \"" ) +
+				throw BaseException( String( "Required argument \"" ) +
 					arg->name() +
 					"\" is not allowed to " +
 					"be in AllOf group \"" + name() + "\"." );
@@ -202,7 +202,7 @@ protected:
 			} );
 
 		if( defined && !all )
-			throw BaseException( std::string( "All arguments in "
+			throw BaseException( String( "All arguments in "
 				"AllOf group \"" ) + name() + "\" should be defined." );
 	}
 }; // class AllOfGroup
@@ -258,7 +258,7 @@ protected:
 		for( const auto & arg : children() )
 		{
 			if( arg->isRequired() )
-				throw BaseException( std::string( "Required argument \"" ) +
+				throw BaseException( String( "Required argument \"" ) +
 					arg->name() +
 					"\" is not allowed to " +
 					"be in AtLeastOne group \"" + name() + "\"." );

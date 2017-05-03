@@ -46,7 +46,7 @@ class BaseException
 	:	public std::logic_error
 {
 public:
-	explicit BaseException( const std::string & what );
+	explicit BaseException( const String & what );
 
 	virtual ~BaseException() noexcept;
 }; // class BaseException
@@ -70,7 +70,7 @@ public:
 //
 
 inline
-BaseException::BaseException( const std::string & what )
+BaseException::BaseException( const String & what )
 	:	std::logic_error( what )
 {
 }

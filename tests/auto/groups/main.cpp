@@ -46,9 +46,9 @@ TEST( GroupCase, TestOnlyOneAllIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	OnlyOneGroup g( "only_one" );
 	g.addArg( timeout );
@@ -77,9 +77,9 @@ TEST( GroupCase, TestOnlyOneFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	OnlyOneGroup g( "only_one" );
 	g.addArg( timeout );
@@ -100,9 +100,9 @@ TEST( GroupCase, TestOnlyOneWithRequiredFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true, true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true, true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	OnlyOneGroup g( "only_one" );
 	g.addArg( timeout );
@@ -123,9 +123,9 @@ TEST( GroupCase, TestAllOfIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AllOfGroup g( "all_of" );
 	g.addArg( timeout );
@@ -156,9 +156,9 @@ TEST( GroupCase, TestAllOfFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AllOfGroup g( "all_of" );
 	g.addArg( timeout );
@@ -179,9 +179,9 @@ TEST( GroupCase, TestAllOfWithRequiredFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true, true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true, true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	OnlyOneGroup g( "all_of" );
 	g.addArg( timeout );
@@ -201,9 +201,9 @@ TEST( GroupCase, TestAtLeasOneIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AtLeastOneGroup g( "at_least_one" );
 	g.addArg( timeout );
@@ -233,9 +233,9 @@ TEST( GroupCase, TestAtLeasOneFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AtLeastOneGroup g( "at_least_one" );
 	g.setRequired( true );
@@ -257,9 +257,9 @@ TEST( GroupCase, TestAtLeasOneWithRequiredFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', std::string( "timeout" ), true, true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true, true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AtLeastOneGroup g( "at_least_one" );
 	g.addArg( timeout );
@@ -287,9 +287,9 @@ TEST( GroupCase, GroupsIsOk )
 	onlyOne.addArg( store );
 	onlyOne.addArg( file );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AllOfGroup g( "all_of" );
 	g.setRequired( true );
@@ -336,9 +336,9 @@ TEST( GroupCase, GroupsFailed )
 	onlyOne.addArg( store );
 	onlyOne.addArg( file );
 
-	Arg timeout( 't', std::string( "timeout" ), true );
-	Arg port( 'p', std::string( "port" ), true );
-	Arg host( 'h', std::string( "host" ), true );
+	Arg timeout( 't', String( "timeout" ), true );
+	Arg port( 'p', String( "port" ), true );
+	Arg host( 'h', String( "host" ), true );
 
 	AllOfGroup g( "all_of" );
 	g.setRequired( true );

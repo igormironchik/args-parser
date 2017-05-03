@@ -6,6 +6,7 @@ QT -= core gui
 CONFIG -= qt
 
 include( ../../Args/Args.pri )
+include( ../../config.pri )
 
 INCLUDEPATH = ../..
 
