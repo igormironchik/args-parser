@@ -94,7 +94,7 @@ private:
 
 inline
 Help::Help( bool throwExceptionOnPrint )
-	:	Arg( SL( 'h' ), SL( "help" ), true )
+	:	Arg( SL( 'h' ), SL( "help" ), true, false )
 	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
 {
 	setDescription( SL( "Print this help." ) );

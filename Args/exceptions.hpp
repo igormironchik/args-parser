@@ -87,7 +87,7 @@ private:
 	String m_what;
 #else
 	//! \return What?
-	const String & desc() const noexcept
+	String desc() const
 	{
 		return what();
 	}
