@@ -186,7 +186,7 @@ CmdLine::parse()
 		{
 			for( String::size_type i = 1, length = word.length(); i < length; ++i )
 			{
-				const String flag = String( "-" ) + word[ i ];
+				const String flag = String( "-" ) + String( word[ i ] );
 
 				ArgIface * arg = findArgument( flag );
 

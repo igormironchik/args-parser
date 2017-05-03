@@ -112,6 +112,34 @@ public:
 	{
 	}
 
+
+	String( const Char * unicode, size_type size = -1 )
+		:	m_str( unicode, size )
+	{
+	}
+
+	String( Char ch )
+		:	m_str( ch )
+	{
+	}
+
+	String( QLatin1String str )
+		:	m_str( str )
+	{
+	}
+
+	String( const QByteArray & ba )
+		:	m_str( ba )
+	{
+	}
+
+	String & operator = ( const String & other )
+	{
+		m_str = other.m_str;
+
+		return *this;
+	}
+
 	~String()
 	{
 	}

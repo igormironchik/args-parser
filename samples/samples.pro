@@ -5,7 +5,7 @@ include( ../config.pri )
 
 contains( DEFINES, ARGS_QSTRING_BUILD ) {
 
-SUBDIRS =
+SUBDIRS = qt_help
 
 } else {
 
