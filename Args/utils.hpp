@@ -31,8 +31,17 @@
 #ifndef ARGS__UTILS_HPP__INCLUDED
 #define ARGS__UTILS_HPP__INCLUDED
 
+#ifndef ARGS_QSTRING_BUILD
+
 // C++ include.
 #include <regex>
+
+#else
+
+// Qt include.
+#include <QRegExp>
+
+#endif
 
 // Args include.
 #include "types.hpp"
@@ -66,7 +75,7 @@ namespace Args {
 static inline bool
 isArgument( const String & word )
 {
-	const size_t it = word.find( "--" );
+	const String::size_type it = word.find( "--" );
 
 	if( it == 0 )
 		return true;
@@ -85,7 +94,7 @@ isFlag( const String & word )
 {
 	if( !isArgument( word ) )
 	{
-		const size_t it = word.find( '-' );
+		const String::size_type it = word.find( '-' );
 
 		if( it == 0 )
 			return true;
@@ -128,16 +137,23 @@ isCorrectName( const String & name )
 	if( name.empty() )
 		return false;
 
+#ifndef ARGS_QSTRING_BUILD
 	std::regex r( "\\s" );
 
 	if( std::regex_search( name, r ) )
 		return false;
+#else
+	QRegExp r( "\\s" );
+
+	if( r.indexIn( name ) != -1 )
+		return false;
+#endif
 
 	static const String availableSymbols( "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" );
 
-	for( const char & c : name )
+	for( const Char & c : name )
 	{
 		if( availableSymbols.find( c ) == String::npos )
 			return false;

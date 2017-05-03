@@ -61,7 +61,7 @@ public:
 	template< typename T >
 	Arg(
 		//! Flag for this argument.
-		char flag,
+		Char flag,
 		//! Name for this argument.
 		T && name,
 		//! Is this argument with value?
@@ -72,7 +72,7 @@ public:
 	//! Construct argument only with flag, without name.
 	explicit Arg(
 		//! Flag for this argument.
-		char flag,
+		Char flag,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?
@@ -121,7 +121,7 @@ public:
 	//! \return Flag.
 	const String & flag() const override;
 	//! Set flag.
-	void setFlag( char f );
+	void setFlag( Char f );
 
 	//! \return Argument name.
 	const String & argumentName() const override;
@@ -212,7 +212,7 @@ private:
 //
 
 template< typename T >
-Arg::Arg( char flag, T && name,
+Arg::Arg( Char flag, T && name,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
@@ -224,7 +224,7 @@ Arg::Arg( char flag, T && name,
 }
 
 inline
-Arg::Arg( char flag,
+Arg::Arg( Char flag,
 	bool isWithValue, bool isRequired )
 	:	m_isWithValue( isWithValue )
 	,	m_isRequired( isRequired )
@@ -406,7 +406,7 @@ Arg::flag() const
 }
 
 inline void
-Arg::setFlag( char f )
+Arg::setFlag( Char f )
 {
 	m_flag = String( 1, f );
 }

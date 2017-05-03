@@ -96,7 +96,7 @@ public:
 	void setCmdLine( CmdLine * cmd );
 
 	//! Set line length for the help.
-	void setLineLength( size_t length );
+	void setLineLength( String::size_type length );
 
 private:
 	//! \return List of words with usage string for the argument.
@@ -107,7 +107,8 @@ private:
 	//! Print string with given margins.
 	void printString( OutStreamType & to,
 		const StringList & words,
-		size_t currentPos, size_t leftMargin, size_t rightMargin ) const;
+		String::size_type currentPos, String::size_type leftMargin,
+		String::size_type rightMargin ) const;
 	//! Print help for the argument.
 	void print( ArgIface * arg, OutStreamType & to ) const;
 	//! Sort argument.
@@ -115,13 +116,13 @@ private:
 		std::list< Command* > & commands,
 		std::list< ArgIface* > & required,
 		std::list< ArgIface* > & optional,
-		std::size_t & maxFlag,
-		std::size_t & maxName,
-		std::size_t & maxCommand,
+		String::size_type & maxFlag,
+		String::size_type & maxName,
+		String::size_type & maxCommand,
 		bool requiredAllOfGroup = false ) const;
 	//! Print help only for argument.
 	void printOnlyFor( ArgIface * arg, OutStreamType & to,
-		std::size_t beforeDescription, std::size_t maxFlag ) const;
+		String::size_type beforeDescription, String::size_type maxFlag ) const;
 
 private:
 	DISABLE_COPY( HelpPrinter )
@@ -133,7 +134,7 @@ private:
 	//! Command line.
 	CmdLine * m_cmdLine;
 	//! Line length.
-	size_t m_lineLength;
+	String::size_type m_lineLength;
 }; // class HelpPrinter
 
 
@@ -154,18 +155,20 @@ HelpPrinter::~HelpPrinter()
 }
 
 static inline void
-printOffset( OutStreamType & to, size_t currentPos, size_t leftMargin )
+printOffset( OutStreamType & to, String::size_type currentPos,
+	String::size_type leftMargin )
 {
 	if( currentPos < leftMargin )
 		to << String( leftMargin - currentPos, ' ' );
 }
 
 static inline void
-calcMaxFlagAndName( ArgIface * arg, size_t & maxFlag, size_t & maxName )
+calcMaxFlagAndName( ArgIface * arg, String::size_type & maxFlag,
+	String::size_type & maxName )
 {
-	size_t f = 1;
-	size_t n = ( !arg->argumentName().empty() ? arg->argumentName().length() :
-		arg->name().length() );
+	String::size_type f = 1;
+	String::size_type n = ( !arg->argumentName().empty() ?
+		arg->argumentName().length() : arg->name().length() );
 
 	if( arg->isWithValue() )
 	{
@@ -187,9 +190,9 @@ HelpPrinter::sortArg( ArgIface * arg,
 	std::list< Command* > & commands,
 	std::list< ArgIface* > & required,
 	std::list< ArgIface* > & optional,
-	std::size_t & maxFlag,
-	std::size_t & maxName,
-	std::size_t & maxCommand,
+	String::size_type & maxFlag,
+	String::size_type & maxName,
+	String::size_type & maxCommand,
 	bool requiredAllOfGroup ) const
 {
 	GroupIface * g = dynamic_cast< GroupIface* > ( arg );
@@ -199,7 +202,7 @@ HelpPrinter::sortArg( ArgIface * arg,
 	{
 		commands.push_back( cmd );
 
-		std::size_t length = cmd->name().length() + ( cmd->isWithValue() ?
+		String::size_type length = cmd->name().length() + ( cmd->isWithValue() ?
 			3 + cmd->valueSpecifier().length() : 0 );
 
 		if( length > maxCommand )
@@ -234,9 +237,9 @@ HelpPrinter::sortArg( ArgIface * arg,
 
 inline void
 HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
-	std::size_t beforeDescription, std::size_t maxFlag ) const
+	String::size_type beforeDescription, String::size_type maxFlag ) const
 {
-	size_t pos = 0;
+	String::size_type pos = 0;
 
 	if( !arg->flag().empty() )
 	{
@@ -292,7 +295,9 @@ HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
 	printString( to, splitToWords( arg->description() ), pos,
 		beforeDescription, 0 );
 
-	to << std::endl << std::endl;
+	to << "\n" << "\n";
+
+	to.flush();
 }
 
 inline void
@@ -302,9 +307,9 @@ HelpPrinter::print( OutStreamType & to )
 	std::list< ArgIface* > optional;
 	std::list< Command* > commands;
 
-	size_t maxFlag = 0;
-	size_t maxName = 0;
-	size_t maxCommand = 0;
+	String::size_type maxFlag = 0;
+	String::size_type maxName = 0;
+	String::size_type maxCommand = 0;
 
 	bool requiredAllOfGroup = false;
 
@@ -323,7 +328,7 @@ HelpPrinter::print( OutStreamType & to )
 
 	printString( to, splitToWords( m_appDescription ), 0, 0, 0 );
 
-	to << std::endl << std::endl;
+	to << "\n" << "\n";
 
 	if( commands.empty() )
 	{
@@ -354,7 +359,7 @@ HelpPrinter::print( OutStreamType & to )
 
 		printString( to, usage, 7, 7, 7 );
 
-		to << std::endl << std::endl;
+		to << "\n" << "\n";
 	}
 	else
 	{
@@ -363,12 +368,12 @@ HelpPrinter::print( OutStreamType & to )
 		if( !optional.empty() || !required.empty() )
 			to << " <args>";
 
-		to << std::endl << std::endl;
+		to << "\n" << "\n";
 
 		std::for_each( commands.cbegin(), commands.cend(),
 			[ & ] ( Command * cmd )
 			{
-				std::size_t pos = 2;
+				String::size_type pos = 2;
 
 				to << "  " << cmd->name();
 
@@ -384,10 +389,10 @@ HelpPrinter::print( OutStreamType & to )
 				printString( to, splitToWords( cmd->description() ), pos,
 					maxCommand + 1, 0 );
 
-				to << std::endl;
+				to << "\n";
 			} );
 
-		to << std::endl << std::endl;
+		to << "\n" << "\n";
 	}
 
 	auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
@@ -396,17 +401,19 @@ HelpPrinter::print( OutStreamType & to )
 
 	if( !required.empty() )
 	{
-		to << "Required arguments:" << std::endl;
+		to << "Required arguments:" << "\n";
 
 		std::for_each( required.cbegin(), required.cend(), printArg );
 	}
 
 	if( !optional.empty() )
 	{
-		to << "Optional arguments:" << std::endl;
+		to << "Optional arguments:" << "\n";
 
 		std::for_each( optional.cbegin(), optional.cend(), printArg );
 	}
+
+	to.flush();
 }
 
 inline void
@@ -424,9 +431,9 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 			std::list< ArgIface* > goptional;
 			std::list< Command* > gcommands;
 
-			size_t gmaxFlag = 0;
-			size_t gmaxName = 0;
-			size_t gmaxCommand = 0;
+			String::size_type gmaxFlag = 0;
+			String::size_type gmaxName = 0;
+			String::size_type gmaxCommand = 0;
 
 			bool requiredAllOfGroup = false;
 
@@ -448,9 +455,9 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 			std::list< ArgIface* > optional;
 			std::list< Command* > commands;
 
-			size_t maxFlag = 0;
-			size_t maxName = 0;
-			size_t maxCommand = 0;
+			String::size_type maxFlag = 0;
+			String::size_type maxName = 0;
+			String::size_type maxCommand = 0;
 
 			requiredAllOfGroup = false;
 
@@ -470,7 +477,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 			// Print.
 			printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );
 
-			to << std::endl << std::endl;
+			to << "\n" << "\n";
 
 			// Print command's arguments.
 			auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
@@ -479,24 +486,24 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 			if( !required.empty() )
 			{
-				to << "Required arguments:" << std::endl;
+				to << "Required arguments:" << "\n";
 
 				std::for_each( required.cbegin(), required.cend(), printArg );
 			}
 
 			if( !optional.empty() )
 			{
-				to << "Optional arguments:" << std::endl;
+				to << "Optional arguments:" << "\n";
 
 				std::for_each( optional.cbegin(), optional.cend(), printArg );
 			}
 
-			to << std::endl;
+			to << "\n";
 
 			// Print global arguments.
 			if( !grequired.empty() || !goptional.empty() )
 			{
-				to << "Global arguments:" << std::endl << std::endl;
+				to << "Global arguments:" << "\n" << "\n";
 
 				auto printGlobalArg = std::bind( &HelpPrinter::printOnlyFor, this,
 					std::placeholders::_1, std::ref( to ),
@@ -504,7 +511,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 				if( !grequired.empty() )
 				{
-					to << "Required arguments:" << std::endl;
+					to << "Required arguments:" << "\n";
 
 					std::for_each( grequired.cbegin(), grequired.cend(),
 						printGlobalArg );
@@ -512,12 +519,14 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 				if( !goptional.empty() )
 				{
-					to << "Optional arguments:" << std::endl;
+					to << "Optional arguments:" << "\n";
 
 					std::for_each( goptional.cbegin(), goptional.cend(),
 						printGlobalArg );
 				}
 			}
+
+			to.flush();
 		}
 		else
 			print( arg, to );
@@ -541,12 +550,14 @@ HelpPrinter::print( ArgIface * arg, OutStreamType & to ) const
 			{ to << s << ' '; }
 	);
 
-	to << std::endl << std::endl;
+	to << "\n" << "\n";
 
 	printString( to, splitToWords( arg->longDescription() ),
 		0, 7, 7 );
 
-	to << std::endl << std::endl;
+	to << "\n" << "\n";
+
+	to.flush();
 }
 
 inline void
@@ -568,7 +579,7 @@ HelpPrinter::setCmdLine( CmdLine * cmd )
 }
 
 inline void
-HelpPrinter::setLineLength( size_t length )
+HelpPrinter::setLineLength( String::size_type length )
 {
 	if( length > 40 )
 		m_lineLength = length;
@@ -625,7 +636,7 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 }
 
 static inline bool
-isSpaceChar( const char & c )
+isSpaceChar( const Char & c )
 {
 	static const String spaceChars = " \n\t\r ";
 
@@ -639,7 +650,7 @@ HelpPrinter::splitToWords( const String & s ) const
 	StringList result;
 
 	std::for_each( s.cbegin(), s.cend(),
-		[ &word, &result ] ( const char & c )
+		[ &word, &result ] ( const Char & c )
 		{
 			if( isSpaceChar( c ) )
 			{
@@ -662,11 +673,12 @@ HelpPrinter::splitToWords( const String & s ) const
 inline void
 HelpPrinter::printString( OutStreamType & to,
 	const StringList & words,
-	size_t currentPos, size_t leftMargin, size_t rightMargin ) const
+	String::size_type currentPos, String::size_type leftMargin,
+	String::size_type rightMargin ) const
 {
-	const size_t occupied = leftMargin + rightMargin;
+	const String::size_type occupied = leftMargin + rightMargin;
 
-	size_t maxLineLength = ( occupied < m_lineLength ?
+	String::size_type maxLineLength = ( occupied < m_lineLength ?
 		m_lineLength - occupied : 0 );
 
 	if( maxLineLength < 20 )
@@ -680,7 +692,7 @@ HelpPrinter::printString( OutStreamType & to,
 		rightMargin = 0;
 	}
 
-	size_t length = 0;
+	String::size_type length = 0;
 
 	bool makeOffset = ( currentPos < leftMargin );
 
@@ -714,7 +726,7 @@ HelpPrinter::printString( OutStreamType & to,
 
 				maxLineLength = m_lineLength - leftMargin - rightMargin;
 
-				to << std::endl;
+				to << "\n";
 
 				printOffset( to, currentPos, leftMargin );
 

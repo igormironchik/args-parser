@@ -62,7 +62,7 @@ public:
 	template< typename T >
 	MultiArg(
 		//! Flag for this argument.
-		char flag,
+		Char flag,
 		//! Name for this argument.
 		T && name,
 		//! Is this argument with value?
@@ -73,7 +73,7 @@ public:
 	//! Construct argument only with flag, without name.
 	explicit MultiArg(
 		//! Flag for this argument.
-		char flag,
+		Char flag,
 		//! Is this argument with value?
 		bool isWithValue = false,
 		//! Is this argument required?
@@ -130,7 +130,7 @@ private:
 //
 
 template< typename T >
-MultiArg::MultiArg( char flag, T && name,
+MultiArg::MultiArg( Char flag, T && name,
 	bool isWithValue, bool isRequired )
 	:	Arg( flag, std::forward< T > ( name ), isWithValue, isRequired )
 	,	m_count( 0 )
@@ -138,7 +138,7 @@ MultiArg::MultiArg( char flag, T && name,
 }
 
 inline
-MultiArg::MultiArg( char flag,
+MultiArg::MultiArg( Char flag,
 	bool isWithValue, bool isRequired )
 	:	Arg( flag, isWithValue, isRequired )
 	,	m_count( 0 )

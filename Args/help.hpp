@@ -60,7 +60,7 @@ public:
 	void setAppDescription( const String & desc );
 
 	//! Set line length for the help.
-	void setLineLength( size_t length );
+	void setLineLength( String::size_type length );
 
 protected:
 	/*!
@@ -94,7 +94,7 @@ private:
 
 inline
 Help::Help( bool throwExceptionOnPrint )
-	:	Arg( 'h', "help", true )
+	:	Arg( Char( 'h' ), String( "help" ), true )
 	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
 {
 	setDescription( "Print this help." );
@@ -114,7 +114,7 @@ Help::setAppDescription( const String & desc )
 }
 
 inline void
-Help::setLineLength( size_t length )
+Help::setLineLength( String::size_type length )
 {
 	m_printer.setLineLength( length );
 }

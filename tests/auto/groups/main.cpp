@@ -280,8 +280,8 @@ TEST( GroupCase, GroupsIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	Arg store( 's', "store", true );
-	Arg file( 'f', "file", true );
+	Arg store( Char( 's' ), "store", true );
+	Arg file( Char( 'f' ), "file", true );
 
 	OnlyOneGroup onlyOne( "only_one" );
 	onlyOne.addArg( store );
@@ -329,8 +329,8 @@ TEST( GroupCase, GroupsFailed )
 
 	CmdLine cmd( argc, argv );
 
-	Arg store( 's', "store", true );
-	Arg file( 'f', "file", true );
+	Arg store( Char( 's' ), "store", true );
+	Arg file( Char( 'f' ), "file", true );
 
 	OnlyOneGroup onlyOne( "only_one" );
 	onlyOne.addArg( store );

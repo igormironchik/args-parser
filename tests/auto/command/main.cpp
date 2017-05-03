@@ -47,7 +47,7 @@ TEST( CommandCase, TestAllIsOk )
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( 'f', true, true );
+	Arg f( Char( 'f' ), true, true );
 
 	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
@@ -94,7 +94,7 @@ TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( 'f', true, true );
+	Arg f( Char( 'f' ), true, true );
 
 	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
@@ -112,7 +112,7 @@ TEST( CommandCase, TestManyArgs )
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( 'f', true, true );
+	Arg f( Char( 'f' ), true, true );
 
 	Command c( "add", ValueOptions::OneValue );
 	c.addArg( f );
@@ -164,7 +164,7 @@ TEST( CommandCase, TestAllIsOk2 )
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( 'f', true );
+	Arg f( Char( 'f' ), true );
 
 	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );
@@ -201,7 +201,7 @@ TEST( CommandCase, TestAllIsOk3 )
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( 'f', true );
+	Arg f( Char( 'f' ), true );
 
 	Command c( "add", ValueOptions::ManyValues );
 	c.addArg( f );

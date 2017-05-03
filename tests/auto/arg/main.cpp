@@ -89,8 +89,13 @@ TEST( ArgTestCase, TestUndefinedArg )
 	}
 	catch( const BaseException & x )
 	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION(
+			x.whatAsQString() == String( "Unknown argument \"--port\"." ) )
+#else
 		CHECK_CONDITION(
 			x.what() == String( "Unknown argument \"--port\"." ) )
+#endif
 
 		return;
 	}
@@ -120,8 +125,14 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	}
 	catch( const BaseException & x )
 	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION(
+			x.whatAsQString() ==
+				String( "Undefined required argument \"--port\"." ) )
+#else
 		CHECK_CONDITION(
 			x.what() == String( "Undefined required argument \"--port\"." ) )
+#endif
 
 		return;
 	}

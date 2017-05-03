@@ -45,10 +45,31 @@ namespace Args {
 class BaseException
 	:	public std::logic_error
 {
-public:
-	explicit BaseException( const String & what );
+public:	
+	explicit BaseException::BaseException( const String & what )
+#ifndef ARGS_QSTRING_BUILD
+		:	std::logic_error( what )
+#else
+		:	std::logic_error( ( (QString) what ).toLocal8Bit().toStdString() )
+		,	m_what( what )
+#endif
+	{
+	}
 
-	virtual ~BaseException() noexcept;
+	virtual BaseException::~BaseException() noexcept
+	{
+	}
+
+#ifdef ARGS_QSTRING_BUILD
+	//! \return What as QString.
+	const String & whatAsQString() const
+	{
+		return m_what;
+	}
+
+private:
+	String m_what;
+#endif // ARGS_QSTRING_BUILD
 }; // class BaseException
 
 
@@ -61,35 +82,11 @@ class HelpHasBeenPrintedException final
 	:	public BaseException
 {
 public:
-	HelpHasBeenPrintedException();
+	HelpHasBeenPrintedException()
+		:	BaseException( "Help has been printed." )
+	{
+	}
 }; // class HelpHasBeenPrintedException
-
-
-//
-// BaseException
-//
-
-inline
-BaseException::BaseException( const String & what )
-	:	std::logic_error( what )
-{
-}
-
-inline
-BaseException::~BaseException() noexcept
-{
-}
-
-
-//
-// HelpHasBeenPrintedException
-//
-
-inline
-HelpHasBeenPrintedException::HelpHasBeenPrintedException()
-	:	BaseException( "Help has been printed." )
-{
-}
 
 } /* namespace Args */
 

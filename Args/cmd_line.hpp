@@ -168,7 +168,7 @@ CmdLine::parse()
 	{
 		String word = *m_context.next();
 
-		const size_t eqIt = word.find( '=' );
+		const String::size_type eqIt = word.find( '=' );
 
 		if( eqIt != String::npos )
 		{
@@ -184,7 +184,7 @@ CmdLine::parse()
 			findArgument( word )->process( m_context );
 		else if( isFlag( word ) )
 		{
-			for( size_t i = 1, length = word.length(); i < length; ++i )
+			for( String::size_type i = 1, length = word.length(); i < length; ++i )
 			{
 				const String flag = String( "-" ) + word[ i ];
 

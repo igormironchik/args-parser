@@ -46,7 +46,7 @@ TEST( ArgAsCommandCase, TestWithArg )
 
 	CmdLine cmd( argc, argv );
 
-	Arg t( 't', true, true );
+	Arg t( Char( 't' ), true, true );
 	ArgAsCommand p( "pos", true, ValueOptions::OneValue );
 
 	cmd.addArg( t );
@@ -191,7 +191,7 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue2 )
 
 	Command add( "add" );
 	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
-	Arg t( 't' );
+	Arg t( Char( 't' ) );
 
 	add.addArg( file );
 
@@ -211,7 +211,7 @@ TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
 
 	Command add( "add" );
 	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
-	Arg t( 't' );
+	Arg t( Char( 't' ) );
 
 	add.addArg( file );
 

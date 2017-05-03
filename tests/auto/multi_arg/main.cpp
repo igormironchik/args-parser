@@ -150,8 +150,13 @@ TEST( MultiArgTestCase, NotDefinedValue )
 	}
 	catch( const BaseException & x )
 	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( x.whatAsQString() == String( "Argument \"--multi"
+			"\" require value that wasn't presented." ) )
+#else
 		CHECK_CONDITION( x.what() == String( "Argument \"--multi"
 			"\" require value that wasn't presented." ) )
+#endif
 
 		return;
 	}
@@ -182,8 +187,13 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	}
 	catch( const BaseException & x )
 	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( x.whatAsQString() == String( "Argument \"--multi"
+			"\" require value that wasn't presented." ) )
+#else
 		CHECK_CONDITION( x.what() == String( "Argument \"--multi"
 			"\" require value that wasn't presented." ) )
+#endif
 
 		return;
 	}
