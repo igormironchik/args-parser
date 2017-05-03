@@ -38,6 +38,7 @@
 
 // Args include.
 #include "utils.hpp"
+#include "types.hpp"
 
 
 namespace Args {
@@ -47,7 +48,7 @@ namespace Args {
 //
 
 //! What Context actually is.
-typedef std::list< std::string > ContextInternal;
+typedef StringList ContextInternal;
 
 
 //

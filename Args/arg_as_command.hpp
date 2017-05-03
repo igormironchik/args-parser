@@ -37,6 +37,7 @@
 #include "exceptions.hpp"
 #include "cmd_line.hpp"
 #include "enums.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <list>
@@ -186,7 +187,7 @@ public:
 	}
 
 	//! \return All values for this argument.
-	const std::list< std::string > & values() const
+	const StringList & values() const
 	{
 		return m_values;
 	}
@@ -267,9 +268,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override
+		StringList & names ) const override
 	{
 		if( isCorrectName( m_name ) )
 		{
@@ -315,7 +316,7 @@ private:
 	//! Long description.
 	std::string m_longDesc;
 	//! Values.
-	std::list< std::string > m_values;
+	StringList m_values;
 }; // class ArgAsCommand
 
 const std::string ArgAsCommand::m_emptyString;

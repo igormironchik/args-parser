@@ -57,7 +57,7 @@ TEST( MultiArgTestCase, TestAllIsOk )
 
 	CHECK_CONDITION( multi.isDefined() == true )
 
-	const std::list< std::string > values = multi.values();
+	const StringList values = multi.values();
 
 	CHECK_CONDITION( multi.count() == 5 )
 	CHECK_CONDITION( values.size() == 5 )
@@ -103,7 +103,7 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 
 	CHECK_CONDITION( multi.isDefined() == true )
 
-	const std::list< std::string > values = multi.values();
+	const StringList values = multi.values();
 
 	CHECK_CONDITION( multi.count() == 5 )
 	CHECK_CONDITION( values.size() == 5 )

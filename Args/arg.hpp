@@ -37,6 +37,7 @@
 #include "context.hpp"
 #include "exceptions.hpp"
 #include "value_utils.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <algorithm>
@@ -175,9 +176,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override;
+		StringList & names ) const override;
 
 	//! Check correctness of the argument after parsing.
 	void checkCorrectnessAfterParsing() const override;
@@ -296,8 +297,8 @@ Arg::name() const
 }
 
 inline void
-Arg::checkCorrectnessBeforeParsing( std::list< std::string > & flags,
-	std::list< std::string > & names ) const
+Arg::checkCorrectnessBeforeParsing( StringList & flags,
+	StringList & names ) const
 {
 	if( !m_flag.empty() )
 	{

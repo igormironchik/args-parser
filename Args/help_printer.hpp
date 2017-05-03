@@ -45,6 +45,7 @@
 #include "group_iface.hpp"
 #include "groups.hpp"
 #include "command.hpp"
+#include "types.hpp"
 
 
 namespace Args {
@@ -101,13 +102,13 @@ public:
 
 private:
 	//! \return List of words with usage string for the argument.
-	std::list< std::string > createUsageString( ArgIface * arg,
+	StringList createUsageString( ArgIface * arg,
 		bool required ) const;
 	//! List of words from string.
-	std::list< std::string > splitToWords( const std::string & s ) const;
+	StringList splitToWords( const std::string & s ) const;
 	//! Print string with given margins.
 	void printString( std::ostream & to,
-		const std::list< std::string > & words,
+		const StringList & words,
 		size_t currentPos, size_t leftMargin, size_t rightMargin ) const;
 	//! Print help for the argument.
 	void print( ArgIface * arg, std::ostream & to ) const;
@@ -328,7 +329,7 @@ HelpPrinter::print( std::ostream & to )
 
 	if( commands.empty() )
 	{
-		std::list< std::string > usage;
+		StringList usage;
 
 		usage.push_back( m_exeName );
 
@@ -337,7 +338,7 @@ HelpPrinter::print( std::ostream & to )
 		std::function< void ( ArgIface* ) > createUsageAndAppend =
 			[ & ] ( ArgIface * arg )
 			{
-				const std::list< std::string > words = createUsageString( arg,
+				const StringList words = createUsageString( arg,
 					requiredFlag );
 
 				usage.insert( usage.end(), words.cbegin(), words.cend() );
@@ -532,7 +533,7 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 inline void
 HelpPrinter::print( ArgIface * arg, std::ostream & to ) const
 {
-	std::list< std::string > usage = createUsageString( arg,
+	StringList usage = createUsageString( arg,
 		arg->isRequired() );
 
 	to << "Usage: ";
@@ -577,10 +578,10 @@ HelpPrinter::setLineLength( size_t length )
 		m_lineLength = 40;
 }
 
-inline std::list< std::string >
+inline StringList
 HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 {
-	std::list< std::string > result;
+	StringList result;
 
 	std::string usage;
 
@@ -633,11 +634,11 @@ isSpaceChar( const char & c )
 	return ( spaceChars.find( c ) != std::string::npos );
 }
 
-inline std::list< std::string >
+inline StringList
 HelpPrinter::splitToWords( const std::string & s ) const
 {
 	std::string word;
-	std::list< std::string > result;
+	StringList result;
 
 	std::for_each( s.cbegin(), s.cend(),
 		[ &word, &result ] ( const char & c )
@@ -662,7 +663,7 @@ HelpPrinter::splitToWords( const std::string & s ) const
 
 inline void
 HelpPrinter::printString( std::ostream & to,
-	const std::list< std::string > & words,
+	const StringList & words,
 	size_t currentPos, size_t leftMargin, size_t rightMargin ) const
 {
 	const size_t occupied = leftMargin + rightMargin;

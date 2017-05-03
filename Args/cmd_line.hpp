@@ -37,6 +37,7 @@
 #include "arg_iface.hpp"
 #include "exceptions.hpp"
 #include "command.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <list>
@@ -241,8 +242,8 @@ CmdLine::arguments() const
 inline void
 CmdLine::checkCorrectnessBeforeParsing() const
 {
-	std::list< std::string > flags;
-	std::list< std::string > names;
+	StringList flags;
+	StringList names;
 
 	std::list< ArgIface* > cmds;
 

@@ -37,6 +37,7 @@
 #include "context.hpp"
 #include "value_utils.hpp"
 #include "enums.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <list>
@@ -156,7 +157,7 @@ public:
 	}
 
 	//! \return All values for this argument.
-	const std::list< std::string > & values() const
+	const StringList & values() const
 	{
 		return m_values;
 	}
@@ -249,9 +250,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override
+		StringList & names ) const override
 	{
 		if( isCorrectName( name() ) )
 		{
@@ -267,8 +268,8 @@ protected:
 			throw BaseException( std::string( "Dissallowed name \"" ) +
 				name() + "\" for the command." );
 
-		std::list< std::string > ftmp = flags;
-		std::list< std::string > ntmp = names;
+		StringList ftmp = flags;
+		StringList ntmp = names;
 
 		GroupIface::checkCorrectnessBeforeParsing( ftmp, ntmp );
 	}
@@ -294,7 +295,7 @@ private:
 	//! Is defined.
 	bool m_isDefined;
 	//! Values.
-	std::list< std::string > m_values;
+	StringList m_values;
 }; // class Command
 
 } /* namespace Args */

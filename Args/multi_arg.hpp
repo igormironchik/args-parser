@@ -37,6 +37,7 @@
 #include "exceptions.hpp"
 #include "value_utils.hpp"
 #include "utils.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <utility>
@@ -94,7 +95,7 @@ public:
 	virtual const std::string & value() const;
 
 	//! \return All values for this argument.
-	virtual const std::list< std::string > & values() const;
+	virtual const StringList & values() const;
 
 	/*!
 		\return Count of times that this argument was presented
@@ -118,7 +119,7 @@ private:
 	DISABLE_COPY( MultiArg )
 
 	//! Values of this argument.
-	std::list< std::string > m_values;
+	StringList m_values;
 	//! Counter.
 	size_t m_count;
 }; // class MultiArg
@@ -166,7 +167,7 @@ MultiArg::value() const
 		return Arg::value();
 }
 
-inline const std::list< std::string > &
+inline const StringList &
 MultiArg::values() const
 {
 	return m_values;

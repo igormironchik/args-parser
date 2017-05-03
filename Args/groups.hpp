@@ -39,6 +39,7 @@
 
 // Args include.
 #include "group_iface.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <algorithm>
@@ -87,9 +88,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override
+		StringList & names ) const override
 	{
 		GroupIface::checkCorrectnessBeforeParsing( flags, names );
 
@@ -168,9 +169,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override
+		StringList & names ) const override
 	{
 		GroupIface::checkCorrectnessBeforeParsing( flags, names );
 
@@ -248,9 +249,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override
+		StringList & names ) const override
 	{
 		GroupIface::checkCorrectnessBeforeParsing( flags, names );
 

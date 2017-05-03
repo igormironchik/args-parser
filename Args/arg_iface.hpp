@@ -37,6 +37,7 @@
 
 // Args include.
 #include "utils.hpp"
+#include "types.hpp"
 
 
 namespace Args {
@@ -136,9 +137,9 @@ protected:
 	*/
 	virtual void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const = 0;
+		StringList & names ) const = 0;
 
 	//! Check correctness of the argument after parsing.
 	virtual void checkCorrectnessAfterParsing() const = 0;

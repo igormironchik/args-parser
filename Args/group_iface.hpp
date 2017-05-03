@@ -41,6 +41,7 @@
 #include "arg_iface.hpp"
 #include "utils.hpp"
 #include "exceptions.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <list>
@@ -225,9 +226,9 @@ protected:
 	*/
 	void checkCorrectnessBeforeParsing(
 		//! All known flags.
-		std::list< std::string > & flags,
+		StringList & flags,
 		//! All known names.
-		std::list< std::string > & names ) const override
+		StringList & names ) const override
 	{
 		for( const auto & arg : m_children )
 			arg->checkCorrectnessBeforeParsing( flags, names );
