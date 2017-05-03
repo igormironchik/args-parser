@@ -32,7 +32,7 @@
 #include <UnitTest/unit_test.hpp>
 
 // Args include.
-#include <Args/context.hpp>
+#include <Args/all.hpp>
 
 // C++ include.
 #include <utility>

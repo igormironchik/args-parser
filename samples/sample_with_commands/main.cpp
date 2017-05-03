@@ -30,10 +30,7 @@
 */
 
 // Args include.
-#include <Args/arg.hpp>
-#include <Args/cmd_line.hpp>
-#include <Args/help.hpp>
-#include <Args/command.hpp>
+#include <Args/all.hpp>
 
 // C++ include.
 #include <iostream>

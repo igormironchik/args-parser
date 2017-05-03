@@ -32,9 +32,7 @@
 #include <UnitTest/unit_test.hpp>
 
 // Args include.
-#include <Args/arg.hpp>
-#include <Args/cmd_line.hpp>
-#include <Args/exceptions.hpp>
+#include <Args/all.hpp>
 
 
 using namespace Args;
