@@ -37,19 +37,25 @@
 
 using namespace Args;
 
+#ifdef ARGS_WSTRING_BUILD
+	using CHAR = String::value_type;
+#else
+	using CHAR = char;
+#endif
+
 
 TEST( MultiArgTestCase, TestAllIsOk )
 {
 	const int argc = 10;
-	const char * argv[ argc ] = { "program.exe",
-		"-m", "100",
-		"-m", "200",
-		"-m", "300",
-		"-m", "400", "500" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-m" ), SL( "100" ),
+		SL( "-m" ), SL( "200" ),
+		SL( "-m" ), SL( "300" ),
+		SL( "-m" ), SL( "400" ), SL( "500" ) };
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', String( "multi" ), true );
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true );
 
 	cmd.addArg( &multi );
 
@@ -62,39 +68,39 @@ TEST( MultiArgTestCase, TestAllIsOk )
 	CHECK_CONDITION( multi.count() == 5 )
 	CHECK_CONDITION( values.size() == 5 )
 
-	CHECK_CONDITION( multi.value() == "100" )
+	CHECK_CONDITION( multi.value() == SL( "100" ) )
 
 	auto it = values.begin();
 
-	CHECK_CONDITION( *it == "100" )
+	CHECK_CONDITION( *it == SL( "100" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "200" )
+	CHECK_CONDITION( *it == SL( "200" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "300" )
+	CHECK_CONDITION( *it == SL( "300" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "400" )
+	CHECK_CONDITION( *it == SL( "400" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "500" )
+	CHECK_CONDITION( *it == SL( "500" ) )
 }
 
 TEST( MultiArgTestCase, TestAllIsOk2 )
 {
 	const int argc = 11;
-	const char * argv[ argc ] = { "program.exe",
-		"-m", "100",
-		"-m", "200",
-		"-m", "300",
-		"-m", "400", "500",
-		"-t" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-m" ), SL( "100" ),
+		SL( "-m" ), SL( "200" ),
+		SL( "-m" ), SL( "300" ),
+		SL( "-m" ), SL( "400" ), SL( "500" ),
+		SL( "-t" ) };
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', String( "multi" ), true );
-	Arg timeout( 't', String( "timeout" ) );
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ) );
 
 	cmd.addArg( &multi );
 	cmd.addArg( &timeout );
@@ -108,23 +114,23 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 	CHECK_CONDITION( multi.count() == 5 )
 	CHECK_CONDITION( values.size() == 5 )
 
-	CHECK_CONDITION( multi.value() == "100" )
+	CHECK_CONDITION( multi.value() == SL( "100" ) )
 
 	auto it = values.begin();
 
-	CHECK_CONDITION( *it == "100" )
+	CHECK_CONDITION( *it == SL( "100" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "200" )
+	CHECK_CONDITION( *it == SL( "200" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "300" )
+	CHECK_CONDITION( *it == SL( "300" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "400" )
+	CHECK_CONDITION( *it == SL( "400" ) )
 	++it;
 
-	CHECK_CONDITION( *it == "500" )
+	CHECK_CONDITION( *it == SL( "500" ) )
 
 	CHECK_CONDITION( timeout.isDefined() == true )
 	CHECK_CONDITION( timeout.value().empty() )
@@ -133,15 +139,15 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 TEST( MultiArgTestCase, NotDefinedValue )
 {
 	const int argc = 8;
-	const char * argv[ argc ] = { "program.exe",
-		"-m", "100",
-		"-m", "200",
-		"-m", "300",
-		"-m" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-m" ), SL( "100" ),
+		SL( "-m" ), SL( "200" ),
+		SL( "-m" ), SL( "300" ),
+		SL( "-m" ) };
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', String( "multi" ), true );
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true );
 
 	cmd.addArg( &multi );
 
@@ -150,13 +156,8 @@ TEST( MultiArgTestCase, NotDefinedValue )
 	}
 	catch( const BaseException & x )
 	{
-#ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( x.whatAsQString() == String( "Argument \"--multi"
-			"\" require value that wasn't presented." ) )
-#else
-		CHECK_CONDITION( x.what() == String( "Argument \"--multi"
-			"\" require value that wasn't presented." ) )
-#endif
+		CHECK_CONDITION( x.desc() == String( SL( "Argument \"--multi"
+			"\" require value that wasn't presented." ) ) )
 
 		return;
 	}
@@ -167,17 +168,17 @@ TEST( MultiArgTestCase, NotDefinedValue )
 TEST( MultiArgTestCase, NotDefinedValue2 )
 {
 	const int argc = 9;
-	const char * argv[ argc ] = { "program.exe",
-		"-m", "100",
-		"-m", "200",
-		"-m", "300",
-		"-m",
-		"-t" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-m" ), SL( "100" ),
+		SL( "-m" ), SL( "200" ),
+		SL( "-m" ), SL( "300" ),
+		SL( "-m" ),
+		SL( "-t" ) };
 
 	CmdLine cmd( argc, argv );
 
-	MultiArg multi( 'm', String( "multi" ), true );
-	Arg timeout( 't', String( "timeout" ) );
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ) );
 
 	cmd.addArg( &multi );
 	cmd.addArg( &timeout );
@@ -187,13 +188,8 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	}
 	catch( const BaseException & x )
 	{
-#ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( x.whatAsQString() == String( "Argument \"--multi"
-			"\" require value that wasn't presented." ) )
-#else
-		CHECK_CONDITION( x.what() == String( "Argument \"--multi"
-			"\" require value that wasn't presented." ) )
-#endif
+		CHECK_CONDITION( x.desc() == String( SL( "Argument \"--multi"
+			"\" require value that wasn't presented." ) ) )
 
 		return;
 	}

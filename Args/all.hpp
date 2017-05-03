@@ -39,5 +39,6 @@
 #include "groups.hpp"
 #include "help.hpp"
 #include "multi_arg.hpp"
+#include "types.hpp"
 
 #endif // ARGS__ALL_HPP__INCLUDED

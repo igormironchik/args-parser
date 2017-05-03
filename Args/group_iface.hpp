@@ -96,9 +96,9 @@ public:
 	addArg( T & arg )
 	{
 		if( dynamic_cast< Command* > ( &arg ) )
-			throw BaseException( String( "Commands not allowed in groups. "
-				"You are trying to add command \"" ) + arg.name() +
-				"\" to group \"" + name() + "\"." );
+			throw BaseException( String( SL( "Commands not allowed in groups. "
+				"You are trying to add command \"" ) ) + arg.name() +
+				SL( "\" to group \"" ) + name() + SL( "\"." ) );
 
 		if( std::find( m_children.cbegin(), m_children.cend(), &arg ) ==
 			m_children.cend() )
@@ -112,9 +112,9 @@ public:
 	addArg( T * arg )
 	{
 		if( dynamic_cast< Command* > ( arg ) )
-			throw BaseException( String( "Commands not allowed in groups. "
-				"You are trying to add command \"" ) + arg->name() +
-				"\" to group \"" + name() + "\"." );
+			throw BaseException( String( SL( "Commands not allowed in groups. "
+				"You are trying to add command \"" ) ) + arg->name() +
+				SL( "\" to group \"" ) + name() + SL( "\"." ) );
 
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
@@ -242,8 +242,8 @@ protected:
 
 		if( isRequired() && !isDefined() )
 			throw BaseException(
-				String( "Not defined required argument \"" ) +
-				name() + "\"" );
+				String( SL( "Not defined required argument \"" ) ) +
+				name() + SL( "\"" ) );
 	}
 
 	//! Set command line parser.

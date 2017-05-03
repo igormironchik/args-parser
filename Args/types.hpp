@@ -76,6 +76,8 @@ static OutStreamType & outStream()
 	return std::wcout;
 }
 
+#define SL(str) L##str
+
 #elif defined( ARGS_QSTRING_BUILD )
 
 //! Char type.
@@ -269,6 +271,8 @@ static OutStreamType & outStream()
 	return stream;
 }
 
+#define SL(str) str
+
 #else
 
 //! String type.
@@ -288,6 +292,8 @@ static OutStreamType & outStream()
 {
 	return std::cout;
 }
+
+#define SL(str) str
 
 #endif
 

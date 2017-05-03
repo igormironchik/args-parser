@@ -37,17 +37,23 @@
 
 using namespace Args;
 
+#ifdef ARGS_WSTRING_BUILD
+	using CHAR = String::value_type;
+#else
+	using CHAR = char;
+#endif
+
 
 TEST( ArgAsCommandCase, TestWithArg )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100", "pos", "400" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ), SL( "pos" ), SL( "400" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg t( Char( 't' ), true, true );
-	ArgAsCommand p( "pos", true, ValueOptions::OneValue );
+	Arg t( Char( SL( 't' ) ), true, true );
+	ArgAsCommand p( SL( "pos" ), true, ValueOptions::OneValue );
 
 	cmd.addArg( t );
 	cmd.addArg( p );
@@ -55,22 +61,22 @@ TEST( ArgAsCommandCase, TestWithArg )
 	cmd.parse();
 
 	CHECK_CONDITION( t.isDefined() == true )
-	CHECK_CONDITION( t.value() == "100" )
+	CHECK_CONDITION( t.value() == SL( "100" ) )
 
 	CHECK_CONDITION( p.isDefined() == true )
 	CHECK_CONDITION( p.values().size() == 1 )
-	CHECK_CONDITION( p.value() == "400" )
+	CHECK_CONDITION( p.value() == SL( "400" ) )
 }
 
 TEST( ArgAsCommandCase, TestManyValues )
 {
 	const int argc = 6;
-	const char * argv[ argc ] = { "program.exe",
-		"pos", "100", "200", "300", "400" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "pos" ), SL( "100" ), SL( "200" ), SL( "300" ), SL( "400" ) };
 
 	CmdLine cmd( argc, argv );
 
-	ArgAsCommand p( "pos", true, ValueOptions::ManyValues );
+	ArgAsCommand p( SL( "pos" ), true, ValueOptions::ManyValues );
 
 	cmd.addArg( p );
 
@@ -81,30 +87,30 @@ TEST( ArgAsCommandCase, TestManyValues )
 
 	auto it = p.values().cbegin();
 
-	CHECK_CONDITION( *it == "100" )
+	CHECK_CONDITION( *it == SL( "100" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "200" )
+	CHECK_CONDITION( *it == SL( "200" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "300" )
+	CHECK_CONDITION( *it == SL( "300" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "400" )
+	CHECK_CONDITION( *it == SL( "400" ) )
 }
 
 TEST( ArgAsCommandCase, TestNoValue )
 {
 	const int argc = 2;
-	const char * argv[ argc ] = { "program.exe",
-		"pos" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "pos" ) };
 
 	CmdLine cmd( argc, argv );
 
-	ArgAsCommand p( "pos", true );
+	ArgAsCommand p( SL( "pos" ), true );
 
 	cmd.addArg( p );
 
@@ -118,13 +124,13 @@ TEST( ArgAsCommandCase, TestNoValue )
 TEST( ArgAsCommandCase, TestUnderCommand )
 {
 	const int argc = 4;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "file", "out.txt" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ), SL( "out.txt" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command add( "add" );
-	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+	Command add( SL( "add" ) );
+	ArgAsCommand file( SL( "file" ), true, ValueOptions::ManyValues );
 
 	add.addArg( file );
 
@@ -136,25 +142,25 @@ TEST( ArgAsCommandCase, TestUnderCommand )
 
 	CHECK_CONDITION( file.isDefined() == true )
 	CHECK_CONDITION( file.values().size() == 1 )
-	CHECK_CONDITION( file.value() == "out.txt" )
+	CHECK_CONDITION( file.value() == SL( "out.txt" ) )
 }
 
 TEST( ArgAsCommandCase, TestWrongName )
 {
-	CHECK_THROW( ArgAsCommand( "-pos" ), BaseException )
-	CHECK_THROW( ArgAsCommand( "--pos" ), BaseException )
+	CHECK_THROW( ArgAsCommand( SL( "-pos" ) ), BaseException )
+	CHECK_THROW( ArgAsCommand( SL( "--pos" ) ), BaseException )
 }
 
 TEST( ArgAsCommandCase, TestUnderCommandNotDefinedRequired )
 {
 	const int argc = 2;
-	const char * argv[ argc ] = { "program.exe",
-		"add" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command add( "add" );
-	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+	Command add( SL( "add" ) );
+	ArgAsCommand file( SL( "file" ), true, ValueOptions::ManyValues );
 
 	add.addArg( file );
 
@@ -166,13 +172,13 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedRequired )
 TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "file" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command add( "add" );
-	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+	Command add( SL( "add" ) );
+	ArgAsCommand file( SL( "file" ), true, ValueOptions::ManyValues );
 
 	add.addArg( file );
 
@@ -184,14 +190,14 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue )
 TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue2 )
 {
 	const int argc = 4;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "file", "-t" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ), SL( "-t" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command add( "add" );
-	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
-	Arg t( Char( 't' ) );
+	Command add( SL( "add" ) );
+	ArgAsCommand file( SL( "file" ), true, ValueOptions::ManyValues );
+	Arg t( Char( SL( 't' ) ) );
 
 	add.addArg( file );
 
@@ -204,14 +210,14 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue2 )
 TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
 {
 	const int argc = 6;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "file", "1.txt", "2.txt", "-t" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ), SL( "1.txt" ), SL( "2.txt" ), SL( "-t" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command add( "add" );
-	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
-	Arg t( Char( 't' ) );
+	Command add( SL( "add" ) );
+	ArgAsCommand file( SL( "file" ), true, ValueOptions::ManyValues );
+	Arg t( Char( SL( 't' ) ) );
 
 	add.addArg( file );
 
@@ -228,11 +234,11 @@ TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
 
 	auto it = file.values().cbegin();
 
-	CHECK_CONDITION( *it == "1.txt" )
+	CHECK_CONDITION( *it == SL( "1.txt" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "2.txt" )
+	CHECK_CONDITION( *it == SL( "2.txt" ) )
 
 	CHECK_CONDITION( t.isDefined() == true )
 }
@@ -240,12 +246,12 @@ TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
 TEST( ArgAsCommandCase, TestAlreadyDefined )
 {
 	const int argc = 4;
-	const char * argv[ argc ] = { "program.exe",
-		"file", "1.txt", "file" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "file" ), SL( "1.txt" ), SL( "file" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	ArgAsCommand file( "file", true, ValueOptions::ManyValues );
+	ArgAsCommand file( SL( "file" ), true, ValueOptions::ManyValues );
 
 	cmd.addArg( file );
 
@@ -255,13 +261,13 @@ TEST( ArgAsCommandCase, TestAlreadyDefined )
 TEST( ArgAsCommandCase, TestNameRedefinition )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "add" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "add" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command add( "add" );
-	ArgAsCommand file( "add", true, ValueOptions::ManyValues );
+	Command add( SL( "add" ) );
+	ArgAsCommand file( SL( "add" ), true, ValueOptions::ManyValues );
 
 	add.addArg( file );
 

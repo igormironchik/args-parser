@@ -38,37 +38,41 @@
 using namespace Args;
 
 
+#ifdef ARGS_WSTRING_BUILD
+int wmain( int argc, wchar_t ** argv )
+#else
 int main( int argc, char ** argv )
+#endif
 {
 	try {
 		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-		Arg file( 'f', "file", true, true );
-		file.setDescription( "Name of the file." );
-		file.setValueSpecifier( "fn" );
+		Arg file( SL( 'f' ), SL( "file" ), true, true );
+		file.setDescription( SL( "Name of the file." ) );
+		file.setValueSpecifier( SL( "fn" ) );
 
-		Command add( "add" );
-		add.setDescription( "Add new file." );
+		Command add( SL( "add" ) );
+		add.setDescription( SL( "Add new file." ) );
 		add.addArg( file );
 
-		Arg d1( 'd', false, false );
-		d1.setDescription( "Do job." );
+		Arg d1( SL( 'd' ), false, false );
+		d1.setDescription( SL( "Do job." ) );
 		add.addArg( d1 );
 
-		Command del( "delete" );
-		del.setDescription( "Delete file." );
+		Command del( SL( "delete" ) );
+		del.setDescription( SL( "Delete file." ) );
 		del.addArg( file );
 
-		Arg d2( 'd', false, false );
-		d2.setDescription( "Do NOT job." );
+		Arg d2( SL( 'd' ), false, false );
+		d2.setDescription( SL( "Do NOT job." ) );
 		del.addArg( d2 );
 
-		Arg recursieve( 'r', "recurcieve", false, false );
-		recursieve.setDescription( "Do operation recurcively?" );
+		Arg recursieve( SL( 'r' ), SL( "recurcieve" ), false, false );
+		recursieve.setDescription( SL( "Do operation recurcively?" ) );
 
 		Help help;
 		help.setAppDescription(
-			"This application just show power of the Args help." );
+			SL( "This application just show power of the Args help." ) );
 		help.setExecutable( argv[0] );
 
 		cmd.addArg( add );
@@ -83,7 +87,7 @@ int main( int argc, char ** argv )
 	}
 	catch( const BaseException & x )
 	{
-		std::cout << x.what();
+		Args::outStream() << x.desc();
 	}
 
 	return 0;

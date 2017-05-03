@@ -97,10 +97,10 @@ protected:
 		for( const auto & arg : children() )
 		{
 			if( arg->isRequired() )
-				throw BaseException( String( "Required argument \"" ) +
+				throw BaseException( String( SL( "Required argument \"" ) ) +
 					arg->name() +
-					"\" is not allowed to " +
-					"be in OnlyOne group \"" + name() + "\"." );
+					SL( "\" is not allowed to be in OnlyOne group \"" ) +
+					name() + SL( "\"." ) );
 		}
 	}
 
@@ -116,10 +116,10 @@ protected:
 			if( arg->isDefined() )
 			{
 				if( defined )
-					throw BaseException( String( "Only one argument can "
-						"be defined in OnlyOne group \"" ) + name() + "\". " +
-						"Whereas defined \"" + defined->name() +
-						"\" and \"" + arg->name() + "\"." );
+					throw BaseException( String( SL( "Only one argument can "
+						"be defined in OnlyOne group \"" ) ) + name() + SL( "\". " ) +
+						SL( "Whereas defined \"" ) + defined->name() +
+						SL( "\" and \"" ) + arg->name() + SL( "\"." ) );
 				else
 					defined = arg;
 			}
@@ -178,10 +178,10 @@ protected:
 		for( const auto & arg : children() )
 		{
 			if( arg->isRequired() )
-				throw BaseException( String( "Required argument \"" ) +
+				throw BaseException( String( SL( "Required argument \"" ) ) +
 					arg->name() +
-					"\" is not allowed to " +
-					"be in AllOf group \"" + name() + "\"." );
+					SL( "\" is not allowed to " ) +
+					SL( "be in AllOf group \"" ) + name() + SL( "\"." ) );
 		}
 	}
 
@@ -202,8 +202,8 @@ protected:
 			} );
 
 		if( defined && !all )
-			throw BaseException( String( "All arguments in "
-				"AllOf group \"" ) + name() + "\" should be defined." );
+			throw BaseException( String( SL( "All arguments in "
+				"AllOf group \"" ) ) + name() + SL( "\" should be defined." ) );
 	}
 }; // class AllOfGroup
 
@@ -258,10 +258,10 @@ protected:
 		for( const auto & arg : children() )
 		{
 			if( arg->isRequired() )
-				throw BaseException( String( "Required argument \"" ) +
+				throw BaseException( String( SL( "Required argument \"" ) ) +
 					arg->name() +
-					"\" is not allowed to " +
-					"be in AtLeastOne group \"" + name() + "\"." );
+					SL( "\" is not allowed to " ) +
+					SL( "be in AtLeastOne group \"" ) + name() + SL( "\"." ) );
 		}
 	}
 }; // class AtLeastOneGroup

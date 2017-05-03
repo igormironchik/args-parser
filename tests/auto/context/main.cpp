@@ -45,34 +45,34 @@ TEST( ContextTestCase, TestContext )
 {
 	ContextInternal internal;
 
-	internal.push_back( "-a" );
-	internal.push_back( "--timeout" );
-	internal.push_back( "100" );
-	internal.push_back( "--port" );
-	internal.push_back( "4545" );
-	internal.push_back( "--host" );
-	internal.push_back( "localhost" );
+	internal.push_back( SL( "-a" ) );
+	internal.push_back( SL( "--timeout" ) );
+	internal.push_back( SL( "100" ) );
+	internal.push_back( SL( "--port" ) );
+	internal.push_back( SL( "4545" ) );
+	internal.push_back( SL( "--host" ) );
+	internal.push_back( SL( "localhost" ) );
 
 	Context ctx( std::move( internal ) );
 
-	CHECK_CONDITION( *ctx.next() == "-a" )
+	CHECK_CONDITION( *ctx.next() == SL( "-a" ) )
 
-	ctx.prepend( "value" );
+	ctx.prepend( SL( "value" ) );
 
-	CHECK_CONDITION( *ctx.next() == "value" )
+	CHECK_CONDITION( *ctx.next() == SL( "value" ) )
 
 	ctx.putBack();
 
-	CHECK_CONDITION( *ctx.next() == "value" )
-	CHECK_CONDITION( *ctx.next() == "--timeout" )
-	CHECK_CONDITION( *ctx.next() == "100" )
-	CHECK_CONDITION( *ctx.next() == "--port" )
-	CHECK_CONDITION( *ctx.next() == "4545" )
-	CHECK_CONDITION( *ctx.next() == "--host" )
+	CHECK_CONDITION( *ctx.next() == SL( "value" ) )
+	CHECK_CONDITION( *ctx.next() == SL( "--timeout" ) )
+	CHECK_CONDITION( *ctx.next() == SL( "100" ) )
+	CHECK_CONDITION( *ctx.next() == SL( "--port" ) )
+	CHECK_CONDITION( *ctx.next() == SL( "4545" ) )
+	CHECK_CONDITION( *ctx.next() == SL( "--host" ) )
 
 	CHECK_CONDITION( ctx.atEnd() == false )
 
-	CHECK_CONDITION( *ctx.next() == "localhost" )
+	CHECK_CONDITION( *ctx.next() == SL( "localhost" ) )
 
 	CHECK_CONDITION( ctx.atEnd() == true )
 }

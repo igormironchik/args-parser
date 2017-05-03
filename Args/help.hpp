@@ -94,11 +94,11 @@ private:
 
 inline
 Help::Help( bool throwExceptionOnPrint )
-	:	Arg( Char( 'h' ), String( "help" ), true )
+	:	Arg( SL( 'h' ), SL( "help" ), true )
 	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
 {
-	setDescription( "Print this help." );
-	setLongDescription( "Print this help." );
+	setDescription( SL( "Print this help." ) );
+	setLongDescription( SL( "Print this help." ) );
 }
 
 inline void

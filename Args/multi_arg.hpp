@@ -188,8 +188,8 @@ MultiArg::process( Context & context )
 	if( isWithValue() )
 	{
 		setDefined( eatValues( context, m_values,
-			String( "Argument \"" ) +
-				name() + "\" require value that wasn't presented.",
+			String( SL( "Argument \"" ) ) +
+				name() + SL( "\" require value that wasn't presented." ),
 			cmdLine() ) );
 	}
 	else

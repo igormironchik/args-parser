@@ -34,6 +34,9 @@
 // C++ include.
 #include <stdexcept>
 
+// Args include.
+#include "types.hpp"
+
 
 namespace Args {
 
@@ -47,11 +50,15 @@ class BaseException
 {
 public:	
 	explicit BaseException::BaseException( const String & what )
-#ifndef ARGS_QSTRING_BUILD
-		:	std::logic_error( what )
-#else
+#ifdef ARGS_QSTRING_BUILD
 		:	std::logic_error( ( (QString) what ).toLocal8Bit().toStdString() )
 		,	m_what( what )
+#elif defined( ARGS_WSTRING_BUILD )
+		:	std::logic_error( "Please use desc() method to get exception "
+				"description when compiling with std::wstring." )
+		,	m_what( what )
+#else
+		:	std::logic_error( what )
 #endif
 	{
 	}
@@ -60,16 +67,31 @@ public:
 	{
 	}
 
-#ifdef ARGS_QSTRING_BUILD
-	//! \return What as QString.
-	const String & whatAsQString() const
+#ifdef ARGS_WSTRING_BUILD
+	//! \return What as std::wstring.
+	const String & desc() const noexcept
 	{
 		return m_what;
 	}
 
 private:
 	String m_what;
-#endif // ARGS_QSTRING_BUILD
+#elif defined( ARGS_QSTRING_BUILD )
+	//! \return What as QString.
+	const String & desc() const noexcept
+	{
+		return m_what;
+	}
+
+private:
+	String m_what;
+#else
+	//! \return What?
+	const String & desc() const noexcept
+	{
+		return what();
+	}
+#endif
 }; // class BaseException
 
 
@@ -83,7 +105,7 @@ class HelpHasBeenPrintedException final
 {
 public:
 	HelpHasBeenPrintedException()
-		:	BaseException( "Help has been printed." )
+		:	BaseException( SL( "Help has been printed." ) )
 	{
 	}
 }; // class HelpHasBeenPrintedException

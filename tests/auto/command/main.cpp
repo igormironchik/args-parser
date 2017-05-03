@@ -37,19 +37,25 @@
 
 using namespace Args;
 
+#ifdef ARGS_WSTRING_BUILD
+	using CHAR = String::value_type;
+#else
+	using CHAR = char;
+#endif
+
 
 TEST( CommandCase, TestAllIsOk )
 {
 	const int argc = 7;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "100", "4545", "500",
-		"-f", "local" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "100" ), SL( "4545" ), SL( "500" ),
+		SL( "-f" ), SL( "local" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( Char( 'f' ), true, true );
+	Arg f( Char( SL( 'f' ) ), true, true );
 
-	Command c( "add", ValueOptions::ManyValues );
+	Command c( SL( "add" ), ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -57,46 +63,46 @@ TEST( CommandCase, TestAllIsOk )
 	cmd.parse();
 
 	CHECK_CONDITION( f.isDefined() == true )
-	CHECK_CONDITION( f.value() == "local" )
+	CHECK_CONDITION( f.value() == SL( "local" ) )
 
 	CHECK_CONDITION( c.isDefined() == true )
-	CHECK_CONDITION( c.value() == "100" )
+	CHECK_CONDITION( c.value() == SL( "100" ) )
 	CHECK_CONDITION( c.values().size() == 3 )
 
 	auto it = c.values().begin();
 
-	CHECK_CONDITION( *it == "100" )
+	CHECK_CONDITION( *it == SL( "100" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "4545" )
+	CHECK_CONDITION( *it == SL( "4545" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "500" )
+	CHECK_CONDITION( *it == SL( "500" ) )
 }
 
 TEST( CommandCase, WrongName1 )
 {
-	CHECK_THROW( Command c( "-a" ), BaseException )
+	CHECK_THROW( Command c( SL( "-a" ) ), BaseException )
 }
 
 TEST( CommandCase, WrongName2 )
 {
-	CHECK_THROW( Command c( "--name" ), BaseException )
+	CHECK_THROW( Command c( SL( "--name" ) ), BaseException )
 }
 
 TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "100", "4545", "500" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "100" ), SL( "4545" ), SL( "500" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( Char( 'f' ), true, true );
+	Arg f( Char( SL( 'f' ) ), true, true );
 
-	Command c( "add", ValueOptions::ManyValues );
+	Command c( SL( "add" ), ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -107,14 +113,14 @@ TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
 TEST( CommandCase, TestManyArgs )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "100", "4545", "500" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "100" ), SL( "4545" ), SL( "500" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( Char( 'f' ), true, true );
+	Arg f( Char( SL( 'f' ) ), true, true );
 
-	Command c( "add", ValueOptions::OneValue );
+	Command c( SL( "add" ), ValueOptions::OneValue );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -125,13 +131,13 @@ TEST( CommandCase, TestManyArgs )
 TEST( CommandCase, TestRedefinition )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "del" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "del" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Command c( "add" );
-	Command d( "del" );
+	Command c( SL( "add" ) );
+	Command d( SL( "del" ) );
 
 	cmd.addArg( c );
 	cmd.addArg( d );
@@ -142,12 +148,12 @@ TEST( CommandCase, TestRedefinition )
 TEST( CommandCase, TestNotDefinedCommand )
 {
 	const int argc = 1;
-	const char * argv[ argc ] = { "program.exe" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	Command c( "add" );
-	Command d( "del" );
+	Command c( SL( "add" ) );
+	Command d( SL( "del" ) );
 
 	cmd.addArg( c );
 	cmd.addArg( d );
@@ -158,15 +164,15 @@ TEST( CommandCase, TestNotDefinedCommand )
 TEST( CommandCase, TestAllIsOk2 )
 {
 	const int argc = 7;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "100", "4545", "500",
-		"-f", "local" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "100" ), SL( "4545" ), SL( "500" ),
+		SL( "-f" ), SL( "local" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( Char( 'f' ), true );
+	Arg f( Char( SL( 'f' ) ), true );
 
-	Command c( "add", ValueOptions::ManyValues );
+	Command c( SL( "add" ), ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -174,36 +180,36 @@ TEST( CommandCase, TestAllIsOk2 )
 	cmd.parse();
 
 	CHECK_CONDITION( f.isDefined() == true )
-	CHECK_CONDITION( f.value() == "local" )
+	CHECK_CONDITION( f.value() == SL( "local" ) )
 
 	CHECK_CONDITION( c.isDefined() == true )
-	CHECK_CONDITION( c.value() == "100" )
+	CHECK_CONDITION( c.value() == SL( "100" ) )
 	CHECK_CONDITION( c.values().size() == 3 )
 
 	auto it = c.values().begin();
 
-	CHECK_CONDITION( *it == "100" )
+	CHECK_CONDITION( *it == SL( "100" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "4545" )
+	CHECK_CONDITION( *it == SL( "4545" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "500" )
+	CHECK_CONDITION( *it == SL( "500" ) )
 }
 
 TEST( CommandCase, TestAllIsOk3 )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"add", "100", "4545", "500" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "100" ), SL( "4545" ), SL( "500" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg f( Char( 'f' ), true );
+	Arg f( Char( SL( 'f' ) ), true );
 
-	Command c( "add", ValueOptions::ManyValues );
+	Command c( SL( "add" ), ValueOptions::ManyValues );
 	c.addArg( f );
 
 	cmd.addArg( c );
@@ -213,31 +219,31 @@ TEST( CommandCase, TestAllIsOk3 )
 	CHECK_CONDITION( f.isDefined() == false )
 
 	CHECK_CONDITION( c.isDefined() == true )
-	CHECK_CONDITION( c.value() == "100" )
+	CHECK_CONDITION( c.value() == SL( "100" ) )
 	CHECK_CONDITION( c.values().size() == 3 )
 
 	auto it = c.values().begin();
 
-	CHECK_CONDITION( *it == "100" )
+	CHECK_CONDITION( *it == SL( "100" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "4545" )
+	CHECK_CONDITION( *it == SL( "4545" ) )
 
 	++it;
 
-	CHECK_CONDITION( *it == "500" )
+	CHECK_CONDITION( *it == SL( "500" ) )
 }
 
 TEST( CommandCase, TestAllIsOk4 )
 {
 	const int argc = 1;
-	const char * argv[ argc ] = { "program.exe" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Command c( "add" );
-	Command d( "del" );
+	Command c( SL( "add" ) );
+	Command d( SL( "del" ) );
 
 	cmd.addArg( c );
 	cmd.addArg( d );

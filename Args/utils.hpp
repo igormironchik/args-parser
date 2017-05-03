@@ -75,7 +75,7 @@ namespace Args {
 static inline bool
 isArgument( const String & word )
 {
-	const String::size_type it = word.find( "--" );
+	const String::size_type it = word.find( SL( "--" ) );
 
 	if( it == 0 )
 		return true;
@@ -94,7 +94,7 @@ isFlag( const String & word )
 {
 	if( !isArgument( word ) )
 	{
-		const String::size_type it = word.find( '-' );
+		const String::size_type it = word.find( SL( '-' ) );
 
 		if( it == 0 )
 			return true;
@@ -115,9 +115,9 @@ isCorrectFlag( const String & flag )
 	if( flag.empty() || flag.length() > 1 )
 		return false;
 
-	static const String availableSymbols( "0123456789"
+	static const String availableSymbols( SL( "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" ) );
 
 	if( availableSymbols.find( flag ) == String::npos )
 		return false;
@@ -138,7 +138,12 @@ isCorrectName( const String & name )
 		return false;
 
 #ifndef ARGS_QSTRING_BUILD
+
+#ifdef ARGS_WSTRING_BUILD
+	std::wregex r( L"\\s" );
+#else
 	std::regex r( "\\s" );
+#endif
 
 	if( std::regex_search( name, r ) )
 		return false;
@@ -149,9 +154,9 @@ isCorrectName( const String & name )
 		return false;
 #endif
 
-	static const String availableSymbols( "0123456789"
+	static const String availableSymbols( SL( "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" );
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" ) );
 
 	for( const Char & c : name )
 	{

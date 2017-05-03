@@ -595,16 +595,16 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 	String usage;
 
 	if( !required )
-		usage.append( "[ " );
+		usage.append( SL( "[ " ) );
 
 	if( !arg->flag().empty() )
 	{
-		usage.append( "-" );
+		usage.append( SL( "-" ) );
 		usage.append( arg->flag() );
 
 		if( !arg->argumentName().empty() )
 		{
-			usage.append( "," );
+			usage.append( SL( "," ) );
 
 			result.push_back( usage );
 
@@ -614,7 +614,7 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 
 	if( !arg->argumentName().empty() )
 	{
-		usage.append( "--" );
+		usage.append( SL( "--" ) );
 		usage.append( arg->argumentName() );
 	}
 	else
@@ -622,13 +622,13 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 
 	if( arg->isWithValue() )
 	{
-		usage.append( " <" );
+		usage.append( SL( " <" ) );
 		usage.append( arg->valueSpecifier() );
-		usage.append( ">" );
+		usage.append( SL( ">" ) );
 	}
 
 	if( !required )
-		usage.append( " ]" );
+		usage.append( SL( " ]" ) );
 
 	result.push_back( usage );
 
@@ -638,7 +638,7 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 static inline bool
 isSpaceChar( const Char & c )
 {
-	static const String spaceChars = " \n\t\r ";
+	static const String spaceChars = SL( " \n\t\r" );
 
 	return ( spaceChars.find( c ) != String::npos );
 }

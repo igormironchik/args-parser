@@ -65,8 +65,13 @@ public:
 		CommandIsRequired = 1
 	}; // enum CmdLineOpts
 
+#ifdef ARGS_WSTRING_BUILD
+	CmdLine( int argc, const Char * const * argv,
+		CmdLineOpts opt = Empty );
+#else
 	CmdLine( int argc, const char * const * argv,
 		CmdLineOpts opt = Empty );
+#endif
 
 	//! Add argument.
 	void addArg( ArgIface * arg );
@@ -109,7 +114,11 @@ private:
 
 //! Make context from the argc and argv.
 static inline ContextInternal
-makeContext( int argc, const char * const * argv )
+#ifdef ARGS_WSTRING_BUILD
+	makeContext( int argc, const Char * const * argv )
+#else
+	makeContext( int argc, const char * const * argv )
+#endif
 {
 	ContextInternal context;
 
@@ -126,7 +135,11 @@ makeContext( int argc, const char * const * argv )
 //
 
 inline
-CmdLine::CmdLine( int argc, const char * const * argv, CmdLineOpts opt )
+#ifdef ARGS_WSTRING_BUILD
+	CmdLine::CmdLine( int argc, const Char * const * argv, CmdLineOpts opt )
+#else
+	CmdLine::CmdLine( int argc, const char * const * argv, CmdLineOpts opt )
+#endif
 	:	m_context( makeContext( argc, argv ) )
 	,	m_command( nullptr )
 	,	m_opt( opt )
@@ -145,12 +158,12 @@ CmdLine::addArg( ArgIface * arg )
 			m_args.push_back( arg );
 		}
 		else
-			throw BaseException( String( "Argument \"" ) +
-				arg->name() + "\" already in the command line parser." );
+			throw BaseException( String( SL( "Argument \"" ) ) +
+				arg->name() + SL( "\" already in the command line parser." ) );
 	}
 	else
-		throw BaseException( String( "Attempt to add nullptr to the "
-			"command line as argument." ) );
+		throw BaseException( String( SL( "Attempt to add nullptr to the "
+			"command line as argument." ) ) );
 }
 
 inline void
@@ -186,14 +199,20 @@ CmdLine::parse()
 		{
 			for( String::size_type i = 1, length = word.length(); i < length; ++i )
 			{
-				const String flag = String( "-" ) + String( word[ i ] );
+				const String flag = String( SL( "-" ) ) +
+
+#ifdef ARGS_QSTRING_BUILD
+					String( word[ i ] );
+#else
+					String( 1, word[ i ] );
+#endif
 
 				ArgIface * arg = findArgument( flag );
 
 				if( i < length - 1 && arg->isWithValue() )
-					throw BaseException( String( "Only last argument in "
-						"flags combo can have value. Flags combo is\"" ) +
-						word + "\"." );
+					throw BaseException( String( SL( "Only last argument in "
+						"flags combo can have value. Flags combo is\"" ) ) +
+						word + SL( "\"." ) );
 				else
 					arg->process( m_context );
 			}
@@ -210,9 +229,9 @@ CmdLine::parse()
 				if( cmd )
 				{
 					if( m_command )
-						throw BaseException( String( "Only one command can be "
-							"specified. But you entered \"" ) + m_command->name() +
-							"\" and \"" + cmd->name() + "\"." );
+						throw BaseException( String( SL( "Only one command can be "
+							"specified. But you entered \"" ) ) + m_command->name() +
+							SL( "\" and \"" ) + cmd->name() + SL( "\"." ) );
 					else
 					{
 						m_command = cmd;
@@ -225,8 +244,8 @@ CmdLine::parse()
 					tmp->process( m_context );
 			}
 			else
-				throw BaseException( String( "Unknown argument \"" ) +
-					word + "\"." );
+				throw BaseException( String( SL( "Unknown argument \"" ) ) +
+					word + SL( "\"." ) );
 		}
 	}
 
@@ -272,7 +291,7 @@ CmdLine::checkCorrectnessAfterParsing() const
 	);
 
 	if( m_opt == CommandIsRequired && !m_command )
-		throw BaseException( "Not specified command." );
+		throw BaseException( SL( "Not specified command." ) );
 }
 
 inline ArgIface *
@@ -300,8 +319,8 @@ CmdLine::findArgument( const String & name )
 			return tmp;
 	}
 
-	throw BaseException( String( "Unknown argument \"" ) +
-		name + "\"." );
+	throw BaseException( String( SL( "Unknown argument \"" ) ) +
+		name + SL( "\"." ) );
 }
 
 } /* namespace Args */

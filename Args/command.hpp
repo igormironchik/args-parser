@@ -62,21 +62,21 @@ public:
 		,	m_isDefined( false )
 	{
 		if( isArgument( name ) || isFlag( name ) )
-			throw BaseException( String( "Command's name can't "
-				"start with \"-\" whereas you are trying to set name to \"" ) +
-				name + "\"." );
+			throw BaseException( String( SL( "Command's name can't "
+				"start with \"-\" whereas you are trying to set name to \"" ) ) +
+				name + SL( "\"." ) );
 
 		switch( m_opt )
 		{
 			case ValueOptions::OneValue :
 			{
-				m_valueSpecifier = "arg";
+				m_valueSpecifier = SL( "arg" );
 			}
 				break;
 
 			case ValueOptions::ManyValues :
 			{
-				m_valueSpecifier = "args";
+				m_valueSpecifier = SL( "args" );
 			}
 				break;
 
@@ -215,8 +215,8 @@ protected:
 			case ValueOptions::ManyValues :
 			{
 				eatValues( ctx, m_values,
-					String( "Command \"" ) +
-						name() + "\" require value that wasn't presented.",
+					String( SL( "Command \"" ) ) +
+						name() + SL( "\" require value that wasn't presented." ),
 					cmdLine() );
 			}
 				break;
@@ -228,8 +228,8 @@ protected:
 				}
 				catch( const BaseException & )
 				{
-					throw BaseException( String( "Command \"" ) +
-						name() + "\" require value that wasn't presented." );
+					throw BaseException( String( SL( "Command \"" ) ) +
+						name() + SL( "\" require value that wasn't presented." ) );
 				}
 			}
 				break;
@@ -256,14 +256,14 @@ protected:
 			auto it = std::find( names.begin(), names.end(), name() );
 
 			if( it != names.end() )
-				throw BaseException( String( "Redefinition of command "
-					"with name \"" ) + name() + "\"." );
+				throw BaseException( String( SL( "Redefinition of command "
+					"with name \"" ) ) + name() + SL( "\"." ) );
 			else
 				names.push_back( name() );
 		}
 		else
-			throw BaseException( String( "Dissallowed name \"" ) +
-				name() + "\" for the command." );
+			throw BaseException( String( SL( "Dissallowed name \"" ) ) +
+				name() + SL( "\" for the command." ) );
 
 		StringList ftmp = flags;
 		StringList ntmp = names;

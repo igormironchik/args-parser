@@ -37,20 +37,26 @@
 
 using namespace Args;
 
+#ifdef ARGS_WSTRING_BUILD
+	using CHAR = String::value_type;
+#else
+	using CHAR = char;
+#endif
+
 
 TEST( ArgTestCase, TestAllIsOk )
 {
 	const int argc = 7;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100",
-		"--port", "4545",
-		"--host", "any" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ),
+		SL( "--port" ), SL( "4545" ),
+		SL( "--host" ), SL( "any" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &port );
@@ -59,27 +65,27 @@ TEST( ArgTestCase, TestAllIsOk )
 	cmd.parse();
 
 	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == "100" )
+	CHECK_CONDITION( timeout.value() == SL( "100" ) )
 
 	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == "4545" )
+	CHECK_CONDITION( port.value() == SL( "4545" ) )
 
 	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == "any" )
+	CHECK_CONDITION( host.value() == SL( "any" ) )
 }
 
 TEST( ArgTestCase, TestUndefinedArg )
 {
 	const int argc = 7;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100",
-		"--port", "4545",
-		"--host", "any" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ),
+		SL( "--port" ), SL( "4545" ),
+		SL( "--host" ), SL( "any" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg host( String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg host( String( SL( "host" ) ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &host );
@@ -89,13 +95,8 @@ TEST( ArgTestCase, TestUndefinedArg )
 	}
 	catch( const BaseException & x )
 	{
-#ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION(
-			x.whatAsQString() == String( "Unknown argument \"--port\"." ) )
-#else
-		CHECK_CONDITION(
-			x.what() == String( "Unknown argument \"--port\"." ) )
-#endif
+			x.desc() == String( SL( "Unknown argument \"--port\"." ) ) )
 
 		return;
 	}
@@ -106,15 +107,15 @@ TEST( ArgTestCase, TestUndefinedArg )
 TEST( ArgTestCase, TestUndefinedRequiredArg )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100",
-		"--host", "any" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ),
+		SL( "--host" ), SL( "any" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true, true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true, true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &port );
@@ -125,14 +126,8 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	}
 	catch( const BaseException & x )
 	{
-#ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION(
-			x.whatAsQString() ==
-				String( "Undefined required argument \"--port\"." ) )
-#else
-		CHECK_CONDITION(
-			x.what() == String( "Undefined required argument \"--port\"." ) )
-#endif
+			x.desc() == String( SL( "Undefined required argument \"--port\"." ) ) )
 
 		return;
 	}

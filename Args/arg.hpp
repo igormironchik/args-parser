@@ -219,7 +219,7 @@ Arg::Arg( Char flag, T && name,
 	,	m_isDefined( false )
 	,	m_flag( 1, flag )
 	,	m_name( std::forward< T > ( name ) )
-	,	m_valueSpecifier( "arg" )
+	,	m_valueSpecifier( SL( "arg" ) )
 {
 }
 
@@ -230,7 +230,7 @@ Arg::Arg( Char flag,
 	,	m_isRequired( isRequired )
 	,	m_isDefined( false )
 	,	m_flag( 1, flag )
-	,	m_valueSpecifier( "arg" )
+	,	m_valueSpecifier( SL( "arg" ) )
 {
 }
 
@@ -241,7 +241,7 @@ Arg::Arg( T && name,
 	,	m_isRequired( isRequired )
 	,	m_isDefined( false )
 	,	m_name( std::forward< T > ( name ) )
-	,	m_valueSpecifier( "arg" )
+	,	m_valueSpecifier( SL( "arg" ) )
 {
 }
 
@@ -277,23 +277,23 @@ Arg::process( Context & context )
 			}
 			catch( const BaseException & )
 			{
-				throw BaseException( String( "Argument \"" ) +
-					name() + "\" requires value but it's not presented." );
+				throw BaseException( String( SL( "Argument \"" ) ) +
+					name() + SL( "\" requires value but it's not presented." ) );
 			}
 		}
 	}
 	else
-		throw BaseException( String( "Argument \"" ) +
-			name() + "\" already defined." );
+		throw BaseException( String( SL( "Argument \"" ) ) +
+			name() + SL( "\" already defined." ) );
 }
 
 inline String
 Arg::name() const
 {
 	if( !m_name.empty() )
-		return "--" + m_name;
+		return SL( "--" ) + m_name;
 	else
-		return "-" + m_flag;
+		return SL( "-" ) + m_flag;
 }
 
 inline void
@@ -304,51 +304,51 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 	{
 		if( isCorrectFlag( m_flag ) )
 		{
-			const String flag = String( "-" ) + m_flag;
+			const String flag = String( SL( "-" ) ) + m_flag;
 
 			auto it = std::find( flags.begin(), flags.end(), flag );
 
 			if( it != flags.end() )
-				throw BaseException( String( "Redefinition of argument "
-					"witg flag \"" ) + flag + "\"." );
+				throw BaseException( String( SL( "Redefinition of argument "
+					"witg flag \"" ) ) + flag + SL( "\"." ) );
 			else
 				flags.push_back( flag );
 		}
 		else
-			throw BaseException( String( "Dissallowed flag \"-" ) +
-				m_flag + "\"." );
+			throw BaseException( String( SL( "Dissallowed flag \"-" ) ) +
+				m_flag + SL( "\"." ) );
 	}
 
 	if( !m_name.empty() )
 	{
 		if( isCorrectName( m_name ) )
 		{
-			const String name = String( "--" ) + m_name;
+			const String name = String( SL( "--" ) ) + m_name;
 
 			auto it = std::find( names.begin(), names.end(), name );
 
 			if( it != names.end() )
-				throw BaseException( String( "Redefinition of argument "
-					"with name \"" ) + name + "\"." );
+				throw BaseException( String( SL( "Redefinition of argument "
+					"with name \"" ) ) + name + SL( "\"." ) );
 			else
 				names.push_back( name );
 		}
 		else
-			throw BaseException( String( "Dissallowed name \"--" ) +
-				m_name + "\"." );
+			throw BaseException( String( SL( "Dissallowed name \"--" ) ) +
+				m_name + SL( "\"." ) );
 	}
 
 	if( m_flag.empty() && m_name.empty() )
-		throw BaseException( String( "Arguments with empty flag and name "
-			"are dissallowed." ) );
+		throw BaseException( String( SL( "Arguments with empty flag and name "
+			"are dissallowed." ) ) );
 }
 
 inline void
 Arg::checkCorrectnessAfterParsing() const
 {
 	if( isRequired() && !isDefined() )
-		throw BaseException( String( "Undefined required argument \"" ) +
-			name() + "\"." );
+		throw BaseException( String( SL( "Undefined required argument \"" ) ) +
+			name() + SL( "\"." ) );
 }
 
 inline bool

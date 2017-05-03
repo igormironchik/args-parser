@@ -64,21 +64,21 @@ public:
 		,	m_defined( false )
 	{
 		if( isArgument( name ) || isFlag( name ) )
-			throw BaseException( String( "ArgAsCommand's name can't "
-				"start with \"-\" whereas you are trying to set name to \"" ) +
-				name + "\"." );
+			throw BaseException( String( SL( "ArgAsCommand's name can't "
+				"start with \"-\" whereas you are trying to set name to \"" ) ) +
+				name + SL( "\"." ) );
 
 		switch( m_opt )
 		{
 			case ValueOptions::OneValue :
 			{
-				m_valueSpecifier = "arg";
+				m_valueSpecifier = SL( "arg" );
 			}
 				break;
 
 			case ValueOptions::ManyValues :
 			{
-				m_valueSpecifier = "args";
+				m_valueSpecifier = SL( "args" );
 			}
 				break;
 
@@ -231,8 +231,8 @@ protected:
 				case ValueOptions::ManyValues :
 				{
 					eatValues( context, m_values,
-						String( "Argument \"" ) +
-							m_name + "\" require value that wasn't presented.",
+						String( SL( "Argument \"" ) ) +
+							m_name + SL( "\" require value that wasn't presented." ),
 						cmdLine() );
 				}
 					break;
@@ -244,8 +244,8 @@ protected:
 					}
 					catch( const BaseException & )
 					{
-						throw BaseException( String( "Argument \"" ) +
-							m_name + "\" require value that wasn't presented." );
+						throw BaseException( String( SL( "Argument \"" ) ) +
+							m_name + SL( "\" require value that wasn't presented." ) );
 					}
 				}
 					break;
@@ -255,8 +255,8 @@ protected:
 			}
 		}
 		else
-			throw BaseException( String( "Argument \"" ) + m_name +
-				"\" already defined." );
+			throw BaseException( String( SL( "Argument \"" ) ) + m_name +
+				SL( "\" already defined." ) );
 	}
 
 	/*!
@@ -278,22 +278,22 @@ protected:
 			auto it = std::find( names.begin(), names.end(), m_name );
 
 			if( it != names.end() )
-				throw BaseException( String( "Redefinition of argument "
-					"with name \"" ) + m_name + "\"." );
+				throw BaseException( String( SL( "Redefinition of argument "
+					"with name \"" ) ) + m_name + SL( "\"." ) );
 			else
 				names.push_back( m_name );
 		}
 		else
-			throw BaseException( String( "Dissallowed name \"" ) +
-				m_name + "\" for the argument." );
+			throw BaseException( String( SL( "Dissallowed name \"" ) ) +
+				m_name + SL( "\" for the argument." ) );
 	}
 
 	//! Check correctness of the argument after parsing.
 	void checkCorrectnessAfterParsing() const override
 	{
 		if( isRequired() && !isDefined() )
-			throw BaseException( String( "Undefined required argument \"" ) +
-				m_name + "\"." );
+			throw BaseException( String( SL( "Undefined required argument \"" ) ) +
+				m_name + SL( "\"." ) );
 	}
 
 private:

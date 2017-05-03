@@ -40,37 +40,37 @@ using namespace Args;
 
 TEST( Flags, DissallowedFlags )
 {
-	CHECK_CONDITION( isCorrectFlag( "-" ) == false )
-	CHECK_CONDITION( isCorrectFlag( " " ) == false )
-	CHECK_CONDITION( isCorrectFlag( "=" ) == false )
-	CHECK_CONDITION( isCorrectFlag( "" ) == false )
+	CHECK_CONDITION( isCorrectFlag( SL( "-" ) ) == false )
+	CHECK_CONDITION( isCorrectFlag( SL( " " ) ) == false )
+	CHECK_CONDITION( isCorrectFlag( SL( "=" ) ) == false )
+	CHECK_CONDITION( isCorrectFlag( SL( "" ) ) == false )
 }
 
 TEST( Flags, AllowedFlags )
 {
-	CHECK_CONDITION( isCorrectFlag( "a" ) == true )
-	CHECK_CONDITION( isCorrectFlag( "1" ) == true )
+	CHECK_CONDITION( isCorrectFlag( SL( "a" ) ) == true )
+	CHECK_CONDITION( isCorrectFlag( SL( "1" ) ) == true )
 }
 
 TEST( Names, DissallowedNames )
 {
-	CHECK_CONDITION( isCorrectName( "time out" ) == false )
-	CHECK_CONDITION( isCorrectName( "" ) == false )
+	CHECK_CONDITION( isCorrectName( SL( "time out" ) ) == false )
+	CHECK_CONDITION( isCorrectName( SL( "" ) ) == false )
 }
 
 TEST( Names, AllowedNames )
 {
-	CHECK_CONDITION( isCorrectName( "timeout" ) == true )
-	CHECK_CONDITION( isCorrectName( "time-out" ) == true )
-	CHECK_CONDITION( isCorrectName( "time_out" ) == true )
+	CHECK_CONDITION( isCorrectName( SL( "timeout" ) ) == true )
+	CHECK_CONDITION( isCorrectName( SL( "time-out" ) ) == true )
+	CHECK_CONDITION( isCorrectName( SL( "time_out" ) ) == true )
 }
 
 TEST( FlagAndArgument, IsFlagOrArgument )
 {
-	CHECK_CONDITION( isFlag( "-a" ) == true )
-	CHECK_CONDITION( isFlag( "--timeout" ) == false )
-	CHECK_CONDITION( isArgument( "-a" ) == false )
-	CHECK_CONDITION( isArgument( "--timeout" ) == true )
+	CHECK_CONDITION( isFlag( SL( "-a" ) ) == true )
+	CHECK_CONDITION( isFlag( SL( "--timeout" ) ) == false )
+	CHECK_CONDITION( isArgument( SL( "-a" ) ) == false )
+	CHECK_CONDITION( isArgument( SL( "--timeout" ) ) == true )
 }
 
 

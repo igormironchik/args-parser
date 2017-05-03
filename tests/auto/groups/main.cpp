@@ -37,20 +37,26 @@
 
 using namespace Args;
 
+#ifdef ARGS_WSTRING_BUILD
+	using CHAR = String::value_type;
+#else
+	using CHAR = char;
+#endif
+
 
 TEST( GroupCase, TestOnlyOneAllIsOk )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	OnlyOneGroup g( "only_one" );
+	OnlyOneGroup g( SL( "only_one" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -60,7 +66,7 @@ TEST( GroupCase, TestOnlyOneAllIsOk )
 	cmd.parse();
 
 	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == "100" )
+	CHECK_CONDITION( timeout.value() == SL( "100" ) )
 
 	CHECK_CONDITION( port.isDefined() == false )
 
@@ -71,17 +77,17 @@ TEST( GroupCase, TestOnlyOneAllIsOk )
 TEST( GroupCase, TestOnlyOneFailed )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100",
-		"-p", "4545" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ),
+		SL( "-p" ), SL( "4545" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	OnlyOneGroup g( "only_one" );
+	OnlyOneGroup g( SL( "only_one" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -95,16 +101,16 @@ TEST( GroupCase, TestOnlyOneFailed )
 TEST( GroupCase, TestOnlyOneWithRequiredFailed )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true, true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true, true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	OnlyOneGroup g( "only_one" );
+	OnlyOneGroup g( SL( "only_one" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -118,16 +124,17 @@ TEST( GroupCase, TestOnlyOneWithRequiredFailed )
 TEST( GroupCase, TestAllOfIsOk )
 {
 	const int argc = 7;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100", "-p", "4545", "-h", "localhost" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ), SL( "-p" ), SL( "4545" ),
+		SL( "-h" ), SL( "localhost" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AllOfGroup g( "all_of" );
+	AllOfGroup g( SL( "all_of" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -137,30 +144,30 @@ TEST( GroupCase, TestAllOfIsOk )
 	cmd.parse();
 
 	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == "100" )
+	CHECK_CONDITION( timeout.value() == SL( "100" ) )
 
 	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == "4545" )
+	CHECK_CONDITION( port.value() == SL( "4545" ) )
 
 	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == "localhost" )
+	CHECK_CONDITION( host.value() == SL( "localhost" ) )
 }
 
 
 TEST( GroupCase, TestAllOfFailed )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100",
-		"-p", "4545" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ),
+		SL( "-p" ), SL( "4545" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AllOfGroup g( "all_of" );
+	AllOfGroup g( SL( "all_of" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -174,16 +181,16 @@ TEST( GroupCase, TestAllOfFailed )
 TEST( GroupCase, TestAllOfWithRequiredFailed )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true, true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true, true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	OnlyOneGroup g( "all_of" );
+	OnlyOneGroup g( SL( "all_of" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -196,16 +203,16 @@ TEST( GroupCase, TestAllOfWithRequiredFailed )
 TEST( GroupCase, TestAtLeasOneIsOk )
 {
 	const int argc = 5;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100", "-p", "4545" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ), SL( "-p" ), SL( "4545" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AtLeastOneGroup g( "at_least_one" );
+	AtLeastOneGroup g( SL( "at_least_one" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -215,10 +222,10 @@ TEST( GroupCase, TestAtLeasOneIsOk )
 	cmd.parse();
 
 	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == "100" )
+	CHECK_CONDITION( timeout.value() == SL( "100" ) )
 
 	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == "4545" )
+	CHECK_CONDITION( port.value() == SL( "4545" ) )
 
 	CHECK_CONDITION( host.isDefined() == false )
 
@@ -229,15 +236,15 @@ TEST( GroupCase, TestAtLeasOneIsOk )
 TEST( GroupCase, TestAtLeasOneFailed )
 {
 	const int argc = 1;
-	const char * argv[ argc ] = { "program.exe" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AtLeastOneGroup g( "at_least_one" );
+	AtLeastOneGroup g( SL( "at_least_one" ) );
 	g.setRequired( true );
 	g.addArg( timeout );
 	g.addArg( port );
@@ -252,16 +259,16 @@ TEST( GroupCase, TestAtLeasOneFailed )
 TEST( GroupCase, TestAtLeasOneWithRequiredFailed )
 {
 	const int argc = 3;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg timeout( 't', String( "timeout" ), true, true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true, true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AtLeastOneGroup g( "at_least_one" );
+	AtLeastOneGroup g( SL( "at_least_one" ) );
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
@@ -275,23 +282,25 @@ TEST( GroupCase, TestAtLeasOneWithRequiredFailed )
 TEST( GroupCase, GroupsIsOk )
 {
 	const int argc = 9;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100", "-p", "4545", "-h", "localhost", "-s", "db" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ), SL( "-p" ), SL( "4545" ),
+		SL( "-h" ), SL( "localhost" ),
+		SL( "-s" ), SL( "db" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg store( Char( 's' ), "store", true );
-	Arg file( Char( 'f' ), "file", true );
+	Arg store( Char( SL( 's' ) ), SL( "store" ), true );
+	Arg file( Char( SL( 'f' ) ), SL( "file" ), true );
 
-	OnlyOneGroup onlyOne( "only_one" );
+	OnlyOneGroup onlyOne( SL( "only_one" ) );
 	onlyOne.addArg( store );
 	onlyOne.addArg( file );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AllOfGroup g( "all_of" );
+	AllOfGroup g( SL( "all_of" ) );
 	g.setRequired( true );
 	g.addArg( timeout );
 	g.addArg( port );
@@ -303,16 +312,16 @@ TEST( GroupCase, GroupsIsOk )
 	cmd.parse();
 
 	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == "100" )
+	CHECK_CONDITION( timeout.value() == SL( "100" ) )
 
 	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == "4545" )
+	CHECK_CONDITION( port.value() == SL( "4545" ) )
 
 	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == "localhost" )
+	CHECK_CONDITION( host.value() == SL( "localhost" ) )
 
 	CHECK_CONDITION( store.isDefined() == true )
-	CHECK_CONDITION( store.value() == "db" )
+	CHECK_CONDITION( store.value() == SL( "db" ) )
 
 	CHECK_CONDITION( file.isDefined() == false )
 
@@ -323,24 +332,25 @@ TEST( GroupCase, GroupsIsOk )
 TEST( GroupCase, GroupsFailed )
 {
 	const int argc = 11;
-	const char * argv[ argc ] = { "program.exe",
-		"-t", "100", "-p", "4545", "-h", "localhost", "-s", "db",
-		"-f", "out.txt" };
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ), SL( "-p" ), SL( "4545" ),
+		SL( "-h" ), SL( "localhost" ),
+		SL( "-s" ), SL( "db" ), SL( "-f" ), SL( "out.txt" ) };
 
 	CmdLine cmd( argc, argv );
 
-	Arg store( Char( 's' ), "store", true );
-	Arg file( Char( 'f' ), "file", true );
+	Arg store( Char( SL( 's' ) ), SL( "store" ), true );
+	Arg file( Char( SL( 'f' ) ), SL( "file" ), true );
 
-	OnlyOneGroup onlyOne( "only_one" );
+	OnlyOneGroup onlyOne( SL( "only_one" ) );
 	onlyOne.addArg( store );
 	onlyOne.addArg( file );
 
-	Arg timeout( 't', String( "timeout" ), true );
-	Arg port( 'p', String( "port" ), true );
-	Arg host( 'h', String( "host" ), true );
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
-	AllOfGroup g( "all_of" );
+	AllOfGroup g( SL( "all_of" ) );
 	g.setRequired( true );
 	g.addArg( timeout );
 	g.addArg( port );

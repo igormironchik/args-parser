@@ -34,6 +34,7 @@
 // Args include.
 #include "utils.hpp"
 #include "exceptions.hpp"
+#include "types.hpp"
 
 // C++ include.
 #include <algorithm>
@@ -51,7 +52,7 @@ bool eatValues( Ctx & context, Container & container,
 	const String & errorDescription, Cmd * cmdLine )
 {
 	if( !cmdLine )
-		throw BaseException( "Argument is not under command line parser." );
+		throw BaseException( SL( "Argument is not under command line parser." ) );
 
 	if( !context.atEnd() )
 	{
@@ -110,7 +111,7 @@ template< typename Cmd, typename Ctx >
 String eatOneValue( Ctx & context, Cmd * cmdLine )
 {
 	if( !cmdLine )
-		throw BaseException( "Argument is not under command line parser." );
+		throw BaseException( SL( "Argument is not under command line parser." ) );
 
 	if( !context.atEnd() )
 	{
@@ -129,10 +130,10 @@ String eatOneValue( Ctx & context, Cmd * cmdLine )
 
 		context.putBack();
 
-		throw BaseException( "Can't eat value." );
+		throw BaseException( SL( "Can't eat value." ) );
 	}
 	else
-		throw BaseException( "Can't eat value." );
+		throw BaseException( SL( "Can't eat value." ) );
 }
 
 } /* namespace Args */
