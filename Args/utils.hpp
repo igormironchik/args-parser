@@ -53,7 +53,7 @@ namespace Args {
 //
 
 //! Macro to supress warning about unused argument.
-#define UNUSED( Var ) Var;
+#define UNUSED( Var ) (void)Var;
 
 
 //

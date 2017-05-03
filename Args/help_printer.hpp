@@ -500,7 +500,7 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 			{
 				to << "Global arguments:" << std::endl << std::endl;
 
-				printArg = std::bind( &HelpPrinter::printOnlyFor, this,
+				auto printGlobalArg = std::bind( &HelpPrinter::printOnlyFor, this,
 					std::placeholders::_1, std::ref( to ),
 					gmaxFlag + 1 + gmaxName + 2, gmaxFlag );
 
@@ -509,7 +509,7 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 					to << "Required arguments:" << std::endl;
 
 					std::for_each( grequired.cbegin(), grequired.cend(),
-						printArg );
+						printGlobalArg );
 				}
 
 				if( !goptional.empty() )
@@ -517,7 +517,7 @@ HelpPrinter::print( const std::string & name, std::ostream & to )
 					to << "Optional arguments:" << std::endl;
 
 					std::for_each( goptional.cbegin(), goptional.cend(),
-						printArg );
+						printGlobalArg );
 				}
 			}
 		}

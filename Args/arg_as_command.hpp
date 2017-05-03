@@ -272,6 +272,8 @@ protected:
 		//! All known names.
 		StringList & names ) const override
 	{
+		UNUSED( flags )
+
 		if( isCorrectName( m_name ) )
 		{
 			auto it = std::find( names.begin(), names.end(), m_name );
