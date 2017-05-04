@@ -34,7 +34,7 @@ of the argument will be ```std::list< std::string >```.
 
 # Different types of strings.
 
-Since version 4.0.0 Args can be build with different strings - std::string,
+Since version 4.0.0 Args can be built with different strings - std::string,
 std::wstring and QString.
 
  * To build Args with std::wstring support define ARGS_WSTRING_BUILD
