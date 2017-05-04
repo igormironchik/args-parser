@@ -104,11 +104,6 @@ public:
 	{
 	}
 
-	String( const String & other )
-		:	m_str( other.m_str )
-	{
-	}
-
 	String( const QString & other )
 		:	m_str( other )
 	{
@@ -132,17 +127,6 @@ public:
 
 	String( const QByteArray & ba )
 		:	m_str( ba )
-	{
-	}
-
-	String & operator = ( const String & other )
-	{
-		m_str = other.m_str;
-
-		return *this;
-	}
-
-	~String()
 	{
 	}
 
