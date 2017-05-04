@@ -223,6 +223,26 @@ public:
 		return String( s1.m_str + s2.m_str );
 	}
 
+	friend String operator + ( const String & s1, const char * s2 )
+	{
+		return String( s1.m_str + s2 );
+	}
+
+	friend String operator + ( const char * s1, const String & s2 )
+	{
+		return String( s1 + s2.m_str );
+	}
+
+	friend String operator + ( const String & s1, const char ch )
+	{
+		return String( s1.m_str + ch );
+	}
+
+	friend String operator + ( const char ch, const String & s2 )
+	{
+		return String( ch + s2.m_str );
+	}
+
 	friend OutStreamType & operator << ( OutStreamType & to,
 		const String & what )
 	{

@@ -49,7 +49,7 @@ class BaseException
 	:	public std::logic_error
 {
 public:	
-	explicit BaseException::BaseException( const String & what )
+	explicit BaseException( const String & what )
 #ifdef ARGS_QSTRING_BUILD
 		:	std::logic_error( ( (QString) what ).toLocal8Bit().toStdString() )
 		,	m_what( what )
@@ -63,7 +63,7 @@ public:
 	{
 	}
 
-	virtual BaseException::~BaseException() noexcept
+	virtual ~BaseException() noexcept
 	{
 	}
 
