@@ -49,17 +49,9 @@ class BaseException
 	:	public std::logic_error
 {
 public:	
-	explicit BaseException( const String & what )
-#ifdef ARGS_QSTRING_BUILD
-		:	std::logic_error( ( (QString) what ).toLocal8Bit().toStdString() )
-		,	m_what( what )
-#elif defined( ARGS_WSTRING_BUILD )
-		:	std::logic_error( "Please use desc() method to get exception "
-				"description when compiling with std::wstring." )
-		,	m_what( what )
-#else
-		:	std::logic_error( what )
-#endif
+	explicit BaseException( String what )
+		:	std::logic_error( "Please use desc() method of the exception." )
+		,	m_what( std::move( what ) )
 	{
 	}
 
@@ -67,7 +59,6 @@ public:
 	{
 	}
 
-#ifdef ARGS_WSTRING_BUILD
 	//! \return What as std::wstring.
 	const String & desc() const noexcept
 	{
@@ -75,23 +66,8 @@ public:
 	}
 
 private:
+	//! What happened?
 	String m_what;
-#elif defined( ARGS_QSTRING_BUILD )
-	//! \return What as QString.
-	const String & desc() const noexcept
-	{
-		return m_what;
-	}
-
-private:
-	String m_what;
-#else
-	//! \return What?
-	String desc() const
-	{
-		return what();
-	}
-#endif
 }; // class BaseException
 
 
