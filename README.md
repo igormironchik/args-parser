@@ -31,6 +31,15 @@ For example ```--argument value``` and ```--argument=value```.
  * MultiArg class provide ability to define more than one value for argument. This type
 of arguments can be specified more than once in the command line. And the resulted value
 of the argument will be ```std::list< std::string >```.
+
+# Different types of strings.
+
+Since version 4.0.0 Args can be build with different strings - std::string,
+std::wstring and QString.
+
+ * To build Args with std::wstring support define ARGS_WSTRING_BUILD
+ * To build Args with QString support define ARGS_QSTRING_BUILD
+ * If nothing was defined then Args will be build with std::string.
           
 # Example
 
