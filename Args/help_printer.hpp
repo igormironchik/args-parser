@@ -448,7 +448,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 			gmaxFlag += 2;
 			gmaxName += 2;
-			gmaxCommand += 2;
+//			gmaxCommand += 2;
 
 			// Prepare arguments of command.
 			std::list< ArgIface* > required;
@@ -472,7 +472,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 			maxFlag += 2;
 			maxName += 2;
-			maxCommand += 2;
+//			maxCommand += 2;
 
 			// Print.
 			printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );
