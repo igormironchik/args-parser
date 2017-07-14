@@ -11,6 +11,9 @@ SET( CMAKE_CXX_STANDARD 14 )
 
 SET( CMAKE_CXX_STANDARD_REQUIRED ON )
 
+file( COPY runtests.rb
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
+
 project( Args )
 
 add_subdirectory( samples )
