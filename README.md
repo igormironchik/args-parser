@@ -16,7 +16,7 @@ For compiling Args you should have installed:
  * mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
 
 or
- * QMake
+ * QMake, CMake
 
 # Syntax
 
