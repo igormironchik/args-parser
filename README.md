@@ -48,7 +48,7 @@ and there is one specific exceptions that inform you about that that help was sh
 exception (HelpHasBeenPrintedException) is needed for processing program's logic that usually stops
 execution at this point.
 
-```
+```cpp
 // Args include.
 #include <Args/arg.hpp>
 #include <Args/help.hpp>
