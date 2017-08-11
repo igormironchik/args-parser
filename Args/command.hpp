@@ -57,7 +57,7 @@ public:
 	template< typename T >
 	explicit Command( T && name,
 		ValueOptions opt = ValueOptions::NoValue )
-		:	GroupIface( std::forward< T > ( name ) )
+		:	GroupIface( name )
 		,	m_opt( opt )
 		,	m_isDefined( false )
 	{

@@ -58,7 +58,7 @@ public:
 	explicit ArgAsCommand( T && name,
 		bool required = false,
 		ValueOptions opt = ValueOptions::NoValue )
-		:	m_name( std::forward< T > ( name ) )
+		:	m_name( name )
 		,	m_opt( opt )
 		,	m_required( required )
 		,	m_defined( false )

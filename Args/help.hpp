@@ -51,7 +51,7 @@ class Help final
 	:	public Arg
 {
 public:
-	Help( bool throwExceptionOnPrint = true );
+	explicit Help( bool throwExceptionOnPrint = true );
 
 	//! Set executable name.
 	void setExecutable( const String & exe );
