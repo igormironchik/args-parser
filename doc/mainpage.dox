@@ -1,6 +1,59 @@
 
 /*!
-	\mainpage
+	\mainpage This is Args - header-only library for parsing command line interface.
 
-	This is Args - header-only library for parsing command line interface.
+	\section compiling Compilling
+
+	Just run build.rb which is a Ruby program and a project file or use QMake
+	or CMake project.
+
+	\subsection requirements Requirements
+
+	For compiling Args you should have installed:
+
+	\li Ruby programming language (http://www.ruby-lang.org/en/)
+	\li mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
+
+	or
+
+	\li QMake or CMake
+
+	\section syntax Syntax
+
+	\li Argument starts with two dashes. For example \c --argument.
+	\li Flag starts with one dash. For example \c -b.
+	\li If argument has value than value can be specified after space or after
+		equal sign. For example \c --argument \c value and \c --argument=value.
+	\li Flags without values can be combined into one block. For example
+		\c -abc defines three flags \c -a, \c -b and \c -c.
+	\li The last flag in flag's block can be with value. Then it's possible to
+		type the next \c -abc=value. And here flag \c -c will have value \c value.
+	\li MultiArg class provide ability to define more than one value for argument.
+		This type of arguments can be specified more than once in the command
+		line. And the resulted value of the argument will be \c std::list< \c std::string \c >.
+
+	\section types Different types of strings.
+
+	Since version 4.0.0 Args can be built with different strings - std::string,
+	std::wstring and QString.
+
+	\li To build Args with \c std::wstring support define \c ARGS_WSTRING_BUILD
+	\li To build Args with \c QString support define \c ARGS_QSTRING_BUILD
+	\li If nothing was defined then Args will be build with \c std::string.
+
+	\section example Example
+
+	First of all you must know that practically all classes of the Args throws
+	exceptions on errors and there is one specific exceptions that inform you
+	about that that help was shown. This specific exception
+	(\c HelpHasBeenPrintedException) is needed for processing program's logic
+	that usually stops execution at this point.
+
+	\include example.cpp
+
+	\section help Help output
+
+	\verbinclude help.txt
+
+	That's it. Use it and enjoy it. Good luck.
 */

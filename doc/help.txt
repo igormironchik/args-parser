@@ -1,0 +1,14 @@
+This application just show the power of Args.
+
+Usage: sample.help.exe -s, --host <arg> -p, --port <arg>
+       [ --timeout <ms> ] [ -h, --help <arg> ]
+
+Required arguments:
+ -o, --host <arg>   Host. Can be "localhost", "any" or regular IP.
+
+ -p, --port <arg>   Port number to create socket.
+
+Optional arguments:
+     --timeout <ms> Timeout before new messages will be sent in milliseconds.
+
+ -h, --help <arg>   Print this help.
