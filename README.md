@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/igormironchik/args-parser.svg?branch=master)](https://travis-ci.org/igormironchik/args-parser)
+
 This is Args.
 
 Args is a small C++ header-only library for parsing command line arguments.
