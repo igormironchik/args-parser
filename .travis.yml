@@ -13,7 +13,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install qt55
+  - sudo apt-get -y install qt55[QTPACKAGE]
 
 addons:
   apt:
