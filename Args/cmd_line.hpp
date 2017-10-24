@@ -299,7 +299,7 @@ CmdLine::findArgument( const String & name )
 {
 	auto it = std::find_if( m_args.begin(),
 		m_args.end(), [ &name ] ( ArgIface * arg ) -> bool
-			{ return ( arg->isItYou( name ) != nullptr ); } );
+			{ return ( arg->findArgument( name ) != nullptr ); } );
 
 	if( it != m_args.end() )
 	{
@@ -310,7 +310,7 @@ CmdLine::findArgument( const String & name )
 	}
 
 	if( it != m_args.end() )
-		return (*it)->isItYou( name );
+		return (*it)->findArgument( name );
 	else if( m_command )
 	{
 		ArgIface * tmp = m_command->isItYourChild( name );

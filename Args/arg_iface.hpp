@@ -109,7 +109,7 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name.
 	*/
-	virtual ArgIface * isItYou(
+	virtual ArgIface * findArgument(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".

@@ -168,7 +168,7 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name.
 	*/
-	ArgIface * isItYou(
+	ArgIface * findArgument(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
@@ -196,7 +196,7 @@ protected:
 		*/
 		const String & name )
 	{
-		return GroupIface::isItYou( name );
+		return GroupIface::findArgument( name );
 	}
 
 	/*!

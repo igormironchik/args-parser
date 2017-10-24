@@ -152,7 +152,7 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name.
 	*/
-	ArgIface * isItYou(
+	ArgIface * findArgument(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
@@ -251,7 +251,7 @@ Arg::~Arg()
 }
 
 inline ArgIface *
-Arg::isItYou( const String & name )
+Arg::findArgument( const String & name )
 {
 	if( isArgument( name ) && name.substr( 2 ) == m_name )
 		return this;

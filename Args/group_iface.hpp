@@ -189,7 +189,7 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name.
 	*/
-	ArgIface * isItYou(
+	ArgIface * findArgument(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
@@ -198,7 +198,7 @@ protected:
 	{
 		for( auto & arg : m_children )
 		{
-			ArgIface * tmp = arg->isItYou( name );
+			ArgIface * tmp = arg->findArgument( name );
 
 			if( tmp != nullptr )
 				return tmp;
