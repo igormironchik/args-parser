@@ -75,12 +75,7 @@ namespace Args {
 static inline bool
 isArgument( const String & word )
 {
-	const String::size_type it = word.find( SL( "--" ) );
-
-	if( it == 0 )
-		return true;
-	else
-		return false;
+	return ( word.find( SL( "--" ) ) == 0 );
 } // isArgument
 
 
@@ -94,9 +89,7 @@ isFlag( const String & word )
 {
 	if( !isArgument( word ) )
 	{
-		const String::size_type it = word.find( SL( '-' ) );
-
-		if( it == 0 )
+		if( word.find( SL( '-' ) ) == 0 )
 			return true;
 	}
 
