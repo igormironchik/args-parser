@@ -32,7 +32,7 @@ For example ```--argument value``` and ```--argument=value```.
 ```-abc=value```. And here flag ```-c``` will have value ```value```.
  * MultiArg class provide ability to define more than one value for argument. This type
 of arguments can be specified more than once in the command line. And the resulted value
-of the argument will be ```std::list< std::string >```.
+of the argument will be ```StringList```.
 
 # Different types of strings.
 

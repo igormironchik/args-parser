@@ -40,7 +40,7 @@
 #include "types.hpp"
 
 // C++ include.
-#include <list>
+#include <vector>
 #include <algorithm>
 
 
@@ -86,7 +86,7 @@ public:
 	ArgIface * findArgument( const String & name );
 
 	//! \return All arguments.
-	const std::list< ArgIface* > & arguments() const;
+	const std::vector< ArgIface* > & arguments() const;
 
 private:
 	//! Check correctness of the arguments before parsing.
@@ -100,7 +100,7 @@ private:
 	// Context.
 	Context m_context;
 	//! Arguments.
-	std::list< ArgIface* > m_args;
+	std::vector< ArgIface* > m_args;
 	//! Current command.
 	Command * m_command;
 	//! Option.
@@ -252,7 +252,7 @@ CmdLine::parse()
 	checkCorrectnessAfterParsing();
 }
 
-inline const std::list< ArgIface* > &
+inline const std::vector< ArgIface* > &
 CmdLine::arguments() const
 {
 	return m_args;
@@ -264,7 +264,7 @@ CmdLine::checkCorrectnessBeforeParsing() const
 	StringList flags;
 	StringList names;
 
-	std::list< ArgIface* > cmds;
+	std::vector< ArgIface* > cmds;
 
 	std::for_each( m_args.cbegin(), m_args.cend(),
 		[ &cmds, &flags, &names ] ( ArgIface * arg )
@@ -297,7 +297,7 @@ CmdLine::checkCorrectnessAfterParsing() const
 inline ArgIface *
 CmdLine::findArgument( const String & name )
 {
-	std::list< ArgIface* >::iterator it = std::find_if( m_args.begin(),
+	auto it = std::find_if( m_args.begin(),
 		m_args.end(), [ &name ] ( ArgIface * arg ) -> bool
 			{ return ( arg->isItYou( name ) != nullptr ); } );
 

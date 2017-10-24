@@ -44,7 +44,7 @@
 #include "types.hpp"
 
 // C++ include.
-#include <list>
+#include <vector>
 #include <type_traits>
 #include <algorithm>
 #include <utility>
@@ -69,7 +69,7 @@ public:
 
 public:
 	//! List of child arguments.
-	typedef std::list< ArgIface* > Arguments;
+	typedef std::vector< ArgIface* > Arguments;
 
 	template< typename T >
 	explicit GroupIface( T && name,

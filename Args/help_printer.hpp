@@ -32,7 +32,7 @@
 #define ARGS__HELP_PRINTER_HPP__INCLUDED
 
 // C++ include.
-#include <list>
+#include <vector>
 #include <algorithm>
 #include <functional>
 
@@ -113,9 +113,9 @@ private:
 	void print( ArgIface * arg, OutStreamType & to ) const;
 	//! Sort argument.
 	void sortArg( ArgIface * arg,
-		std::list< Command* > & commands,
-		std::list< ArgIface* > & required,
-		std::list< ArgIface* > & optional,
+		std::vector< Command* > & commands,
+		std::vector< ArgIface* > & required,
+		std::vector< ArgIface* > & optional,
 		String::size_type & maxFlag,
 		String::size_type & maxName,
 		String::size_type & maxCommand,
@@ -187,9 +187,9 @@ calcMaxFlagAndName( ArgIface * arg, String::size_type & maxFlag,
 
 inline void
 HelpPrinter::sortArg( ArgIface * arg,
-	std::list< Command* > & commands,
-	std::list< ArgIface* > & required,
-	std::list< ArgIface* > & optional,
+	std::vector< Command* > & commands,
+	std::vector< ArgIface* > & required,
+	std::vector< ArgIface* > & optional,
 	String::size_type & maxFlag,
 	String::size_type & maxName,
 	String::size_type & maxCommand,
@@ -303,9 +303,9 @@ HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
 inline void
 HelpPrinter::print( OutStreamType & to )
 {
-	std::list< ArgIface* > required;
-	std::list< ArgIface* > optional;
-	std::list< Command* > commands;
+	std::vector< ArgIface* > required;
+	std::vector< ArgIface* > optional;
+	std::vector< Command* > commands;
 
 	String::size_type maxFlag = 0;
 	String::size_type maxName = 0;
@@ -427,9 +427,9 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 		if( cmd )
 		{
 			// Prepare global arguments.
-			std::list< ArgIface* > grequired;
-			std::list< ArgIface* > goptional;
-			std::list< Command* > gcommands;
+			std::vector< ArgIface* > grequired;
+			std::vector< ArgIface* > goptional;
+			std::vector< Command* > gcommands;
 
 			String::size_type gmaxFlag = 0;
 			String::size_type gmaxName = 0;
@@ -451,9 +451,9 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 //			gmaxCommand += 2;
 
 			// Prepare arguments of command.
-			std::list< ArgIface* > required;
-			std::list< ArgIface* > optional;
-			std::list< Command* > commands;
+			std::vector< ArgIface* > required;
+			std::vector< ArgIface* > optional;
+			std::vector< Command* > commands;
 
 			String::size_type maxFlag = 0;
 			String::size_type maxName = 0;

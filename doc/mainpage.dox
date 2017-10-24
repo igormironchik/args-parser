@@ -30,7 +30,7 @@
 		type the next \c -abc=value. And here flag \c -c will have value \c value.
 	\li MultiArg class provide ability to define more than one value for argument.
 		This type of arguments can be specified more than once in the command
-		line. And the resulted value of the argument will be \c std::list< \c std::string \c >.
+		line. And the resulted value of the argument will be \c StringList.
 
 	\section types Different types of strings.
 
