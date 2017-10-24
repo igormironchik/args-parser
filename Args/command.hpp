@@ -189,7 +189,7 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name.
 	*/
-	ArgIface * isItYourChild(
+	ArgIface * findChild(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".

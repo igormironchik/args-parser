@@ -750,7 +750,7 @@ HelpPrinter::print( Command * cmd, const String & name,
 {
 	if( cmd )
 	{
-		ArgIface * arg = cmd->isItYourChild( name );
+		ArgIface * arg = cmd->findChild( name );
 
 		if( arg )
 			print( arg, to );

@@ -313,7 +313,7 @@ CmdLine::findArgument( const String & name )
 		return (*it)->findArgument( name );
 	else if( m_command )
 	{
-		ArgIface * tmp = m_command->isItYourChild( name );
+		ArgIface * tmp = m_command->findChild( name );
 
 		if( tmp )
 			return tmp;
