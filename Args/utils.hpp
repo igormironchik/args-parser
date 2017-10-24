@@ -112,10 +112,7 @@ isCorrectFlag( const String & flag )
 		"abcdefghijklmnopqrstuvwxyz"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ" ) );
 
-	if( availableSymbols.find( flag ) == String::npos )
-		return false;
-
-	return true;
+	return ( availableSymbols.find( flag ) != String::npos );
 } // isCorrectFlag
 
 
