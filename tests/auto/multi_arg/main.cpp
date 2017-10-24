@@ -157,7 +157,7 @@ TEST( MultiArgTestCase, NotDefinedValue )
 	catch( const BaseException & x )
 	{
 		CHECK_CONDITION( x.desc() == String( SL( "Argument \"--multi"
-			"\" require value that wasn't presented." ) ) )
+			"\" requires value that wasn't presented." ) ) )
 
 		return;
 	}
@@ -189,7 +189,7 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	catch( const BaseException & x )
 	{
 		CHECK_CONDITION( x.desc() == String( SL( "Argument \"--multi"
-			"\" require value that wasn't presented." ) ) )
+			"\" requires value that wasn't presented." ) ) )
 
 		return;
 	}
