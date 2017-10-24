@@ -307,10 +307,9 @@ CmdLine::findArgument( const String & name )
 
 		if( tmp )
 			return tmp;
+		else
+			return (*it)->findArgument( name );
 	}
-
-	if( it != m_args.end() )
-		return (*it)->findArgument( name );
 	else if( m_command )
 	{
 		ArgIface * tmp = m_command->findChild( name );
