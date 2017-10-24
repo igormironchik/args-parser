@@ -232,21 +232,17 @@ protected:
 				{
 					eatValues( context, m_values,
 						String( SL( "Argument \"" ) ) +
-							m_name + SL( "\" require value that wasn't presented." ),
+							m_name + SL( "\" requires value that wasn't presented." ),
 						cmdLine() );
 				}
 					break;
 
 				case ValueOptions::OneValue :
 				{
-					try {
-						m_values.push_back( eatOneValue( context, cmdLine() ) );
-					}
-					catch( const BaseException & )
-					{
-						throw BaseException( String( SL( "Argument \"" ) ) +
-							m_name + SL( "\" require value that wasn't presented." ) );
-					}
+					m_values.push_back( eatOneValue( context,
+						String( SL( "Argument \"" ) ) + m_name +
+							SL( "\" requires value that wasn't presented." ),
+						cmdLine() ) );
 				}
 					break;
 

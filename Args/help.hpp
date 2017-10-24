@@ -133,7 +133,7 @@ Help::process( Context & context )
 		else
 		{
 			try {
-				ArgIface * tmp = cmdLine()->findArgument( arg );
+				auto * tmp = cmdLine()->findArgument( arg );
 
 				Command * cmd = dynamic_cast< Command* > ( tmp );
 
@@ -145,8 +145,10 @@ Help::process( Context & context )
 					else
 						m_printer.print( arg, outStream() );
 				}
-				else
+				else if( tmp )
 					m_printer.print( arg, outStream() );
+				else
+					m_printer.print( outStream() );
 			}
 			catch( const BaseException & )
 			{

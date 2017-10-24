@@ -419,122 +419,118 @@ HelpPrinter::print( OutStreamType & to )
 inline void
 HelpPrinter::print( const String & name, OutStreamType & to )
 {
-	try {
-		ArgIface * arg = m_cmdLine->findArgument( name );
+	auto * arg = m_cmdLine->findArgument( name );
 
-		Command * cmd = dynamic_cast < Command* > ( arg );
+	Command * cmd = dynamic_cast < Command* > ( arg );
 
-		if( cmd )
-		{
-			// Prepare global arguments.
-			std::vector< ArgIface* > grequired;
-			std::vector< ArgIface* > goptional;
-			std::vector< Command* > gcommands;
+	if( cmd )
+	{
+		// Prepare global arguments.
+		std::vector< ArgIface* > grequired;
+		std::vector< ArgIface* > goptional;
+		std::vector< Command* > gcommands;
 
-			String::size_type gmaxFlag = 0;
-			String::size_type gmaxName = 0;
-			String::size_type gmaxCommand = 0;
+		String::size_type gmaxFlag = 0;
+		String::size_type gmaxName = 0;
+		String::size_type gmaxCommand = 0;
 
-			bool requiredAllOfGroup = false;
+		bool requiredAllOfGroup = false;
 
-			auto gf = std::bind( &HelpPrinter::sortArg, this, std::placeholders::_1,
-				std::ref( gcommands ), std::ref( grequired ),
-				std::ref( goptional ), std::ref( gmaxFlag ),
-				std::ref( gmaxName ), std::ref( gmaxCommand ),
-				requiredAllOfGroup );
+		auto gf = std::bind( &HelpPrinter::sortArg, this, std::placeholders::_1,
+			std::ref( gcommands ), std::ref( grequired ),
+			std::ref( goptional ), std::ref( gmaxFlag ),
+			std::ref( gmaxName ), std::ref( gmaxCommand ),
+			requiredAllOfGroup );
 
-			std::for_each( m_cmdLine->arguments().cbegin(),
-				m_cmdLine->arguments().cend(), gf );
+		std::for_each( m_cmdLine->arguments().cbegin(),
+			m_cmdLine->arguments().cend(), gf );
 
-			gmaxFlag += 2;
-			gmaxName += 2;
+		gmaxFlag += 2;
+		gmaxName += 2;
 //			gmaxCommand += 2;
 
-			// Prepare arguments of command.
-			std::vector< ArgIface* > required;
-			std::vector< ArgIface* > optional;
-			std::vector< Command* > commands;
+		// Prepare arguments of command.
+		std::vector< ArgIface* > required;
+		std::vector< ArgIface* > optional;
+		std::vector< Command* > commands;
 
-			String::size_type maxFlag = 0;
-			String::size_type maxName = 0;
-			String::size_type maxCommand = 0;
+		String::size_type maxFlag = 0;
+		String::size_type maxName = 0;
+		String::size_type maxCommand = 0;
 
-			requiredAllOfGroup = false;
+		requiredAllOfGroup = false;
 
-			auto f = std::bind( &HelpPrinter::sortArg, this, std::placeholders::_1,
-				std::ref( commands ), std::ref( required ),
-				std::ref( optional ), std::ref( maxFlag ),
-				std::ref( maxName ), std::ref( maxCommand ),
-				requiredAllOfGroup );
+		auto f = std::bind( &HelpPrinter::sortArg, this, std::placeholders::_1,
+			std::ref( commands ), std::ref( required ),
+			std::ref( optional ), std::ref( maxFlag ),
+			std::ref( maxName ), std::ref( maxCommand ),
+			requiredAllOfGroup );
 
-			std::for_each( cmd->children().cbegin(),
-				cmd->children().cend(), f );
+		std::for_each( cmd->children().cbegin(),
+			cmd->children().cend(), f );
 
-			maxFlag += 2;
-			maxName += 2;
+		maxFlag += 2;
+		maxName += 2;
 //			maxCommand += 2;
 
-			// Print.
-			printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );
+		// Print.
+		printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );
 
-			to << "\n" << "\n";
+		to << "\n" << "\n";
 
-			// Print command's arguments.
-			auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
-				std::placeholders::_1, std::ref( to ), maxFlag + 1 + maxName + 2,
-				maxFlag );
+		// Print command's arguments.
+		auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
+			std::placeholders::_1, std::ref( to ), maxFlag + 1 + maxName + 2,
+			maxFlag );
 
-			if( !required.empty() )
+		if( !required.empty() )
+		{
+			to << "Required arguments:" << "\n";
+
+			std::for_each( required.cbegin(), required.cend(), printArg );
+		}
+
+		if( !optional.empty() )
+		{
+			to << "Optional arguments:" << "\n";
+
+			std::for_each( optional.cbegin(), optional.cend(), printArg );
+		}
+
+		to << "\n";
+
+		// Print global arguments.
+		if( !grequired.empty() || !goptional.empty() )
+		{
+			to << "Global arguments:" << "\n" << "\n";
+
+			auto printGlobalArg = std::bind( &HelpPrinter::printOnlyFor, this,
+				std::placeholders::_1, std::ref( to ),
+				gmaxFlag + 1 + gmaxName + 2, gmaxFlag );
+
+			if( !grequired.empty() )
 			{
 				to << "Required arguments:" << "\n";
 
-				std::for_each( required.cbegin(), required.cend(), printArg );
+				std::for_each( grequired.cbegin(), grequired.cend(),
+					printGlobalArg );
 			}
 
-			if( !optional.empty() )
+			if( !goptional.empty() )
 			{
 				to << "Optional arguments:" << "\n";
 
-				std::for_each( optional.cbegin(), optional.cend(), printArg );
+				std::for_each( goptional.cbegin(), goptional.cend(),
+					printGlobalArg );
 			}
-
-			to << "\n";
-
-			// Print global arguments.
-			if( !grequired.empty() || !goptional.empty() )
-			{
-				to << "Global arguments:" << "\n" << "\n";
-
-				auto printGlobalArg = std::bind( &HelpPrinter::printOnlyFor, this,
-					std::placeholders::_1, std::ref( to ),
-					gmaxFlag + 1 + gmaxName + 2, gmaxFlag );
-
-				if( !grequired.empty() )
-				{
-					to << "Required arguments:" << "\n";
-
-					std::for_each( grequired.cbegin(), grequired.cend(),
-						printGlobalArg );
-				}
-
-				if( !goptional.empty() )
-				{
-					to << "Optional arguments:" << "\n";
-
-					std::for_each( goptional.cbegin(), goptional.cend(),
-						printGlobalArg );
-				}
-			}
-
-			to.flush();
 		}
-		else
-			print( arg, to );
+
+		to.flush();
 	}
-	catch( const BaseException & )
-	{
+	else if( arg )
+		print( arg, to );
+	else
 		print( to );
-	}
 }
 
 inline void
@@ -756,15 +752,12 @@ HelpPrinter::print( Command * cmd, const String & name,
 			print( arg, to );
 		else
 		{
-			try {
-				arg = m_cmdLine->findArgument( name );
+			arg = m_cmdLine->findArgument( name );
 
+			if( arg )
 				print( arg, to );
-			}
-			catch( const BaseException & )
-			{
+			else
 				print( cmd->name(), to );
-			}
 		}
 	}
 	else

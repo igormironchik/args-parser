@@ -194,7 +194,15 @@ CmdLine::parse()
 		}
 
 		if( isArgument( word ) )
-			findArgument( word )->process( m_context );
+		{
+			auto * arg = findArgument( word );
+
+			if( arg )
+				arg->process( m_context );
+			else
+				throw BaseException( String( SL( "Unknown argument \"" ) ) +
+					word + SL( "\"." ) );
+		}
 		else if( isFlag( word ) )
 		{
 			for( String::size_type i = 1, length = word.length(); i < length; ++i )
@@ -207,7 +215,11 @@ CmdLine::parse()
 					String( 1, word[ i ] );
 #endif
 
-				ArgIface * arg = findArgument( flag );
+				auto * arg = findArgument( flag );
+
+				if( !arg )
+					throw BaseException( String( SL( "Unknown argument \"" ) ) +
+						flag + SL( "\"." ) );
 
 				if( i < length - 1 && arg->isWithValue() )
 					throw BaseException( String( SL( "Only last argument in "
@@ -220,7 +232,7 @@ CmdLine::parse()
 		// Command?
 		else
 		{
-			ArgIface * tmp = findArgument( word );
+			auto * tmp = findArgument( word );
 
 			if( tmp )
 			{
@@ -318,8 +330,7 @@ CmdLine::findArgument( const String & name )
 			return tmp;
 	}
 
-	throw BaseException( String( SL( "Unknown argument \"" ) ) +
-		name + SL( "\"." ) );
+	return nullptr;
 }
 
 } /* namespace Args */

@@ -216,21 +216,17 @@ protected:
 			{
 				eatValues( ctx, m_values,
 					String( SL( "Command \"" ) ) +
-						name() + SL( "\" require value that wasn't presented." ),
+						name() + SL( "\" requires value that wasn't presented." ),
 					cmdLine() );
 			}
 				break;
 
 			case ValueOptions::OneValue :
 			{
-				try {
-					m_values.push_back( eatOneValue( ctx, cmdLine() ) );
-				}
-				catch( const BaseException & )
-				{
-					throw BaseException( String( SL( "Command \"" ) ) +
-						name() + SL( "\" require value that wasn't presented." ) );
-				}
+				m_values.push_back( eatOneValue( ctx,
+					String( SL( "Command \"" ) ) + name() +
+						SL( "\" requires value that wasn't presented." ),
+					cmdLine() ) );
 			}
 				break;
 

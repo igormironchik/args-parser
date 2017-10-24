@@ -51,9 +51,6 @@ template< typename Container, typename Cmd, typename Ctx >
 bool eatValues( Ctx & context, Container & container,
 	const String & errorDescription, Cmd * cmdLine )
 {
-	if( !cmdLine )
-		throw BaseException( SL( "Argument is not under command line parser." ) );
-
 	if( !context.atEnd() )
 	{
 		auto begin = context.begin();
@@ -64,17 +61,7 @@ bool eatValues( Ctx & context, Container & container,
 				if( isArgument( v ) || isFlag( v ) )
 					return true;
 				else
-				{
-					try {
-						cmdLine->findArgument( v );
-
-						return true;
-					}
-					catch( const BaseException & )
-					{
-						return false;
-					}
-				}
+					return( cmdLine->findArgument( v ) != nullptr );
 			}
 		);
 
@@ -94,11 +81,9 @@ bool eatValues( Ctx & context, Container & container,
 
 			return true;
 		}
-		else
-			throw BaseException( errorDescription );
 	}
-	else
-		throw BaseException( errorDescription );
+
+	throw BaseException( errorDescription );
 }
 
 
@@ -108,32 +93,23 @@ bool eatValues( Ctx & context, Container & container,
 
 //! Eat one value.
 template< typename Cmd, typename Ctx >
-String eatOneValue( Ctx & context, Cmd * cmdLine )
+String eatOneValue( Ctx & context,
+	const String & errorDescription, Cmd * cmdLine )
 {
-	if( !cmdLine )
-		throw BaseException( SL( "Argument is not under command line parser." ) );
-
 	if( !context.atEnd() )
 	{
 		auto val = context.next();
 
 		if( !isArgument( *val ) && !isFlag( *val ) )
 		{
-			try {
-				cmdLine->findArgument( *val );
-			}
-			catch( const BaseException & )
-			{
+			if( !cmdLine->findArgument( *val ) )
 				return *val;
-			}
 		}
 
 		context.putBack();
-
-		throw BaseException( SL( "Can't eat value." ) );
 	}
-	else
-		throw BaseException( SL( "Can't eat value." ) );
+
+	throw BaseException( errorDescription );
 }
 
 } /* namespace Args */

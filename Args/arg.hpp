@@ -270,16 +270,12 @@ Arg::process( Context & context )
 			setDefined( true );
 		else
 		{
-			try {
-				setValue( eatOneValue( context, cmdLine() ) );
+			setValue( eatOneValue( context,
+				String( SL( "Argument \"" ) ) +	name() +
+					SL( "\" requires value that wasn't presented." ),
+				cmdLine() ) );
 
-				setDefined( true );
-			}
-			catch( const BaseException & )
-			{
-				throw BaseException( String( SL( "Argument \"" ) ) +
-					name() + SL( "\" requires value but it's not presented." ) );
-			}
+			setDefined( true );
 		}
 	}
 	else
