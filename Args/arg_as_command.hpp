@@ -284,7 +284,7 @@ protected:
 				names.push_back( m_name );
 		}
 		else
-			throw BaseException( String( SL( "Dissallowed name \"" ) ) +
+			throw BaseException( String( SL( "Disallowed name \"" ) ) +
 				m_name + SL( "\" for the argument." ) );
 	}
 

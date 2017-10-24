@@ -38,7 +38,7 @@
 using namespace Args;
 
 
-TEST( Flags, DissallowedFlags )
+TEST( Flags, DisallowedFlags )
 {
 	CHECK_CONDITION( isCorrectFlag( SL( "-" ) ) == false )
 	CHECK_CONDITION( isCorrectFlag( SL( " " ) ) == false )
@@ -52,7 +52,7 @@ TEST( Flags, AllowedFlags )
 	CHECK_CONDITION( isCorrectFlag( SL( "1" ) ) == true )
 }
 
-TEST( Names, DissallowedNames )
+TEST( Names, DisallowedNames )
 {
 	CHECK_CONDITION( isCorrectName( SL( "time out" ) ) == false )
 	CHECK_CONDITION( isCorrectName( SL( "" ) ) == false )

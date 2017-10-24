@@ -262,7 +262,7 @@ protected:
 				names.push_back( name() );
 		}
 		else
-			throw BaseException( String( SL( "Dissallowed name \"" ) ) +
+			throw BaseException( String( SL( "Disallowed name \"" ) ) +
 				name() + SL( "\" for the command." ) );
 
 		StringList ftmp = flags;

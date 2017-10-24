@@ -315,7 +315,7 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 				flags.push_back( flag );
 		}
 		else
-			throw BaseException( String( SL( "Dissallowed flag \"-" ) ) +
+			throw BaseException( String( SL( "Disallowed flag \"-" ) ) +
 				m_flag + SL( "\"." ) );
 	}
 
@@ -334,13 +334,13 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 				names.push_back( name );
 		}
 		else
-			throw BaseException( String( SL( "Dissallowed name \"--" ) ) +
+			throw BaseException( String( SL( "Disallowed name \"--" ) ) +
 				m_name + SL( "\"." ) );
 	}
 
 	if( m_flag.empty() && m_name.empty() )
 		throw BaseException( String( SL( "Arguments with empty flag and name "
-			"are dissallowed." ) ) );
+			"are disallowed." ) ) );
 }
 
 inline void
