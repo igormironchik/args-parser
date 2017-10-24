@@ -31,26 +31,27 @@
 #ifndef ARGS__TYPES_HPP__INCLUDED
 #define ARGS__TYPES_HPP__INCLUDED
 
-#ifdef ARGS_WSTRING_BUILD
-
 // C++ include.
-#include <string>
-#include <list>
-#include <iostream>
-
-#elif defined( ARGS_QSTRING_BUILD )
-
-// Qt include.
-#include <QString>
-#include <QTextStream>
-
+#ifdef ARGS_LIST
+	#include <list>
+#elif defined( ARGS_DEQUE )
+	#include <deque>
 #else
+	#include <vector>
+#endif
 
-// C++ include.
-#include <string>
-#include <list>
-#include <iostream>
-
+#ifdef ARGS_WSTRING_BUILD
+	// C++ include.
+	#include <string>
+	#include <iostream>
+#elif defined( ARGS_QSTRING_BUILD )
+	// Qt include.
+	#include <QString>
+	#include <QTextStream>
+#else
+	// C++ include.
+	#include <string>
+	#include <iostream>
 #endif
 
 
@@ -63,9 +64,6 @@ using String = std::wstring;
 
 //! Char type.
 using Char = String::value_type;
-
-//! List of strings.
-using StringList = std::list< String >;
 
 //! Out stream type.
 using OutStreamType = std::wostream;
@@ -264,9 +262,6 @@ private:
 	QString m_str;
 }; // class String
 
-//! List of strings.
-using StringList = std::list< String >;
-
 //! Output stream.
 static OutStreamType & outStream()
 {
@@ -285,9 +280,6 @@ using String = std::string;
 //! Char type.
 using Char = String::value_type;
 
-//! List of strings.
-using StringList = std::list< String >;
-
 //! Out stream type.
 using OutStreamType = std::ostream;
 
@@ -299,6 +291,15 @@ static OutStreamType & outStream()
 
 #define SL(str) str
 
+#endif
+
+//! List of strings.
+#ifdef ARGS_LIST
+	using StringList = std::list< String >;
+#elif defined( ARGS_DEQUE )
+	using StringList = std::deque< String >;
+#else
+	using StringList = std::vector< String >;
 #endif
 
 } /* namespace Args */
