@@ -70,13 +70,8 @@ public:
 	//! \return Is this argument defined?
 	bool isDefined() const override
 	{
-		for( const auto & arg : children() )
-		{
-			if( arg->isDefined() )
-				return true;
-		}
-
-		return false;
+		return std::any_of( children().cbegin(), children().cend(),
+			[] ( const auto & arg ) { return arg->isDefined(); } );
 	}
 
 protected:
@@ -151,13 +146,8 @@ public:
 	//! \return Is this argument defined?
 	bool isDefined() const override
 	{
-		for( const auto & arg : children() )
-		{
-			if( !arg->isDefined() )
-				return false;
-		}
-
-		return true;
+		return !std::any_of( children().cbegin(), children().cend(),
+			[] ( const auto & arg ) { return !arg->isDefined(); } );
 	}
 
 protected:
@@ -231,13 +221,8 @@ public:
 	//! \return Is this argument defined?
 	bool isDefined() const override
 	{
-		for( const auto & arg : children() )
-		{
-			if( arg->isDefined() )
-				return true;
-		}
-
-		return false;
+		return std::any_of( children().cbegin(), children().cend(),
+			[] ( const auto & arg ) { return arg->isDefined(); } );
 	}
 
 protected:
