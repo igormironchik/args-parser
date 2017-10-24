@@ -73,10 +73,10 @@ public:
 		CmdLineOpts opt = Empty );
 #endif
 
-	//! Add argument.
+	//! Add argument. \note Developer should handle lifetime of the argument.
 	void addArg( ArgIface * arg );
 
-	//! Add argument.
+	//! Add argument. \note Developer should handle lifetime of the argument.
 	void addArg( ArgIface & arg );
 
 	//! Parse arguments.

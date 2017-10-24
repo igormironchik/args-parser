@@ -89,7 +89,7 @@ public:
 		return m_children;
 	}
 
-	//! Add argument.
+	//! Add argument. \note Developer should handle lifetime of the argument.
 	template< typename T >
 	typename std::enable_if< std::is_base_of< ArgIface, T >::value &&
 		!std::is_base_of< Command, T >::value >::type
@@ -105,7 +105,7 @@ public:
 				m_children.push_back( &arg );
 	}
 
-	//! Add argument.
+	//! Add argument. \note Developer should handle lifetime of the argument.
 	template< typename T >
 	typename std::enable_if< std::is_base_of< ArgIface, T >::value &&
 		!std::is_base_of< Command, T >::value >::type
