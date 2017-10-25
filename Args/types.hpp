@@ -225,6 +225,11 @@ public:
 		return String( ch + s2.m_str );
 	}
 
+	friend bool operator < ( const String & s1, const String & s2 )
+	{
+		return s1.m_str < s2.m_str;
+	}
+
 	friend OutStreamType & operator << ( OutStreamType & to,
 		const String & what )
 	{

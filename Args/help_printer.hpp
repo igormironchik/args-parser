@@ -322,6 +322,19 @@ HelpPrinter::print( OutStreamType & to )
 	std::for_each( m_cmdLine->arguments().cbegin(),
 		m_cmdLine->arguments().cend(), f );
 
+	// Sort arguments by name.
+	std::sort( required.begin(), required.end(),
+		[] ( const auto & a1, const auto & a2 )
+			{ return a1->name() < a2->name(); } );
+
+	std::sort( optional.begin(), optional.end(),
+		[] ( const auto & a1, const auto & a2 )
+			{ return a1->name() < a2->name(); } );
+
+	std::sort( commands.begin(), commands.end(),
+		[] ( const auto & c1, const auto & c2 )
+			{ return c1->name() < c2->name(); } );
+
 	maxFlag += 2;
 	maxName += 2;
 	maxCommand += 2;
@@ -363,7 +376,7 @@ HelpPrinter::print( OutStreamType & to )
 	}
 	else
 	{
-		to << "Usage: " << m_exeName << " <commands>";
+		to << "Usage: " << m_exeName << " <command>";
 
 		if( !optional.empty() || !required.empty() )
 			to << " <args>";
@@ -392,7 +405,7 @@ HelpPrinter::print( OutStreamType & to )
 				to << "\n";
 			} );
 
-		to << "\n" << "\n";
+		to << "\n";
 	}
 
 	auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
@@ -445,6 +458,15 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 		std::for_each( m_cmdLine->arguments().cbegin(),
 			m_cmdLine->arguments().cend(), gf );
 
+		// Sort global arguments by name.
+		std::sort( grequired.begin(), grequired.end(),
+			[] ( const auto & a1, const auto & a2 )
+				{ return a1->name() < a2->name(); } );
+
+		std::sort( goptional.begin(), goptional.end(),
+			[] ( const auto & a1, const auto & a2 )
+				{ return a1->name() < a2->name(); } );
+
 		gmaxFlag += 2;
 		gmaxName += 2;
 //			gmaxCommand += 2;
@@ -468,6 +490,15 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 		std::for_each( cmd->children().cbegin(),
 			cmd->children().cend(), f );
+
+		// Sort arguments by name.
+		std::sort( required.begin(), required.end(),
+			[] ( const auto & a1, const auto & a2 )
+				{ return a1->name() < a2->name(); } );
+
+		std::sort( optional.begin(), optional.end(),
+			[] ( const auto & a1, const auto & a2 )
+				{ return a1->name() < a2->name(); } );
 
 		maxFlag += 2;
 		maxName += 2;
