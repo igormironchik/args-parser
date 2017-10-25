@@ -46,6 +46,40 @@
 
 namespace Args {
 
+namespace details {
+
+//
+// formatCorrectNamesString
+//
+
+//! \return Prepared for priniting string of correct names.
+String formatCorrectNamesString( const StringList & names )
+{
+	if( !names.empty() )
+	{
+		String res;
+
+		bool first = true;
+
+		for( const auto & name : names )
+		{
+			if( !first )
+				res.append( SL( " or " ) );
+
+			res.append( name );
+
+			first = false;
+		}
+
+		return res;
+	}
+	else
+		return String();
+}
+
+} /* namespace details */
+
+
 //
 // CmdLine
 //
@@ -88,11 +122,48 @@ public:
 	//! \return All arguments.
 	const std::vector< ArgIface* > & arguments() const;
 
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & name,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const
+	{
+		bool ret = false;
+
+		std::for_each( arguments().cbegin(), arguments().cend(),
+			[ & ] ( const auto & arg )
+			{
+				if( arg->isMisspelledName( name, possibleNames ) )
+					ret = true;
+			} );
+
+		return ret;
+	}
+
 private:
 	//! Check correctness of the arguments before parsing.
 	void checkCorrectnessBeforeParsing() const;
 	//! Check correctness of the arguments after parsing.
 	void checkCorrectnessAfterParsing() const;
+	//! Print information about unknown argument.
+	void printInfoAboutUnknownArgument( const String & word )
+	{
+		StringList correctNames;
+
+		if( isMisspelledName( word, correctNames ) )
+		{
+			const String names = details::formatCorrectNamesString(
+				correctNames );
+
+			throw BaseException( String( SL( "Unknown argument \"" ) ) +
+				word + SL( "\".\n\nProbably you mean " ) + names +
+				SL( "." ) );
+		}
+		else
+			throw BaseException( String( SL( "Unknown argument \"" ) ) +
+				word + SL( "\"." ) );
+	}
 
 private:
 	DISABLE_COPY( CmdLine )
@@ -200,8 +271,7 @@ CmdLine::parse()
 			if( arg )
 				arg->process( m_context );
 			else
-				throw BaseException( String( SL( "Unknown argument \"" ) ) +
-					word + SL( "\"." ) );
+				printInfoAboutUnknownArgument( word );
 		}
 		else if( details::isFlag( word ) )
 		{
@@ -223,7 +293,7 @@ CmdLine::parse()
 
 				if( i < length - 1 && arg->isWithValue() )
 					throw BaseException( String( SL( "Only last argument in "
-						"flags combo can have value. Flags combo is\"" ) ) +
+						"flags combo can be with value. Flags combo is \"" ) ) +
 						word + SL( "\"." ) );
 				else
 					arg->process( m_context );
@@ -256,8 +326,7 @@ CmdLine::parse()
 					tmp->process( m_context );
 			}
 			else
-				throw BaseException( String( SL( "Unknown argument \"" ) ) +
-					word + SL( "\"." ) );
+				printInfoAboutUnknownArgument( word );
 		}
 	}
 
