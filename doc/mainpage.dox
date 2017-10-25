@@ -9,12 +9,12 @@
 
 	\subsection requirements Requirements
 
-	For compiling Args you should have installed:
+	For compiling Args with Ruby you should have installed:
 
 	\li Ruby programming language (http://www.ruby-lang.org/en/)
 	\li mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
 
-	or
+	or use
 
 	\li QMake or CMake
 
@@ -28,9 +28,26 @@
 		\c -abc defines three flags \c -a, \c -b and \c -c.
 	\li The last flag in flag's block can be with value. Then it's possible to
 		type the next \c -abc=value. And here flag \c -c will have value \c value.
-	\li MultiArg class provide ability to define more than one value for argument.
+	\li \c MultiArg class provides ability to define more than one value for argument.
 		This type of arguments can be specified more than once in the command
 		line. And the resulted value of the argument will be \c StringList.
+	\li \c Command class can be used to define command in command line interface.
+	   Command is the argument without dash/dashes at the beginning, \c add for example.
+	\li Command can has children arguments or even subcommands. Subcommand can be
+	   added using \c ArgAsCommand class.
+	\li In Args groups can be used to group arguments into groups to check their
+		definitions after parsing, so if constraint of group will be violated
+		exception will be thrown.
+	\li Args provides \c Help argument that provides help printing. \c Help
+		uses \c -h, \c --help arguments. \c Help can receive value with name
+		of argument or command to print help about. If \c Help will receive name
+		of the command as value then can be set second value with name of subcommand
+		or child argument to receive help about child argument.
+	\li If Args don't know about argument in command line interface it provides
+		information about possible arguments if some misspelling was in command
+		line interface. If Args can't assume anything about entered argument it
+		will just say about unknown argument through the exception and parsing will
+		fail.
 
 	\section types Different types of strings.
 
@@ -40,6 +57,16 @@
 	\li To build Args with \c std::wstring support define \c ARGS_WSTRING_BUILD
 	\li To build Args with \c QString support define \c ARGS_QSTRING_BUILD
 	\li If nothing was defined then Args will be build with \c std::string.
+
+	\section stringlist Different types of list of strings.
+
+	Args extensively uses list of string in internal structures and to return
+	values of arguments outside. In the code this is \c StringList
+	type defined in \c Args/types.hpp. By default underlying type is
+	\c std::vector that can be changed to \c std::list or \c std::deque.
+
+	\li Define \c ARGS_LIST to build Args with \c std::list as \c StringList
+	\li Define \c ARGS_DEQUE to build Args with \c std::deque as \c StringList
 
 	\section example Example
 

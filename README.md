@@ -4,20 +4,20 @@ This is Args.
 
 Args is a small C++ header-only library for parsing command line arguments.
 
-
 # Compilling
 
-Just run build.rb which is a Ruby program and a project file or use QMake project.
-
+Just run build.rb which is a Ruby program and a project file or use QMake
+or CMake project.
 
 # Requirements
 
-For compiling Args you should have installed:
+For compiling Args with Ruby you should have installed:
 
  * Ruby programming language (http://www.ruby-lang.org/en/)
  * mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
 
-or
+or use
+
  * QMake, CMake
 
 # Syntax
@@ -30,9 +30,26 @@ For example ```--argument value``` and ```--argument=value```.
 ```-abc``` defines three flags ```-a```, ```-b``` and ```-c```.
  * The last flag in flag's block can be with value. Then it's possible to type the next
 ```-abc=value```. And here flag ```-c``` will have value ```value```.
- * MultiArg class provide ability to define more than one value for argument. This type
+ * ```MultiArg``` class provides ability to define more than one value for argument. This type
 of arguments can be specified more than once in the command line. And the resulted value
 of the argument will be ```StringList```.
+ * ```Command``` class can be used to define command in command line interface.
+Command is the argument without dash/dashes at the beginning, ```add``` for example.
+ * Command can has children arguments or even subcommands. Subcommand can be
+added using ```ArgAsCommand``` class.
+ * In Args groups can be used to group arguments into groups to check their
+definitions after parsing, so if constraint of group will be violated
+exception will be thrown.
+ * Args provides ```Help``` argument that provides help printing. ```Help```
+uses ```-h, --help``` arguments. ```Help``` can receive value with name
+of argument or command to print help about. If ```Help``` will receive name
+of the command as value then can be set second value with name of subcommand
+or child argument to receive help about child argument.
+ * If Args don't know about argument in command line interface it provides
+information about possible arguments if some misspelling was in command
+line interface. If Args can't assume anything about entered argument it
+will just say about unknown argument through the exception and parsing will
+fail.
 
 # Different types of strings.
 
@@ -42,6 +59,16 @@ std::wstring and QString.
  * To build Args with std::wstring support define ARGS_WSTRING_BUILD
  * To build Args with QString support define ARGS_QSTRING_BUILD
  * If nothing was defined then Args will be build with std::string.
+
+# Different types of list of strings.
+
+Args extensively uses list of string in internal structures and to return
+values of arguments outside. In the code this is ```StringList```
+type defined in ```Args/types.hpp```. By default underlying type is
+```std::vector``` that can be changed to ```std::list``` or ```std::deque```.
+
+ * Define ARGS_LIST to build Args with ```std::list``` as ```StringList```
+ * Define ARGS_DEQUE to build Args with ```std::deque``` as ```StringList```
           
 # Example
 
@@ -146,18 +173,18 @@ int main( int argc, char ** argv )
 ```
 This application just show the power of Args.
 
-Usage: sample.help.exe -s, --host <arg> -p, --port <arg>
-       [ --timeout <ms> ] [ -h, --help <arg> ]
+Usage: sample.help.exe -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ]
+       [ --timeout <ms> ]
 
 Required arguments:
- -o, --host <arg>   Host. Can be "localhost", "any" or regular IP.
+ -s, --host <arg>   Host. Can be "localhost", "any" or regular IP.
 
  -p, --port <arg>   Port number to create socket.
 
 Optional arguments:
-     --timeout <ms> Timeout before new messages will be sent in milliseconds.
-
  -h, --help <arg>   Print this help.
+
+     --timeout <ms> Timeout before new messages will be sent in milliseconds.
 ```
 
 That's it. Use it and enjoy it. Good luck.
