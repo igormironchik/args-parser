@@ -146,6 +146,7 @@ private:
 	void checkCorrectnessBeforeParsing() const;
 	//! Check correctness of the arguments after parsing.
 	void checkCorrectnessAfterParsing() const;
+
 	//! Print information about unknown argument.
 	void printInfoAboutUnknownArgument( const String & word )
 	{
