@@ -116,7 +116,7 @@ public:
 	//! \return Value of this argument.
 	virtual const String & value() const;
 	//! Set value.
-	void setValue( const String & v );
+	virtual void setValue( const String & v );
 
 	//! \return Flag.
 	const String & flag() const override;
@@ -142,6 +142,18 @@ public:
 	const String & longDescription() const override;
 	//! Set long description.
 	void setLongDescription( const String & desc );
+
+	//! \return Default value.
+	virtual const String & defaultValue() const
+	{
+		return m_defaultValue;
+	}
+
+	//! Set default value.
+	virtual void setDefaultValue( const String & v )
+	{
+		m_defaultValue = v;
+	}
 
 protected:
 	/*!
@@ -225,6 +237,8 @@ private:
 	String m_description;
 	//! Long description.
 	String m_longDescription;
+	//! Default value.
+	String m_defaultValue;
 }; // class Arg
 
 
@@ -407,7 +421,10 @@ Arg::setDefined( bool on )
 inline const String &
 Arg::value() const
 {
-	return m_value;
+	if( !m_value.empty() )
+		return m_value;
+	else
+		return m_defaultValue;
 }
 
 inline void

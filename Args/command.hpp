@@ -153,6 +153,8 @@ public:
 	{
 		if( !m_values.empty() )
 			return m_values.front();
+		else if( !m_defaultValues.empty() )
+			return m_defaultValues.front();
 		else
 			return m_dummyEmptyString;
 	}
@@ -160,7 +162,38 @@ public:
 	//! \return All values for this argument.
 	const StringList & values() const
 	{
-		return m_values;
+		if( !m_values.empty() )
+			return m_values;
+		else
+			return m_defaultValues;
+	}
+
+	//! \return Default value.
+	const String & defaultValue() const
+	{
+		if( !m_defaultValues.empty() )
+			return m_defaultValues.front();
+		else
+			return m_dummyEmptyString;
+	}
+
+	//! Set default value. \note Value will be pushed back to the list
+	//! of default values.
+	void setDefaultValue( const String & v )
+	{
+		m_defaultValues.push_back( v );
+	}
+
+	//! \return Default values.
+	const StringList & defaultValues() const
+	{
+		return m_defaultValues;
+	}
+
+	//! Set default values.
+	void setDefaultValues( const StringList & v )
+	{
+		m_defaultValues = v;
 	}
 
 protected:
@@ -316,6 +349,8 @@ private:
 	bool m_isDefined;
 	//! Values.
 	StringList m_values;
+	//! Default values.
+	StringList m_defaultValues;
 }; // class Command
 
 } /* namespace Args */
