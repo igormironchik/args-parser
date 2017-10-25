@@ -112,7 +112,7 @@ public:
 		if( !m_defaultValues.empty() )
 			return m_defaultValues.front();
 		else
-			return Arg::defaultValue();
+			return m_emptyString;
 	}
 
 	//! Set default value. \note Value will be pushed back to the list
