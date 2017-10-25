@@ -127,7 +127,7 @@ Help::process( Context & context )
 		const String arg = *context.next();
 
 		// Argument or flag.
-		if( isArgument( arg ) || isFlag( arg ) )
+		if( details::isArgument( arg ) || details::isFlag( arg ) )
 			m_printer.print( arg, outStream() );
 		// Command?
 		else

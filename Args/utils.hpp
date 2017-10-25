@@ -46,6 +46,9 @@
 // Args include.
 #include "types.hpp"
 
+// C++ include.
+#include <algorithm>
+
 
 namespace Args {
 
@@ -66,6 +69,8 @@ namespace Args {
 //! Macro to supress warning about unused argument.
 #define UNUSED( Var ) (void)Var;
 
+
+namespace details {
 
 //
 // isArgument
@@ -156,6 +161,31 @@ isCorrectName( const String & name )
 
 	return true;
 } // isCorrectName
+
+
+//
+// isMisspelledName
+//
+
+//! \return Is the given name a misspelling of correct name.
+bool isMisspelledName( const String & misspelled,
+	const String & correct )
+{
+	if( !misspelled.empty() && !correct.empty() )
+	{
+		String ms = misspelled;
+		String cs = correct;
+
+		std::sort( ms.begin(), ms.end() );
+		std::sort( cs.begin(), cs.end() );
+
+		return ( ms == cs );
+	}
+	else
+		return false;
+}
+
+} /* namespace details */
 
 } /* namespace Args */
 

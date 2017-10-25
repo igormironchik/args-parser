@@ -146,6 +146,13 @@ protected:
 		m_cmdLine = cmdLine;
 	}
 
+	//! \return Is given name a misspelled name of the argument.
+	virtual bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & name,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const = 0;
+
 private:
 	DISABLE_COPY( ArgIface )
 

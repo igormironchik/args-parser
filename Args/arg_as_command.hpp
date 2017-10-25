@@ -58,15 +58,19 @@ public:
 	explicit ArgAsCommand( T && name,
 		bool required = false,
 		ValueOptions opt = ValueOptions::NoValue )
-		:	m_name( name )
+		:	m_name( std::forward< T > ( name ) )
 		,	m_opt( opt )
 		,	m_required( required )
 		,	m_defined( false )
 	{
-		if( isArgument( name ) || isFlag( name ) )
+		if( details::isArgument( m_name ) || details::isFlag( m_name ) )
 			throw BaseException( String( SL( "ArgAsCommand's name can't "
 				"start with \"-\" whereas you are trying to set name to \"" ) ) +
-				name + SL( "\"." ) );
+				m_name + SL( "\"." ) );
+
+		if( m_name.empty() )
+			throw BaseException(
+				String( SL( "ArgAsCommand can't be with empty name." ) ) );
 
 		switch( m_opt )
 		{
@@ -134,7 +138,7 @@ public:
 
 	const String & argumentName() const override
 	{
-		return m_emptyString;
+		return m_name;
 	}
 
 	//! \return Value specifier.
@@ -269,7 +273,7 @@ protected:
 	{
 		UNUSED( flags )
 
-		if( isCorrectName( m_name ) )
+		if( details::isCorrectName( m_name ) )
 		{
 			auto it = std::find( names.begin(), names.end(), m_name );
 
@@ -290,6 +294,24 @@ protected:
 		if( isRequired() && !isDefined() )
 			throw BaseException( String( SL( "Undefined required argument \"" ) ) +
 				m_name + SL( "\"." ) );
+	}
+
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & name,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		if( details::isMisspelledName( name,
+			String( SL( "--" ) ) + argumentName() ) )
+		{
+			possibleNames.push_back( String( SL( "--" ) ) + argumentName() );
+
+			return true;
+		}
+		else
+			return false;
 	}
 
 private:

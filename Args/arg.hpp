@@ -183,6 +183,27 @@ protected:
 	//! Check correctness of the argument after parsing.
 	void checkCorrectnessAfterParsing() const override;
 
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & name,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		if( !argumentName().empty() )
+		{
+			if( details::isMisspelledName( name,
+				String( SL( "--" ) ) + argumentName() ) )
+			{
+				possibleNames.push_back( String( SL( "--" ) ) + argumentName() );
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 private:
 	DISABLE_COPY( Arg )
 
@@ -253,9 +274,9 @@ Arg::~Arg()
 inline ArgIface *
 Arg::findArgument( const String & name )
 {
-	if( isArgument( name ) && name.substr( 2 ) == m_name )
+	if( details::isArgument( name ) && name.substr( 2 ) == m_name )
 		return this;
-	else if( isFlag( name ) && name.substr( 1 ) == m_flag )
+	else if( details::isFlag( name ) && name.substr( 1 ) == m_flag )
 		return this;
 	else
 		return nullptr;
@@ -298,7 +319,7 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 {
 	if( !m_flag.empty() )
 	{
-		if( isCorrectFlag( m_flag ) )
+		if( details::isCorrectFlag( m_flag ) )
 		{
 			const String flag = String( SL( "-" ) ) + m_flag;
 
@@ -317,7 +338,7 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 
 	if( !m_name.empty() )
 	{
-		if( isCorrectName( m_name ) )
+		if( details::isCorrectName( m_name ) )
 		{
 			const String name = String( SL( "--" ) ) + m_name;
 

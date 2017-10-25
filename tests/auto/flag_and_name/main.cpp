@@ -40,37 +40,37 @@ using namespace Args;
 
 TEST( Flags, DisallowedFlags )
 {
-	CHECK_CONDITION( isCorrectFlag( SL( "-" ) ) == false )
-	CHECK_CONDITION( isCorrectFlag( SL( " " ) ) == false )
-	CHECK_CONDITION( isCorrectFlag( SL( "=" ) ) == false )
-	CHECK_CONDITION( isCorrectFlag( SL( "" ) ) == false )
+	CHECK_CONDITION( details::isCorrectFlag( SL( "-" ) ) == false )
+	CHECK_CONDITION( details::isCorrectFlag( SL( " " ) ) == false )
+	CHECK_CONDITION( details::isCorrectFlag( SL( "=" ) ) == false )
+	CHECK_CONDITION( details::isCorrectFlag( SL( "" ) ) == false )
 }
 
 TEST( Flags, AllowedFlags )
 {
-	CHECK_CONDITION( isCorrectFlag( SL( "a" ) ) == true )
-	CHECK_CONDITION( isCorrectFlag( SL( "1" ) ) == true )
+	CHECK_CONDITION( details::isCorrectFlag( SL( "a" ) ) == true )
+	CHECK_CONDITION( details::isCorrectFlag( SL( "1" ) ) == true )
 }
 
 TEST( Names, DisallowedNames )
 {
-	CHECK_CONDITION( isCorrectName( SL( "time out" ) ) == false )
-	CHECK_CONDITION( isCorrectName( SL( "" ) ) == false )
+	CHECK_CONDITION( details::isCorrectName( SL( "time out" ) ) == false )
+	CHECK_CONDITION( details::isCorrectName( SL( "" ) ) == false )
 }
 
 TEST( Names, AllowedNames )
 {
-	CHECK_CONDITION( isCorrectName( SL( "timeout" ) ) == true )
-	CHECK_CONDITION( isCorrectName( SL( "time-out" ) ) == true )
-	CHECK_CONDITION( isCorrectName( SL( "time_out" ) ) == true )
+	CHECK_CONDITION( details::isCorrectName( SL( "timeout" ) ) == true )
+	CHECK_CONDITION( details::isCorrectName( SL( "time-out" ) ) == true )
+	CHECK_CONDITION( details::isCorrectName( SL( "time_out" ) ) == true )
 }
 
 TEST( FlagAndArgument, IsFlagOrArgument )
 {
-	CHECK_CONDITION( isFlag( SL( "-a" ) ) == true )
-	CHECK_CONDITION( isFlag( SL( "--timeout" ) ) == false )
-	CHECK_CONDITION( isArgument( SL( "-a" ) ) == false )
-	CHECK_CONDITION( isArgument( SL( "--timeout" ) ) == true )
+	CHECK_CONDITION( details::isFlag( SL( "-a" ) ) == true )
+	CHECK_CONDITION( details::isFlag( SL( "--timeout" ) ) == false )
+	CHECK_CONDITION( details::isArgument( SL( "-a" ) ) == false )
+	CHECK_CONDITION( details::isArgument( SL( "--timeout" ) ) == true )
 }
 
 

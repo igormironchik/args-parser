@@ -55,16 +55,20 @@ class Command final
 
 public:
 	template< typename T >
-	explicit Command( T && name,
+	explicit Command( T && nm,
 		ValueOptions opt = ValueOptions::NoValue )
-		:	GroupIface( name )
+		:	GroupIface( std::forward< T > ( nm ) )
 		,	m_opt( opt )
 		,	m_isDefined( false )
 	{
-		if( isArgument( name ) || isFlag( name ) )
+		if( details::isArgument( name() ) || details::isFlag( name() ) )
 			throw BaseException( String( SL( "Command's name can't "
 				"start with \"-\" whereas you are trying to set name to \"" ) ) +
-				name + SL( "\"." ) );
+				name() + SL( "\"." ) );
+
+		if( name().empty() )
+			throw BaseException(
+				String( SL( "Command can't be with empty name." ) ) );
 
 		switch( m_opt )
 		{
@@ -247,7 +251,7 @@ protected:
 		//! All known names.
 		StringList & names ) const override
 	{
-		if( isCorrectName( name() ) )
+		if( details::isCorrectName( name() ) )
 		{
 			auto it = std::find( names.begin(), names.end(), name() );
 
@@ -272,6 +276,29 @@ protected:
 	{
 		if( isDefined() )
 			GroupIface::checkCorrectnessAfterParsing();
+	}
+
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & nm,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		bool ret = false;
+
+		if( details::isMisspelledName( nm, name() ) )
+		{
+			possibleNames.push_back( name() );
+
+			ret = true;
+		}
+
+
+		if( GroupIface::isMisspelledName( nm, possibleNames ) )
+			return true;
+		else
+			return ret;
 	}
 
 private:

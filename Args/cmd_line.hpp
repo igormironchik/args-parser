@@ -193,7 +193,7 @@ CmdLine::parse()
 			word = word.substr( 0, eqIt );
 		}
 
-		if( isArgument( word ) )
+		if( details::isArgument( word ) )
 		{
 			auto * arg = findArgument( word );
 
@@ -203,7 +203,7 @@ CmdLine::parse()
 				throw BaseException( String( SL( "Unknown argument \"" ) ) +
 					word + SL( "\"." ) );
 		}
-		else if( isFlag( word ) )
+		else if( details::isFlag( word ) )
 		{
 			for( String::size_type i = 1, length = word.length(); i < length; ++i )
 			{

@@ -159,7 +159,7 @@ public:
 	//! \return Argument name.
 	const String & argumentName() const override
 	{
-		return m_dummyEmptyString;
+		return m_name;
 	}
 
 	//! \return Value specifier.
@@ -253,6 +253,25 @@ protected:
 
 		for( const auto & arg : m_children )
 			arg->setCmdLine( cmdLine );
+	}
+
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & name,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		bool ret = false;
+
+		std::for_each( children().cbegin(), children().cend(),
+			[ & ] ( const auto & ch )
+			{
+				if( ch->isMisspelledName( name, possibleNames ) )
+					ret = true;
+			} );
+
+		return ret;
 	}
 
 private:
