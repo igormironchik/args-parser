@@ -300,6 +300,30 @@ HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
 	to.flush();
 }
 
+namespace details {
+
+template< typename T >
+bool argNameLess( const T & a1, const T & a2 )
+{
+	static const Char dash = SL( '-' );
+
+	if( !a1->name().empty() && !a2->name().empty() )
+	{
+		if( *( a1->name().cbegin() ) != dash &&
+				*( a2->name().cbegin() ) == dash )
+			return true;
+		else if( *( a1->name().cbegin() ) == dash &&
+				*( a2->name().cbegin() ) != dash )
+			return false;
+		else
+			return ( a1->name() < a2->name() );
+	}
+	else
+		return ( a1->name() < a2->name() );
+}
+
+} /* namespace details */
+
 inline void
 HelpPrinter::print( OutStreamType & to )
 {
@@ -325,15 +349,15 @@ HelpPrinter::print( OutStreamType & to )
 	// Sort arguments by name.
 	std::sort( required.begin(), required.end(),
 		[] ( const auto & a1, const auto & a2 )
-			{ return a1->name() < a2->name(); } );
+			{ return details::argNameLess( a1, a2 ); } );
 
 	std::sort( optional.begin(), optional.end(),
 		[] ( const auto & a1, const auto & a2 )
-			{ return a1->name() < a2->name(); } );
+			{ return details::argNameLess( a1, a2 ); } );
 
 	std::sort( commands.begin(), commands.end(),
 		[] ( const auto & c1, const auto & c2 )
-			{ return c1->name() < c2->name(); } );
+			{ return details::argNameLess( c1, c2 ); } );
 
 	maxFlag += 2;
 	maxName += 2;
@@ -461,11 +485,11 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 		// Sort global arguments by name.
 		std::sort( grequired.begin(), grequired.end(),
 			[] ( const auto & a1, const auto & a2 )
-				{ return a1->name() < a2->name(); } );
+				{ return details::argNameLess( a1, a2 ); } );
 
 		std::sort( goptional.begin(), goptional.end(),
 			[] ( const auto & a1, const auto & a2 )
-				{ return a1->name() < a2->name(); } );
+				{ return details::argNameLess( a1, a2 ); } );
 
 		gmaxFlag += 2;
 		gmaxName += 2;
@@ -494,11 +518,11 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 		// Sort arguments by name.
 		std::sort( required.begin(), required.end(),
 			[] ( const auto & a1, const auto & a2 )
-				{ return a1->name() < a2->name(); } );
+				{ return details::argNameLess( a1, a2 ); } );
 
 		std::sort( optional.begin(), optional.end(),
 			[] ( const auto & a1, const auto & a2 )
-				{ return a1->name() < a2->name(); } );
+				{ return details::argNameLess( a1, a2 ); } );
 
 		maxFlag += 2;
 		maxName += 2;
