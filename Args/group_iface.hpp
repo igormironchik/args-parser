@@ -159,7 +159,7 @@ public:
 	//! \return Argument name.
 	const String & argumentName() const override
 	{
-		return m_name;
+		return m_dummyEmptyString;
 	}
 
 	//! \return Value specifier.

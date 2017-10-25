@@ -138,7 +138,7 @@ public:
 
 	const String & argumentName() const override
 	{
-		return m_name;
+		return m_emptyString;
 	}
 
 	//! \return Value specifier.

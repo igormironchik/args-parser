@@ -278,7 +278,7 @@ HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
 			pos += arg->valueSpecifier().length() + 3;
 		}
 	}
-	else
+	else if( arg->flag().empty() && arg->argumentName().empty() )
 	{
 		to << ' ';
 		++pos;
