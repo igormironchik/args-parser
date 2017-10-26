@@ -35,4 +35,5 @@ script:
   - cd ..
   - |
     coveralls --build-root build --gcov-options '\-lp' \
-      -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples
+      -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples \
+      -i . --verbose
