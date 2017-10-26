@@ -382,7 +382,7 @@ HelpPrinter::print( OutStreamType & to )
 					requiredFlag );
 
 				for( const auto & w : details::asConst( words ) )
-					usage.insert( usage.end(), w );
+					usage.push_back( w );
 			};
 
 		std::for_each( required.cbegin(), required.cend(),
