@@ -44,7 +44,7 @@ using namespace Args;
 #endif
 
 
-TEST( MultiArgTestCase, TestAllIsOk )
+TEST( MultiArgTestCase, TestAllIsOk1 )
 {
 	const int argc = 10;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -147,12 +147,50 @@ TEST( MultiArgTestCase, TestAllIsOk3 )
 
 	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), false, true );
 
-	cmd.addArg( &multi );
+	cmd.addArg( multi );
 
 	cmd.parse();
 
 	CHECK_CONDITION( multi.isDefined() == true )
 	CHECK_CONDITION( multi.count() == 4 )
+}
+
+TEST( MultiArgTestCase, TestAllIsOk4 )
+{
+	const int argc = 1;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true, false );
+	multi.setDefaultValue( SL( "default" ) );
+
+	cmd.addArg( multi );
+
+	cmd.parse();
+
+	CHECK_CONDITION( multi.isDefined() == false )
+	CHECK_CONDITION( multi.value() == SL( "default" ) )
+	CHECK_CONDITION( multi.values().size() == 1 )
+	CHECK_CONDITION( multi.values().front() == SL( "default" ) )
+}
+
+TEST( MultiArgTestCase, TestAllIsOk5 )
+{
+	const int argc = 1;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true, false );
+
+	cmd.addArg( multi );
+
+	cmd.parse();
+
+	CHECK_CONDITION( multi.isDefined() == false )
+	CHECK_CONDITION( multi.value().empty() )
+	CHECK_CONDITION( multi.values().size() == 0 )
 }
 
 TEST( MultiArgTestCase, NotDefinedValue )
