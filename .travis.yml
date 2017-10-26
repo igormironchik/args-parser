@@ -33,4 +33,4 @@ script:
   - make
   - ctest
   - cd ..
-  - coveralls --build-root build --gcov-options '\-lp' -e doc -e tests -e tests -e UnitTest
+  - coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles
