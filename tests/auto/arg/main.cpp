@@ -46,9 +46,9 @@ using namespace Args;
 
 TEST( ArgTestCase, TestAllIsOk )
 {
-	const int argc = 7;
+	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "-t" ), SL( "100" ),
+		SL( "-t=100" ),
 		SL( "--port" ), SL( "4545" ),
 		SL( "--host" ), SL( "any" ) };
 
