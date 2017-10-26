@@ -31,9 +31,8 @@ script:
   - cd build
   - cmake -DENABLE_COVERAGE=ON ..
   - make
-  - make test
+  - ctest
   - cd ..
   - |
     coveralls --build-root build --gcov-options '\-lp' \
-      -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples \
-      -i . --verbose
+      -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples
