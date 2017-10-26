@@ -136,6 +136,25 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 	CHECK_CONDITION( timeout.value().empty() )
 }
 
+TEST( MultiArgTestCase, TestAllIsOk3 )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-m" ),	SL( "-m" ),
+		SL( "-m" ), SL( "-m" ) };
+
+	CmdLine cmd( argc, argv );
+
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), false, true );
+
+	cmd.addArg( &multi );
+
+	cmd.parse();
+
+	CHECK_CONDITION( multi.isDefined() == true )
+	CHECK_CONDITION( multi.count() == 4 )
+}
+
 TEST( MultiArgTestCase, NotDefinedValue )
 {
 	const int argc = 8;

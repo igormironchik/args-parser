@@ -56,13 +56,14 @@ TEST( ArgTestCase, TestAllIsOk )
 
 	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
 	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
-	Arg d( SL( "default" ), false, true );
+	Arg d( SL( "default" ), true );
 	d.setDefaultValue( SL( "default" ) );
 	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
 	cmd.addArg( &timeout );
 	cmd.addArg( &port );
 	cmd.addArg( &host );
+	cmd.addArg( d );
 
 	cmd.parse();
 
