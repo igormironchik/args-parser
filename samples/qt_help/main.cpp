@@ -73,7 +73,7 @@ int main( int argc, char ** argv )
 			He is with value but optional.
 		*/
 		Args::Arg timeout( QLatin1String( "timeout" ), true );
-		//! This argument want to specify value specifier in the help. Let's do it.
+		// This argument want to specify value specifier in the help. Let's do it.
 		timeout.setValueSpecifier( QLatin1String( "ms" ) );
 		timeout.setDescription( QLatin1String( "Timeout before new messages will be "
 			"sent in milliseconds." ) );
@@ -84,7 +84,7 @@ int main( int argc, char ** argv )
 		Args::Help help;
 		// Set executable name to the help printer.
 		help.setExecutable( argv[ 0 ] );
-		//! And set description of the application.
+		// And set description of the application.
 		help.setAppDescription( QLatin1String( "This application just show "
 			"the power of Args." ) );
 

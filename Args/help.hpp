@@ -39,8 +39,28 @@
 #include "exceptions.hpp"
 #include "types.hpp"
 
+#ifdef ARGS_TESTING
+	#ifndef ARGS_QSTRING_BUILD
+		// C++ include.
+		#include <sstream>
+	#endif
+#endif
+
 
 namespace Args {
+
+#ifdef ARGS_TESTING
+	#ifdef ARGS_WSTRING_BUILD
+		extern std::wstringstream g_argsOutStream;
+	#elif defined( ARGS_QSTRING_BUILD )
+		extern OutStreamType g_argsOutStream;
+	#else
+		extern std::stringstream g_argsOutStream;
+	#endif
+#else
+	OutStreamType & g_argsOutStream = outStream();
+#endif // ARGS_TESTING
+
 
 //
 // Help
@@ -128,7 +148,7 @@ Help::process( Context & context )
 
 		// Argument or flag.
 		if( details::isArgument( arg ) || details::isFlag( arg ) )
-			m_printer.print( arg, outStream() );
+			m_printer.print( arg, g_argsOutStream );
 		// Command?
 		else
 		{
@@ -141,23 +161,23 @@ Help::process( Context & context )
 				if( cmd )
 				{
 					if( !context.atEnd() )
-						m_printer.print( cmd, *context.next(), outStream() );
+						m_printer.print( cmd, *context.next(), g_argsOutStream );
 					else
-						m_printer.print( arg, outStream() );
+						m_printer.print( arg, g_argsOutStream );
 				}
 				else if( tmp )
-					m_printer.print( arg, outStream() );
+					m_printer.print( arg, g_argsOutStream );
 				else
-					m_printer.print( outStream() );
+					m_printer.print( g_argsOutStream );
 			}
 			catch( const BaseException & )
 			{
-				m_printer.print( outStream() );
+				m_printer.print( g_argsOutStream );
 			}
 		}
 	}
 	else
-		m_printer.print( outStream() );
+		m_printer.print( g_argsOutStream );
 
 	setDefined( true );
 

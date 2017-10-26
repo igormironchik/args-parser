@@ -276,7 +276,7 @@ TEST( ArgAsCommandCase, TestNameRedefinition )
 	CHECK_THROW( cmd.parse(), BaseException )
 }
 
-TEST( ArgAsCOmmandCase, TestAllIsOk1 )
+TEST( ArgAsCommandCase, TestAllIsOk1 )
 {
 	const int argc = 1;
 
@@ -296,7 +296,7 @@ TEST( ArgAsCOmmandCase, TestAllIsOk1 )
 	CHECK_CONDITION( file.values().empty() )
 }
 
-TEST( ArgAsCOmmandCase, TestAllIsOk2 )
+TEST( ArgAsCommandCase, TestAllIsOk2 )
 {
 	const int argc = 1;
 
