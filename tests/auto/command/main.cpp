@@ -44,7 +44,7 @@ using namespace Args;
 #endif
 
 
-TEST( CommandCase, TestAllIsOk )
+TEST( CommandCase, TestAllIsOk1 )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -250,6 +250,49 @@ TEST( CommandCase, TestAllIsOk4 )
 
 	CHECK_CONDITION( c.isDefined() == false )
 	CHECK_CONDITION( d.isDefined() == false )
+}
+
+TEST( CommandCase, TestAllIsOk5 )
+{
+	const int argc = 1;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	Command a( SL( "add" ), ValueOptions::ManyValues );
+
+	cmd.addArg( a );
+
+	cmd.parse();
+
+	CHECK_CONDITION( a.isDefined() == false )
+	CHECK_CONDITION( a.value().empty() )
+	CHECK_CONDITION( a.values().empty() )
+	CHECK_CONDITION( a.defaultValue().empty() )
+	CHECK_CONDITION( a.defaultValues().empty() )
+}
+
+TEST( CommandCase, TestAllIsOk6 )
+{
+	const int argc = 1;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	Command a( SL( "add" ), ValueOptions::ManyValues );
+	a.setDefaultValue( SL( "default" ) );
+
+	cmd.addArg( a );
+
+	cmd.parse();
+
+	CHECK_CONDITION( a.isDefined() == false )
+	CHECK_CONDITION( a.value() == SL( "default" ) )
+	CHECK_CONDITION( a.values().size() == 1 )
+	CHECK_CONDITION( a.values().front() == SL( "default" ) )
+	CHECK_CONDITION( a.defaultValue() == SL( "default" ) )
+	CHECK_CONDITION( a.defaultValues().size() == 1 )
+	CHECK_CONDITION( a.defaultValues().front() == SL( "default" ) )
 }
 
 
