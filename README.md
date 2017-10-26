@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/igormironchik/args-parser.svg?branch=master)](https://travis-ci.org/igormironchik/args-parser)
+[![Build Status](https://travis-ci.org/igormironchik/args-parser.svg?branch=master)](https://travis-ci.org/igormironchik/args-parser)[![Coverage Status](https://coveralls.io/repos/github/igormironchik/args-parser/badge.svg?branch=master)](https://coveralls.io/github/igormironchik/args-parser?branch=master)
 
 This is Args.
 
