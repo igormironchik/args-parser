@@ -61,7 +61,7 @@ String formatCorrectNamesString( const StringList & names )
 
 		bool first = true;
 
-		for( const auto & name : names )
+		for( const auto & name : details::asConst( names ) )
 		{
 			if( !first )
 				res.append( SL( " or " ) );

@@ -381,7 +381,8 @@ HelpPrinter::print( OutStreamType & to )
 				const StringList words = createUsageString( arg,
 					requiredFlag );
 
-				usage.insert( usage.end(), words.cbegin(), words.cend() );
+				for( const auto & w : details::asConst( words ) )
+					usage.insert( usage.end(), w );
 			};
 
 		std::for_each( required.cbegin(), required.cend(),

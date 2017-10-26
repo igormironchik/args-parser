@@ -65,10 +65,20 @@ std::wstring and QString.
 Args extensively uses list of string in internal structures and to return
 values of arguments outside. In the code this is ```StringList```
 type defined in ```Args/types.hpp```. By default underlying type is
-```std::vector``` that can be changed to ```std::list``` or ```std::deque```.
+```std::vector``` or ```QVector``` when building with Qt that can be changed
+to ```std::list```, ```QLinkedList``` or ```std::deque```, ```QList```.
 
- * Define ARGS_LIST to build Args with ```std::list``` as ```StringList```
- * Define ARGS_DEQUE to build Args with ```std::deque``` as ```StringList```
+ * Define ARGS_LIST to build Args with ```std::list```, ```QLinkedList```
+as ```StringList```
+ * Define ARGS_DEQUE to build Args with ```std::deque```, ```QList```
+as ```StringList```
+
+# Q/A
+
+Why not to add description, long description, etc into constructors of
+arguments, so it will be possible to initialize argument in one line?
+
+ * This is impossible because constructors will be ambiguous.
           
 # Example
 

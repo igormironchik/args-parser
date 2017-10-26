@@ -31,27 +31,45 @@
 #ifndef ARGS__TYPES_HPP__INCLUDED
 #define ARGS__TYPES_HPP__INCLUDED
 
-// C++ include.
-#ifdef ARGS_LIST
-	#include <list>
-#elif defined( ARGS_DEQUE )
-	#include <deque>
-#else
-	#include <vector>
-#endif
-
 #ifdef ARGS_WSTRING_BUILD
 	// C++ include.
 	#include <string>
 	#include <iostream>
+
+	#ifdef ARGS_LIST
+		#include <list>
+	#elif defined( ARGS_DEQUE )
+		#include <deque>
+	#else
+		#include <vector>
+	#endif
+
 #elif defined( ARGS_QSTRING_BUILD )
 	// Qt include.
 	#include <QString>
 	#include <QTextStream>
+
+	#ifdef ARGS_LIST
+		#include <QLinkedList>
+	#elif defined( ARGS_DEQUE )
+		#include <QList>
+	#else
+		#include <QVector>
+	#endif
+
 #else
 	// C++ include.
 	#include <string>
 	#include <iostream>
+
+	#ifdef ARGS_LIST
+		#include <list>
+	#elif defined( ARGS_DEQUE )
+		#include <deque>
+	#else
+		#include <vector>
+	#endif
+
 #endif
 
 
@@ -75,6 +93,15 @@ static OutStreamType & outStream()
 }
 
 #define SL(str) L##str
+
+//! List of strings.
+#ifdef ARGS_LIST
+	using StringList = std::list< String >;
+#elif defined( ARGS_DEQUE )
+	using StringList = std::deque< String >;
+#else
+	using StringList = std::vector< String >;
+#endif
 
 #elif defined( ARGS_QSTRING_BUILD )
 
@@ -277,6 +304,15 @@ static OutStreamType & outStream()
 
 #define SL(str) str
 
+//! List of strings.
+#ifdef ARGS_LIST
+	using StringList = QLinkedList< String >;
+#elif defined( ARGS_DEQUE )
+	using StringList = QList< String >;
+#else
+	using StringList = QVector< String >;
+#endif
+
 #else
 
 //! String type.
@@ -296,8 +332,6 @@ static OutStreamType & outStream()
 
 #define SL(str) str
 
-#endif
-
 //! List of strings.
 #ifdef ARGS_LIST
 	using StringList = std::list< String >;
@@ -305,6 +339,8 @@ static OutStreamType & outStream()
 	using StringList = std::deque< String >;
 #else
 	using StringList = std::vector< String >;
+#endif
+
 #endif
 
 } /* namespace Args */

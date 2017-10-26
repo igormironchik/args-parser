@@ -63,10 +63,20 @@
 	Args extensively uses list of string in internal structures and to return
 	values of arguments outside. In the code this is \c StringList
 	type defined in \c Args/types.hpp. By default underlying type is
-	\c std::vector that can be changed to \c std::list or \c std::deque.
+	\c std::vector or \c QVector when building with Qt that can be changed to
+	\c std::list, \c QLinkedList or \c std::deque, \c QList.
 
-	\li Define \c ARGS_LIST to build Args with \c std::list as \c StringList
-	\li Define \c ARGS_DEQUE to build Args with \c std::deque as \c StringList
+	\li Define \c ARGS_LIST to build Args with \c std::list, \c QLinkedList
+		as \c StringList
+	\li Define \c ARGS_DEQUE to build Args with \c std::deque, \c QList
+		as \c StringList
+
+	\section qa Q/A
+
+	Why not to add description, long description, etc into constructors of
+	arguments, so it will be possible to initialize argument in one line?
+
+	\li This is impossible because constructors will be ambiguous.
 
 	\section example Example
 

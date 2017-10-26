@@ -48,6 +48,7 @@
 
 // C++ include.
 #include <algorithm>
+#include <type_traits>
 
 
 namespace Args {
@@ -71,6 +72,22 @@ namespace Args {
 
 
 namespace details {
+
+//
+// asConst
+//
+
+//! Adds const to non-const objects.
+template< typename T >
+constexpr typename std::add_const< T >::type &
+asConst( T & t ) noexcept
+{
+	return t;
+}
+
+template < typename T >
+void asConst( const T && ) = delete;
+
 
 //
 // isArgument
@@ -153,7 +170,7 @@ isCorrectName( const String & name )
 		"abcdefghijklmnopqrstuvwxyz"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ-_" ) );
 
-	for( const Char & c : name )
+	for( const Char & c : asConst( name ) )
 	{
 		if( availableSymbols.find( c ) == String::npos )
 			return false;

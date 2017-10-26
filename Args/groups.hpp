@@ -89,7 +89,7 @@ protected:
 	{
 		GroupIface::checkCorrectnessBeforeParsing( flags, names );
 
-		for( const auto & arg : children() )
+		for( const auto & arg : details::asConst( children() ) )
 		{
 			if( arg->isRequired() )
 				throw BaseException( String( SL( "Required argument \"" ) ) +
@@ -106,7 +106,7 @@ protected:
 
 		ArgIface * defined = nullptr;
 
-		for( const auto & arg : children() )
+		for( const auto & arg : details::asConst( children() ) )
 		{
 			if( arg->isDefined() )
 			{
@@ -165,7 +165,7 @@ protected:
 	{
 		GroupIface::checkCorrectnessBeforeParsing( flags, names );
 
-		for( const auto & arg : children() )
+		for( const auto & arg : details::asConst( children() ) )
 		{
 			if( arg->isRequired() )
 				throw BaseException( String( SL( "Required argument \"" ) ) +
@@ -240,7 +240,7 @@ protected:
 	{
 		GroupIface::checkCorrectnessBeforeParsing( flags, names );
 
-		for( const auto & arg : children() )
+		for( const auto & arg : details::asConst( children() ) )
 		{
 			if( arg->isRequired() )
 				throw BaseException( String( SL( "Required argument \"" ) ) +

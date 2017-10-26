@@ -196,7 +196,7 @@ protected:
 		*/
 		const String & name ) override
 	{
-		for( auto & arg : m_children )
+		for( const auto & arg : details::asConst( m_children ) )
 		{
 			ArgIface * tmp = arg->findArgument( name );
 
@@ -230,14 +230,14 @@ protected:
 		//! All known names.
 		StringList & names ) const override
 	{
-		for( const auto & arg : m_children )
+		for( const auto & arg : details::asConst( m_children ) )
 			arg->checkCorrectnessBeforeParsing( flags, names );
 	}
 
 	//! Check correctness of the argument after parsing.
 	void checkCorrectnessAfterParsing() const override
 	{
-		for( const auto & arg : m_children )
+		for( const auto & arg : details::asConst( m_children ) )
 			arg->checkCorrectnessAfterParsing();
 
 		if( isRequired() && !isDefined() )
@@ -251,7 +251,7 @@ protected:
 	{
 		ArgIface::setCmdLine( cmdLine );
 
-		for( const auto & arg : m_children )
+		for( const auto & arg : details::asConst( m_children ) )
 			arg->setCmdLine( cmdLine );
 	}
 
