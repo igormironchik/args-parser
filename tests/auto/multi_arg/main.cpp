@@ -191,6 +191,9 @@ TEST( MultiArgTestCase, TestAllIsOk5 )
 	CHECK_CONDITION( multi.isDefined() == false )
 	CHECK_CONDITION( multi.value().empty() )
 	CHECK_CONDITION( multi.values().size() == 0 )
+	CHECK_CONDITION( multi.count() == 0 )
+	CHECK_CONDITION( multi.defaultValue().empty() )
+	CHECK_CONDITION( multi.defaultValues().empty() )
 }
 
 TEST( MultiArgTestCase, NotDefinedValue )

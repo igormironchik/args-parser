@@ -276,6 +276,49 @@ TEST( ArgAsCommandCase, TestNameRedefinition )
 	CHECK_THROW( cmd.parse(), BaseException )
 }
 
+TEST( ArgAsCOmmandCase, TestAllIsOk1 )
+{
+	const int argc = 1;
+
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	ArgAsCommand file( SL( "add" ), false, ValueOptions::ManyValues );
+
+	cmd.addArg( file );
+
+	cmd.parse();
+
+	CHECK_CONDITION( file.defaultValue().empty() )
+	CHECK_CONDITION( file.defaultValues().empty() )
+	CHECK_CONDITION( file.value().empty() )
+	CHECK_CONDITION( file.values().empty() )
+}
+
+TEST( ArgAsCOmmandCase, TestAllIsOk2 )
+{
+	const int argc = 1;
+
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	ArgAsCommand file( SL( "add" ), false, ValueOptions::ManyValues );
+	file.setDefaultValue( SL( "default" ) );
+
+	cmd.addArg( file );
+
+	cmd.parse();
+
+	CHECK_CONDITION( file.defaultValue() == SL( "default" ) )
+	CHECK_CONDITION( file.defaultValues().size() == 1 )
+	CHECK_CONDITION( file.defaultValues().front() == SL( "default" ) )
+	CHECK_CONDITION( file.value() == SL( "default" ) )
+	CHECK_CONDITION( file.values().size() == 1 )
+	CHECK_CONDITION( file.values().front() == SL( "default" ) )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
