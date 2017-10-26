@@ -56,6 +56,8 @@ TEST( ArgTestCase, TestAllIsOk )
 
 	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
 	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg d( SL( "default" ), false, true );
+	d.setDefaultValue( SL( "default" ) );
 	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
 	cmd.addArg( &timeout );
@@ -72,6 +74,9 @@ TEST( ArgTestCase, TestAllIsOk )
 
 	CHECK_CONDITION( host.isDefined() == true )
 	CHECK_CONDITION( host.value() == SL( "any" ) )
+
+	CHECK_CONDITION( d.isDefined() == false )
+	CHECK_CONDITION( d.value() == SL( "default" ) )
 }
 
 TEST( ArgTestCase, TestUndefinedArg )
