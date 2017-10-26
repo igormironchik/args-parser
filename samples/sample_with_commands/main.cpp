@@ -87,7 +87,7 @@ int main( int argc, char ** argv )
 	}
 	catch( const BaseException & x )
 	{
-		Args::outStream() << x.desc();
+		Args::outStream() << x.desc() << SL( "\n" );
 	}
 
 	return 0;

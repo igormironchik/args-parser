@@ -134,7 +134,19 @@ public:
 		std::for_each( arguments().cbegin(), arguments().cend(),
 			[ & ] ( const auto & arg )
 			{
-				if( arg->isMisspelledName( name, possibleNames ) )
+				Command * cmd = dynamic_cast< Command* > ( arg );
+
+				if( cmd )
+				{
+					if( cmd == m_command )
+					{
+						if( arg->isMisspelledName( name, possibleNames ) )
+							ret = true;
+					}
+					else if( cmd->isMisspelledCommand( name, possibleNames ) )
+						ret = true;
+				}
+				else if( arg->isMisspelledName( name, possibleNames ) )
 					ret = true;
 			} );
 
@@ -158,8 +170,8 @@ private:
 				correctNames );
 
 			throw BaseException( String( SL( "Unknown argument \"" ) ) +
-				word + SL( "\".\n\nProbably you mean " ) + names +
-				SL( "." ) );
+				word + SL( "\".\n\nProbably you mean \"" ) + names +
+				SL( "\"." ) );
 		}
 		else
 			throw BaseException( String( SL( "Unknown argument \"" ) ) +

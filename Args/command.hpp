@@ -327,11 +327,27 @@ protected:
 			ret = true;
 		}
 
-
 		if( GroupIface::isMisspelledName( nm, possibleNames ) )
 			return true;
 		else
 			return ret;
+	}
+
+	//! \return Is given name a misspelled name of the command.
+	bool isMisspelledCommand(
+		//! Name to check (misspelled).
+		const String & nm,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const
+	{
+		if( details::isMisspelledName( nm, name() ) )
+		{
+			possibleNames.push_back( name() );
+
+			return true;
+		}
+		else
+			return false;
 	}
 
 private:

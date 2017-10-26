@@ -249,7 +249,7 @@ TEST( HelpTestCase, TestMisspelling )
 		CHECK_CONDITION( x.desc() ==
 			SL( "Unknown argument \"--hots\".\n"
 				"\n"
-				"Probably you mean --host." ) )
+				"Probably you mean \"--host\"." ) )
 
 		return;
 	}

@@ -332,14 +332,13 @@ protected:
 	//! \return Is given name a misspelled name of the argument.
 	bool isMisspelledName(
 		//! Name to check (misspelled).
-		const String & name,
+		const String & nm,
 		//! List of possible names for the given misspelled name.
 		StringList & possibleNames ) const override
 	{
-		if( details::isMisspelledName( name,
-			String( SL( "--" ) ) + argumentName() ) )
+		if( details::isMisspelledName( nm, name() ) )
 		{
-			possibleNames.push_back( String( SL( "--" ) ) + argumentName() );
+			possibleNames.push_back( name() );
 
 			return true;
 		}
