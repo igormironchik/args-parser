@@ -267,7 +267,7 @@ TEST( MultiArgTestCase, TestStuff )
 	CHECK_CONDITION( multi.defaultValues().empty() )
 	CHECK_CONDITION( arg.value().empty() )
 
-	multi.setDefaultValue( SL( "1" ) );
+	arg.setDefaultValue( SL( "1" ) );
 
 	CHECK_CONDITION( arg.defaultValue() == SL( "1" ) )
 	CHECK_CONDITION( multi.defaultValues().size() == 1 )
@@ -276,7 +276,7 @@ TEST( MultiArgTestCase, TestStuff )
 	CHECK_CONDITION( multi.values().size() == 1 )
 	CHECK_CONDITION( multi.values().front() == SL( "1" ) )
 
-	multi.setValue( SL( "2" ) );
+	arg.setValue( SL( "2" ) );
 
 	CHECK_CONDITION( arg.defaultValue() == SL( "1" ) )
 	CHECK_CONDITION( multi.defaultValues().size() == 1 )
