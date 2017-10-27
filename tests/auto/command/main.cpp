@@ -304,6 +304,12 @@ TEST( CommandCase, TestMisspelling )
 
 	StringList correct;
 
+	CHECK_CONDITION( add.isMisspelledName( SL( "dad" ), correct ) )
+	CHECK_CONDITION( correct.size() == 1 )
+	CHECK_CONDITION( correct.front() == SL( "add" ) )
+
+	correct.clear();
+
 	CHECK_CONDITION( add.isMisspelledName( SL( "fiel" ), correct ) )
 	CHECK_CONDITION( correct.size() == 1 )
 	CHECK_CONDITION( correct.front() == SL( "file" ) )
@@ -315,6 +321,32 @@ TEST( CommandCase, TestMisspelling )
 	CHECK_CONDITION( add.isMisspelledCommand( SL( "dad" ), correct ) )
 	CHECK_CONDITION( correct.size() == 1 )
 	CHECK_CONDITION( correct.front() == SL( "add" ) )
+}
+
+TEST( CommandCase, TestStuff )
+{
+	Command add( SL( "add" ) );
+
+	CHECK_CONDITION( add.description().empty() )
+	CHECK_CONDITION( add.longDescription().empty() )
+
+	add.setDescription( SL( "desc" ) );
+
+	CHECK_CONDITION( add.description() == SL( "desc" ) )
+	CHECK_CONDITION( add.longDescription() == SL( "desc" ) )
+
+	add.setLongDescription( SL( "long" ) );
+
+	CHECK_CONDITION( add.description() == SL( "desc" ) )
+	CHECK_CONDITION( add.longDescription() == SL( "long" ) )
+
+	CHECK_CONDITION( add.valueSpecifier().empty() )
+
+	add.setValueSpecifier( SL( "val" ) );
+
+	CHECK_CONDITION( add.valueSpecifier() == SL( "val" ) )
+
+	CHECK_CONDITION( !add.isDefined() )
 }
 
 
