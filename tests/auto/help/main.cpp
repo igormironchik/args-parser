@@ -501,6 +501,60 @@ TEST( HelpTestCase, TestHelpOfArgOfCommand )
 	CHECK_CONDITION( false )
 }
 
+TEST( HelpTestCase, TestHelpOfSubcommand )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h=add" ), SL( "file" ) };
+
+	try {
+		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+		Command add( SL( "add" ) );
+		add.setDescription( SL( "Add new file." ) );
+
+		ArgAsCommand file( SL( "file" ), false, ValueOptions::OneValue );
+		file.setDescription( SL( "Add file." ) );
+		file.setLongDescription( SL( "Add file. File can exist but if "
+			"it's not so new file will be created." ) );
+		add.addArg( file );
+
+		Help help;
+		help.setAppDescription(
+			SL( "This application just show power of the Args help." ) );
+		help.setExecutable( SL( "executable" )  );
+
+		cmd.addArg( add );
+		cmd.addArg( help );
+
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Usage: [ file <arg> ] \n"
+			"\n"
+			"       Add file. File can exist but if it's not so new file will be \n"
+			"       created. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Usage: [ file <arg> ] \n"
+			"\n"
+			"       Add file. File can exist but if it's not so new file will be \n"
+			"       created. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 
 int main()
 {
