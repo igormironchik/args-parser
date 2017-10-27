@@ -327,26 +327,42 @@ TEST( CommandCase, TestStuff )
 {
 	Command add( SL( "add" ) );
 
-	CHECK_CONDITION( add.description().empty() )
-	CHECK_CONDITION( add.longDescription().empty() )
+	ArgIface & a = add;
+
+	CHECK_CONDITION( a.description().empty() )
+	CHECK_CONDITION( a.longDescription().empty() )
 
 	add.setDescription( SL( "desc" ) );
 
-	CHECK_CONDITION( add.description() == SL( "desc" ) )
-	CHECK_CONDITION( add.longDescription() == SL( "desc" ) )
+	CHECK_CONDITION( a.description() == SL( "desc" ) )
+	CHECK_CONDITION( a.longDescription() == SL( "desc" ) )
 
 	add.setLongDescription( SL( "long" ) );
 
-	CHECK_CONDITION( add.description() == SL( "desc" ) )
-	CHECK_CONDITION( add.longDescription() == SL( "long" ) )
+	CHECK_CONDITION( a.description() == SL( "desc" ) )
+	CHECK_CONDITION( a.longDescription() == SL( "long" ) )
 
-	CHECK_CONDITION( add.valueSpecifier().empty() )
+	CHECK_CONDITION( a.valueSpecifier().empty() )
 
 	add.setValueSpecifier( SL( "val" ) );
 
-	CHECK_CONDITION( add.valueSpecifier() == SL( "val" ) )
+	CHECK_CONDITION( a.valueSpecifier() == SL( "val" ) )
 
-	CHECK_CONDITION( !add.isDefined() )
+	CHECK_CONDITION( !a.isDefined() )
+
+	GroupIface & g = add;
+
+	CHECK_CONDITION( !g.isRequired() )
+
+	g.setRequired();
+
+	CHECK_CONDITION( !g.isRequired() )
+
+	Command c( SL( "c" ), ValueOptions::ManyValues );
+
+	ArgIface & a2 = c;
+
+	CHECK_CONDITION( a2.isWithValue() )
 }
 
 
