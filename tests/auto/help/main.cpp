@@ -608,6 +608,10 @@ TEST( HelpTestCase, TestHelpOfArgAsCommand )
 
 int main()
 {
+
+	// Suppressing warning.
+	outStream();
+
 	RUN_ALL_TESTS()
 
 	return 0;
