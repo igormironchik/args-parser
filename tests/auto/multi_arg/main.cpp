@@ -257,6 +257,33 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	CHECK_CONDITION( false )
 }
 
+TEST( MultiArgTestCase, TestStuff )
+{
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true );
+
+	CHECK_CONDITION( multi.defaultValue().empty() )
+	CHECK_CONDITION( multi.defaultValues().empty() )
+	CHECK_CONDITION( multi.value().empty() )
+
+	multi.setDefaultValue( SL( "1" ) );
+
+	CHECK_CONDITION( multi.defaultValue() == SL( "1" ) )
+	CHECK_CONDITION( multi.defaultValues().size() == 1 )
+	CHECK_CONDITION( multi.defaultValues().front() == SL( "1" ) )
+	CHECK_CONDITION( multi.value() == SL( "1" ) )
+	CHECK_CONDITION( multi.values().size() == 1 )
+	CHECK_CONDITION( multi.values().front() == SL( "1" ) )
+
+	multi.setValue( SL( "2" ) );
+
+	CHECK_CONDITION( multi.defaultValue() == SL( "1" ) )
+	CHECK_CONDITION( multi.defaultValues().size() == 1 )
+	CHECK_CONDITION( multi.defaultValues().front() == SL( "1" ) )
+	CHECK_CONDITION( multi.value() == SL( "2" ) )
+	CHECK_CONDITION( multi.values().size() == 1 )
+	CHECK_CONDITION( multi.values().front() == SL( "2" ) )
+}
+
 
 int main()
 {
