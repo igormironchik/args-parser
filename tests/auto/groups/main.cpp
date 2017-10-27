@@ -366,12 +366,14 @@ TEST( GroupCase, GroupsStuff )
 {
 	OnlyOneGroup one( SL( "only_one" ) );
 
-	CHECK_CONDITION( !one.isWithValue() )
-	CHECK_CONDITION( one.flag().empty() )
-	CHECK_CONDITION( one.argumentName().empty() )
-	CHECK_CONDITION( one.valueSpecifier().empty() )
-	CHECK_CONDITION( one.description().empty() )
-	CHECK_CONDITION( one.longDescription().empty() )
+	const GroupIface & g = one;
+
+	CHECK_CONDITION( !g.isWithValue() )
+	CHECK_CONDITION( g.flag().empty() )
+	CHECK_CONDITION( g.argumentName().empty() )
+	CHECK_CONDITION( g.valueSpecifier().empty() )
+	CHECK_CONDITION( g.description().empty() )
+	CHECK_CONDITION( g.longDescription().empty() )
 }
 
 
