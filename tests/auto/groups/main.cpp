@@ -362,6 +362,18 @@ TEST( GroupCase, GroupsFailed )
 	CHECK_THROW( cmd.parse(), BaseException )
 }
 
+TEST( GroupCase, GroupsStuff )
+{
+	OnlyOneGroup one( SL( "only_one" ) );
+
+	CHECK_CONDITION( !one.isWithValue() )
+	CHECK_CONDITION( one.flag().empty() )
+	CHECK_CONDITION( one.argumentName().empty() )
+	CHECK_CONDITION( one.valueSpecifier().empty() )
+	CHECK_CONDITION( one.description().empty() )
+	CHECK_CONDITION( one.longDescription().empty() )
+}
+
 
 int main()
 {
