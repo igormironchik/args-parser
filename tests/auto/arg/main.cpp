@@ -141,6 +141,24 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgTestCase, TestStuff )
+{
+	Arg a( SL( 't' ), String( SL( "timeout" ) ), true );
+
+	CHECK_CONDITION( a.value().empty() )
+	CHECK_CONDITION( a.defaultValue().empty() )
+
+	a.setDefaultValue( SL( "1" ) );
+
+	CHECK_CONDITION( a.value() == SL( "1" ) )
+	CHECK_CONDITION( a.defaultValue() == SL( "1" ) )
+
+	a.setValue( SL( "2" ) );
+
+	CHECK_CONDITION( a.value() == SL( "2" ) )
+	CHECK_CONDITION( a.defaultValue() == SL( "1" ) )
+}
+
 
 int main()
 {
