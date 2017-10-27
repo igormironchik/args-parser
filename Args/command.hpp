@@ -196,6 +196,45 @@ public:
 		m_defaultValues = v;
 	}
 
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & nm,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		bool ret = false;
+
+		if( details::isMisspelledName( nm, name() ) )
+		{
+			possibleNames.push_back( name() );
+
+			ret = true;
+		}
+
+		if( GroupIface::isMisspelledName( nm, possibleNames ) )
+			return true;
+		else
+			return ret;
+	}
+
+	//! \return Is given name a misspelled name of the command.
+	bool isMisspelledCommand(
+		//! Name to check (misspelled).
+		const String & nm,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const
+	{
+		if( details::isMisspelledName( nm, name() ) )
+		{
+			possibleNames.push_back( name() );
+
+			return true;
+		}
+		else
+			return false;
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.
@@ -309,45 +348,6 @@ protected:
 	{
 		if( isDefined() )
 			GroupIface::checkCorrectnessAfterParsing();
-	}
-
-	//! \return Is given name a misspelled name of the argument.
-	bool isMisspelledName(
-		//! Name to check (misspelled).
-		const String & nm,
-		//! List of possible names for the given misspelled name.
-		StringList & possibleNames ) const override
-	{
-		bool ret = false;
-
-		if( details::isMisspelledName( nm, name() ) )
-		{
-			possibleNames.push_back( name() );
-
-			ret = true;
-		}
-
-		if( GroupIface::isMisspelledName( nm, possibleNames ) )
-			return true;
-		else
-			return ret;
-	}
-
-	//! \return Is given name a misspelled name of the command.
-	bool isMisspelledCommand(
-		//! Name to check (misspelled).
-		const String & nm,
-		//! List of possible names for the given misspelled name.
-		StringList & possibleNames ) const
-	{
-		if( details::isMisspelledName( nm, name() ) )
-		{
-			possibleNames.push_back( name() );
-
-			return true;
-		}
-		else
-			return false;
 	}
 
 private:

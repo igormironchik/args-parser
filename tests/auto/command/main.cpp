@@ -295,6 +295,28 @@ TEST( CommandCase, TestAllIsOk6 )
 	CHECK_CONDITION( a.defaultValues().front() == SL( "default" ) )
 }
 
+TEST( CommandCase, TestMisspelling )
+{
+	Command add( SL( "add" ) );
+
+	ArgAsCommand file( SL( "file" ) );
+	add.addArg( file );
+
+	StringList correct;
+
+	CHECK_CONDITION( add.isMisspelledName( SL( "fiel" ), correct ) )
+	CHECK_CONDITION( correct.size() == 1 )
+	CHECK_CONDITION( correct.front() == SL( "file" ) )
+
+	correct.clear();
+
+	CHECK_CONDITION( !add.isMisspelledCommand( SL( "fiel" ), correct ) )
+
+	CHECK_CONDITION( add.isMisspelledCommand( SL( "dad" ), correct ) )
+	CHECK_CONDITION( correct.size() == 1 )
+	CHECK_CONDITION( correct.front() == SL( "add" ) )
+}
+
 
 int main()
 {

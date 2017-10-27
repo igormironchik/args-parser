@@ -228,6 +228,23 @@ public:
 		m_defaultValues = v;
 	}
 
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & nm,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		if( details::isMisspelledName( nm, name() ) )
+		{
+			possibleNames.push_back( name() );
+
+			return true;
+		}
+		else
+			return false;
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.
@@ -327,23 +344,6 @@ protected:
 		if( isRequired() && !isDefined() )
 			throw BaseException( String( SL( "Undefined required argument \"" ) ) +
 				m_name + SL( "\"." ) );
-	}
-
-	//! \return Is given name a misspelled name of the argument.
-	bool isMisspelledName(
-		//! Name to check (misspelled).
-		const String & nm,
-		//! List of possible names for the given misspelled name.
-		StringList & possibleNames ) const override
-	{
-		if( details::isMisspelledName( nm, name() ) )
-		{
-			possibleNames.push_back( name() );
-
-			return true;
-		}
-		else
-			return false;
 	}
 
 private:

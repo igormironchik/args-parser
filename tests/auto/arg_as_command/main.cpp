@@ -319,6 +319,17 @@ TEST( ArgAsCommandCase, TestAllIsOk2 )
 	CHECK_CONDITION( file.values().front() == SL( "default" ) )
 }
 
+TEST( ArgAsCommandCase, TestMisspelling )
+{
+	ArgAsCommand add( SL( "add" ) );
+
+	StringList correct;
+
+	CHECK_CONDITION( add.isMisspelledName( SL( "dad" ), correct ) )
+	CHECK_CONDITION( correct.size() == 1 )
+	CHECK_CONDITION( correct.front() == SL( "add" ) )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()

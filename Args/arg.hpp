@@ -155,6 +155,27 @@ public:
 		m_defaultValue = v;
 	}
 
+	//! \return Is given name a misspelled name of the argument.
+	bool isMisspelledName(
+		//! Name to check (misspelled).
+		const String & name,
+		//! List of possible names for the given misspelled name.
+		StringList & possibleNames ) const override
+	{
+		if( !argumentName().empty() )
+		{
+			if( details::isMisspelledName( name,
+				String( SL( "--" ) ) + argumentName() ) )
+			{
+				possibleNames.push_back( String( SL( "--" ) ) + argumentName() );
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.
@@ -194,27 +215,6 @@ protected:
 
 	//! Check correctness of the argument after parsing.
 	void checkCorrectnessAfterParsing() const override;
-
-	//! \return Is given name a misspelled name of the argument.
-	bool isMisspelledName(
-		//! Name to check (misspelled).
-		const String & name,
-		//! List of possible names for the given misspelled name.
-		StringList & possibleNames ) const override
-	{
-		if( !argumentName().empty() )
-		{
-			if( details::isMisspelledName( name,
-				String( SL( "--" ) ) + argumentName() ) )
-			{
-				possibleNames.push_back( String( SL( "--" ) ) + argumentName() );
-
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 private:
 	DISABLE_COPY( Arg )
