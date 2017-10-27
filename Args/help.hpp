@@ -152,28 +152,22 @@ Help::process( Context & context )
 		// Command?
 		else
 		{
-			try {
-				auto * tmp = cmdLine()->findArgument( arg );
+			auto * tmp = cmdLine()->findArgument( arg );
 
-				Command * cmd = dynamic_cast< Command* > ( tmp );
+			Command * cmd = dynamic_cast< Command* > ( tmp );
 
-				// Command.
-				if( cmd )
-				{
-					if( !context.atEnd() )
-						m_printer.print( cmd, *context.next(), g_argsOutStream );
-					else
-						m_printer.print( arg, g_argsOutStream );
-				}
-				else if( tmp )
-					m_printer.print( arg, g_argsOutStream );
-				else
-					m_printer.print( g_argsOutStream );
-			}
-			catch( const BaseException & )
+			// Command.
+			if( cmd )
 			{
-				m_printer.print( g_argsOutStream );
+				if( !context.atEnd() )
+					m_printer.print( cmd, *context.next(), g_argsOutStream );
+				else
+					m_printer.print( arg, g_argsOutStream );
 			}
+			else if( tmp )
+				m_printer.print( arg, g_argsOutStream );
+			else
+				m_printer.print( g_argsOutStream );
 		}
 	}
 	else
