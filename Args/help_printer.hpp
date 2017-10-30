@@ -38,12 +38,12 @@
 
 // Args include.
 #include "utils.hpp"
-#include "cmd_line.hpp"
 #include "exceptions.hpp"
 #include "group_iface.hpp"
 #include "groups.hpp"
 #include "command.hpp"
 #include "types.hpp"
+#include "help_printer_iface.hpp"
 
 
 namespace Args {
@@ -59,26 +59,28 @@ class ArgIface;
 /*!
 	HelpPrinter is a class that prints help.
 */
-class HelpPrinter final {
+class HelpPrinter final
+	:	public HelpPrinterIface
+{
 public:
 	//! Smart pointer to the argument.
 	using ArgPtr = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
 
 	HelpPrinter();
 
-	~HelpPrinter();
+	virtual ~HelpPrinter();
 
 	//! Print help for all arguments.
 	void print(
 		//! Output stream for the printing help.
-		OutStreamType & to );
+		OutStreamType & to ) override;
 
 	//! Print help for the given argument.
 	void print(
 		//! Name of the argument. I.e. "-t" or "--timeout".
 		const String & name,
 		//! Output stream for the printing help.
-		OutStreamType & to );
+		OutStreamType & to ) override;
 
 	//! Print help for command's argument.
 	void print(
@@ -87,19 +89,25 @@ public:
 		//! Name of the argument. I.e. "-t" or "--timeout".
 		const String & name,
 		//! Output stream for the printing help.
-		OutStreamType & to );
+		OutStreamType & to ) override;
 
 	//! Set executable name.
-	void setExecutable( const String & exe );
+	void setExecutable( const String & exe ) override;
 
 	//! Set description for the application.
-	void setAppDescription( const String & desc );
+	void setAppDescription( const String & desc ) override;
 
 	//! Set command line.
-	void setCmdLine( CmdLine * cmd );
+	void setCmdLine( CmdLine * cmd ) override;
 
 	//! Set line length for the help.
-	void setLineLength( String::size_type length );
+	void setLineLength( String::size_type length ) override;
+
+	//! \return Argument for the given name.
+	ArgIface * findArgument( const String & name ) override
+	{
+		return m_cmdLine->findArgument( name );
+	}
 
 private:
 	//! \return List of words with usage string for the argument.

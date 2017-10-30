@@ -64,10 +64,7 @@ public:
 	}
 
 	//! \return Type of the argument.
-	virtual ArgType type() const
-	{
-		return ArgType::Unknown;
-	}
+	virtual ArgType type() const = 0;
 
 	/*!
 		\return Name of the argument.

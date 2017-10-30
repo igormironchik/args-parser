@@ -18,4 +18,5 @@ HEADERS += $$PWD/arg_iface.hpp \
 	$$PWD/enums.hpp \
 	$$PWD/all.hpp \
 	$$PWD/types.hpp \
-	$$PWD/api.hpp
+	$$PWD/api.hpp \
+	$$PWD/help_printer_iface.hpp

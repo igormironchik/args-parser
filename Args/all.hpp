@@ -32,9 +32,6 @@
 #define ARGS__ALL_HPP__INCLUDED
 
 #include "cmd_line.hpp"
-#include "command.hpp"
-#include "exceptions.hpp"
-#include "help.hpp"
 #include "types.hpp"
 
 #endif // ARGS__ALL_HPP__INCLUDED

@@ -37,6 +37,7 @@
 #include "context.hpp"
 #include "exceptions.hpp"
 #include "command.hpp"
+#include "help.hpp"
 
 // C++ include.
 #include <vector>
@@ -193,6 +194,37 @@ public:
 		addArg( cmd );
 
 		return API< CmdLine, Command, Command::ArgPtr > ( *this, *cmd );
+	}
+
+	//! Add help.
+	template< typename APPEXE = String, typename APPDESC = String >
+	API< CmdLine, CmdLine, ArgPtr > addHelp(
+		//! Should exception be thrown on help printing.
+		bool throwExceptionOnPrint = true,
+		//! Application executable.
+		APPEXE && appExe = String(),
+		//! Application description.
+		APPDESC && appDesc = String(),
+		//! Line length.
+		String::size_type length = 79 )
+	{
+		auto help = std::unique_ptr< Help, details::Deleter< ArgIface > >
+			( new Help( throwExceptionOnPrint ),
+				details::Deleter< ArgIface > ( true ) );
+
+		if( !appExe.empty() )
+			help->setExecutable( std::forward< APPEXE > ( appExe ) );
+
+		if( !appDesc.empty() )
+			help->setAppDescription( std::forward< APPDESC > ( appDesc ) );
+
+		help->setLineLength( length );
+
+		ArgPtr arg = help;
+
+		addArg( arg );
+
+		return *this;
 	}
 
 private:
@@ -455,6 +487,22 @@ CmdLine::findArgument( const String & name )
 	}
 
 	return nullptr;
+}
+
+} /* namespace Args */
+
+#include "help_printer.hpp"
+
+namespace Args {
+
+inline
+Help::Help( bool throwExceptionOnPrint )
+	:	Arg( SL( 'h' ), SL( "help" ), true, false )
+	,	m_printer( new HelpPrinter )
+	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
+{
+	setDescription( SL( "Print this help." ) );
+	setLongDescription( SL( "Print this help." ) );
 }
 
 } /* namespace Args */

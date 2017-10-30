@@ -33,11 +33,14 @@
 
 // Args include.
 #include "arg.hpp"
-#include "help_printer.hpp"
+#include "help_printer_iface.hpp"
 #include "context.hpp"
 #include "utils.hpp"
 #include "exceptions.hpp"
 #include "types.hpp"
+
+// C++ include.
+#include <memory>
 
 #ifdef ARGS_TESTING
 	#ifndef ARGS_QSTRING_BUILD
@@ -97,12 +100,12 @@ protected:
 	{
 		Arg::setCmdLine( cmdLine );
 
-		m_printer.setCmdLine( cmdLine );
+		m_printer->setCmdLine( cmdLine );
 	}
 
 private:
 	//! Printer.
-	HelpPrinter m_printer;
+	std::unique_ptr< HelpPrinterIface > m_printer;
 	//! Throw or not exception?
 	bool m_throwExceptionOnPrint;
 }; // class Help
@@ -112,31 +115,22 @@ private:
 // Help
 //
 
-inline
-Help::Help( bool throwExceptionOnPrint )
-	:	Arg( SL( 'h' ), SL( "help" ), true, false )
-	,	m_throwExceptionOnPrint( throwExceptionOnPrint )
-{
-	setDescription( SL( "Print this help." ) );
-	setLongDescription( SL( "Print this help." ) );
-}
-
 inline void
 Help::setExecutable( const String & exe )
 {
-	m_printer.setExecutable( exe );
+	m_printer->setExecutable( exe );
 }
 
 inline void
 Help::setAppDescription( const String & desc )
 {
-	m_printer.setAppDescription( desc );
+	m_printer->setAppDescription( desc );
 }
 
 inline void
 Help::setLineLength( String::size_type length )
 {
-	m_printer.setLineLength( length );
+	m_printer->setLineLength( length );
 }
 
 inline void
@@ -148,29 +142,29 @@ Help::process( Context & context )
 
 		// Argument or flag.
 		if( details::isArgument( arg ) || details::isFlag( arg ) )
-			m_printer.print( arg, g_argsOutStream );
+			m_printer->print( arg, g_argsOutStream );
 		// Command?
 		else
 		{
-			auto * tmp = cmdLine()->findArgument( arg );
+			auto * tmp = m_printer->findArgument( arg );
 
 			// Command.
 			if( tmp->type() == ArgType::Command )
 			{
 				if( !context.atEnd() )
-					m_printer.print( dynamic_cast< Command* > ( tmp ),
+					m_printer->print( dynamic_cast< Command* > ( tmp ),
 						*context.next(), g_argsOutStream );
 				else
-					m_printer.print( arg, g_argsOutStream );
+					m_printer->print( arg, g_argsOutStream );
 			}
 			else if( tmp )
-				m_printer.print( arg, g_argsOutStream );
+				m_printer->print( arg, g_argsOutStream );
 			else
-				m_printer.print( g_argsOutStream );
+				m_printer->print( g_argsOutStream );
 		}
 	}
 	else
-		m_printer.print( g_argsOutStream );
+		m_printer->print( g_argsOutStream );
 
 	setDefined( true );
 
