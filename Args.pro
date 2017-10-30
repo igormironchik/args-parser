@@ -9,4 +9,5 @@ OTHER_FILES = README.md \
 	doc/example.cpp \
 	doc/help.txt \
 	.travis.yml \
-	doc/Doxyfile
+	doc/Doxyfile \
+	doc/oneline.cpp

@@ -78,7 +78,8 @@ as ```StringList```
 Why not to add description, long description, etc into constructors of
 arguments, so it will be possible to initialize argument in one line?
 
- * This is impossible because constructors will be ambiguous.
+ * This is impossible because constructors will be ambiguous but you can use
+auxiliary API that allows to define arguments in one line of code.
           
 # Example
 
@@ -86,6 +87,60 @@ First of all you must know that practically all classes of the Args throws excep
 and there is one specific exceptions that inform you about that that help was shown. This specific
 exception (HelpHasBeenPrintedException) is needed for processing program's logic that usually stops
 execution at this point.
+
+Since version 5.0.0 Args provides two API: the old one and auxiliary API
+that allows to define arguments in one line of code. Let's look.
+
+```cpp
+// Args include.
+#include <Args/all.hpp>
+
+using namespace Args;
+
+int main( int argc, char ** argv )
+{
+  try {
+    CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+    cmd.addCommand( "add", ValueOptions::NoValue,
+          "Add file." )
+        .addAllOfGroup( "file group" )
+          .addSubCommand( "file", false, ValueOptions::NoValue )
+          .addArgWithFlagAndName( 'f', "file", true, false,
+            "Name of the file.", "", "",
+            "fn" )
+        .end()
+        .addArgWithFlagOnly( 'd', false, false, "Do job." )
+      .end()
+      .addCommand( "delete", ValueOptions::NoValue,
+          "Delete file." )
+        .addArgWithFlagOnly( 'd', false, false,
+          "Do NOT job." )
+      .end()
+      .addArgWithFlagAndName( 'r', "recurcieve", false, false,
+        "Do operation recurcively?" )
+      .addHelp( true, argv[ 0 ],
+        "This application just show power of the Args help." );
+
+    cmd.parse();
+
+    if( cmd.isDefined( "-f" ) )
+		const auto file = cmd.value( "-f" );
+  }
+  catch( const HelpHasBeenPrintedException & )
+  {
+	return 0;
+  }
+  catch( const BaseException & x )
+  {
+	outStream() << x.desc();
+
+	return 1;
+  }
+
+  return 0;
+}
+```
 
 ```cpp
 // Args include.

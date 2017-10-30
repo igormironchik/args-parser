@@ -67,7 +67,7 @@ int main( int argc, char ** argv )
   }
   catch( const Args::BaseException & x )
   {
-	std::cout << x.what();
+	std::cout << x.desc();
 
 	return 1;
   }
