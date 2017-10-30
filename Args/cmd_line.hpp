@@ -92,7 +92,7 @@ String formatCorrectNamesString( const StringList & names )
 */
 class CmdLine final
 	:	public details::API< CmdLine, CmdLine,
-			std::unique_ptr< ArgIface, details::Deleter< ArgIface > > >
+			std::unique_ptr< ArgIface, details::Deleter< ArgIface > >, true >
 {
 public:
 	//! Smart pointer to the argument.
@@ -133,7 +133,7 @@ public:
 		{
 			arg->setCmdLine( this );
 
-			m_args.push_back( std::forward< ArgPtr > ( arg ) );
+			m_args.push_back( std::move( arg ) );
 		}
 		else
 			throw BaseException( String( SL( "Argument \"" ) ) +
@@ -185,26 +185,49 @@ public:
 		//! Name of the group.
 		NAME && name,
 		//! Value type.
-		ValueOptions opt = ValueOptions::NoValue )
+		ValueOptions opt = ValueOptions::NoValue,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const String & defaultValue = String(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
 	{
-		auto cmd = ArgPtr(
+		auto cmd = std::unique_ptr< Command, details::Deleter< ArgIface > > (
 			new Command( std::forward< NAME > ( name ), opt ),
 			details::Deleter< ArgIface > ( true ) );
 
-		addArg( cmd );
+		if( !desc.empty() )
+			cmd->setDescription( desc );
 
-		return API< CmdLine, Command, Command::ArgPtr > ( *this, *cmd );
+		if( !longDesc.empty() )
+			cmd->setLongDescription( longDesc );
+
+		if( !defaultValue.empty() )
+			cmd->setDefaultValue( defaultValue );
+
+		if( !valueSpecifier.empty() )
+			cmd->setValueSpecifier( valueSpecifier );
+
+		Command & c = *cmd;
+
+		ArgPtr arg = std::move( cmd );
+
+		addArg( std::move( arg ) );
+
+		return API< CmdLine, Command, Command::ArgPtr > ( *this, c );
 	}
 
 	//! Add help.
-	template< typename APPEXE = String, typename APPDESC = String >
-	API< CmdLine, CmdLine, ArgPtr > addHelp(
+	CmdLine & addHelp(
 		//! Should exception be thrown on help printing.
 		bool throwExceptionOnPrint = true,
 		//! Application executable.
-		APPEXE && appExe = String(),
+		const String & appExe = String(),
 		//! Application description.
-		APPDESC && appDesc = String(),
+		const String & appDesc = String(),
 		//! Line length.
 		String::size_type length = 79 )
 	{
@@ -213,16 +236,16 @@ public:
 				details::Deleter< ArgIface > ( true ) );
 
 		if( !appExe.empty() )
-			help->setExecutable( std::forward< APPEXE > ( appExe ) );
+			help->setExecutable( appExe );
 
 		if( !appDesc.empty() )
-			help->setAppDescription( std::forward< APPDESC > ( appDesc ) );
+			help->setAppDescription( appDesc );
 
 		help->setLineLength( length );
 
-		ArgPtr arg = help;
+		ArgPtr arg = std::move( help );
 
-		addArg( arg );
+		addArg( std::move( arg ) );
 
 		return *this;
 	}
@@ -298,7 +321,7 @@ inline
 #else
 	CmdLine::CmdLine( int argc, const char * const * argv, CmdLineOpts opt )
 #endif
-	:	details::API< CmdLine, CmdLine, ArgPtr > ( *this, *this )
+	:	details::API< CmdLine, CmdLine, ArgPtr, true > ( *this, *this )
 	,	m_context( makeContext( argc, argv ) )
 	,	m_command( nullptr )
 	,	m_opt( opt )

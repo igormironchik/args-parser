@@ -136,12 +136,12 @@ public:
 				"You are trying to add command \"" ) ) + arg->name() +
 				SL( "\" to group \"" ) + name() + SL( "\"." ) );
 
-		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
-			m_children.cend() )
-				m_children.push_back( std::forward< ArgPtr > ( arg ) );
-
 		if( cmdLine() )
 			arg->setCmdLine( cmdLine() );
+
+		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
+			m_children.cend() )
+				m_children.push_back( std::move( arg ) );
 	}
 
 	/*!
