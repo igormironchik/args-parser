@@ -61,6 +61,9 @@ class ArgIface;
 */
 class HelpPrinter final {
 public:
+	//! Smart pointer to the argument.
+	using ArgPtr = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
+
 	HelpPrinter();
 
 	~HelpPrinter();
@@ -112,7 +115,7 @@ private:
 	//! Print help for the argument.
 	void print( ArgIface * arg, OutStreamType & to ) const;
 	//! Sort argument.
-	void sortArg( ArgIface * arg,
+	void sortArg( const ArgPtr & arg,
 		std::vector< Command* > & commands,
 		std::vector< ArgIface* > & required,
 		std::vector< ArgIface* > & optional,
@@ -186,7 +189,7 @@ calcMaxFlagAndName( ArgIface * arg, String::size_type & maxFlag,
 }
 
 inline void
-HelpPrinter::sortArg( ArgIface * arg,
+HelpPrinter::sortArg( const ArgPtr & arg,
 	std::vector< Command* > & commands,
 	std::vector< ArgIface* > & required,
 	std::vector< ArgIface* > & optional,
@@ -195,11 +198,12 @@ HelpPrinter::sortArg( ArgIface * arg,
 	String::size_type & maxCommand,
 	bool requiredAllOfGroup ) const
 {
-	GroupIface * g = dynamic_cast< GroupIface* > ( arg );
-	Command * cmd = dynamic_cast< Command* > ( arg );
+	GroupIface * g = dynamic_cast< GroupIface* > ( arg.get() );
 
-	if( cmd )
+	if( arg->type() == ArgType::Command )
 	{
+		Command * cmd = dynamic_cast< Command* > ( arg.get() );
+
 		commands.push_back( cmd );
 
 		String::size_type length = cmd->name().length() + ( cmd->isWithValue() ?
@@ -210,7 +214,7 @@ HelpPrinter::sortArg( ArgIface * arg,
 	}
 	else if( g )
 	{
-		if( g->isRequired() && dynamic_cast< AllOfGroup* > ( g ) )
+		if( g->isRequired() && g->type() == ArgType::AllOfGroup )
 			requiredAllOfGroup = true;
 		else
 			requiredAllOfGroup = false;
@@ -227,11 +231,11 @@ HelpPrinter::sortArg( ArgIface * arg,
 	else
 	{
 		if( arg->isRequired() || requiredAllOfGroup )
-			required.push_back( arg );
+			required.push_back( arg.get() );
 		else
-			optional.push_back( arg );
+			optional.push_back( arg.get() );
 
-		calcMaxFlagAndName( arg, maxFlag, maxName );
+		calcMaxFlagAndName( arg.get(), maxFlag, maxName );
 	}
 }
 
@@ -459,10 +463,10 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 {
 	auto * arg = m_cmdLine->findArgument( name );
 
-	Command * cmd = dynamic_cast < Command* > ( arg );
-
-	if( cmd )
+	if( arg->type() == ArgType::Command )
 	{
+		Command * cmd = dynamic_cast < Command* > ( arg );
+
 		// Prepare global arguments.
 		std::vector< ArgIface* > grequired;
 		std::vector< ArgIface* > goptional;

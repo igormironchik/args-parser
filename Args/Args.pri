@@ -17,4 +17,5 @@ HEADERS += $$PWD/arg_iface.hpp \
 	$$PWD/arg_as_command.hpp \
 	$$PWD/enums.hpp \
 	$$PWD/all.hpp \
-	$$PWD/types.hpp
+	$$PWD/types.hpp \
+	$$PWD/api.hpp

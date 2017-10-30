@@ -93,6 +93,12 @@ public:
 	{
 	}
 
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::Command;
+	}
+
 	//! \return Is this command defined?
 	bool isDefined() const override
 	{

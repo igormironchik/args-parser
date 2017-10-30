@@ -91,6 +91,12 @@ public:
 
 	virtual ~MultiArg();
 
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::MultiArg;
+	}
+
 	//! \return First value of this argument.
 	const String & value() const override;
 	//! Set value. \note Value will be pushed back to the list of values.

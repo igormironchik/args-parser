@@ -45,7 +45,32 @@ enum class ValueOptions {
 	OneValue = 1,
 	//! Many values.
 	ManyValues = 2
-}; // enum ValueOptions
+}; // enum class ValueOptions
+
+
+//
+// ArgType
+//
+
+//! Type of the argument.
+enum class ArgType {
+	//! Unknown.
+	Unknown,
+	//! Command.
+	Command,
+	//! Argument as command.
+	ArgAsCommand,
+	//! Argument.
+	Arg,
+	//! Multi argument
+	MultiArg,
+	//! "Only one" group.
+	OnlyOneGroup,
+	//! "All of" group.
+	AllOfGroup,
+	//! "At least one" group.
+	AtLeastOneGroup
+}; // enum class ArgType
 
 } /* namespace Args */
 

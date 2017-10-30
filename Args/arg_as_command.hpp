@@ -95,6 +95,12 @@ public:
 	{
 	}
 
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::ArgAsCommand;
+	}
+
 	/*!
 		\return Name of the argument.
 

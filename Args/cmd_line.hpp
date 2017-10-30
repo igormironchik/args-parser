@@ -32,16 +32,16 @@
 #define ARGS__CMD_LINE_HPP__INCLUDED
 
 // Args include.
+#include "api.hpp"
 #include "utils.hpp"
 #include "context.hpp"
-#include "arg_iface.hpp"
 #include "exceptions.hpp"
 #include "command.hpp"
-#include "types.hpp"
 
 // C++ include.
 #include <vector>
 #include <algorithm>
+#include <memory>
 
 
 namespace Args {
@@ -89,8 +89,16 @@ String formatCorrectNamesString( const StringList & names )
 	command line arguments in the correspondence with holded
 	arguments.
 */
-class CmdLine final {
+class CmdLine final
+	:	public details::API< CmdLine, CmdLine,
+			std::unique_ptr< ArgIface, details::Deleter< ArgIface > > >
+{
 public:
+	//! Smart pointer to the argument.
+	using ArgPtr = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
+	//! List of child arguments.
+	using Arguments = std::vector< ArgPtr >;
+
 	//! Command line options.
 	enum CmdLineOpts {
 		//! No special options.
@@ -107,11 +115,29 @@ public:
 		CmdLineOpts opt = Empty );
 #endif
 
+	virtual ~CmdLine()
+	{
+	}
+
 	//! Add argument. \note Developer should handle lifetime of the argument.
 	void addArg( ArgIface * arg );
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
 	void addArg( ArgIface & arg );
+
+	void addArg( ArgPtr arg )
+	{
+		if( std::find( m_args.begin(), m_args.end(), arg ) ==
+			m_args.end() )
+		{
+			arg->setCmdLine( this );
+
+			m_args.push_back( std::forward< ArgPtr > ( arg ) );
+		}
+		else
+			throw BaseException( String( SL( "Argument \"" ) ) +
+				arg->name() + SL( "\" already in the command line parser." ) );
+	}
 
 	//! Parse arguments.
 	void parse();
@@ -120,7 +146,7 @@ public:
 	ArgIface * findArgument( const String & name );
 
 	//! \return All arguments.
-	const std::vector< ArgIface* > & arguments() const;
+	const Arguments & arguments() const;
 
 	//! \return Is given name a misspelled name of the argument.
 	bool isMisspelledName(
@@ -134,23 +160,39 @@ public:
 		std::for_each( arguments().cbegin(), arguments().cend(),
 			[ & ] ( const auto & arg )
 			{
-				Command * cmd = dynamic_cast< Command* > ( arg );
-
-				if( cmd )
+				if( arg->type() == ArgType::Command )
 				{
-					if( cmd == m_command )
+					if( arg.get() == m_command )
 					{
 						if( arg->isMisspelledName( name, possibleNames ) )
 							ret = true;
 					}
-					else if( cmd->isMisspelledCommand( name, possibleNames ) )
-						ret = true;
+					else if( dynamic_cast< Command* > ( arg.get() )->
+						isMisspelledCommand( name, possibleNames ) )
+							ret = true;
 				}
 				else if( arg->isMisspelledName( name, possibleNames ) )
 					ret = true;
 			} );
 
 		return ret;
+	}
+
+	//! Add Command.
+	template< typename NAME >
+	API< CmdLine, Command, Command::ArgPtr > addCommand(
+		//! Name of the group.
+		NAME && name,
+		//! Value type.
+		ValueOptions opt = ValueOptions::NoValue )
+	{
+		auto cmd = ArgPtr(
+			new Command( std::forward< NAME > ( name ), opt ),
+			details::Deleter< ArgIface > ( true ) );
+
+		addArg( cmd );
+
+		return API< CmdLine, Command, Command::ArgPtr > ( *this, *cmd );
 	}
 
 private:
@@ -184,7 +226,7 @@ private:
 	// Context.
 	Context m_context;
 	//! Arguments.
-	std::vector< ArgIface* > m_args;
+	Arguments m_args;
 	//! Current command.
 	Command * m_command;
 	//! Option.
@@ -224,7 +266,8 @@ inline
 #else
 	CmdLine::CmdLine( int argc, const char * const * argv, CmdLineOpts opt )
 #endif
-	:	m_context( makeContext( argc, argv ) )
+	:	details::API< CmdLine, CmdLine, ArgPtr > ( *this, *this )
+	,	m_context( makeContext( argc, argv ) )
 	,	m_command( nullptr )
 	,	m_opt( opt )
 {
@@ -235,11 +278,14 @@ CmdLine::addArg( ArgIface * arg )
 {
 	if( arg )
 	{
-		if( std::find( m_args.begin(), m_args.end(), arg ) == m_args.end() )
+		if( std::find( m_args.begin(), m_args.end(),
+			ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) ) ==
+				m_args.end() )
 		{
 			arg->setCmdLine( this );
 
-			m_args.push_back( arg );
+			m_args.push_back( ArgPtr( arg,
+				details::Deleter< ArgIface > ( false ) ) );
 		}
 		else
 			throw BaseException( String( SL( "Argument \"" ) ) +
@@ -319,17 +365,15 @@ CmdLine::parse()
 
 			if( tmp )
 			{
-				Command * cmd = dynamic_cast< Command* > ( tmp );
-
-				if( cmd )
+				if( tmp->type() == ArgType::Command )
 				{
 					if( m_command )
 						throw BaseException( String( SL( "Only one command can be "
 							"specified. But you entered \"" ) ) + m_command->name() +
-							SL( "\" and \"" ) + cmd->name() + SL( "\"." ) );
+							SL( "\" and \"" ) + tmp->name() + SL( "\"." ) );
 					else
 					{
-						m_command = cmd;
+						m_command = dynamic_cast< Command* > ( tmp );
 
 						m_command->process( m_context );
 					}
@@ -346,7 +390,7 @@ CmdLine::parse()
 	checkCorrectnessAfterParsing();
 }
 
-inline const std::vector< ArgIface* > &
+inline const CmdLine::Arguments &
 CmdLine::arguments() const
 {
 	return m_args;
@@ -361,10 +405,10 @@ CmdLine::checkCorrectnessBeforeParsing() const
 	std::vector< ArgIface* > cmds;
 
 	std::for_each( m_args.cbegin(), m_args.cend(),
-		[ &cmds, &flags, &names ] ( ArgIface * arg )
+		[ &cmds, &flags, &names ] ( const auto & arg )
 		{
-			if( dynamic_cast< Command* > ( arg ) )
-				cmds.push_back( arg );
+			if( arg->type() == ArgType::Command )
+				cmds.push_back( arg.get() );
 			else
 				arg->checkCorrectnessBeforeParsing( flags, names );
 		}
@@ -380,7 +424,7 @@ inline void
 CmdLine::checkCorrectnessAfterParsing() const
 {
 	std::for_each( m_args.begin(), m_args.end(),
-		[] ( ArgIface * arg )
+		[] ( const auto & arg )
 			{ arg->checkCorrectnessAfterParsing(); }
 	);
 
@@ -392,15 +436,13 @@ inline ArgIface *
 CmdLine::findArgument( const String & name )
 {
 	auto it = std::find_if( m_args.begin(),
-		m_args.end(), [ &name ] ( ArgIface * arg ) -> bool
+		m_args.end(), [ &name ] ( const auto & arg ) -> bool
 			{ return ( arg->findArgument( name ) != nullptr ); } );
 
 	if( it != m_args.end() )
 	{
-		Command * tmp = dynamic_cast< Command* > ( *it );
-
-		if( tmp )
-			return tmp;
+		if( (*it)->type() == ArgType::Command )
+			return it->get();
 		else
 			return (*it)->findArgument( name );
 	}

@@ -90,6 +90,12 @@ public:
 
 	virtual ~Arg();
 
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::Arg;
+	}
+
 	/*!
 		\return Name of the argument.
 

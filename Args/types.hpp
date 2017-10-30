@@ -343,6 +343,35 @@ static OutStreamType & outStream()
 
 #endif
 
+
+namespace details {
+
+//
+// Deleter
+//
+
+//! Deleter.
+template< typename T >
+class Deleter {
+public:
+	explicit Deleter( bool shouldIDelete )
+		:	m_delete( shouldIDelete )
+	{
+	}
+
+	void operator () ( T * obj ) noexcept
+	{
+		if( m_delete )
+			delete obj;
+	}
+
+private:
+	//! Should deleter delete object?
+	bool m_delete;
+}; // class Deleter
+
+} /* namespace details */
+
 } /* namespace Args */
 
 #endif // ARGS__TYPES_HPP__INCLUDED

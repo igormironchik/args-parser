@@ -28,12 +28,6 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/*!
-	\file
-
-	\warning If you are including this file you should include command.hpp too.
-*/
-
 #ifndef ARGS__GROUP_IFACE_HPP__INCLUDED
 #define ARGS__GROUP_IFACE_HPP__INCLUDED
 
@@ -48,6 +42,7 @@
 #include <type_traits>
 #include <algorithm>
 #include <utility>
+#include <memory>
 
 
 namespace Args {
@@ -68,8 +63,10 @@ public:
 	static const String m_dummyEmptyString;
 
 public:
+	//! Smart pointer to the argument.
+	using ArgPtr = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
 	//! List of child arguments.
-	typedef std::vector< ArgIface* > Arguments;
+	using Arguments = std::vector< ArgPtr >;
 
 	template< typename T >
 	explicit GroupIface( T && name,
@@ -95,14 +92,19 @@ public:
 		!std::is_base_of< Command, T >::value >::type
 	addArg( T & arg )
 	{
-		if( dynamic_cast< Command* > ( &arg ) )
+		if( arg.type() == ArgType::Command )
 			throw BaseException( String( SL( "Commands not allowed in groups. "
 				"You are trying to add command \"" ) ) + arg.name() +
 				SL( "\" to group \"" ) + name() + SL( "\"." ) );
 
-		if( std::find( m_children.cbegin(), m_children.cend(), &arg ) ==
+		if( std::find( m_children.cbegin(), m_children.cend(),
+			ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) ) ==
 			m_children.cend() )
-				m_children.push_back( &arg );
+				m_children.push_back(
+					ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
+
+		if( cmdLine() )
+			arg.setCmdLine( cmdLine() );
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
@@ -111,14 +113,35 @@ public:
 		!std::is_base_of< Command, T >::value >::type
 	addArg( T * arg )
 	{
-		if( dynamic_cast< Command* > ( arg ) )
+		if( arg->type() == ArgType::Command )
+			throw BaseException( String( SL( "Commands not allowed in groups. "
+				"You are trying to add command \"" ) ) + arg->name() +
+				SL( "\" to group \"" ) + name() + SL( "\"." ) );
+
+		if( std::find( m_children.cbegin(), m_children.cend(),
+			ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) ) ==
+				m_children.cend() )
+					m_children.push_back(
+						ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
+
+		if( cmdLine() )
+			arg->setCmdLine( cmdLine() );
+	}
+
+	//! Add argument.
+	void addArg( ArgPtr arg )
+	{
+		if( arg->type() == ArgType::Command )
 			throw BaseException( String( SL( "Commands not allowed in groups. "
 				"You are trying to add command \"" ) ) + arg->name() +
 				SL( "\" to group \"" ) + name() + SL( "\"." ) );
 
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
-				m_children.push_back( arg );
+				m_children.push_back( std::forward< ArgPtr > ( arg ) );
+
+		if( cmdLine() )
+			arg->setCmdLine( cmdLine() );
 	}
 
 	/*!

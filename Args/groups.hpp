@@ -67,6 +67,12 @@ public:
 	{
 	}
 
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::OnlyOneGroup;
+	}
+
 	//! \return Is this argument defined?
 	bool isDefined() const override
 	{
@@ -116,7 +122,7 @@ protected:
 						SL( "Whereas defined \"" ) + defined->name() +
 						SL( "\" and \"" ) + arg->name() + SL( "\"." ) );
 				else
-					defined = arg;
+					defined = arg.get();
 			}
 		}
 	}
@@ -141,6 +147,12 @@ public:
 
 	virtual ~AllOfGroup()
 	{
+	}
+
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::AllOfGroup;
 	}
 
 	//! \return Is this argument defined?
@@ -216,6 +228,12 @@ public:
 
 	virtual ~AtLeastOneGroup()
 	{
+	}
+
+	//! \return Type of the argument.
+	ArgType type() const override
+	{
+		return ArgType::AtLeastOneGroup;
 	}
 
 	//! \return Is this argument defined?

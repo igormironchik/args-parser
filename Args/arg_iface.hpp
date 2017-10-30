@@ -34,6 +34,7 @@
 // Args include.
 #include "utils.hpp"
 #include "types.hpp"
+#include "enums.hpp"
 
 
 namespace Args {
@@ -60,6 +61,12 @@ public:
 
 	virtual ~ArgIface()
 	{
+	}
+
+	//! \return Type of the argument.
+	virtual ArgType type() const
+	{
+		return ArgType::Unknown;
 	}
 
 	/*!

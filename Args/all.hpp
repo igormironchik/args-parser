@@ -31,14 +31,10 @@
 #ifndef ARGS__ALL_HPP__INCLUDED
 #define ARGS__ALL_HPP__INCLUDED
 
-#include "arg.hpp"
-#include "arg_as_command.hpp"
 #include "cmd_line.hpp"
 #include "command.hpp"
 #include "exceptions.hpp"
-#include "groups.hpp"
 #include "help.hpp"
-#include "multi_arg.hpp"
 #include "types.hpp"
 
 #endif // ARGS__ALL_HPP__INCLUDED

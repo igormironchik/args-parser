@@ -154,13 +154,12 @@ Help::process( Context & context )
 		{
 			auto * tmp = cmdLine()->findArgument( arg );
 
-			Command * cmd = dynamic_cast< Command* > ( tmp );
-
 			// Command.
-			if( cmd )
+			if( tmp->type() == ArgType::Command )
 			{
 				if( !context.atEnd() )
-					m_printer.print( cmd, *context.next(), g_argsOutStream );
+					m_printer.print( dynamic_cast< Command* > ( tmp ),
+						*context.next(), g_argsOutStream );
 				else
 					m_printer.print( arg, g_argsOutStream );
 			}
