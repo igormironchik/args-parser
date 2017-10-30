@@ -210,7 +210,7 @@ HelpPrinter::sortArg( const ArgPtr & arg,
 
 	if( arg->type() == ArgType::Command )
 	{
-		Command * cmd = dynamic_cast< Command* > ( arg.get() );
+		Command * cmd = static_cast< Command* > ( arg.get() );
 
 		commands.push_back( cmd );
 
@@ -473,7 +473,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 	if( arg->type() == ArgType::Command )
 	{
-		Command * cmd = dynamic_cast < Command* > ( arg );
+		Command * cmd = static_cast < Command* > ( arg );
 
 		// Prepare global arguments.
 		std::vector< ArgIface* > grequired;

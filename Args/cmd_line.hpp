@@ -217,7 +217,7 @@ public:
 						if( arg->isMisspelledName( name, possibleNames ) )
 							ret = true;
 					}
-					else if( dynamic_cast< Command* > ( arg.get() )->
+					else if( static_cast< Command* > ( arg.get() )->
 						isMisspelledCommand( name, possibleNames ) )
 							ret = true;
 				}
@@ -312,16 +312,16 @@ public:
 			switch( arg->type() )
 			{
 				case ArgType::Command :
-					return ( dynamic_cast< const Command* > ( arg )->value() );
+					return ( static_cast< const Command* > ( arg )->value() );
 
 				case ArgType::ArgAsCommand :
-					return ( dynamic_cast< const ArgAsCommand* > ( arg )->value() );
+					return ( static_cast< const ArgAsCommand* > ( arg )->value() );
 
 				case ArgType::Arg :
-					return ( dynamic_cast< const Arg* > ( arg )->value() );
+					return ( static_cast< const Arg* > ( arg )->value() );
 
 				case ArgType::MultiArg :
-					return ( dynamic_cast< const MultiArg* > ( arg )->value() );
+					return ( static_cast< const MultiArg* > ( arg )->value() );
 
 				default :
 					return String();
@@ -344,17 +344,17 @@ public:
 			switch( arg->type() )
 			{
 				case ArgType::Command :
-					return ( dynamic_cast< const Command* > ( arg )->values() );
+					return ( static_cast< const Command* > ( arg )->values() );
 
 				case ArgType::ArgAsCommand :
-					return ( dynamic_cast< const ArgAsCommand* > ( arg )->values() );
+					return ( static_cast< const ArgAsCommand* > ( arg )->values() );
 
 				case ArgType::Arg :
 					return StringList(
-						{ ( dynamic_cast< const Arg* > ( arg )->value() ) } );
+						{ ( static_cast< const Arg* > ( arg )->value() ) } );
 
 				case ArgType::MultiArg :
-					return ( dynamic_cast< const MultiArg* > ( arg )->values() );
+					return ( static_cast< const MultiArg* > ( arg )->values() );
 
 				default :
 					return StringList();
@@ -558,7 +558,7 @@ CmdLine::parse()
 							SL( "\" and \"" ) + tmp->name() + SL( "\"." ) );
 					else
 					{
-						m_command = dynamic_cast< Command* > ( tmp );
+						m_command = static_cast< Command* > ( tmp );
 
 						m_command->process( m_context );
 					}

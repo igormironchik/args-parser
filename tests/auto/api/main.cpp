@@ -73,7 +73,7 @@ TEST( ArgAPI, TestAllIsOk )
 			SL( "Do operation recurcively?" ) )
 		.addHelp( true, argv[ 0 ],
 			SL( "This application just show power of the Args help." ) )
-		// Dummy, just for testing.
+		// Dummy, just for compillation testing.
 		.addAllOfGroup( SL( "1" ) )
 		.end()
 		.addOnlyOneGroup( SL( "2" ) )

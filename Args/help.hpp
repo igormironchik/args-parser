@@ -152,7 +152,7 @@ Help::process( Context & context )
 			if( tmp->type() == ArgType::Command )
 			{
 				if( !context.atEnd() )
-					m_printer->print( dynamic_cast< Command* > ( tmp ),
+					m_printer->print( static_cast< Command* > ( tmp ),
 						*context.next(), g_argsOutStream );
 				else
 					m_printer->print( arg, g_argsOutStream );
