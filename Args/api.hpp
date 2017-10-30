@@ -62,7 +62,7 @@ public:
 	{
 	}
 
-	//! Add OnlyOneGroup to this group.
+	//! Add OnlyOneGroup.
 	template< typename NAME >
 	API< API< PARENT, SELF, ARGPTR >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
 		//! Name of the group.
@@ -84,7 +84,7 @@ public:
 			( *this, g );
 	}
 
-	//! Add AllOfGroup to this group.
+	//! Add AllOfGroup.
 	template< typename NAME >
 	API< API< PARENT, SELF, ARGPTR >, AllOfGroup, ARGPTR > addAllOfGroup(
 		//! Name of the group.
@@ -106,7 +106,7 @@ public:
 			( *this, g );
 	}
 
-	//! Add AtLeastOneGroup to this group.
+	//! Add AtLeastOneGroup.
 	template< typename NAME >
 	API< API< PARENT, SELF, ARGPTR >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
 		//! Name of the group.
@@ -479,7 +479,7 @@ public:
 	{
 	}
 
-	//! Add OnlyOneGroup to this group.
+	//! Add OnlyOneGroup.
 	template< typename NAME >
 	API< API< PARENT, SELF, ARGPTR, true >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
 		//! Name of the group.
@@ -501,7 +501,7 @@ public:
 			( *this, g );
 	}
 
-	//! Add AllOfGroup to this group.
+	//! Add AllOfGroup.
 	template< typename NAME >
 	API< API< PARENT, SELF, ARGPTR, true >, AllOfGroup, ARGPTR > addAllOfGroup(
 		//! Name of the group.
@@ -523,7 +523,7 @@ public:
 			( *this, g );
 	}
 
-	//! Add AtLeastOneGroup to this group.
+	//! Add AtLeastOneGroup.
 	template< typename NAME >
 	API< API< PARENT, SELF, ARGPTR, true >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
 		//! Name of the group.
