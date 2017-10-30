@@ -125,7 +125,7 @@ int main( int argc, char ** argv )
     cmd.parse();
 
     if( cmd.isDefined( "-f" ) )
-		const auto file = cmd.value( "-f" );
+      const auto file = cmd.value( "-f" );
   }
   catch( const HelpHasBeenPrintedException & )
   {
