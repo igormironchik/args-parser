@@ -128,6 +128,21 @@ protected:
 		const String & name ) = 0;
 
 	/*!
+		\return Argument for the given name.
+
+		\retval Pointer to the ArgIface if this argument handles
+			argument with the given name.
+		\retval nullptr if this argument doesn't know about
+			argument with name.
+	*/
+	virtual const ArgIface * findArgument(
+		/*!
+			Name of the argument. Can be for example "-t" or
+			"--timeout".
+		*/
+		const String & name ) const = 0;
+
+	/*!
 		Process argument's staff, for example take values from
 		context. This method invokes exactly at that moment when
 		parser has found this argument.

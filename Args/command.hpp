@@ -271,6 +271,24 @@ protected:
 		\retval nullptr if this argument doesn't know about
 			argument with name.
 	*/
+	const ArgIface * findArgument(
+		/*!
+			Name of the argument. Can be for example "-t" or
+			"--timeout".
+		*/
+		const String & name ) const override
+	{
+		return findArgument( name );
+	}
+
+	/*!
+		\return Argument for the given name.
+
+		\retval Pointer to the ArgIface if this argument handles
+			argument with the given name.
+		\retval nullptr if this argument doesn't know about
+			argument with name.
+	*/
 	ArgIface * findChild(
 		/*!
 			Name of the argument. Can be for example "-t" or

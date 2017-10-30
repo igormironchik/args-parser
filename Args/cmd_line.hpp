@@ -146,6 +146,12 @@ public:
 	//! \return Argument for the given name.
 	ArgIface * findArgument( const String & name );
 
+	//! \return Argument for the given name.
+	const ArgIface * findArgument( const String & name ) const
+	{
+		return findArgument( name );
+	}
+
 	//! \return All arguments.
 	const Arguments & arguments() const;
 
@@ -248,6 +254,85 @@ public:
 		addArg( std::move( arg ) );
 
 		return *this;
+	}
+
+	//! \return Value of the argument.
+	String value(
+		//! Name of the argument. Should be full name, i.e '-a' or '--arg'
+		//! or 'add' if it's a command or subcommand.
+		const String & name ) const
+	{
+		const auto * arg = findArgument( name );
+
+		if( arg )
+		{
+			switch( arg->type() )
+			{
+				case ArgType::Command :
+					return ( dynamic_cast< const Command* > ( arg )->value() );
+
+				case ArgType::ArgAsCommand :
+					return ( dynamic_cast< const ArgAsCommand* > ( arg )->value() );
+
+				case ArgType::Arg :
+					return ( dynamic_cast< const Arg* > ( arg )->value() );
+
+				case ArgType::MultiArg :
+					return ( dynamic_cast< const MultiArg* > ( arg )->value() );
+
+				default :
+					return String();
+			}
+		}
+		else
+			return String();
+	}
+
+	//! \return Values of the argument.
+	StringList values(
+		//! Name of the argument. Should be full name, i.e '-a' or '--arg'
+		//! or 'add' if it's a command or subcommand.
+		const String & name ) const
+	{
+		const auto * arg = findArgument( name );
+
+		if( arg )
+		{
+			switch( arg->type() )
+			{
+				case ArgType::Command :
+					return ( dynamic_cast< const Command* > ( arg )->values() );
+
+				case ArgType::ArgAsCommand :
+					return ( dynamic_cast< const ArgAsCommand* > ( arg )->values() );
+
+				case ArgType::Arg :
+					return StringList(
+						{ ( dynamic_cast< const Arg* > ( arg )->value() ) } );
+
+				case ArgType::MultiArg :
+					return ( dynamic_cast< const MultiArg* > ( arg )->values() );
+
+				default :
+					return StringList();
+			}
+		}
+		else
+			return StringList();
+	}
+
+	//! \return Is argument defined?
+	bool isDefined(
+		//! Name of the argument. Should be full name, i.e '-a' or '--arg'
+		//! or 'add' if it's a command or subcommand.
+		const String & name ) const
+	{
+		const auto * arg = findArgument( name );
+
+		if( arg )
+			return arg->isDefined();
+		else
+			return false;
 	}
 
 private:
