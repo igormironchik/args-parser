@@ -129,13 +129,13 @@ int main( int argc, char ** argv )
   }
   catch( const HelpHasBeenPrintedException & )
   {
-	return 0;
+    return 0;
   }
   catch( const BaseException & x )
   {
-	outStream() << x.desc();
+    outStream() << x.desc();
 
-	return 1;
+    return 1;
   }
 
   return 0;
