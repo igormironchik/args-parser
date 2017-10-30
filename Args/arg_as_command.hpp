@@ -288,7 +288,10 @@ protected:
 		*/
 		const String & name ) const override
 	{
-		return findArgument( name );
+		if( m_name == name )
+			return this;
+		else
+			return nullptr;
 	}
 
 	/*!

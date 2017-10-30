@@ -70,13 +70,15 @@ public:
 		//! Is group required?
 		bool required = false )
 	{
-		auto group = ARGPTR(
+		auto group = std::unique_ptr< OnlyOneGroup, details::Deleter< ArgIface > > (
 			new OnlyOneGroup( std::forward< NAME > ( name ), required ),
 			details::Deleter< ArgIface > ( true ) );
 
 		OnlyOneGroup & g = *group;
 
-		m_self.addArg( std::move( group ) );
+		ARGPTR a = std::move( group );
+
+		m_self.addArg( std::move( a ) );
 
 		return API< API< PARENT, SELF, ARGPTR >, OnlyOneGroup, ARGPTR >
 			( *this, g );
@@ -90,13 +92,15 @@ public:
 		//! Is group required?
 		bool required = false )
 	{
-		auto group = ARGPTR(
+		auto group = std::unique_ptr< AllOfGroup, details::Deleter< ArgIface > > (
 			new AllOfGroup( std::forward< NAME > ( name ), required ),
 			details::Deleter< ArgIface > ( true ) );
 
 		AllOfGroup & g = *group;
 
-		m_self.addArg( std::move( group ) );
+		ARGPTR a = std::move( group );
+
+		m_self.addArg( std::move( a ) );
 
 		return API< API< PARENT, SELF, ARGPTR >, AllOfGroup, ARGPTR >
 			( *this, g );
@@ -110,13 +114,15 @@ public:
 		//! Is group required?
 		bool required = false )
 	{
-		auto group = ARGPTR(
+		auto group = std::unique_ptr< AtLeastOneGroup, details::Deleter< ArgIface > > (
 			new AtLeastOneGroup( std::forward< NAME > ( name ), required ),
 			details::Deleter< ArgIface > ( true ) );
 
 		AtLeastOneGroup & g = *group;
 
-		m_self.addArg( std::move( group ) );
+		ARGPTR a = std::move( group );
+
+		m_self.addArg( std::move( a ) );
 
 		return API< API< PARENT, SELF, ARGPTR >, AtLeastOneGroup, ARGPTR >
 			( *this, g );
@@ -475,61 +481,67 @@ public:
 
 	//! Add OnlyOneGroup to this group.
 	template< typename NAME >
-	API< API< PARENT, SELF, ARGPTR >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
+	API< API< PARENT, SELF, ARGPTR, true >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
 		bool required = false )
 	{
-		auto group = ARGPTR(
+		auto group = std::unique_ptr< OnlyOneGroup, details::Deleter< ArgIface > > (
 			new OnlyOneGroup( std::forward< NAME > ( name ), required ),
 			details::Deleter< ArgIface > ( true ) );
 
 		OnlyOneGroup & g = *group;
 
-		m_self.addArg( std::move( group ) );
+		ARGPTR a = std::move( group );
 
-		return API< API< PARENT, SELF, ARGPTR >, OnlyOneGroup, ARGPTR >
+		m_self.addArg( std::move( a ) );
+
+		return API< API< PARENT, SELF, ARGPTR, true >, OnlyOneGroup, ARGPTR >
 			( *this, g );
 	}
 
 	//! Add AllOfGroup to this group.
 	template< typename NAME >
-	API< API< PARENT, SELF, ARGPTR >, AllOfGroup, ARGPTR > addAllOfGroup(
+	API< API< PARENT, SELF, ARGPTR, true >, AllOfGroup, ARGPTR > addAllOfGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
 		bool required = false )
 	{
-		auto group = ARGPTR(
+		auto group = std::unique_ptr< AllOfGroup, details::Deleter< ArgIface > > (
 			new AllOfGroup( std::forward< NAME > ( name ), required ),
 			details::Deleter< ArgIface > ( true ) );
 
 		AllOfGroup & g = *group;
 
-		m_self.addArg( std::move( group ) );
+		ARGPTR a = std::move( group );
 
-		return API< API< PARENT, SELF, ARGPTR >, AllOfGroup, ARGPTR >
+		m_self.addArg( std::move( a ) );
+
+		return API< API< PARENT, SELF, ARGPTR, true >, AllOfGroup, ARGPTR >
 			( *this, g );
 	}
 
 	//! Add AtLeastOneGroup to this group.
 	template< typename NAME >
-	API< API< PARENT, SELF, ARGPTR >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
+	API< API< PARENT, SELF, ARGPTR, true >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
 		bool required = false )
 	{
-		auto group = ARGPTR(
+		auto group = std::unique_ptr< AtLeastOneGroup, details::Deleter< ArgIface > > (
 			new AtLeastOneGroup( std::forward< NAME > ( name ), required ),
 			details::Deleter< ArgIface > ( true ) );
 
 		AtLeastOneGroup & g = *group;
 
-		m_self.addArg( std::move( group ) );
+		ARGPTR a = std::move( group );
 
-		return API< API< PARENT, SELF, ARGPTR >, AtLeastOneGroup, ARGPTR >
+		m_self.addArg( std::move( a ) );
+
+		return API< API< PARENT, SELF, ARGPTR, true >, AtLeastOneGroup, ARGPTR >
 			( *this, g );
 	}
 

@@ -245,10 +245,9 @@ protected:
 	/*!
 		\return Argument for the given name.
 
-		\retval Pointer to the ArgIface if this argument handles
-			argument with the given name.
-		\retval nullptr if this argument doesn't know about
-			argument with name.
+		\retval this if the given name is the name of the command.
+
+		\note Doesn't look in the children.
 	*/
 	ArgIface * findArgument(
 		/*!
@@ -266,19 +265,21 @@ protected:
 	/*!
 		\return Argument for the given name.
 
-		\retval Pointer to the ArgIface if this argument handles
-			argument with the given name.
-		\retval nullptr if this argument doesn't know about
-			argument with name.
+		\retval this if the given name is the name of the command.
+
+		\note Doesn't look in the children.
 	*/
 	const ArgIface * findArgument(
 		/*!
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const String & name ) const override
+		const String & n ) const override
 	{
-		return findArgument( name );
+		if( name() == n )
+			return this;
+		else
+			return nullptr;
 	}
 
 	/*!
@@ -288,6 +289,8 @@ protected:
 			argument with the given name.
 		\retval nullptr if this argument doesn't know about
 			argument with name.
+
+		\note Looks only in children.
 	*/
 	ArgIface * findChild(
 		/*!
@@ -295,6 +298,26 @@ protected:
 			"--timeout".
 		*/
 		const String & name )
+	{
+		return GroupIface::findArgument( name );
+	}
+
+	/*!
+		\return Argument for the given name.
+
+		\retval Pointer to the ArgIface if this argument handles
+			argument with the given name.
+		\retval nullptr if this argument doesn't know about
+			argument with name.
+
+		\note Looks only in children.
+	*/
+	const ArgIface * findChild(
+		/*!
+			Name of the argument. Can be for example "-t" or
+			"--timeout".
+		*/
+		const String & name ) const
 	{
 		return GroupIface::findArgument( name );
 	}

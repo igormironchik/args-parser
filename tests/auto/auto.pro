@@ -8,5 +8,6 @@ SUBDIRS = arg \
 	groups \
 	command \
 	arg_as_command \
-	help
+	help \
+	api
 	

@@ -196,7 +196,15 @@ protected:
 			Name of the argument. Can be for example "-t" or
 			"--timeout".
 		*/
-		const String & name ) override;
+		const String & name ) override
+	{
+		if( details::isArgument( name ) && name.substr( 2 ) == m_name )
+			return this;
+		else if( details::isFlag( name ) && name.substr( 1 ) == m_flag )
+			return this;
+		else
+			return nullptr;
+	}
 
 	/*!
 		\return Argument for the given name.
@@ -213,7 +221,12 @@ protected:
 		*/
 		const String & name ) const override
 	{
-		return findArgument( name );
+		if( details::isArgument( name ) && name.substr( 2 ) == m_name )
+			return this;
+		else if( details::isFlag( name ) && name.substr( 1 ) == m_flag )
+			return this;
+		else
+			return nullptr;
 	}
 
 	/*!
@@ -307,17 +320,6 @@ Arg::Arg( T && name,
 inline
 Arg::~Arg()
 {
-}
-
-inline ArgIface *
-Arg::findArgument( const String & name )
-{
-	if( details::isArgument( name ) && name.substr( 2 ) == m_name )
-		return this;
-	else if( details::isFlag( name ) && name.substr( 1 ) == m_flag )
-		return this;
-	else
-		return nullptr;
 }
 
 inline void

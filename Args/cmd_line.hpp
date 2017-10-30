@@ -144,12 +144,55 @@ public:
 	void parse();
 
 	//! \return Argument for the given name.
-	ArgIface * findArgument( const String & name );
+	//! \note It's impossible to find any GroupIface with exception of Command.
+	ArgIface * findArgument( const String & name )
+	{
+		auto it = std::find_if( m_args.begin(),
+			m_args.end(), [ &name ] ( const auto & arg ) -> bool
+				{ return ( arg->findArgument( name ) != nullptr ); } );
+
+		if( it != m_args.end() )
+		{
+			if( (*it)->type() == ArgType::Command )
+				return it->get();
+			else
+				return (*it)->findArgument( name );
+		}
+		else if( m_command )
+		{
+			ArgIface * tmp = m_command->findChild( name );
+
+			if( tmp )
+				return tmp;
+		}
+
+		return nullptr;
+	}
 
 	//! \return Argument for the given name.
+	//! \note It's impossible to find any GroupIface with exception of Command.
 	const ArgIface * findArgument( const String & name ) const
 	{
-		return findArgument( name );
+		auto it = std::find_if( m_args.cbegin(),
+			m_args.cend(), [ &name ] ( const auto & arg ) -> bool
+				{ return ( arg->findArgument( name ) != nullptr ); } );
+
+		if( it != m_args.end() )
+		{
+			if( (*it)->type() == ArgType::Command )
+				return it->get();
+			else
+				return (*it)->findArgument( name );
+		}
+		else if( m_command )
+		{
+			const ArgIface * tmp = m_command->findChild( name );
+
+			if( tmp )
+				return tmp;
+		}
+
+		return nullptr;
 	}
 
 	//! \return All arguments.
@@ -322,6 +365,8 @@ public:
 	}
 
 	//! \return Is argument defined?
+	//! \note It's impossible to check if any GroupIface is defined
+	//! with exception of Command.
 	bool isDefined(
 		//! Name of the argument. Should be full name, i.e '-a' or '--arg'
 		//! or 'add' if it's a command or subcommand.
@@ -570,31 +615,6 @@ CmdLine::checkCorrectnessAfterParsing() const
 
 	if( m_opt == CommandIsRequired && !m_command )
 		throw BaseException( SL( "Not specified command." ) );
-}
-
-inline ArgIface *
-CmdLine::findArgument( const String & name )
-{
-	auto it = std::find_if( m_args.begin(),
-		m_args.end(), [ &name ] ( const auto & arg ) -> bool
-			{ return ( arg->findArgument( name ) != nullptr ); } );
-
-	if( it != m_args.end() )
-	{
-		if( (*it)->type() == ArgType::Command )
-			return it->get();
-		else
-			return (*it)->findArgument( name );
-	}
-	else if( m_command )
-	{
-		ArgIface * tmp = m_command->findChild( name );
-
-		if( tmp )
-			return tmp;
-	}
-
-	return nullptr;
 }
 
 } /* namespace Args */

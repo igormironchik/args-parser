@@ -211,6 +211,8 @@ protected:
 			argument with the given name.
 		\retval nullptr if this argument doesn't know about
 			argument with name.
+
+		\note Looks only in children.
 	*/
 	ArgIface * findArgument(
 		/*!
@@ -237,6 +239,8 @@ protected:
 			argument with the given name.
 		\retval nullptr if this argument doesn't know about
 			argument with name.
+
+		\note Looks only in children.
 	*/
 	const ArgIface * findArgument(
 		/*!
@@ -245,7 +249,15 @@ protected:
 		*/
 		const String & name ) const override
 	{
-		return findArgument( name );
+		for( const auto & arg : details::asConst( m_children ) )
+		{
+			const ArgIface * tmp = arg->findArgument( name );
+
+			if( tmp != nullptr )
+				return tmp;
+		}
+
+		return nullptr;
 	}
 
 	/*!
