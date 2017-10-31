@@ -640,7 +640,7 @@ public:
 		//! Value specifier.
 		const String & valueSpecifier = String() )
 	{
-		return addArgAsCommand( std::forward< NAME > ( name ),
+		return addArgAsCommandWithDefaulValues( std::forward< NAME > ( name ),
 			required, opt, desc, longDesc,
 			defaultValues, valueSpecifier );
 	}
@@ -1251,7 +1251,7 @@ public:
 		//! Value specifier.
 		const String & valueSpecifier = String() )
 	{
-		return addArgAsCommand( std::forward< NAME > ( name ),
+		return addArgAsCommandWithDefaulValues( std::forward< NAME > ( name ),
 			required, opt, desc, longDesc,
 			defaultValues, valueSpecifier );
 	}
