@@ -269,6 +269,47 @@ public:
 		return API< CmdLine, Command, Command::ArgPtr > ( *this, c );
 	}
 
+	//! Add Command.
+	template< typename NAME >
+	API< CmdLine, Command, Command::ArgPtr > addCommandWithDefaultValues(
+		//! Name of the group.
+		NAME && name,
+		//! Value type.
+		ValueOptions opt = ValueOptions::NoValue,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+		auto cmd = std::unique_ptr< Command, details::Deleter< ArgIface > > (
+			new Command( std::forward< NAME > ( name ), opt ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			cmd->setDescription( desc );
+
+		if( !longDesc.empty() )
+			cmd->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			cmd->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			cmd->setValueSpecifier( valueSpecifier );
+
+		Command & c = *cmd;
+
+		ArgPtr arg = std::move( cmd );
+
+		addArg( std::move( arg ) );
+
+		return API< CmdLine, Command, Command::ArgPtr > ( *this, c );
+	}
+
 	//! Add help.
 	CmdLine & addHelp(
 		//! Should exception be thrown on help printing.

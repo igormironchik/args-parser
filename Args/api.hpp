@@ -386,6 +386,135 @@ public:
 		return *this;
 	}
 
+	//! Add multi argument.
+	template< typename NAME >
+	API< PARENT, SELF, ARGPTR, RETPARENT > & addMultiArgWithDefaulValues(
+		//! Flag for this argument.
+		Char flag,
+		//! Name for this argument.
+		NAME && name,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+
+		auto arg = std::unique_ptr< MultiArg, details::Deleter< ArgIface > > (
+			new MultiArg( flag, std::forward< NAME > ( name ), isWithValue,
+				isRequired ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return *this;
+	}
+
+	//! Add multi argument with flag only.
+	API< PARENT, SELF, ARGPTR, RETPARENT > & addMultiArgWithFlagOnlyAndDefaultValues(
+		//! Flag for this argument.
+		Char flag,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+
+		auto arg = std::unique_ptr< MultiArg, details::Deleter< ArgIface > > (
+			new MultiArg( flag, isWithValue, isRequired ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return *this;
+	}
+
+	//! Add multi argument with name only.
+	template< typename NAME >
+	API< PARENT, SELF, ARGPTR, RETPARENT > & addMultiArgWithNameOnlyAndDefaultValues(
+		//! Name for this argument.
+		NAME && name,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+
+		auto arg = std::unique_ptr< MultiArg, details::Deleter< ArgIface > > (
+			new MultiArg( std::forward< NAME > ( name ), isWithValue,
+				isRequired ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return *this;
+	}
+
 	//! Add argument as command.
 	template< typename NAME >
 	API< PARENT, SELF, ARGPTR, RETPARENT > & addArgAsCommand(
@@ -428,6 +557,48 @@ public:
 		return *this;
 	}
 
+	//! Add argument as command.
+	template< typename NAME >
+	API< PARENT, SELF, ARGPTR, RETPARENT > & addArgAsCommandWithDefaulValues(
+		//! Name.
+		NAME && name,
+		//! Is required?
+		bool required = false,
+		//! Value type.
+		ValueOptions opt = ValueOptions::NoValue,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+		auto arg = std::unique_ptr< ArgAsCommand, details::Deleter< ArgIface > > (
+			new ArgAsCommand( std::forward< NAME > ( name ), required,
+				opt ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return *this;
+	}
+
 	//! Add sub command.
 	template< typename NAME >
 	API< PARENT, SELF, ARGPTR, RETPARENT > & addSubCommand(
@@ -449,6 +620,29 @@ public:
 		return addArgAsCommand( std::forward< NAME > ( name ),
 			required, opt, desc, longDesc,
 			defaultValue, valueSpecifier );
+	}
+
+	//! Add sub command.
+	template< typename NAME >
+	API< PARENT, SELF, ARGPTR, RETPARENT > & addSubCommandWithDefaultValues(
+		//! Name.
+		NAME && name,
+		//! Is required?
+		bool required = false,
+		//! Value type.
+		ValueOptions opt = ValueOptions::NoValue,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+		return addArgAsCommand( std::forward< NAME > ( name ),
+			required, opt, desc, longDesc,
+			defaultValues, valueSpecifier );
 	}
 
 	//! End this group. \return Parent object.
@@ -803,6 +997,135 @@ public:
 		return m_parent;
 	}
 
+	//! Add multi argument.
+	template< typename NAME >
+	PARENT & addMultiArgWithDefaulValues(
+		//! Flag for this argument.
+		Char flag,
+		//! Name for this argument.
+		NAME && name,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+
+		auto arg = std::unique_ptr< MultiArg, details::Deleter< ArgIface > > (
+			new MultiArg( flag, std::forward< NAME > ( name ), isWithValue,
+				isRequired ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return m_parent;
+	}
+
+	//! Add multi argument with flag only.
+	PARENT & addMultiArgWithFlagOnlyAndDefaultValues(
+		//! Flag for this argument.
+		Char flag,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+
+		auto arg = std::unique_ptr< MultiArg, details::Deleter< ArgIface > > (
+			new MultiArg( flag, isWithValue, isRequired ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return m_parent;
+	}
+
+	//! Add multi argument with name only.
+	template< typename NAME >
+	PARENT & addMultiArgWithNameOnlyAndDefaultValues(
+		//! Name for this argument.
+		NAME && name,
+		//! Is this argument with value?
+		bool isWithValue = false,
+		//! Is this argument required?
+		bool isRequired = false,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+
+		auto arg = std::unique_ptr< MultiArg, details::Deleter< ArgIface > > (
+			new MultiArg( std::forward< NAME > ( name ), isWithValue,
+				isRequired ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return m_parent;
+	}
+
 	//! Add argument as command.
 	template< typename NAME >
 	PARENT & addArgAsCommand(
@@ -845,6 +1168,48 @@ public:
 		return m_parent;
 	}
 
+	//! Add argument as command.
+	template< typename NAME >
+	PARENT & addArgAsCommandWithDefaulValues(
+		//! Name.
+		NAME && name,
+		//! Is required?
+		bool required = false,
+		//! Value type.
+		ValueOptions opt = ValueOptions::NoValue,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+		auto arg = std::unique_ptr< ArgAsCommand, details::Deleter< ArgIface > > (
+			new ArgAsCommand( std::forward< NAME > ( name ), required,
+				opt ),
+			details::Deleter< ArgIface > ( true ) );
+
+		if( !desc.empty() )
+			arg->setDescription( desc );
+
+		if( !longDesc.empty() )
+			arg->setLongDescription( longDesc );
+
+		if( !defaultValues.empty() )
+			arg->setDefaultValues( defaultValues );
+
+		if( !valueSpecifier.empty() )
+			arg->setValueSpecifier( valueSpecifier );
+
+		ARGPTR a = std::move( arg );
+
+		m_self.addArg( std::move( a ) );
+
+		return m_parent;
+	}
+
 	//! Add sub command.
 	template< typename NAME >
 	PARENT & addSubCommand(
@@ -866,6 +1231,29 @@ public:
 		return addArgAsCommand( std::forward< NAME > ( name ),
 			required, opt, desc, longDesc,
 			defaultValue, valueSpecifier );
+	}
+
+	//! Add sub command.
+	template< typename NAME >
+	PARENT & addSubCommandWithDefaultValues(
+		//! Name.
+		NAME && name,
+		//! Is required?
+		bool required = false,
+		//! Value type.
+		ValueOptions opt = ValueOptions::NoValue,
+		//! Description of the argument.
+		const String & desc = String(),
+		//! Long description.
+		const String & longDesc = String(),
+		//! Default value.
+		const StringList & defaultValues = StringList(),
+		//! Value specifier.
+		const String & valueSpecifier = String() )
+	{
+		return addArgAsCommand( std::forward< NAME > ( name ),
+			required, opt, desc, longDesc,
+			defaultValues, valueSpecifier );
 	}
 
 	//! End this group. \return Parent object.
