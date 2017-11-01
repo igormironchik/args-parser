@@ -297,10 +297,14 @@ TEST( CommandCase, TestAllIsOk6 )
 
 TEST( CommandCase, TestMisspelling )
 {
+	CmdLine cmd;
+
 	Command add( SL( "add" ) );
 
 	ArgAsCommand file( SL( "file" ) );
 	add.addArg( file );
+
+	cmd.addArg( add );
 
 	StringList correct;
 
@@ -319,6 +323,12 @@ TEST( CommandCase, TestMisspelling )
 	CHECK_CONDITION( !add.isMisspelledCommand( SL( "fiel" ), correct ) )
 
 	CHECK_CONDITION( add.isMisspelledCommand( SL( "dad" ), correct ) )
+	CHECK_CONDITION( correct.size() == 1 )
+	CHECK_CONDITION( correct.front() == SL( "add" ) )
+
+	correct.clear();
+
+	CHECK_CONDITION( cmd.isMisspelledName( SL( "dad" ), correct ) )
 	CHECK_CONDITION( correct.size() == 1 )
 	CHECK_CONDITION( correct.front() == SL( "add" ) )
 }

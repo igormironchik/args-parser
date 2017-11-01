@@ -273,6 +273,10 @@ TEST( ArgAPI, TestGetterSetterOfArg )
 	CHECK_CONDITION( a3->value() == SL( "val" ) )
 	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
 	CHECK_CONDITION( a3->defaultValue() == SL( "val" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "-1" ) ) == SL( "val" ) )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).front() == SL( "val" ) )
 }
 
 TEST( ArgAPI, TestGetterSetterOfMultiArg )
@@ -309,6 +313,10 @@ TEST( ArgAPI, TestGetterSetterOfMultiArg )
 	CHECK_CONDITION( a3->value() == SL( "val" ) )
 	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
 	CHECK_CONDITION( a3->defaultValue() == SL( "val" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "-1" ) ) == SL( "val" ) )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).front() == SL( "val" ) )
 }
 
 TEST( ArgAPI, TestGetterSetterOfMultiArgWithValues )
@@ -357,6 +365,11 @@ TEST( ArgAPI, TestGetterSetterOfMultiArgWithValues )
 	CHECK_CONDITION( a3->defaultValues().size() == 2 )
 	CHECK_CONDITION( a3->defaultValues().front() == SL( "val1" ) )
 	CHECK_CONDITION( a3->defaultValues().back() == SL( "val2" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "-1" ) ) == SL( "val1" ) )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).size() == 2 )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).front() == SL( "val1" ) )
+	CHECK_CONDITION( cmd.values( SL( "-1" ) ).back() == SL( "val2" ) )
 }
 
 TEST( ArgAPI, TestGetterSetterOfArgAsCommand )
@@ -389,6 +402,15 @@ TEST( ArgAPI, TestGetterSetterOfArgAsCommand )
 	CHECK_CONDITION( a2->defaultValues().size() == 2 )
 	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
 	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "arg1" ) ) == SL( "val" ) )
+	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "arg2" ) ) == SL( "val1" ) )
+	CHECK_CONDITION( cmd.values( SL( "arg2" ) ).size() == 2 )
+	CHECK_CONDITION( cmd.values( SL( "arg2" ) ).front() == SL( "val1" ) )
+	CHECK_CONDITION( cmd.values( SL( "arg2" ) ).back() == SL( "val2" ) )
 }
 
 TEST( ArgAPI, TestGetterSetterOfSubCommand )
@@ -421,6 +443,10 @@ TEST( ArgAPI, TestGetterSetterOfSubCommand )
 	CHECK_CONDITION( a2->defaultValues().size() == 2 )
 	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
 	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "arg1" ) ) == SL( "val" ) )
+	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) )
 }
 
 TEST( ArgAPI, TestGetterSetterOfArgInGroup )
@@ -650,6 +676,15 @@ TEST( ArgAPI, TestGetterSetterOfCommand )
 	CHECK_CONDITION( a2->defaultValues().size() == 2 )
 	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
 	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "cmd1" ) ) == SL( "val" ) )
+	CHECK_CONDITION( cmd.values( SL( "cmd1" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "cmd1" ) ).front() == SL( "val" ) )
+
+	CHECK_CONDITION( cmd.value( SL( "cmd2" ) ) == SL( "val1" ) )
+	CHECK_CONDITION( cmd.values( SL( "cmd2" ) ).size() == 2 )
+	CHECK_CONDITION( cmd.values( SL( "cmd2" ) ).front() == SL( "val1" ) )
+	CHECK_CONDITION( cmd.values( SL( "cmd2" ) ).back() == SL( "val2" ) )
 }
 
 
