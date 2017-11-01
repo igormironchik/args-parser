@@ -149,7 +149,7 @@ Help::process( Context & context )
 			auto * tmp = m_printer->findArgument( arg );
 
 			// Command.
-			if( tmp->type() == ArgType::Command )
+			if( tmp && tmp->type() == ArgType::Command )
 			{
 				if( !context.atEnd() )
 					m_printer->print( static_cast< Command* > ( tmp ),

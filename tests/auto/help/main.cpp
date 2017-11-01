@@ -605,6 +605,88 @@ TEST( HelpTestCase, TestHelpOfArgAsCommand )
 	CHECK_CONDITION( false )
 }
 
+TEST( HelpTestCase, TestWrongArgForHelp )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ) };
+
+	try {
+		CmdLine cmd( argc, argv );
+
+		Arg host( SL( 's' ), SL( "host" ),
+			true, true );
+		host.setDescription( SL( "Host. Can be \"localhost\", "
+			"\"any\" or regular IP." ) );
+		host.setLongDescription( SL( "Host. This argument told to the "
+			"application where to open socket for communication." ) );
+
+		Arg port( SL( 'p' ), SL( "port" ), true, true );
+		port.setDescription( SL( "Port number to create socket." ) );
+
+		Arg timeout( SL( "timeout" ), true );
+		timeout.setValueSpecifier( SL( "ms" ) );
+		timeout.setDescription( SL( "Timeout before new messages will be "
+			"sent in milliseconds." ) );
+
+		Help help;
+		help.setExecutable( SL( "executable" ) );
+		help.setAppDescription( SL( "This application just show "
+			"the power of Args." ) );
+
+		cmd.addArg( host );
+		cmd.addArg( port );
+		cmd.addArg( timeout );
+		cmd.addArg( help );
+
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"This application just show the power of Args. \n"
+			"\n"
+			"Usage: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
+			"       --help <arg> ] [ --timeout <ms> ] \n"
+			"\n"
+			"Required arguments:\n"
+			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
+			"\n"
+			" -p, --port <arg>   Port number to create socket. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg>   Print this help. \n"
+			"\n"
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"This application just show the power of Args. \n"
+			"\n"
+			"Usage: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
+			"       --help <arg> ] [ --timeout <ms> ] \n"
+			"\n"
+			"Required arguments:\n"
+			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
+			"\n"
+			" -p, --port <arg>   Port number to create socket. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg>   Print this help. \n"
+			"\n"
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 
 int main()
 {
