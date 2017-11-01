@@ -130,6 +130,7 @@ public:
 		CommandIsRequired = 1
 	}; // enum CmdLineOpts
 
+	//! Construct empty CmdLine.
 	explicit CmdLine( CmdLineOpts opt = Empty )
 		:	details::API< CmdLine, CmdLine, ArgPtr, true > ( *this, *this )
 		,	m_command( nullptr )
@@ -138,9 +139,11 @@ public:
 	}
 
 #ifdef ARGS_WSTRING_BUILD
+	//! Construct CmdLine with set command line arguments.
 	CmdLine( int argc, const Char * const * argv,
 		CmdLineOpts opt = Empty );
 #else
+	//! Construct CmdLine with set command line arguments.
 	CmdLine( int argc, const char * const * argv,
 		CmdLineOpts opt = Empty );
 #endif
@@ -174,10 +177,10 @@ public:
 	void parse();
 
 #ifdef ARGS_WSTRING_BUILD
-	//! Reparse arguments.
+	//! Parse arguments.
 	void parse( int argc, const Char * const * argv )
 #else
-	//! Reparse arguments.
+	//! Parse arguments.
 	void parse( int argc, const char * const * argv )
 #endif
 	{
