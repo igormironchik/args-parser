@@ -241,6 +241,16 @@ public:
 			return false;
 	}
 
+	//! Clear state of the argument.
+	void clear() override
+	{
+		m_isDefined = false;
+
+		m_values.clear();
+
+		GroupIface::clear();
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.

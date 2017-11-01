@@ -50,6 +50,28 @@ namespace Args {
 namespace details {
 
 //
+// makeContext
+//
+
+//! Make context from the argc and argv.
+static inline ContextInternal
+#ifdef ARGS_WSTRING_BUILD
+	makeContext( int argc, const Char * const * argv )
+#else
+	makeContext( int argc, const char * const * argv )
+#endif
+{
+	ContextInternal context;
+
+	// We skip first argv because of it's executable name.
+	for( int i = 1; i < argc; ++i )
+		context.push_back( argv[ i ] );
+
+	return context;
+} // makeContext
+
+
+//
 // formatCorrectNamesString
 //
 
@@ -108,6 +130,13 @@ public:
 		CommandIsRequired = 1
 	}; // enum CmdLineOpts
 
+	explicit CmdLine( CmdLineOpts opt = Empty )
+		:	details::API< CmdLine, CmdLine, ArgPtr, true > ( *this, *this )
+		,	m_command( nullptr )
+		,	m_opt( opt )
+	{
+	}
+
 #ifdef ARGS_WSTRING_BUILD
 	CmdLine( int argc, const Char * const * argv,
 		CmdLineOpts opt = Empty );
@@ -142,6 +171,21 @@ public:
 
 	//! Parse arguments.
 	void parse();
+
+#ifdef ARGS_WSTRING_BUILD
+	//! Reparse arguments.
+	void parse( int argc, const Char * const * argv )
+#else
+	//! Reparse arguments.
+	void parse( int argc, const char * const * argv )
+#endif
+	{
+		m_context = std::move( details::makeContext( argc, argv ) );
+
+		clear();
+
+		parse();
+	}
 
 	//! \return Argument for the given name.
 	//! \note It's impossible to find any GroupIface with exception of Command.
@@ -421,6 +465,15 @@ public:
 			return false;
 	}
 
+	//! Clear state of the arguments.
+	void clear()
+	{
+		std::for_each( arguments().begin(), arguments().end(),
+			[] ( const auto & a ) { a->clear(); } );
+
+		m_command = nullptr;
+	}
+
 private:
 	//! Check correctness of the arguments before parsing.
 	void checkCorrectnessBeforeParsing() const;
@@ -461,28 +514,6 @@ private:
 
 
 //
-// makeContext
-//
-
-//! Make context from the argc and argv.
-static inline ContextInternal
-#ifdef ARGS_WSTRING_BUILD
-	makeContext( int argc, const Char * const * argv )
-#else
-	makeContext( int argc, const char * const * argv )
-#endif
-{
-	ContextInternal context;
-
-	// We skip first argv because of it's executable name.
-	for( int i = 1; i < argc; ++i )
-		context.push_back( argv[ i ] );
-
-	return context;
-} // makeContext
-
-
-//
 // CmdLine
 //
 
@@ -493,7 +524,7 @@ inline
 	CmdLine::CmdLine( int argc, const char * const * argv, CmdLineOpts opt )
 #endif
 	:	details::API< CmdLine, CmdLine, ArgPtr, true > ( *this, *this )
-	,	m_context( makeContext( argc, argv ) )
+	,	m_context( details::makeContext( argc, argv ) )
 	,	m_command( nullptr )
 	,	m_opt( opt )
 {

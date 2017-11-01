@@ -251,6 +251,14 @@ public:
 			return false;
 	}
 
+	//! Clear state of the argument.
+	void clear() override
+	{
+		m_defined = false;
+
+		m_values.clear();
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.

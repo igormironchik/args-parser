@@ -108,6 +108,137 @@ TEST( ArgAPI, TestAllIsOk )
 	CHECK_CONDITION( !cmd.isDefined( SL( "-h" ) ) )
 }
 
+TEST( ArgAPI, TestAllIsOkReparse )
+{
+	const int argc = 7;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ),
+		SL( "-f" ), SL( "test.txt" ),
+		SL( "-d" ), SL( "-r" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
+				SL( "Add file." ) )
+			.addAllOfGroup( SL( "file group" ) )
+				.addSubCommand( SL( "file" ), false, ValueOptions::NoValue )
+				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
+					SL( "Name of the file." ), SL( "" ), SL( "" ),
+					SL( "fn" ) )
+			.end()
+			.addArgWithFlagOnly( SL( 'd' ), false, false, SL( "Do job." ) )
+		.end()
+		.addCommand( SL( "delete" ), ValueOptions::NoValue,
+				SL( "Delete file." ) )
+			.addArgWithFlagOnly( SL( 'd' ), false, false,
+				SL( "Do NOT job." ) )
+		.end()
+		.addArgWithFlagAndName( SL( 'r' ), SL( "recurcieve" ), false, false,
+			SL( "Do operation recurcively?" ) )
+		.addHelp( true, argv[ 0 ],
+			SL( "This application just show power of the Args help." ) )
+		// Dummy, just for compillation testing.
+		.addMultiArgWithDefaulValues( SL( '1' ), SL( "11" ) )
+		.addMultiArgWithFlagOnlyAndDefaultValues( SL( '2' ) )
+		.addMultiArgWithNameOnlyAndDefaultValues( SL( "22" ) )
+		.addArgAsCommandWithDefaulValues( SL( "33" ) )
+		.addSubCommandWithDefaultValues( SL( "44" ) )
+		.addAtLeastOneGroup( SL( "5" ) )
+			.addMultiArgWithDefaulValues( SL( '6' ), SL( "66" ) )
+			.addMultiArgWithFlagOnlyAndDefaultValues( SL( '7' ) )
+			.addMultiArgWithNameOnlyAndDefaultValues( SL( "77" ) )
+			.addArgAsCommandWithDefaulValues( SL( "88" ) )
+			.addSubCommandWithDefaultValues( SL( "99" ) )
+		.end();
+
+	cmd.parse();
+
+	CHECK_CONDITION( cmd.isDefined( SL( "add" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "file" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "-f" ) ) )
+	CHECK_CONDITION( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) )
+	CHECK_CONDITION( cmd.values( SL( "-f" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "-d" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "-r" ) ) )
+
+	CHECK_CONDITION( !cmd.isDefined( SL( "delete" ) ) )
+	CHECK_CONDITION( !cmd.isDefined( SL( "-h" ) ) )
+
+	const int nargc = 2;
+	const CHAR * nargv[ nargc ] = { SL( "program.exe" ),
+		SL( "delete" ) };
+
+	cmd.parse( nargc, nargv );
+
+	CHECK_CONDITION( !cmd.isDefined( SL( "add" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "delete" ) ) )
+}
+
+TEST( ArgAPI, TestAllIsOkWithEmptyCtor )
+{
+	const int argc = 7;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ),
+		SL( "-f" ), SL( "test.txt" ),
+		SL( "-d" ), SL( "-r" ) };
+
+	CmdLine cmd( CmdLine::CommandIsRequired );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
+				SL( "Add file." ) )
+			.addAllOfGroup( SL( "file group" ) )
+				.addSubCommand( SL( "file" ), false, ValueOptions::NoValue )
+				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
+					SL( "Name of the file." ), SL( "" ), SL( "" ),
+					SL( "fn" ) )
+			.end()
+			.addArgWithFlagOnly( SL( 'd' ), false, false, SL( "Do job." ) )
+		.end()
+		.addCommand( SL( "delete" ), ValueOptions::NoValue,
+				SL( "Delete file." ) )
+			.addArgWithFlagOnly( SL( 'd' ), false, false,
+				SL( "Do NOT job." ) )
+		.end()
+		.addArgWithFlagAndName( SL( 'r' ), SL( "recurcieve" ), false, false,
+			SL( "Do operation recurcively?" ) )
+		.addHelp( true, argv[ 0 ],
+			SL( "This application just show power of the Args help." ) )
+		// Dummy, just for compillation testing.
+		.addAllOfGroup( SL( "1" ) )
+		.end()
+		.addOnlyOneGroup( SL( "2" ) )
+		.end()
+		.addAtLeastOneGroup( SL( "3" ) )
+			.addAllOfGroup( SL( "4" ) )
+			.end()
+			.addOnlyOneGroup( SL( "5" ) )
+			.end()
+			.addAtLeastOneGroup( SL( "6" ) )
+			.end()
+			.addMultiArg( SL( '7' ), SL( "77" ) )
+			.addMultiArgWithFlagOnly( SL( '8' ) )
+			.addMultiArgWithNameOnly( SL( "9" ) )
+		.end()
+		.addMultiArg( SL( 'q' ), SL( "qq" ) )
+		.addMultiArgWithFlagOnly( SL( 'w' ) )
+		.addMultiArgWithNameOnly( SL( "qwe" ) );
+
+	cmd.parse( argc, argv );
+
+	CHECK_CONDITION( cmd.isDefined( SL( "add" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "file" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "-f" ) ) )
+	CHECK_CONDITION( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) )
+	CHECK_CONDITION( cmd.values( SL( "-f" ) ).size() == 1 )
+	CHECK_CONDITION( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "-d" ) ) )
+	CHECK_CONDITION( cmd.isDefined( SL( "-r" ) ) )
+
+	CHECK_CONDITION( !cmd.isDefined( SL( "delete" ) ) )
+	CHECK_CONDITION( !cmd.isDefined( SL( "-h" ) ) )
+}
+
 
 int main()
 {

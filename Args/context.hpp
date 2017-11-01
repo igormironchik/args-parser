@@ -59,7 +59,21 @@ typedef StringList ContextInternal;
 */
 class Context final {
 public:
+	Context()
+		:	m_it( m_context.begin() )
+	{
+	}
+
 	explicit Context( ContextInternal items );
+
+	Context & operator = ( ContextInternal && items )
+	{
+		m_context = std::move( items );
+
+		m_it = m_context.begin();
+
+		return *this;
+	}
 
 	//! \return Iterator to the first item in the context.
 	ContextInternal::iterator begin();

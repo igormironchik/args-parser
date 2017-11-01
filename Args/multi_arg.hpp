@@ -140,6 +140,13 @@ public:
 		m_defaultValues = v;
 	}
 
+	//! Clear state of the argument.
+	void clear() override
+	{
+		setDefined( false );
+
+		m_values.clear();
+	}
 
 protected:
 	/*!

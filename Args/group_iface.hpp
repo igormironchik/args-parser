@@ -203,6 +203,13 @@ public:
 		return m_dummyEmptyString;
 	}
 
+	//! Clear state of the argument.
+	void clear() override
+	{
+		std::for_each( children().begin(), children().end(),
+			[ & ] ( const auto & ch ) { ch->clear(); } );
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.

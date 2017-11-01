@@ -111,6 +111,9 @@ public:
 		//! List of possible names for the given misspelled name.
 		StringList & possibleNames ) const = 0;
 
+	//! Clear state of the argument.
+	virtual void clear() = 0;
+
 protected:
 	/*!
 		\return Argument for the given name.
