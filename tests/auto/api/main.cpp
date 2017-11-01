@@ -298,7 +298,10 @@ TEST( ArgAPI, TestGetterSetterOfMultiArg )
 	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
 	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
 
-	const auto * a2 = static_cast< const Arg* > ( cmd.findArgument( SL( "-2" ) ) );
+	const CmdLine & tmpCmd = cmd;
+
+	const auto * a2 = static_cast< const Arg* > (
+		tmpCmd.findArgument( SL( "-2" ) ) );
 
 	CHECK_CONDITION( a2->description() == SL( "desc" ) )
 	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
@@ -306,7 +309,8 @@ TEST( ArgAPI, TestGetterSetterOfMultiArg )
 	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
 	CHECK_CONDITION( a2->defaultValue() == SL( "val" ) )
 
-	auto * a3 = static_cast< Arg* > ( cmd.findArgument( SL( "--33" ) ) );
+	const auto * a3 = static_cast< const Arg* > (
+		tmpCmd.findArgument( SL( "--33" ) ) );
 
 	CHECK_CONDITION( a3->description() == SL( "desc" ) )
 	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
@@ -665,8 +669,10 @@ TEST( ArgAPI, TestGetterSetterOfCommand )
 	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
 	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
 
+	const CmdLine & tmpCmd = cmd;
+
 	const auto * a2 = static_cast< const Command* > (
-		cmd.findArgument( SL( "cmd2" ) ) );
+		tmpCmd.findArgument( SL( "cmd2" ) ) );
 
 	CHECK_CONDITION( a2->description() == SL( "desc" ) )
 	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
