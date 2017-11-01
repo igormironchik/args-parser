@@ -155,6 +155,7 @@ public:
 	//! Add argument. \note Developer should handle lifetime of the argument.
 	void addArg( ArgIface & arg );
 
+	//! Add argument.
 	void addArg( ArgPtr arg )
 	{
 		if( std::find( m_args.begin(), m_args.end(), arg ) ==
