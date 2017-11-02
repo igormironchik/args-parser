@@ -687,6 +687,60 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 	CHECK_CONDITION( false )
 }
 
+TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addAllOfGroup( SL( "group" ), true )
+				.addArgWithFlagOnly( SL( 'a' ), true, false,
+					SL( "Argument." ) )
+			.end()
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		auto a = g_string;
+		CHECK_CONDITION( g_string ==
+			"Test help. \n"
+			"\n"
+			"Usage: executable -a <arg> [ -h, --help <arg> ] \n"
+			"\n"
+			"Required arguments:\n"
+			" -a <arg>         Argument. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Test help. \n"
+			"\n"
+			"Usage: executable -a <arg> [ -h, --help <arg> ] \n"
+			"\n"
+			"Required arguments:\n"
+			" -a <arg>         Argument. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 
 int main()
 {

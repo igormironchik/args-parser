@@ -675,7 +675,7 @@ public:
 
 	//! Add OnlyOneGroup.
 	template< typename NAME >
-	API< API< PARENT, SELF, ARGPTR, true >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
+	API< PARENT, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
@@ -691,13 +691,13 @@ public:
 
 		m_self.addArg( std::move( a ) );
 
-		return API< API< PARENT, SELF, ARGPTR, true >, OnlyOneGroup, ARGPTR >
-			( *this, g );
+		return API< PARENT, OnlyOneGroup, ARGPTR >
+			( *( static_cast< PARENT* > ( this ) ), g );
 	}
 
 	//! Add AllOfGroup.
 	template< typename NAME >
-	API< API< PARENT, SELF, ARGPTR, true >, AllOfGroup, ARGPTR > addAllOfGroup(
+	API< PARENT, AllOfGroup, ARGPTR > addAllOfGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
@@ -713,13 +713,13 @@ public:
 
 		m_self.addArg( std::move( a ) );
 
-		return API< API< PARENT, SELF, ARGPTR, true >, AllOfGroup, ARGPTR >
-			( *this, g );
+		return API< PARENT, AllOfGroup, ARGPTR >
+			( *( static_cast< PARENT* > ( this ) ), g );
 	}
 
 	//! Add AtLeastOneGroup.
 	template< typename NAME >
-	API< API< PARENT, SELF, ARGPTR, true >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
+	API< PARENT, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
@@ -735,8 +735,8 @@ public:
 
 		m_self.addArg( std::move( a ) );
 
-		return API< API< PARENT, SELF, ARGPTR, true >, AtLeastOneGroup, ARGPTR >
-			( *this, g );
+		return API< PARENT, AtLeastOneGroup, ARGPTR >
+			( *( static_cast< PARENT* > ( this ) ), g );
 	}
 
 	//! Add argument.

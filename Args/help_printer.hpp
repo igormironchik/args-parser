@@ -681,7 +681,7 @@ HelpPrinter::createUsageString( ArgIface * arg, bool required ) const
 		usage.append( SL( "--" ) );
 		usage.append( arg->argumentName() );
 	}
-	else
+	else if( arg->flag().empty() && arg->argumentName().empty() )
 		usage.append( arg->name() );
 
 	if( arg->isWithValue() )
