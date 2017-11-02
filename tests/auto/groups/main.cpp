@@ -90,9 +90,9 @@ TEST( GroupCase, TestOnlyOneFailed )
 	OnlyOneGroup g( SL( "only_one" ) );
 	cmd.addArg( &g );
 
-	g.addArg( timeout );
-	g.addArg( port );
-	g.addArg( host );
+	g.addArg( &timeout );
+	g.addArg( &port );
+	g.addArg( &host );
 
 	CHECK_THROW( cmd.parse(), BaseException )
 }
