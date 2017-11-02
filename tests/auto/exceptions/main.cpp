@@ -95,6 +95,70 @@ TEST( ArgExceptions, TestRequiredArgInAllOfGroup )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestAlreadyInCmdLine1 )
+{
+	CmdLine cmd;
+
+	try {
+		auto a1 = CmdLine::ArgPtr( new Arg( Char( SL( 'a' ) ), true, true ),
+			details::Deleter< ArgIface >( true ) );
+		auto a2 = CmdLine::ArgPtr( a1.get(),
+			details::Deleter< ArgIface >( false ) );
+
+		cmd.addArg( std::move( a1 ) );
+		cmd.addArg( std::move( a2 ) );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Argument \"-a\" already in the command line parser." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestAlreadyInCmdLine2 )
+{
+	CmdLine cmd;
+
+	try {
+		Arg a1( Char( SL( 'a' ) ), true, true );
+
+		cmd.addArg( &a1 );
+		cmd.addArg( &a1 );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Argument \"-a\" already in the command line parser." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestAddingNull )
+{
+	CmdLine cmd;
+
+	try {
+		cmd.addArg( nullptr );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Attempt to add nullptr to the "
+				"command line as argument." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
