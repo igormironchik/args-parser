@@ -201,6 +201,72 @@ TEST( ArgExceptions, TestDissallowedNameOfArgAsCommand )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestEmptyNameOfCommand )
+{
+	try {
+		CmdLine cmd;
+
+		Command a( SL( "" ) );
+
+		cmd.addArg( a );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Command can't be with empty name." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestRedefinitionOfCommand )
+{
+	try {
+		CmdLine cmd;
+
+		Command a( SL( "cmd" ) );
+		Command b( SL( "cmd" ) );
+
+		cmd.addArg( a );
+		cmd.addArg( b );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Redefinition of command with name \"cmd\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestDissallowedNameOfCommand )
+{
+	try {
+		CmdLine cmd;
+
+		Command a( SL( "cmd with space" ) );
+
+		cmd.addArg( a );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Disallowed name \"cmd with space\" for the command." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
