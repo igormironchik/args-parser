@@ -478,7 +478,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 {
 	auto * arg = m_cmdLine->findArgument( name );
 
-	if( arg->type() == ArgType::Command )
+	if( arg && arg->type() == ArgType::Command )
 	{
 		Command * cmd = static_cast < Command* > ( arg );
 
@@ -574,7 +574,8 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 			std::for_each( optional.cbegin(), optional.cend(), printArg );
 		}
 
-		to << "\n";
+		if( !required.empty() || !optional.empty() )
+			to << "\n";
 
 		// Print global arguments.
 		if( !grequired.empty() || !goptional.empty() )

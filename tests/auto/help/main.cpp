@@ -984,6 +984,112 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 	CHECK_CONDITION( false )
 }
 
+TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addCommand( SL( "cmd" ), ValueOptions::OneValue, SL( "Command." ) )
+			.end()
+			.addArgAsCommand( SL( "arg" ), true, ValueOptions::OneValue,
+				SL( "Argument." ) )
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Test help. \n"
+			"\n"
+			"Usage: executable <command> <args>\n"
+			"\n"
+			"  cmd <arg> Command. \n"
+			"\n"
+			"Required arguments:\n"
+			"     arg <arg>    Argument. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Test help. \n"
+			"\n"
+			"Usage: executable <command> <args>\n"
+			"\n"
+			"  cmd <arg> Command. \n"
+			"\n"
+			"Required arguments:\n"
+			"     arg <arg>    Argument. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "cmd" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addCommand( SL( "cmd" ), ValueOptions::OneValue, SL( "Command." ) )
+			.end()
+			.addArgAsCommand( SL( "arg" ), true, ValueOptions::OneValue,
+				SL( "Argument." ) )
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Command. \n"
+			"\n"
+			"Global arguments:\n\n"
+			"Required arguments:\n"
+			"     arg <arg>    Argument. \n\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Command. \n"
+			"\n"
+			"Global arguments:\n\n"
+			"Required arguments:\n"
+			"     arg <arg>    Argument. \n\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 
 int main()
 {
