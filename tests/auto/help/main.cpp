@@ -879,6 +879,63 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 	CHECK_CONDITION( false )
 }
 
+TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithFlagOnly( SL( 'a' ), true, false,
+				SL( "Argument." ), SL( "" ), SL( "" ), SL( "bin|lib|shared" ) )
+			.addArgWithNameOnly( SL( "name" ), false, false, SL( "Name." ) )
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		auto a = g_string;
+		CHECK_CONDITION( g_string ==
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"       [ --name ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a <bin|lib|shared> Argument. \n"
+			"\n"
+			" -h, --help <arg>    Print this help. \n"
+			"\n"
+			"     --name          Name. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"       [ --name ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a <bin|lib|shared> Argument. \n"
+			"\n"
+			" -h, --help <arg>    Print this help. \n"
+			"\n"
+			"     --name          Name. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 {
 	const int argc = 2;

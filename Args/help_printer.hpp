@@ -250,7 +250,7 @@ HelpPrinter::sortArg( const ArgPtr & arg,
 
 inline void
 HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
-	String::size_type beforeDescription, String::size_type maxFlag ) const
+	String::size_type beforeDescription, String::size_type ) const
 {
 	String::size_type pos = 0;
 
@@ -274,8 +274,8 @@ HelpPrinter::printOnlyFor( ArgIface * arg, OutStreamType & to,
 	}
 	else
 	{
-		printOffset( to, pos, maxFlag + 1 );
-		pos += maxFlag + 1;
+		printOffset( to, pos, 4 );
+		pos = 4;
 	}
 
 	if( !arg->argumentName().empty() )
