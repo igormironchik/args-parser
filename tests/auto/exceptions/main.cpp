@@ -159,6 +159,48 @@ TEST( ArgExceptions, TestAddingNull )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestEmptyNameOfArgAsCommand )
+{
+	try {
+		CmdLine cmd;
+
+		ArgAsCommand a( SL( "" ) );
+
+		cmd.addArg( a );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "ArgAsCommand can't be with empty name." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestDissallowedNameOfArgAsCommand )
+{
+	try {
+		CmdLine cmd;
+
+		ArgAsCommand a( SL( "arg with space" ) );
+
+		cmd.addArg( a );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Disallowed name \"arg with space\" for the argument." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
