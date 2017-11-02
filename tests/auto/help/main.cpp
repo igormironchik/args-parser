@@ -863,7 +863,7 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
+			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"\n"
 			"Optional arguments:\n"
 			" -a <bin|lib|shared> Argument. \n"
@@ -898,7 +898,6 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		auto a = g_string;
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
