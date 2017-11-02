@@ -689,9 +689,9 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 
 TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 {
-	const int argc = 3;
+	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "-h" ), SL( "add" ) };
+		SL( "-h" ) };
 
 	try {
 		CmdLine cmd;
@@ -707,7 +707,6 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		auto a = g_string;
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
@@ -731,6 +730,194 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 			"\n"
 			"Optional arguments:\n"
 			" -h, --help <arg> Print this help. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addAllOfGroup( SL( "group" ) )
+				.addArgWithFlagOnly( SL( 'a' ), true, false,
+					SL( "Argument." ) )
+			.end()
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a <arg>         Argument. \n"
+			"\n"
+			" -h, --help <arg> Print this help. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a <arg>         Argument. \n"
+			"\n"
+			" -h, --help <arg> Print this help. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( HelpTestCase, TestArgAsCommandHelp )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "sub" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addArgAsCommand( SL( "sub" ), true, ValueOptions::OneValue,
+				SL( "ArgAsCommand." ) )
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Usage: sub <arg> \n"
+			"\n"
+			"       ArgAsCommand. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Usage: sub <arg> \n"
+			"\n"
+			"       ArgAsCommand. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( HelpTestCase, TestFlagWithBigVSHelp )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithFlagOnly( SL( 'a' ), true, false,
+				SL( "Argument." ), SL( "" ), SL( "" ), SL( "bin|lib|shared" ) )
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a <bin|lib|shared> Argument. \n"
+			"\n"
+			" -h, --help <arg>    Print this help. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a <bin|lib|shared> Argument. \n"
+			"\n"
+			" -h, --help <arg>    Print this help. \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithFlagAndName( SL( 'a' ), SL( "arg" ), true, false,
+				SL( "Argument." ), SL( "" ), SL( "" ), SL( "bin|lib|shared" ) )
+			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a, --arg <bin|lib|shared> Argument. \n"
+			"\n"
+			" -h, --help <arg>           Print this help. \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Test help. \n"
+			"\n"
+			"Usage: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"\n"
+			"Optional arguments:\n"
+			" -a, --arg <bin|lib|shared> Argument. \n"
+			"\n"
+			" -h, --help <arg>           Print this help. \n\n" ) )
 
 		g_argsOutStream.str( SL( "" ) );
 #endif

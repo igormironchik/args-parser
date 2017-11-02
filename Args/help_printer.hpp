@@ -179,7 +179,8 @@ calcMaxFlagAndName( ArgIface * arg, String::size_type & maxFlag,
 {
 	String::size_type f = 1;
 	String::size_type n = ( !arg->argumentName().empty() ?
-		arg->argumentName().length() : arg->name().length() );
+		arg->argumentName().length() : ( arg->flag().empty() ?
+			arg->name().length() : 0 ) );
 
 	if( arg->isWithValue() )
 	{
@@ -327,6 +328,10 @@ bool argNameLess( const T & a1, const T & a2 )
 		else if( *( a1->name().cbegin() ) == dash &&
 				*( a2->name().cbegin() ) != dash )
 			return false;
+		else if( a1->argumentName().empty() && !a2->argumentName().empty() )
+			return true;
+		else if( !a1->argumentName().empty() && a2->argumentName().empty() )
+			return false;
 		else
 			return ( a1->name() < a2->name() );
 	}
@@ -446,7 +451,9 @@ HelpPrinter::print( OutStreamType & to )
 	}
 
 	auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
-		std::placeholders::_1, std::ref( to ), maxFlag + 1 + maxName + 2,
+		std::placeholders::_1, std::ref( to ),
+			( maxFlag == 1 ? maxName + 6 : ( maxName + 6 > maxFlag + 1 ?
+				maxName + 6 : maxFlag + 1 ) ),
 		maxFlag );
 
 	if( !required.empty() )
@@ -548,7 +555,9 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 		// Print command's arguments.
 		auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
-			std::placeholders::_1, std::ref( to ), maxFlag + 1 + maxName + 2,
+			std::placeholders::_1, std::ref( to ),
+			( maxFlag == 1 ? maxName + 6 : ( maxName + 6 > maxFlag + 1 ?
+				maxName + 6 : maxFlag + 1 ) ),
 			maxFlag );
 
 		if( !required.empty() )
@@ -574,7 +583,8 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 			auto printGlobalArg = std::bind( &HelpPrinter::printOnlyFor, this,
 				std::placeholders::_1, std::ref( to ),
-				gmaxFlag + 1 + gmaxName + 2, gmaxFlag );
+				( gmaxFlag == 1 ? gmaxName + 6 : ( gmaxName + 6 > gmaxFlag + 1 ?
+					gmaxName + 6 : gmaxFlag + 1 ) ), gmaxFlag );
 
 			if( !grequired.empty() )
 			{
