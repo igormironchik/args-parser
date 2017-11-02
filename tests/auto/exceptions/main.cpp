@@ -479,6 +479,54 @@ TEST( ArgExceptions, TestMisspelledSubcommand )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestUnknownFlag )
+{
+	try {
+		const int argc = 2;
+		const CHAR * argv[ argc ] = { SL( "program.exe" ),
+			SL( "-h" ) };
+
+		CmdLine cmd;
+
+		cmd.parse( argc, argv );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Unknown argument \"-h\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestWrongCombo )
+{
+	try {
+		const int argc = 2;
+		const CHAR * argv[ argc ] = { SL( "program.exe" ),
+			SL( "-ab" ) };
+
+		CmdLine cmd;
+
+		cmd.addArgWithFlagOnly( SL( 'a' ), true )
+			.addArgWithFlagOnly( SL( 'b' ), true );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Only last argument in "
+				"flags combo can be with value. Flags combo is \"-ab\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
