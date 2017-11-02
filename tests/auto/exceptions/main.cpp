@@ -267,6 +267,133 @@ TEST( ArgExceptions, TestDissallowedNameOfCommand )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestArgAlreadyDefined )
+{
+	try {
+		const int argc = 3;
+		const CHAR * argv[ argc ] = { SL( "program.exe" ),
+			SL( "-a" ), SL( "-a" ) };
+
+		CmdLine cmd;
+
+		cmd.addArgWithFlagOnly( SL( 'a' ) );
+
+		cmd.parse( argc, argv );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Argument \"-a\" already defined." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestArgRedefinition )
+{
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithFlagOnly( SL( 'a' ) )
+			.addArgWithFlagOnly( SL( 'a' ) );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Redefinition of argument witg flag \"-a\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestDissallowedFlag )
+{
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithFlagOnly( SL( '~' ) );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Disallowed flag \"-~\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestArgNameRedefinition )
+{
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithNameOnly( SL( "name" ) )
+			.addArgWithNameOnly( SL( "name" ) );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Redefinition of argument with name \"--name\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestArgDissallowedName )
+{
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithNameOnly( SL( "~~" ) );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Disallowed name \"--~~\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestArgEmptyNameAndFlag )
+{
+	try {
+		CmdLine cmd;
+
+		cmd.addArgWithNameOnly( SL( "" ) );
+
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Arguments with empty flag and name "
+				"are disallowed." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
