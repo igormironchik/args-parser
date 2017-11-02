@@ -57,11 +57,11 @@ TEST( GroupCase, TestOnlyOneAllIsOk )
 	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
 	OnlyOneGroup g( SL( "only_one" ) );
+	cmd.addArg( g );
+
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
-
-	cmd.addArg( g );
 
 	cmd.parse();
 
@@ -88,11 +88,11 @@ TEST( GroupCase, TestOnlyOneFailed )
 	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
 
 	OnlyOneGroup g( SL( "only_one" ) );
+	cmd.addArg( &g );
+
 	g.addArg( timeout );
 	g.addArg( port );
 	g.addArg( host );
-
-	cmd.addArg( g );
 
 	CHECK_THROW( cmd.parse(), BaseException )
 }

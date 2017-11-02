@@ -394,6 +394,64 @@ TEST( ArgExceptions, TestArgEmptyNameAndFlag )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestCommandIngroup )
+{
+	try {
+		AllOfGroup g( SL( "" ) );
+		Command c( SL( "c" ) );
+		g.addArg( (ArgIface&) c );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Commands not allowed in groups. "
+				"You are trying to add command \"c\" to group \"\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestCommandIngroup2 )
+{
+	try {
+		AllOfGroup g( SL( "" ) );
+		AllOfGroup::ArgPtr c( new Command( SL( "c" ) ),
+			details::Deleter< ArgIface > ( true ) );
+		g.addArg( std::move( c ) );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Commands not allowed in groups. "
+				"You are trying to add command \"c\" to group \"\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
+TEST( ArgExceptions, TestCommandIngroup3 )
+{
+	try {
+		AllOfGroup g( SL( "" ) );
+		Command c( SL( "c" ) );
+		g.addArg( (ArgIface*) &c );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Commands not allowed in groups. "
+				"You are trying to add command \"c\" to group \"\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
