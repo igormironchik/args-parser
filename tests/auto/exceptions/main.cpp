@@ -452,6 +452,33 @@ TEST( ArgExceptions, TestCommandIngroup3 )
 	CHECK_CONDITION( false )
 }
 
+TEST( ArgExceptions, TestMisspelledSubcommand )
+{
+	try {
+		const int argc = 3;
+		const CHAR * argv[ argc ] = { SL( "program.exe" ),
+			SL( "cmd" ), SL( "bac" ) };
+
+		CmdLine cmd;
+
+		cmd.addCommand( SL( "cmd" ) )
+				.addSubCommand( SL( "abc" ) )
+				.addSubCommand( SL( "cba" ) )
+			.end();
+
+		cmd.parse( argc, argv );
+	}
+	catch( const BaseException & x )
+	{
+		CHECK_CONDITION( x.desc() ==
+			SL( "Unknown argument \"bac\".\n\nProbably you mean \"abc or cba\"." ) )
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
+
 int main()
 {
 	RUN_ALL_TESTS()
