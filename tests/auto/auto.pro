@@ -9,5 +9,6 @@ SUBDIRS = arg \
 	command \
 	arg_as_command \
 	help \
-	api
+	api \
+	exceptions
 	
