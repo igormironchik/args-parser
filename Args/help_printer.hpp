@@ -830,14 +830,7 @@ HelpPrinter::print( Command * cmd, const String & name,
 		if( arg )
 			print( arg, to );
 		else
-		{
-			arg = m_cmdLine->findArgument( name );
-
-			if( arg )
-				print( arg, to );
-			else
-				print( cmd->name(), to );
-		}
+			print( cmd->name(), to );
 	}
 	else
 		print( to );

@@ -1090,6 +1090,97 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 	CHECK_CONDITION( false )
 }
 
+TEST( HelpTestCase, TestHelpOfCommand2 )
+{
+	const int argc = 4;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ), SL( "dummy" ) };
+
+	try {
+		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
+
+		Arg file( SL( 'f' ), SL( "file" ), true, true );
+		file.setDescription( SL( "Name of the file." ) );
+		file.setValueSpecifier( SL( "fn" ) );
+
+		Command add( SL( "add" ) );
+		add.setDescription( SL( "Add new file." ) );
+		add.addArg( file );
+
+		Arg d1( Char( SL( 'd' ) ), false, false );
+		d1.setDescription( SL( "Do job." ) );
+		add.addArg( d1 );
+
+		Command del( SL( "delete" ) );
+		del.setDescription( SL( "Delete file." ) );
+		del.addArg( file );
+
+		Arg d2( Char( SL( 'd' ) ), false, false );
+		d2.setDescription( SL( "Do NOT job." ) );
+		del.addArg( d2 );
+
+		Arg recursieve( SL( 'r' ), SL( "recurcieve" ), false, false );
+		recursieve.setDescription( SL( "Do operation recurcively?" ) );
+
+		Help help;
+		help.setAppDescription(
+			SL( "This application just show power of the Args help." ) );
+		help.setExecutable( SL( "executable" )  );
+
+		cmd.addArg( add );
+		cmd.addArg( del );
+		cmd.addArg( recursieve );
+		cmd.addArg( help );
+
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		CHECK_CONDITION( g_string ==
+			"Add new file. \n"
+			"\n"
+			"Required arguments:\n"
+			" -f, --file <fn> Name of the file. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -d              Do job. \n"
+			"\n"
+			"\n"
+			"Global arguments:\n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n"
+			"\n"
+			" -r, --recurcieve Do operation recurcively? \n\n" )
+
+		g_string.clear();
+#else
+		CHECK_CONDITION( g_argsOutStream.str() == SL(
+			"Add new file. \n"
+			"\n"
+			"Required arguments:\n"
+			" -f, --file <fn> Name of the file. \n"
+			"\n"
+			"Optional arguments:\n"
+			" -d              Do job. \n"
+			"\n"
+			"\n"
+			"Global arguments:\n"
+			"\n"
+			"Optional arguments:\n"
+			" -h, --help <arg> Print this help. \n"
+			"\n"
+			" -r, --recurcieve Do operation recurcively? \n\n" ) )
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	CHECK_CONDITION( false )
+}
 
 int main()
 {
