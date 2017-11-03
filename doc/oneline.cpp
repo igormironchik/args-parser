@@ -39,7 +39,7 @@ int main( int argc, char ** argv )
   }
   catch( const BaseException & x )
   {
-    outStream() << x.desc();
+    outStream() << x.desc() << "\n";
 
     return 1;
   }

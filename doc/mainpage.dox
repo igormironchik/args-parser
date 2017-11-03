@@ -92,9 +92,11 @@
 
 	\include oneline.cpp
 
+	And with the old syntax.
+
 	\include example.cpp
 
-	\section help Help output
+	Help output for the example with the old syntax.
 
 	\verbinclude help.txt
 
