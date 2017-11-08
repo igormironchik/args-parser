@@ -29,8 +29,8 @@ addons:
       name: "igormironchik/args-parser"
       description: "Build submitted via Travis CI"
     notification_email: igor.mironchik@gmail.com
-    build_command_prepend: "echo 'Starting prebuild step...'; export CXX='g++-4.9' CC='gcc-4.9'; echo '1'; source /opt/qt55/bin/qt55-env.sh; echo '2'; mkdir build; echo '3'; cd build; echo '4'; cmake ..; echo 'Prebuild step finished...';"
-    build_command: "make"
+    build_command_prepend: echo 'Starting prebuild step...'; export CXX='g++-4.9' CC='gcc-4.9'; echo '1'; source /opt/qt55/bin/qt55-env.sh; echo '2'; mkdir build; echo '3'; cd build; echo '4'; cmake ..; echo 'Prebuild step finished...';
+    build_command: make
     branch_pattern: coverity_scan
 
 script:
