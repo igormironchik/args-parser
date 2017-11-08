@@ -30,7 +30,7 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: igor.mironchik@gmail.com
     build_command_prepend: "export CXX='g++-4.9' CC='gcc-4.9'; source /opt/qt55/bin/qt55-env.sh; mkdir build; cd build; cmake .."
-    build_command:   "make"
+    build_command: "make"
     branch_pattern: coverity_scan
 
 script:
