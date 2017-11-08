@@ -29,11 +29,12 @@ addons:
       name: "igormironchik/args-parser"
       description: "Build submitted via Travis CI"
     notification_email: igor.mironchik@gmail.com
-    build_command_prepend: "export CXX='g++-4.9' CC='gcc-4.9'; source /opt/qt55/bin/qt55-env.sh; mkdir coverity; cd coverity; cmake .."
-    build_command:   "make -j 4; cd .."
-    branch_pattern: dev
+    build_command_prepend: "export CXX='g++-4.9' CC='gcc-4.9'; source /opt/qt55/bin/qt55-env.sh; mkdir build; cd build; cmake .."
+    build_command:   "make"
+    branch_pattern: coverity_scan
 
 script:
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then
   - export CXX="g++-4.9" CC="gcc-4.9"
   - source /opt/qt55/bin/qt55-env.sh
   - mkdir build
@@ -45,3 +46,4 @@ script:
   - |
     coveralls --build-root build --gcov-options '\-lp' \
       -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples
+  - fi
