@@ -9,13 +9,8 @@ compiler:
   - gcc
 
 before_install:
-  - sudo add-apt-repository --yes ppa:beineri/opt-qt551-trusty
-  - sudo apt-get update -qq
   - pip install --user cpp-coveralls
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
-install:
-  - sudo apt-get -y install qt55base
 
 addons:
   apt:
@@ -24,12 +19,13 @@ addons:
     packages:
       - cmake
       - g++-4.9
+      - qtbase5-dev
   coverity_scan:
     project:
       name: "igormironchik/args-parser"
       description: "Build submitted via Travis CI"
     notification_email: igor.mironchik@gmail.com
-    build_command_prepend: echo 'Starting prebuild step...'; export CXX='g++-4.9' CC='gcc-4.9'; /opt/qt55/bin/qt55-env.sh; mkdir build; cd build; cmake ..; echo 'Prebuild step finished...';
+    build_command_prepend: echo 'Starting prebuild step...'; export CXX='g++-4.9' CC='gcc-4.9'; mkdir build; cd build; cmake ..; echo 'Prebuild step finished...';
     build_command: make
     branch_pattern: coverity_scan
 
@@ -37,7 +33,6 @@ script:
   - |
     if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then \
       export CXX="g++-4.9" CC="gcc-4.9"; \
-      source /opt/qt55/bin/qt55-env.sh; \
       mkdir build; \
       cd build; \
       cmake -DENABLE_COVERAGE=ON ..; \
