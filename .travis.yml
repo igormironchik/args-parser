@@ -31,7 +31,7 @@ addons:
     notification_email: igor.mironchik@gmail.com
     build_command_prepend: "export CXX='g++-4.9' CC='gcc-4.9'; source /opt/qt55/bin/qt55-env.sh; mkdir coverity; cd coverity; cmake .."
     build_command:   "make -j 4; cd .."
-    branch_pattern: coverity_scan
+    branch_pattern: dev
 
 script:
   - export CXX="g++-4.9" CC="gcc-4.9"
