@@ -33,4 +33,16 @@ addons:
     build_command:   "make"
     branch_pattern: coverity_scan
 
-script: if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then export CXX="g++-4.9" CC="gcc-4.9"; source /opt/qt55/bin/qt55-env.sh; mkdir build; cd build; cmake -DENABLE_COVERAGE=ON ..; make; ctest;  cd ..; coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples fi
+script:
+  - |
+    if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then \
+      export CXX="g++-4.9" CC="gcc-4.9"; \
+      source /opt/qt55/bin/qt55-env.sh; \
+      mkdir build; \
+      cd build; \
+      cmake -DENABLE_COVERAGE=ON ..; \
+      make; \
+      ctest --output-on-failure; \
+      cd ..; \
+      coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples; \
+      fi
