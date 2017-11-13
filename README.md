@@ -117,8 +117,8 @@ int main( int argc, char ** argv )
         .addArgWithFlagOnly( 'd', false, false,
           "Do NOT job." )
       .end()
-      .addArgWithFlagAndName( 'r', "recurcieve", false, false,
-        "Do operation recurcively?" )
+      .addArgWithFlagAndName( 'r', "recursive", false, false,
+        "Do operation recursively?" )
       .addHelp( true, argv[ 0 ],
         "This application just show power of the Args help." );
 
@@ -240,15 +240,15 @@ Help output for the example with the old syntax.
 ```
 This application just show the power of Args.
 
-Usage: sample.help.exe -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ]
+USAGE: sample.help.exe -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ]
        [ --timeout <ms> ]
 
-Required arguments:
+REQUIRED:
  -s, --host <arg>   Host. Can be "localhost", "any" or regular IP.
 
  -p, --port <arg>   Port number to create socket.
 
-Optional arguments:
+OPTIONAL:
  -h, --help <arg>   Print this help.
 
      --timeout <ms> Timeout before new messages will be sent in milliseconds.

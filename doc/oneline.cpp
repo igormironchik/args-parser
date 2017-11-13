@@ -23,8 +23,8 @@ int main( int argc, char ** argv )
         .addArgWithFlagOnly( 'd', false, false,
           "Do NOT job." )
       .end()
-      .addArgWithFlagAndName( 'r', "recurcieve", false, false,
-        "Do operation recurcively?" )
+      .addArgWithFlagAndName( 'r', "recursive", false, false,
+        "Do operation recursively?" )
       .addHelp( true, argv[ 0 ],
         "This application just show power of the Args help." );
 

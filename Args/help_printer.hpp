@@ -410,7 +410,7 @@ HelpPrinter::print( OutStreamType & to )
 		std::for_each( optional.cbegin(), optional.cend(),
 			createUsageAndAppend );
 
-		to << "Usage: ";
+		to << "USAGE: ";
 
 		printString( to, usage, 7, 7, 7 );
 
@@ -418,10 +418,10 @@ HelpPrinter::print( OutStreamType & to )
 	}
 	else
 	{
-		to << "Usage: " << m_exeName << " <command>";
+		to << "USAGE: " << m_exeName << " <command>";
 
 		if( !optional.empty() || !required.empty() )
-			to << " <args>";
+			to << " <options>";
 
 		to << "\n" << "\n";
 
@@ -458,14 +458,14 @@ HelpPrinter::print( OutStreamType & to )
 
 	if( !required.empty() )
 	{
-		to << "Required arguments:" << "\n";
+		to << "REQUIRED:" << "\n";
 
 		std::for_each( required.cbegin(), required.cend(), printArg );
 	}
 
 	if( !optional.empty() )
 	{
-		to << "Optional arguments:" << "\n";
+		to << "OPTIONAL:" << "\n";
 
 		std::for_each( optional.cbegin(), optional.cend(), printArg );
 	}
@@ -551,7 +551,17 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 		// Print.
 		printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );
 
-		to << "\n" << "\n";
+		to << "\n\n";
+		to << "USAGE: " << name;
+
+		if( cmd->isWithValue() )
+			to << " <" << cmd->valueSpecifier() << ">";
+
+		if( !grequired.empty() || !goptional.empty() ||
+			!required.empty() || !optional.empty() )
+				to << " <options>";
+
+		to << "\n\n";
 
 		// Print command's arguments.
 		auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
@@ -562,26 +572,21 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 		if( !required.empty() )
 		{
-			to << "Required arguments:" << "\n";
+			to << "REQUIRED:" << "\n";
 
 			std::for_each( required.cbegin(), required.cend(), printArg );
 		}
 
 		if( !optional.empty() )
 		{
-			to << "Optional arguments:" << "\n";
+			to << "OPTIONAL:" << "\n";
 
 			std::for_each( optional.cbegin(), optional.cend(), printArg );
 		}
 
-		if( !required.empty() || !optional.empty() )
-			to << "\n";
-
 		// Print global arguments.
 		if( !grequired.empty() || !goptional.empty() )
 		{
-			to << "Global arguments:" << "\n" << "\n";
-
 			auto printGlobalArg = std::bind( &HelpPrinter::printOnlyFor, this,
 				std::placeholders::_1, std::ref( to ),
 				( gmaxFlag == 1 ? gmaxName + 6 : ( gmaxName + 6 > gmaxFlag + 1 ?
@@ -589,7 +594,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 			if( !grequired.empty() )
 			{
-				to << "Required arguments:" << "\n";
+				to << "GLOBAL REQUIRED:" << "\n";
 
 				std::for_each( grequired.cbegin(), grequired.cend(),
 					printGlobalArg );
@@ -597,7 +602,7 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 			if( !goptional.empty() )
 			{
-				to << "Optional arguments:" << "\n";
+				to << "GLOBAL OPTIONAL:" << "\n";
 
 				std::for_each( goptional.cbegin(), goptional.cend(),
 					printGlobalArg );
@@ -618,7 +623,7 @@ HelpPrinter::print( ArgIface * arg, OutStreamType & to ) const
 	StringList usage = createUsageString( arg,
 		arg->isRequired() );
 
-	to << "Usage: ";
+	to << "USAGE: ";
 
 	std::for_each( usage.cbegin(), usage.cend(),
 		[ & ] ( const String & s )

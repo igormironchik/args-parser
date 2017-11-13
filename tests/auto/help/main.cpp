@@ -106,15 +106,15 @@ TEST( HelpTestCase, TestSimpleHelp )
 		CHECK_CONDITION( g_string ==
 			"This application just show the power of Args. \n"
 			"\n"
-			"Usage: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
 			"       --help <arg> ] [ --timeout <ms> ] \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
 			"\n"
 			" -p, --port <arg>   Port number to create socket. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
 			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" )
@@ -124,15 +124,15 @@ TEST( HelpTestCase, TestSimpleHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"This application just show the power of Args. \n"
 			"\n"
-			"Usage: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
 			"       --help <arg> ] [ --timeout <ms> ] \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
 			"\n"
 			" -p, --port <arg>   Port number to create socket. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
 			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) )
@@ -186,7 +186,7 @@ TEST( HelpTestCase, TestArgHelp )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION( g_string ==
-			"Usage: -s, --host <arg> \n"
+			"USAGE: -s, --host <arg> \n"
 			"\n"
 			"       Host. This argument told to the application where to open socket \n"
 			"       for communication. \n\n" )
@@ -194,7 +194,7 @@ TEST( HelpTestCase, TestArgHelp )
 		g_string.clear();
 #else
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
-			"Usage: -s, --host <arg> \n"
+			"USAGE: -s, --host <arg> \n"
 			"\n"
 			"       Host. This argument told to the application where to open socket \n"
 			"       for communication. \n\n" ) )
@@ -307,12 +307,12 @@ TEST( HelpTestCase, TestHelpWithCommands )
 		CHECK_CONDITION( g_string ==
 			"This application just show power of the Args help. \n"
 			"\n"
-			"Usage: executable <command> <args>\n"
+			"USAGE: executable <command> <options>\n"
 			"\n"
 			"  add    Add new file. \n"
 			"  delete Delete file. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" )
@@ -322,12 +322,12 @@ TEST( HelpTestCase, TestHelpWithCommands )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"This application just show power of the Args help. \n"
 			"\n"
-			"Usage: executable <command> <args>\n"
+			"USAGE: executable <command> <options>\n"
 			"\n"
 			"  add    Add new file. \n"
 			"  delete Delete file. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" ) )
@@ -391,16 +391,15 @@ TEST( HelpTestCase, TestHelpOfCommand )
 		CHECK_CONDITION( g_string ==
 			"Add new file. \n"
 			"\n"
-			"Required arguments:\n"
+			"USAGE: add <options>\n"
+			"\n"
+			"REQUIRED:\n"
 			" -f, --file <fn> Name of the file. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -d              Do job. \n"
 			"\n"
-			"\n"
-			"Global arguments:\n"
-			"\n"
-			"Optional arguments:\n"
+			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" )
@@ -410,16 +409,15 @@ TEST( HelpTestCase, TestHelpOfCommand )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Add new file. \n"
 			"\n"
-			"Required arguments:\n"
+			"USAGE: add <options>\n"
+			"\n"
+			"REQUIRED:\n"
 			" -f, --file <fn> Name of the file. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -d              Do job. \n"
 			"\n"
-			"\n"
-			"Global arguments:\n"
-			"\n"
-			"Optional arguments:\n"
+			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" ) )
@@ -481,14 +479,14 @@ TEST( HelpTestCase, TestHelpOfArgOfCommand )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION( g_string ==
-			"Usage: -f, --file <fn> \n"
+			"USAGE: -f, --file <fn> \n"
 			"\n"
 			"       Name of the file. \n\n" )
 
 		g_string.clear();
 #else
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
-			"Usage: -f, --file <fn> \n"
+			"USAGE: -f, --file <fn> \n"
 			"\n"
 			"       Name of the file. \n\n" ) )
 
@@ -533,7 +531,7 @@ TEST( HelpTestCase, TestHelpOfSubcommand )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION( g_string ==
-			"Usage: [ file <arg> ] \n"
+			"USAGE: [ file <arg> ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
 			"       created. \n\n" )
@@ -541,7 +539,7 @@ TEST( HelpTestCase, TestHelpOfSubcommand )
 		g_string.clear();
 #else
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
-			"Usage: [ file <arg> ] \n"
+			"USAGE: [ file <arg> ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
 			"       created. \n\n" ) )
@@ -583,7 +581,7 @@ TEST( HelpTestCase, TestHelpOfArgAsCommand )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION( g_string ==
-			"Usage: [ add ] \n"
+			"USAGE: [ add ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
 			"       created. \n\n" )
@@ -591,7 +589,7 @@ TEST( HelpTestCase, TestHelpOfArgAsCommand )
 		g_string.clear();
 #else
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
-			"Usage: [ add ] \n"
+			"USAGE: [ add ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
 			"       created. \n\n" ) )
@@ -647,15 +645,15 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 		CHECK_CONDITION( g_string ==
 			"This application just show the power of Args. \n"
 			"\n"
-			"Usage: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
 			"       --help <arg> ] [ --timeout <ms> ] \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
 			"\n"
 			" -p, --port <arg>   Port number to create socket. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
 			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" )
@@ -665,15 +663,15 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"This application just show the power of Args. \n"
 			"\n"
-			"Usage: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
 			"       --help <arg> ] [ --timeout <ms> ] \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
 			"\n"
 			" -p, --port <arg>   Port number to create socket. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
 			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) )
@@ -710,12 +708,12 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
-			"Usage: executable -a <arg> [ -h, --help <arg> ] \n"
+			"USAGE: executable -a <arg> [ -h, --help <arg> ] \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			" -a <arg>         Argument. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n\n" )
 
 		g_string.clear();
@@ -723,12 +721,12 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable -a <arg> [ -h, --help <arg> ] \n"
+			"USAGE: executable -a <arg> [ -h, --help <arg> ] \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			" -a <arg>         Argument. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n\n" ) )
 
 		g_argsOutStream.str( SL( "" ) );
@@ -763,9 +761,9 @@ TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a <arg>         Argument. \n"
 			"\n"
 			" -h, --help <arg> Print this help. \n\n" )
@@ -775,9 +773,9 @@ TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a <arg>         Argument. \n"
 			"\n"
 			" -h, --help <arg> Print this help. \n\n" ) )
@@ -810,14 +808,14 @@ TEST( HelpTestCase, TestArgAsCommandHelp )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		CHECK_CONDITION( g_string ==
-			"Usage: sub <arg> \n"
+			"USAGE: sub <arg> \n"
 			"\n"
 			"       ArgAsCommand. \n\n" )
 
 		g_string.clear();
 #else
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
-			"Usage: sub <arg> \n"
+			"USAGE: sub <arg> \n"
 			"\n"
 			"       ArgAsCommand. \n\n" ) )
 
@@ -851,9 +849,9 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
 			"\n"
 			" -h, --help <arg>    Print this help. \n\n" )
@@ -863,9 +861,9 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
 			"\n"
 			" -h, --help <arg>    Print this help. \n\n" ) )
@@ -901,10 +899,10 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"       [ --name ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
 			"\n"
 			" -h, --help <arg>    Print this help. \n"
@@ -916,10 +914,10 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"       [ --name ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
 			"\n"
 			" -h, --help <arg>    Print this help. \n"
@@ -956,9 +954,9 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a, --arg <bin|lib|shared> Argument. \n"
 			"\n"
 			" -h, --help <arg>           Print this help. \n\n" )
@@ -968,9 +966,9 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
+			"USAGE: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -a, --arg <bin|lib|shared> Argument. \n"
 			"\n"
 			" -h, --help <arg>           Print this help. \n\n" ) )
@@ -1007,14 +1005,14 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
 		CHECK_CONDITION( g_string ==
 			"Test help. \n"
 			"\n"
-			"Usage: executable <command> <args>\n"
+			"USAGE: executable <command> <options>\n"
 			"\n"
 			"  cmd <arg> Command. \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			"     arg <arg>    Argument. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n\n" )
 
 		g_string.clear();
@@ -1022,14 +1020,14 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"Usage: executable <command> <args>\n"
+			"USAGE: executable <command> <options>\n"
 			"\n"
 			"  cmd <arg> Command. \n"
 			"\n"
-			"Required arguments:\n"
+			"REQUIRED:\n"
 			"     arg <arg>    Argument. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n\n" ) )
 
 		g_argsOutStream.str( SL( "" ) );
@@ -1064,10 +1062,11 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 		CHECK_CONDITION( g_string ==
 			"Command. \n"
 			"\n"
-			"Global arguments:\n\n"
-			"Required arguments:\n"
+			"USAGE: cmd <arg> <options>\n"
+			"\n"
+			"GLOBAL REQUIRED:\n"
 			"     arg <arg>    Argument. \n\n"
-			"Optional arguments:\n"
+			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n\n" )
 
 		g_string.clear();
@@ -1075,10 +1074,11 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Command. \n"
 			"\n"
-			"Global arguments:\n\n"
-			"Required arguments:\n"
+			"USAGE: cmd <arg> <options>\n"
+			"\n"
+			"GLOBAL REQUIRED:\n"
 			"     arg <arg>    Argument. \n\n"
-			"Optional arguments:\n"
+			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n\n" ) )
 
 		g_argsOutStream.str( SL( "" ) );
@@ -1140,16 +1140,15 @@ TEST( HelpTestCase, TestHelpOfCommand2 )
 		CHECK_CONDITION( g_string ==
 			"Add new file. \n"
 			"\n"
-			"Required arguments:\n"
+			"USAGE: add <options>\n"
+			"\n"
+			"REQUIRED:\n"
 			" -f, --file <fn> Name of the file. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -d              Do job. \n"
 			"\n"
-			"\n"
-			"Global arguments:\n"
-			"\n"
-			"Optional arguments:\n"
+			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" )
@@ -1159,16 +1158,15 @@ TEST( HelpTestCase, TestHelpOfCommand2 )
 		CHECK_CONDITION( g_argsOutStream.str() == SL(
 			"Add new file. \n"
 			"\n"
-			"Required arguments:\n"
+			"USAGE: add <options>\n"
+			"\n"
+			"REQUIRED:\n"
 			" -f, --file <fn> Name of the file. \n"
 			"\n"
-			"Optional arguments:\n"
+			"OPTIONAL:\n"
 			" -d              Do job. \n"
 			"\n"
-			"\n"
-			"Global arguments:\n"
-			"\n"
-			"Optional arguments:\n"
+			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" ) )

@@ -11,3 +11,5 @@ OTHER_FILES = README.md \
 	.travis.yml \
 	doc/Doxyfile \
 	doc/oneline.cpp
+
+include( Args/Args.pri )
