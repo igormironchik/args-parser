@@ -388,6 +388,12 @@ public:
 		return *this;
 	}
 
+	template< typename T >
+	void addHelp( T throwExceptionOnPrint,
+		const String & appExe = String(),
+		const String & appDesc = String(),
+		String::size_type length = 79 ) = delete;
+
 	//! \return Value of the argument.
 	String value(
 		//! Name of the argument. Should be full name, i.e '-a' or '--arg'
