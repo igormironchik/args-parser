@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( ArgTestCase, TestAllIsOk )
+TEST_CASE( "TestAllIsOk" )
 {
 	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -67,20 +68,20 @@ TEST( ArgTestCase, TestAllIsOk )
 
 	cmd.parse();
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == SL( "100" ) )
+	REQUIRE( timeout.isDefined() == true );
+	REQUIRE( timeout.value() == SL( "100" ) );
 
-	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == SL( "4545" ) )
+	REQUIRE( port.isDefined() == true );
+	REQUIRE( port.value() == SL( "4545" ) );
 
-	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == SL( "any" ) )
+	REQUIRE( host.isDefined() == true );
+	REQUIRE( host.value() == SL( "any" ) );
 
-	CHECK_CONDITION( d.isDefined() == false )
-	CHECK_CONDITION( d.value() == SL( "default" ) )
+	REQUIRE( d.isDefined() == false );
+	REQUIRE( d.value() == SL( "default" ) );
 }
 
-TEST( ArgTestCase, TestUndefinedArg )
+TEST_CASE( "TestUndefinedArg" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -101,16 +102,16 @@ TEST( ArgTestCase, TestUndefinedArg )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION(
-			x.desc() == String( SL( "Unknown argument \"--port\"." ) ) )
+		REQUIRE(
+			x.desc() == String( SL( "Unknown argument \"--port\"." ) ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgTestCase, TestUndefinedRequiredArg )
+TEST_CASE( "TestUndefinedRequiredArg" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -132,37 +133,29 @@ TEST( ArgTestCase, TestUndefinedRequiredArg )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION(
-			x.desc() == String( SL( "Undefined required argument \"--port\"." ) ) )
+		REQUIRE(
+			x.desc() == String( SL( "Undefined required argument \"--port\"." ) ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgTestCase, TestStuff )
+TEST_CASE( "TestStuff" )
 {
 	Arg a( SL( 't' ), String( SL( "timeout" ) ), true );
 
-	CHECK_CONDITION( a.value().empty() )
-	CHECK_CONDITION( a.defaultValue().empty() )
+	REQUIRE( a.value().empty() );
+	REQUIRE( a.defaultValue().empty() );
 
 	a.setDefaultValue( SL( "1" ) );
 
-	CHECK_CONDITION( a.value() == SL( "1" ) )
-	CHECK_CONDITION( a.defaultValue() == SL( "1" ) )
+	REQUIRE( a.value() == SL( "1" ) );
+	REQUIRE( a.defaultValue() == SL( "1" ) );
 
 	a.setValue( SL( "2" ) );
 
-	CHECK_CONDITION( a.value() == SL( "2" ) )
-	CHECK_CONDITION( a.defaultValue() == SL( "1" ) )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( a.value() == SL( "2" ) );
+	REQUIRE( a.defaultValue() == SL( "1" ) );
 }

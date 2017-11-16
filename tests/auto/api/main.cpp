@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( ArgAPI, TestAllIsOk )
+TEST_CASE( "TestAllIsOk" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -95,20 +96,20 @@ TEST( ArgAPI, TestAllIsOk )
 
 	cmd.parse();
 
-	CHECK_CONDITION( cmd.isDefined( SL( "add" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "file" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-f" ) ) )
-	CHECK_CONDITION( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) )
-	CHECK_CONDITION( cmd.values( SL( "-f" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-d" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-r" ) ) )
+	REQUIRE( cmd.isDefined( SL( "add" ) ) );
+	REQUIRE( cmd.isDefined( SL( "file" ) ) );
+	REQUIRE( cmd.isDefined( SL( "-f" ) ) );
+	REQUIRE( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) );
+	REQUIRE( cmd.values( SL( "-f" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) );
+	REQUIRE( cmd.isDefined( SL( "-d" ) ) );
+	REQUIRE( cmd.isDefined( SL( "-r" ) ) );
 
-	CHECK_CONDITION( !cmd.isDefined( SL( "delete" ) ) )
-	CHECK_CONDITION( !cmd.isDefined( SL( "-h" ) ) )
+	REQUIRE( !cmd.isDefined( SL( "delete" ) ) );
+	REQUIRE( !cmd.isDefined( SL( "-h" ) ) );
 }
 
-TEST( ArgAPI, TestAllIsOkReparse )
+TEST_CASE( "TestAllIsOkReparse" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -153,17 +154,17 @@ TEST( ArgAPI, TestAllIsOkReparse )
 
 	cmd.parse();
 
-	CHECK_CONDITION( cmd.isDefined( SL( "add" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "file" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-f" ) ) )
-	CHECK_CONDITION( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) )
-	CHECK_CONDITION( cmd.values( SL( "-f" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-d" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-r" ) ) )
+	REQUIRE( cmd.isDefined( SL( "add" ) ) );
+	REQUIRE( cmd.isDefined( SL( "file" ) ) );
+	REQUIRE( cmd.isDefined( SL( "-f" ) ) );
+	REQUIRE( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) );
+	REQUIRE( cmd.values( SL( "-f" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) );
+	REQUIRE( cmd.isDefined( SL( "-d" ) ) );
+	REQUIRE( cmd.isDefined( SL( "-r" ) ) );
 
-	CHECK_CONDITION( !cmd.isDefined( SL( "delete" ) ) )
-	CHECK_CONDITION( !cmd.isDefined( SL( "-h" ) ) )
+	REQUIRE( !cmd.isDefined( SL( "delete" ) ) );
+	REQUIRE( !cmd.isDefined( SL( "-h" ) ) );
 
 	const int nargc = 2;
 	const CHAR * nargv[ nargc ] = { SL( "program.exe" ),
@@ -171,11 +172,11 @@ TEST( ArgAPI, TestAllIsOkReparse )
 
 	cmd.parse( nargc, nargv );
 
-	CHECK_CONDITION( !cmd.isDefined( SL( "add" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "delete" ) ) )
+	REQUIRE( !cmd.isDefined( SL( "add" ) ) );
+	REQUIRE( cmd.isDefined( SL( "delete" ) ) );
 }
 
-TEST( ArgAPI, TestAllIsOkWithEmptyCtor )
+TEST_CASE( "TestAllIsOkWithEmptyCtor" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -226,20 +227,20 @@ TEST( ArgAPI, TestAllIsOkWithEmptyCtor )
 
 	cmd.parse( argc, argv );
 
-	CHECK_CONDITION( cmd.isDefined( SL( "add" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "file" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-f" ) ) )
-	CHECK_CONDITION( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) )
-	CHECK_CONDITION( cmd.values( SL( "-f" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-d" ) ) )
-	CHECK_CONDITION( cmd.isDefined( SL( "-r" ) ) )
+	REQUIRE( cmd.isDefined( SL( "add" ) ) );
+	REQUIRE( cmd.isDefined( SL( "file" ) ) );
+	REQUIRE( cmd.isDefined( SL( "-f" ) ) );
+	REQUIRE( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) );
+	REQUIRE( cmd.values( SL( "-f" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "-f" ) ).front() == SL( "test.txt" ) );
+	REQUIRE( cmd.isDefined( SL( "-d" ) ) );
+	REQUIRE( cmd.isDefined( SL( "-r" ) ) );
 
-	CHECK_CONDITION( !cmd.isDefined( SL( "delete" ) ) )
-	CHECK_CONDITION( !cmd.isDefined( SL( "-h" ) ) )
+	REQUIRE( !cmd.isDefined( SL( "delete" ) ) );
+	REQUIRE( !cmd.isDefined( SL( "-h" ) ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfArg )
+TEST_CASE( "TestGetterSetterOfArg" )
 {
 	CmdLine cmd;
 
@@ -252,34 +253,34 @@ TEST( ArgAPI, TestGetterSetterOfArg )
 
 	auto * a1 = static_cast< Arg* > ( cmd.findArgument( SL( "-1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const Arg* > ( cmd.findArgument( SL( "-2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val" ) );
 
 	auto * a3 = static_cast< Arg* > ( cmd.findArgument( SL( "--33" ) ) );
 
-	CHECK_CONDITION( a3->description() == SL( "desc" ) )
-	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a3->value() == SL( "val" ) )
-	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a3->defaultValue() == SL( "val" ) )
+	REQUIRE( a3->description() == SL( "desc" ) );
+	REQUIRE( a3->longDescription() == SL( "long desc" ) );
+	REQUIRE( a3->value() == SL( "val" ) );
+	REQUIRE( a3->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a3->defaultValue() == SL( "val" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "-1" ) ) == SL( "val" ) )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).front() == SL( "val" ) )
+	REQUIRE( cmd.value( SL( "-1" ) ) == SL( "val" ) );
+	REQUIRE( cmd.values( SL( "-1" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "-1" ) ).front() == SL( "val" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfMultiArg )
+TEST_CASE( "TestGetterSetterOfMultiArg" )
 {
 	CmdLine cmd;
 
@@ -292,38 +293,38 @@ TEST( ArgAPI, TestGetterSetterOfMultiArg )
 
 	auto * a1 = static_cast< Arg* > ( cmd.findArgument( SL( "-1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const CmdLine & tmpCmd = cmd;
 
 	const auto * a2 = static_cast< const Arg* > (
 		tmpCmd.findArgument( SL( "-2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val" ) );
 
 	const auto * a3 = static_cast< const Arg* > (
 		tmpCmd.findArgument( SL( "--33" ) ) );
 
-	CHECK_CONDITION( a3->description() == SL( "desc" ) )
-	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a3->value() == SL( "val" ) )
-	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a3->defaultValue() == SL( "val" ) )
+	REQUIRE( a3->description() == SL( "desc" ) );
+	REQUIRE( a3->longDescription() == SL( "long desc" ) );
+	REQUIRE( a3->value() == SL( "val" ) );
+	REQUIRE( a3->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a3->defaultValue() == SL( "val" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "-1" ) ) == SL( "val" ) )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).front() == SL( "val" ) )
+	REQUIRE( cmd.value( SL( "-1" ) ) == SL( "val" ) );
+	REQUIRE( cmd.values( SL( "-1" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "-1" ) ).front() == SL( "val" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfMultiArgWithValues )
+TEST_CASE( "TestGetterSetterOfMultiArgWithValues" )
 {
 	CmdLine cmd;
 
@@ -339,44 +340,44 @@ TEST( ArgAPI, TestGetterSetterOfMultiArgWithValues )
 
 	auto * a1 = static_cast< MultiArg* > ( cmd.findArgument( SL( "-1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val1" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a1->defaultValues().size() == 2 )
-	CHECK_CONDITION( a1->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a1->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val1" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val1" ) );
+	REQUIRE( a1->defaultValues().size() == 2 );
+	REQUIRE( a1->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a1->defaultValues().back() == SL( "val2" ) );
 
 	const auto * a2 = static_cast< const MultiArg* > ( cmd.findArgument( SL( "-2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 
 	auto * a3 = static_cast< MultiArg* > ( cmd.findArgument( SL( "--33" ) ) );
 
-	CHECK_CONDITION( a3->description() == SL( "desc" ) )
-	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a3->value() == SL( "val1" ) )
-	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a3->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a3->defaultValues().size() == 2 )
-	CHECK_CONDITION( a3->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a3->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a3->description() == SL( "desc" ) );
+	REQUIRE( a3->longDescription() == SL( "long desc" ) );
+	REQUIRE( a3->value() == SL( "val1" ) );
+	REQUIRE( a3->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a3->defaultValue() == SL( "val1" ) );
+	REQUIRE( a3->defaultValues().size() == 2 );
+	REQUIRE( a3->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a3->defaultValues().back() == SL( "val2" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "-1" ) ) == SL( "val1" ) )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).size() == 2 )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).front() == SL( "val1" ) )
-	CHECK_CONDITION( cmd.values( SL( "-1" ) ).back() == SL( "val2" ) )
+	REQUIRE( cmd.value( SL( "-1" ) ) == SL( "val1" ) );
+	REQUIRE( cmd.values( SL( "-1" ) ).size() == 2 );
+	REQUIRE( cmd.values( SL( "-1" ) ).front() == SL( "val1" ) );
+	REQUIRE( cmd.values( SL( "-1" ) ).back() == SL( "val2" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfArgAsCommand )
+TEST_CASE( "TestGetterSetterOfArgAsCommand" )
 {
 	CmdLine cmd;
 
@@ -389,35 +390,35 @@ TEST( ArgAPI, TestGetterSetterOfArgAsCommand )
 	auto * a1 = static_cast< ArgAsCommand* > (
 		cmd.findArgument( SL( "arg1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const ArgAsCommand* > (
 		cmd.findArgument( SL( "arg2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "arg1" ) ) == SL( "val" ) )
-	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) )
+	REQUIRE( cmd.value( SL( "arg1" ) ) == SL( "val" ) );
+	REQUIRE( cmd.values( SL( "arg1" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "arg2" ) ) == SL( "val1" ) )
-	CHECK_CONDITION( cmd.values( SL( "arg2" ) ).size() == 2 )
-	CHECK_CONDITION( cmd.values( SL( "arg2" ) ).front() == SL( "val1" ) )
-	CHECK_CONDITION( cmd.values( SL( "arg2" ) ).back() == SL( "val2" ) )
+	REQUIRE( cmd.value( SL( "arg2" ) ) == SL( "val1" ) );
+	REQUIRE( cmd.values( SL( "arg2" ) ).size() == 2 );
+	REQUIRE( cmd.values( SL( "arg2" ) ).front() == SL( "val1" ) );
+	REQUIRE( cmd.values( SL( "arg2" ) ).back() == SL( "val2" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfSubCommand )
+TEST_CASE( "TestGetterSetterOfSubCommand" )
 {
 	CmdLine cmd;
 
@@ -430,30 +431,30 @@ TEST( ArgAPI, TestGetterSetterOfSubCommand )
 	auto * a1 = static_cast< ArgAsCommand* > (
 		cmd.findArgument( SL( "arg1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const ArgAsCommand* > (
 		cmd.findArgument( SL( "arg2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "arg1" ) ) == SL( "val" ) )
-	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) )
+	REQUIRE( cmd.value( SL( "arg1" ) ) == SL( "val" ) );
+	REQUIRE( cmd.values( SL( "arg1" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfArgInGroup )
+TEST_CASE( "TestGetterSetterOfArgInGroup" )
 {
 	CmdLine cmd;
 
@@ -468,30 +469,30 @@ TEST( ArgAPI, TestGetterSetterOfArgInGroup )
 
 	auto * a1 = static_cast< Arg* > ( cmd.findArgument( SL( "-1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const Arg* > ( cmd.findArgument( SL( "-2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val" ) );
 
 	auto * a3 = static_cast< Arg* > ( cmd.findArgument( SL( "--33" ) ) );
 
-	CHECK_CONDITION( a3->description() == SL( "desc" ) )
-	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a3->value() == SL( "val" ) )
-	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a3->defaultValue() == SL( "val" ) )
+	REQUIRE( a3->description() == SL( "desc" ) );
+	REQUIRE( a3->longDescription() == SL( "long desc" ) );
+	REQUIRE( a3->value() == SL( "val" ) );
+	REQUIRE( a3->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a3->defaultValue() == SL( "val" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfMultiArgInGroup )
+TEST_CASE( "TestGetterSetterOfMultiArgInGroup" )
 {
 	CmdLine cmd;
 
@@ -506,30 +507,30 @@ TEST( ArgAPI, TestGetterSetterOfMultiArgInGroup )
 
 	auto * a1 = static_cast< Arg* > ( cmd.findArgument( SL( "-1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const Arg* > ( cmd.findArgument( SL( "-2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val" ) );
 
 	auto * a3 = static_cast< Arg* > ( cmd.findArgument( SL( "--33" ) ) );
 
-	CHECK_CONDITION( a3->description() == SL( "desc" ) )
-	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a3->value() == SL( "val" ) )
-	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a3->defaultValue() == SL( "val" ) )
+	REQUIRE( a3->description() == SL( "desc" ) );
+	REQUIRE( a3->longDescription() == SL( "long desc" ) );
+	REQUIRE( a3->value() == SL( "val" ) );
+	REQUIRE( a3->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a3->defaultValue() == SL( "val" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfMultiArgWithValuesInGroup )
+TEST_CASE( "TestGetterSetterOfMultiArgWithValuesInGroup" )
 {
 	CmdLine cmd;
 
@@ -547,39 +548,39 @@ TEST( ArgAPI, TestGetterSetterOfMultiArgWithValuesInGroup )
 
 	auto * a1 = static_cast< MultiArg* > ( cmd.findArgument( SL( "-1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val1" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a1->defaultValues().size() == 2 )
-	CHECK_CONDITION( a1->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a1->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val1" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val1" ) );
+	REQUIRE( a1->defaultValues().size() == 2 );
+	REQUIRE( a1->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a1->defaultValues().back() == SL( "val2" ) );
 
 	const auto * a2 = static_cast< const MultiArg* > ( cmd.findArgument( SL( "-2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 
 	auto * a3 = static_cast< MultiArg* > ( cmd.findArgument( SL( "--33" ) ) );
 
-	CHECK_CONDITION( a3->description() == SL( "desc" ) )
-	CHECK_CONDITION( a3->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a3->value() == SL( "val1" ) )
-	CHECK_CONDITION( a3->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a3->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a3->defaultValues().size() == 2 )
-	CHECK_CONDITION( a3->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a3->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a3->description() == SL( "desc" ) );
+	REQUIRE( a3->longDescription() == SL( "long desc" ) );
+	REQUIRE( a3->value() == SL( "val1" ) );
+	REQUIRE( a3->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a3->defaultValue() == SL( "val1" ) );
+	REQUIRE( a3->defaultValues().size() == 2 );
+	REQUIRE( a3->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a3->defaultValues().back() == SL( "val2" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfArgAsCommandInGroup )
+TEST_CASE( "TestGetterSetterOfArgAsCommandInGroup" )
 {
 	CmdLine cmd;
 
@@ -594,26 +595,26 @@ TEST( ArgAPI, TestGetterSetterOfArgAsCommandInGroup )
 	auto * a1 = static_cast< ArgAsCommand* > (
 		cmd.findArgument( SL( "arg1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const ArgAsCommand* > (
 		cmd.findArgument( SL( "arg2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfSubCommandInGroup )
+TEST_CASE( "TestGetterSetterOfSubCommandInGroup" )
 {
 	CmdLine cmd;
 
@@ -628,26 +629,26 @@ TEST( ArgAPI, TestGetterSetterOfSubCommandInGroup )
 	auto * a1 = static_cast< ArgAsCommand* > (
 		cmd.findArgument( SL( "arg1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const auto * a2 = static_cast< const ArgAsCommand* > (
 		cmd.findArgument( SL( "arg2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 }
 
-TEST( ArgAPI, TestGetterSetterOfCommand )
+TEST_CASE( "TestGetterSetterOfCommand" )
 {
 	CmdLine cmd;
 
@@ -663,40 +664,32 @@ TEST( ArgAPI, TestGetterSetterOfCommand )
 	auto * a1 = static_cast< Command* > (
 		cmd.findArgument( SL( "cmd1" ) ) );
 
-	CHECK_CONDITION( a1->description() == SL( "desc" ) )
-	CHECK_CONDITION( a1->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a1->value() == SL( "val" ) )
-	CHECK_CONDITION( a1->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a1->defaultValue() == SL( "val" ) )
+	REQUIRE( a1->description() == SL( "desc" ) );
+	REQUIRE( a1->longDescription() == SL( "long desc" ) );
+	REQUIRE( a1->value() == SL( "val" ) );
+	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
 	const CmdLine & tmpCmd = cmd;
 
 	const auto * a2 = static_cast< const Command* > (
 		tmpCmd.findArgument( SL( "cmd2" ) ) );
 
-	CHECK_CONDITION( a2->description() == SL( "desc" ) )
-	CHECK_CONDITION( a2->longDescription() == SL( "long desc" ) )
-	CHECK_CONDITION( a2->value() == SL( "val1" ) )
-	CHECK_CONDITION( a2->valueSpecifier() == SL( "vs" ) )
-	CHECK_CONDITION( a2->defaultValue() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().size() == 2 )
-	CHECK_CONDITION( a2->defaultValues().front() == SL( "val1" ) )
-	CHECK_CONDITION( a2->defaultValues().back() == SL( "val2" ) )
+	REQUIRE( a2->description() == SL( "desc" ) );
+	REQUIRE( a2->longDescription() == SL( "long desc" ) );
+	REQUIRE( a2->value() == SL( "val1" ) );
+	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
+	REQUIRE( a2->defaultValue() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().size() == 2 );
+	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
+	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "cmd1" ) ) == SL( "val" ) )
-	CHECK_CONDITION( cmd.values( SL( "cmd1" ) ).size() == 1 )
-	CHECK_CONDITION( cmd.values( SL( "cmd1" ) ).front() == SL( "val" ) )
+	REQUIRE( cmd.value( SL( "cmd1" ) ) == SL( "val" ) );
+	REQUIRE( cmd.values( SL( "cmd1" ) ).size() == 1 );
+	REQUIRE( cmd.values( SL( "cmd1" ) ).front() == SL( "val" ) );
 
-	CHECK_CONDITION( cmd.value( SL( "cmd2" ) ) == SL( "val1" ) )
-	CHECK_CONDITION( cmd.values( SL( "cmd2" ) ).size() == 2 )
-	CHECK_CONDITION( cmd.values( SL( "cmd2" ) ).front() == SL( "val1" ) )
-	CHECK_CONDITION( cmd.values( SL( "cmd2" ) ).back() == SL( "val2" ) )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( cmd.value( SL( "cmd2" ) ) == SL( "val1" ) );
+	REQUIRE( cmd.values( SL( "cmd2" ) ).size() == 2 );
+	REQUIRE( cmd.values( SL( "cmd2" ) ).front() == SL( "val1" ) );
+	REQUIRE( cmd.values( SL( "cmd2" ) ).back() == SL( "val2" ) );
 }

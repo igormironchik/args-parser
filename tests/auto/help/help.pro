@@ -4,7 +4,7 @@ CONFIG += console c++14
 QT -= core gui
 DEFINES += ARGS_TESTING
 
-INCLUDEPATH = ../../..
+INCLUDEPATH = ../../.. ../../../3rdparty/doctest
 
 include( ../../../config.pri )
 

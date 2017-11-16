@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -64,8 +65,12 @@ using namespace Args;
 #endif
 
 
-TEST( HelpTestCase, TestSimpleHelp )
+TEST_CASE( "TestSimpleHelp" )
 {
+	// Suppressing warning.
+	OutStreamType & stream = outStream();
+	(void) stream;
+
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
 		SL( "-h" ) };
@@ -103,7 +108,7 @@ TEST( HelpTestCase, TestSimpleHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"This application just show the power of Args. \n"
 			"\n"
 			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
@@ -117,11 +122,11 @@ TEST( HelpTestCase, TestSimpleHelp )
 			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
-			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" )
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show the power of Args. \n"
 			"\n"
 			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
@@ -135,7 +140,7 @@ TEST( HelpTestCase, TestSimpleHelp )
 			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
-			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) )
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -143,10 +148,10 @@ TEST( HelpTestCase, TestSimpleHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestArgHelp )
+TEST_CASE( "TestArgHelp" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -185,19 +190,19 @@ TEST( HelpTestCase, TestArgHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"USAGE: -s, --host <arg> \n"
 			"\n"
 			"       Host. This argument told to the application where to open socket \n"
-			"       for communication. \n\n" )
+			"       for communication. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"USAGE: -s, --host <arg> \n"
 			"\n"
 			"       Host. This argument told to the application where to open socket \n"
-			"       for communication. \n\n" ) )
+			"       for communication. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -205,10 +210,10 @@ TEST( HelpTestCase, TestArgHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestMisspelling )
+TEST_CASE( "TestMisspelling" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -246,18 +251,18 @@ TEST( HelpTestCase, TestMisspelling )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Unknown argument \"--hots\".\n"
 				"\n"
-				"Probably you mean \"--host\"." ) )
+				"Probably you mean \"--host\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpWithCommands )
+TEST_CASE( "TestHelpWithCommands" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -304,7 +309,7 @@ TEST( HelpTestCase, TestHelpWithCommands )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"This application just show power of the Args help. \n"
 			"\n"
 			"USAGE: executable <command> <options>\n"
@@ -315,11 +320,11 @@ TEST( HelpTestCase, TestHelpWithCommands )
 			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
-			" -r, --recurcieve Do operation recurcively? \n\n" )
+			" -r, --recurcieve Do operation recurcively? \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show power of the Args help. \n"
 			"\n"
 			"USAGE: executable <command> <options>\n"
@@ -330,7 +335,7 @@ TEST( HelpTestCase, TestHelpWithCommands )
 			"OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
-			" -r, --recurcieve Do operation recurcively? \n\n" ) )
+			" -r, --recurcieve Do operation recurcively? \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -338,10 +343,10 @@ TEST( HelpTestCase, TestHelpWithCommands )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpOfCommand )
+TEST_CASE( "TestHelpOfCommand" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -388,7 +393,7 @@ TEST( HelpTestCase, TestHelpOfCommand )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Add new file. \n"
 			"\n"
 			"USAGE: add <options>\n"
@@ -402,11 +407,11 @@ TEST( HelpTestCase, TestHelpOfCommand )
 			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
-			" -r, --recurcieve Do operation recurcively? \n\n" )
+			" -r, --recurcieve Do operation recurcively? \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Add new file. \n"
 			"\n"
 			"USAGE: add <options>\n"
@@ -420,7 +425,7 @@ TEST( HelpTestCase, TestHelpOfCommand )
 			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
-			" -r, --recurcieve Do operation recurcively? \n\n" ) )
+			" -r, --recurcieve Do operation recurcively? \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -428,10 +433,10 @@ TEST( HelpTestCase, TestHelpOfCommand )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpOfArgOfCommand )
+TEST_CASE( "TestHelpOfArgOfCommand" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -478,17 +483,17 @@ TEST( HelpTestCase, TestHelpOfArgOfCommand )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"USAGE: -f, --file <fn> \n"
 			"\n"
-			"       Name of the file. \n\n" )
+			"       Name of the file. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"USAGE: -f, --file <fn> \n"
 			"\n"
-			"       Name of the file. \n\n" ) )
+			"       Name of the file. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -496,10 +501,10 @@ TEST( HelpTestCase, TestHelpOfArgOfCommand )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpOfSubcommand )
+TEST_CASE( "TestHelpOfSubcommand" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -530,19 +535,19 @@ TEST( HelpTestCase, TestHelpOfSubcommand )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"USAGE: [ file <arg> ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" )
+			"       created. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"USAGE: [ file <arg> ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" ) )
+			"       created. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -550,10 +555,10 @@ TEST( HelpTestCase, TestHelpOfSubcommand )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpOfArgAsCommand )
+TEST_CASE( "TestHelpOfArgAsCommand" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -580,19 +585,19 @@ TEST( HelpTestCase, TestHelpOfArgAsCommand )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"USAGE: [ add ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" )
+			"       created. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"USAGE: [ add ] \n"
 			"\n"
 			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" ) )
+			"       created. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -600,10 +605,10 @@ TEST( HelpTestCase, TestHelpOfArgAsCommand )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestWrongArgForHelp )
+TEST_CASE( "TestWrongArgForHelp" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -642,7 +647,7 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"This application just show the power of Args. \n"
 			"\n"
 			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
@@ -656,11 +661,11 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
-			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" )
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show the power of Args. \n"
 			"\n"
 			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
@@ -674,7 +679,7 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 			"OPTIONAL:\n"
 			" -h, --help <arg>   Print this help. \n"
 			"\n"
-			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) )
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -682,10 +687,10 @@ TEST( HelpTestCase, TestWrongArgForHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
+TEST_CASE( "TestRequiredAllOfGroupHelp" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -705,7 +710,7 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
 			"USAGE: executable -a <arg> [ -h, --help <arg> ] \n"
@@ -714,11 +719,11 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 			" -a <arg>         Argument. \n"
 			"\n"
 			"OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" )
+			" -h, --help <arg> Print this help. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
 			"USAGE: executable -a <arg> [ -h, --help <arg> ] \n"
@@ -727,7 +732,7 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 			" -a <arg>         Argument. \n"
 			"\n"
 			"OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" ) )
+			" -h, --help <arg> Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -735,10 +740,10 @@ TEST( HelpTestCase, TestRequiredAllOfGroupHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
+TEST_CASE( "TestNotRequiredAllOfGroupHelp" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -758,7 +763,7 @@ TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
@@ -766,11 +771,11 @@ TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
 			"OPTIONAL:\n"
 			" -a <arg>         Argument. \n"
 			"\n"
-			" -h, --help <arg> Print this help. \n\n" )
+			" -h, --help <arg> Print this help. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a <arg> ] [ -h, --help <arg> ] \n"
@@ -778,7 +783,7 @@ TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
 			"OPTIONAL:\n"
 			" -a <arg>         Argument. \n"
 			"\n"
-			" -h, --help <arg> Print this help. \n\n" ) )
+			" -h, --help <arg> Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -786,10 +791,10 @@ TEST( HelpTestCase, TestNotRequiredAllOfGroupHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestArgAsCommandHelp )
+TEST_CASE( "TestArgAsCommandHelp" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -807,17 +812,17 @@ TEST( HelpTestCase, TestArgAsCommandHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"USAGE: sub <arg> \n"
 			"\n"
-			"       ArgAsCommand. \n\n" )
+			"       ArgAsCommand. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"USAGE: sub <arg> \n"
 			"\n"
-			"       ArgAsCommand. \n\n" ) )
+			"       ArgAsCommand. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -825,10 +830,10 @@ TEST( HelpTestCase, TestArgAsCommandHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestFlagWithBigVSHelp )
+TEST_CASE( "TestFlagWithBigVSHelp" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -846,7 +851,7 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
@@ -854,11 +859,11 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
 			"\n"
-			" -h, --help <arg>    Print this help. \n\n" )
+			" -h, --help <arg>    Print this help. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
@@ -866,7 +871,7 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
 			"\n"
-			" -h, --help <arg>    Print this help. \n\n" ) )
+			" -h, --help <arg>    Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -874,10 +879,10 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
+TEST_CASE( "TestFlagWithBigVSHelp2" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -896,7 +901,7 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
@@ -907,11 +912,11 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 			"\n"
 			" -h, --help <arg>    Print this help. \n"
 			"\n"
-			"     --name          Name. \n\n" )
+			"     --name          Name. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
@@ -922,7 +927,7 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 			"\n"
 			" -h, --help <arg>    Print this help. \n"
 			"\n"
-			"     --name          Name. \n\n" ) )
+			"     --name          Name. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -930,10 +935,10 @@ TEST( HelpTestCase, TestFlagWithBigVSHelp2 )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
+TEST_CASE( "TestFlagAndNameWithBigVSHelp" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -951,7 +956,7 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
@@ -959,11 +964,11 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 			"OPTIONAL:\n"
 			" -a, --arg <bin|lib|shared> Argument. \n"
 			"\n"
-			" -h, --help <arg>           Print this help. \n\n" )
+			" -h, --help <arg>           Print this help. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
 			"USAGE: executable [ -a, --arg <bin|lib|shared> ] [ -h, --help <arg> ] \n"
@@ -971,7 +976,7 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 			"OPTIONAL:\n"
 			" -a, --arg <bin|lib|shared> Argument. \n"
 			"\n"
-			" -h, --help <arg>           Print this help. \n\n" ) )
+			" -h, --help <arg>           Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -979,10 +984,10 @@ TEST( HelpTestCase, TestFlagAndNameWithBigVSHelp )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
+TEST_CASE( "TestHelpWithCommandAndArgAsCommand" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -1002,7 +1007,7 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
 			"USAGE: executable <command> <options>\n"
@@ -1013,11 +1018,11 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
 			"     arg <arg>    Argument. \n"
 			"\n"
 			"OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" )
+			" -h, --help <arg> Print this help. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
 			"USAGE: executable <command> <options>\n"
@@ -1028,7 +1033,7 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
 			"     arg <arg>    Argument. \n"
 			"\n"
 			"OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" ) )
+			" -h, --help <arg> Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -1036,10 +1041,10 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommand )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
+TEST_CASE( "TestHelpWithCommandAndArgAsCommandForCmd" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -1059,7 +1064,7 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Command. \n"
 			"\n"
 			"USAGE: cmd <arg> <options>\n"
@@ -1067,11 +1072,11 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 			"GLOBAL REQUIRED:\n"
 			"     arg <arg>    Argument. \n\n"
 			"GLOBAL OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" )
+			" -h, --help <arg> Print this help. \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Command. \n"
 			"\n"
 			"USAGE: cmd <arg> <options>\n"
@@ -1079,7 +1084,7 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 			"GLOBAL REQUIRED:\n"
 			"     arg <arg>    Argument. \n\n"
 			"GLOBAL OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" ) )
+			" -h, --help <arg> Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -1087,10 +1092,10 @@ TEST( HelpTestCase, TestHelpWithCommandAndArgAsCommandForCmd )
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( HelpTestCase, TestHelpOfCommand2 )
+TEST_CASE( "TestHelpOfCommand2" )
 {
 	const int argc = 4;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -1137,7 +1142,7 @@ TEST( HelpTestCase, TestHelpOfCommand2 )
 	catch( const HelpHasBeenPrintedException & )
 	{
 #ifdef ARGS_QSTRING_BUILD
-		CHECK_CONDITION( g_string ==
+		REQUIRE( g_string ==
 			"Add new file. \n"
 			"\n"
 			"USAGE: add <options>\n"
@@ -1151,11 +1156,11 @@ TEST( HelpTestCase, TestHelpOfCommand2 )
 			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
-			" -r, --recurcieve Do operation recurcively? \n\n" )
+			" -r, --recurcieve Do operation recurcively? \n\n" );
 
 		g_string.clear();
 #else
-		CHECK_CONDITION( g_argsOutStream.str() == SL(
+		REQUIRE( g_argsOutStream.str() == SL(
 			"Add new file. \n"
 			"\n"
 			"USAGE: add <options>\n"
@@ -1169,7 +1174,7 @@ TEST( HelpTestCase, TestHelpOfCommand2 )
 			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
-			" -r, --recurcieve Do operation recurcively? \n\n" ) )
+			" -r, --recurcieve Do operation recurcively? \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -1177,16 +1182,5 @@ TEST( HelpTestCase, TestHelpOfCommand2 )
 		return;
 	}
 
-	CHECK_CONDITION( false )
-}
-
-int main()
-{
-
-	// Suppressing warning.
-	outStream();
-
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( false );
 }

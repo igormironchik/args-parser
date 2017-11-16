@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -38,45 +39,37 @@
 using namespace Args;
 
 
-TEST( Flags, DisallowedFlags )
+TEST_CASE( "DisallowedFlags" )
 {
-	CHECK_CONDITION( details::isCorrectFlag( SL( "-" ) ) == false )
-	CHECK_CONDITION( details::isCorrectFlag( SL( " " ) ) == false )
-	CHECK_CONDITION( details::isCorrectFlag( SL( "=" ) ) == false )
-	CHECK_CONDITION( details::isCorrectFlag( SL( "" ) ) == false )
+	REQUIRE( details::isCorrectFlag( SL( "-" ) ) == false );
+	REQUIRE( details::isCorrectFlag( SL( " " ) ) == false );
+	REQUIRE( details::isCorrectFlag( SL( "=" ) ) == false );
+	REQUIRE( details::isCorrectFlag( SL( "" ) ) == false );
 }
 
-TEST( Flags, AllowedFlags )
+TEST_CASE( "AllowedFlags" )
 {
-	CHECK_CONDITION( details::isCorrectFlag( SL( "a" ) ) == true )
-	CHECK_CONDITION( details::isCorrectFlag( SL( "1" ) ) == true )
+	REQUIRE( details::isCorrectFlag( SL( "a" ) ) == true );
+	REQUIRE( details::isCorrectFlag( SL( "1" ) ) == true );
 }
 
-TEST( Names, DisallowedNames )
+TEST_CASE( "DisallowedNames" )
 {
-	CHECK_CONDITION( details::isCorrectName( SL( "time out" ) ) == false )
-	CHECK_CONDITION( details::isCorrectName( SL( "" ) ) == false )
+	REQUIRE( details::isCorrectName( SL( "time out" ) ) == false );
+	REQUIRE( details::isCorrectName( SL( "" ) ) == false );
 }
 
-TEST( Names, AllowedNames )
+TEST_CASE( "AllowedNames" )
 {
-	CHECK_CONDITION( details::isCorrectName( SL( "timeout" ) ) == true )
-	CHECK_CONDITION( details::isCorrectName( SL( "time-out" ) ) == true )
-	CHECK_CONDITION( details::isCorrectName( SL( "time_out" ) ) == true )
+	REQUIRE( details::isCorrectName( SL( "timeout" ) ) == true );
+	REQUIRE( details::isCorrectName( SL( "time-out" ) ) == true );
+	REQUIRE( details::isCorrectName( SL( "time_out" ) ) == true );
 }
 
-TEST( FlagAndArgument, IsFlagOrArgument )
+TEST_CASE( "IsFlagOrArgument" )
 {
-	CHECK_CONDITION( details::isFlag( SL( "-a" ) ) == true )
-	CHECK_CONDITION( details::isFlag( SL( "--timeout" ) ) == false )
-	CHECK_CONDITION( details::isArgument( SL( "-a" ) ) == false )
-	CHECK_CONDITION( details::isArgument( SL( "--timeout" ) ) == true )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( details::isFlag( SL( "-a" ) ) == true );
+	REQUIRE( details::isFlag( SL( "--timeout" ) ) == false );
+	REQUIRE( details::isArgument( SL( "-a" ) ) == false );
+	REQUIRE( details::isArgument( SL( "--timeout" ) ) == true );
 }

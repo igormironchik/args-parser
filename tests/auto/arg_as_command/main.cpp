@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( ArgAsCommandCase, TestWithArg )
+TEST_CASE( "TestWithArg" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -60,15 +61,15 @@ TEST( ArgAsCommandCase, TestWithArg )
 
 	cmd.parse();
 
-	CHECK_CONDITION( t.isDefined() == true )
-	CHECK_CONDITION( t.value() == SL( "100" ) )
+	REQUIRE( t.isDefined() == true );
+	REQUIRE( t.value() == SL( "100" ) );
 
-	CHECK_CONDITION( p.isDefined() == true )
-	CHECK_CONDITION( p.values().size() == 1 )
-	CHECK_CONDITION( p.value() == SL( "400" ) )
+	REQUIRE( p.isDefined() == true );
+	REQUIRE( p.values().size() == 1 );
+	REQUIRE( p.value() == SL( "400" ) );
 }
 
-TEST( ArgAsCommandCase, TestManyValues )
+TEST_CASE( "TestManyValues" )
 {
 	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -82,27 +83,27 @@ TEST( ArgAsCommandCase, TestManyValues )
 
 	cmd.parse();
 
-	CHECK_CONDITION( p.isDefined() == true )
-	CHECK_CONDITION( p.values().size() == 4 )
+	REQUIRE( p.isDefined() == true );
+	REQUIRE( p.values().size() == 4 );
 
 	auto it = p.values().cbegin();
 
-	CHECK_CONDITION( *it == SL( "100" ) )
+	REQUIRE( *it == SL( "100" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "200" ) )
+	REQUIRE( *it == SL( "200" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "300" ) )
+	REQUIRE( *it == SL( "300" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "400" ) )
+	REQUIRE( *it == SL( "400" ) );
 }
 
-TEST( ArgAsCommandCase, TestNoValue )
+TEST_CASE( "TestNoValue" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -116,12 +117,12 @@ TEST( ArgAsCommandCase, TestNoValue )
 
 	cmd.parse();
 
-	CHECK_CONDITION( p.isDefined() == true )
-	CHECK_CONDITION( p.values().size() == 0 )
-	CHECK_CONDITION( p.value().empty() )
+	REQUIRE( p.isDefined() == true );
+	REQUIRE( p.values().size() == 0 );
+	REQUIRE( p.value().empty() );
 }
 
-TEST( ArgAsCommandCase, TestUnderCommand )
+TEST_CASE( "TestUnderCommand" )
 {
 	const int argc = 4;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -138,20 +139,20 @@ TEST( ArgAsCommandCase, TestUnderCommand )
 
 	cmd.parse();
 
-	CHECK_CONDITION( add.isDefined() == true )
+	REQUIRE( add.isDefined() == true );
 
-	CHECK_CONDITION( file.isDefined() == true )
-	CHECK_CONDITION( file.values().size() == 1 )
-	CHECK_CONDITION( file.value() == SL( "out.txt" ) )
+	REQUIRE( file.isDefined() == true );
+	REQUIRE( file.values().size() == 1 );
+	REQUIRE( file.value() == SL( "out.txt" ) );
 }
 
-TEST( ArgAsCommandCase, TestWrongName )
+TEST_CASE( "TestWrongName" )
 {
-	CHECK_THROW( ArgAsCommand( SL( "-pos" ) ), BaseException )
-	CHECK_THROW( ArgAsCommand( SL( "--pos" ) ), BaseException )
+	REQUIRE_THROWS_AS( ArgAsCommand( SL( "-pos" ) ), BaseException );
+	REQUIRE_THROWS_AS( ArgAsCommand( SL( "--pos" ) ), BaseException );
 }
 
-TEST( ArgAsCommandCase, TestUnderCommandNotDefinedRequired )
+TEST_CASE( "TestUnderCommandNotDefinedRequired" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -166,10 +167,10 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedRequired )
 
 	cmd.addArg( add );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue )
+TEST_CASE( "TestUnderCommandNotDefinedValue" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -184,10 +185,10 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue )
 
 	cmd.addArg( add );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue2 )
+TEST_CASE( "TestUnderCommandNotDefinedValue2" )
 {
 	const int argc = 4;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -204,10 +205,10 @@ TEST( ArgAsCommandCase, TestUnderCommandNotDefinedValue2 )
 	cmd.addArg( add );
 	cmd.addArg( t );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
+TEST_CASE( "TestUnderCommandWithManyValuesAndArg" )
 {
 	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -226,24 +227,24 @@ TEST( ArgAsCommandCase, TestUnderCommandWithManyValuesAndArg )
 
 	cmd.parse();
 
-	CHECK_CONDITION( add.isDefined() == true )
+	REQUIRE( add.isDefined() == true );
 
-	CHECK_CONDITION( file.isDefined() == true )
+	REQUIRE( file.isDefined() == true );
 
-	CHECK_CONDITION( file.values().size() == 2 )
+	REQUIRE( file.values().size() == 2 );
 
 	auto it = file.values().cbegin();
 
-	CHECK_CONDITION( *it == SL( "1.txt" ) )
+	REQUIRE( *it == SL( "1.txt" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "2.txt" ) )
+	REQUIRE( *it == SL( "2.txt" ) );
 
-	CHECK_CONDITION( t.isDefined() == true )
+	REQUIRE( t.isDefined() == true );
 }
 
-TEST( ArgAsCommandCase, TestAlreadyDefined )
+TEST_CASE( "TestAlreadyDefined" )
 {
 	const int argc = 4;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -255,10 +256,10 @@ TEST( ArgAsCommandCase, TestAlreadyDefined )
 
 	cmd.addArg( file );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( ArgAsCommandCase, TestNameRedefinition )
+TEST_CASE( "TestNameRedefinition" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -273,10 +274,10 @@ TEST( ArgAsCommandCase, TestNameRedefinition )
 
 	cmd.addArg( add );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( ArgAsCommandCase, TestAllIsOk1 )
+TEST_CASE( "TestAllIsOk1" )
 {
 	const int argc = 1;
 
@@ -290,13 +291,13 @@ TEST( ArgAsCommandCase, TestAllIsOk1 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( file.defaultValue().empty() )
-	CHECK_CONDITION( file.defaultValues().empty() )
-	CHECK_CONDITION( file.value().empty() )
-	CHECK_CONDITION( file.values().empty() )
+	REQUIRE( file.defaultValue().empty() );
+	REQUIRE( file.defaultValues().empty() );
+	REQUIRE( file.value().empty() );
+	REQUIRE( file.values().empty() );
 }
 
-TEST( ArgAsCommandCase, TestAllIsOk2 )
+TEST_CASE( "TestAllIsOk2" )
 {
 	const int argc = 1;
 
@@ -311,28 +312,21 @@ TEST( ArgAsCommandCase, TestAllIsOk2 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( file.defaultValue() == SL( "default" ) )
-	CHECK_CONDITION( file.defaultValues().size() == 1 )
-	CHECK_CONDITION( file.defaultValues().front() == SL( "default" ) )
-	CHECK_CONDITION( file.value() == SL( "default" ) )
-	CHECK_CONDITION( file.values().size() == 1 )
-	CHECK_CONDITION( file.values().front() == SL( "default" ) )
+	REQUIRE( file.defaultValue() == SL( "default" ) );
+	REQUIRE( file.defaultValues().size() == 1 );
+	REQUIRE( file.defaultValues().front() == SL( "default" ) );
+	REQUIRE( file.value() == SL( "default" ) );
+	REQUIRE( file.values().size() == 1 );
+	REQUIRE( file.values().front() == SL( "default" ) );
 }
 
-TEST( ArgAsCommandCase, TestMisspelling )
+TEST_CASE( "TestMisspelling" )
 {
 	ArgAsCommand add( SL( "add" ) );
 
 	StringList correct;
 
-	CHECK_CONDITION( add.isMisspelledName( SL( "dad" ), correct ) )
-	CHECK_CONDITION( correct.size() == 1 )
-	CHECK_CONDITION( correct.front() == SL( "add" ) )
-}
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( add.isMisspelledName( SL( "dad" ), correct ) );
+	REQUIRE( correct.size() == 1 );
+	REQUIRE( correct.front() == SL( "add" ) );
 }

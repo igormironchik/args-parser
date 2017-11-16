@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( GroupCase, TestOnlyOneAllIsOk )
+TEST_CASE( "TestOnlyOneAllIsOk" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -65,16 +66,16 @@ TEST( GroupCase, TestOnlyOneAllIsOk )
 
 	cmd.parse();
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == SL( "100" ) )
+	REQUIRE( timeout.isDefined() == true );
+	REQUIRE( timeout.value() == SL( "100" ) );
 
-	CHECK_CONDITION( port.isDefined() == false )
+	REQUIRE( port.isDefined() == false );
 
-	CHECK_CONDITION( host.isDefined() == false )
+	REQUIRE( host.isDefined() == false );
 }
 
 
-TEST( GroupCase, TestOnlyOneFailed )
+TEST_CASE( "TestOnlyOneFailed" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -94,11 +95,11 @@ TEST( GroupCase, TestOnlyOneFailed )
 	g.addArg( &port );
 	g.addArg( &host );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
 
-TEST( GroupCase, TestOnlyOneWithRequiredFailed )
+TEST_CASE( "TestOnlyOneWithRequiredFailed" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -117,11 +118,11 @@ TEST( GroupCase, TestOnlyOneWithRequiredFailed )
 
 	cmd.addArg( g );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
 
-TEST( GroupCase, TestAllOfIsOk )
+TEST_CASE( "TestAllOfIsOk" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -143,18 +144,18 @@ TEST( GroupCase, TestAllOfIsOk )
 
 	cmd.parse();
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == SL( "100" ) )
+	REQUIRE( timeout.isDefined() == true );
+	REQUIRE( timeout.value() == SL( "100" ) );
 
-	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == SL( "4545" ) )
+	REQUIRE( port.isDefined() == true );
+	REQUIRE( port.value() == SL( "4545" ) );
 
-	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == SL( "localhost" ) )
+	REQUIRE( host.isDefined() == true );
+	REQUIRE( host.value() == SL( "localhost" ) );
 }
 
 
-TEST( GroupCase, TestAllOfFailed )
+TEST_CASE( "TestAllOfFailed" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -174,11 +175,11 @@ TEST( GroupCase, TestAllOfFailed )
 
 	cmd.addArg( g );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
 
-TEST( GroupCase, TestAllOfWithRequiredFailed )
+TEST_CASE( "TestAllOfWithRequiredFailed" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -197,10 +198,10 @@ TEST( GroupCase, TestAllOfWithRequiredFailed )
 
 	cmd.addArg( g );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( GroupCase, TestAtLeasOneIsOk )
+TEST_CASE( "TestAtLeasOneIsOk" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -221,19 +222,19 @@ TEST( GroupCase, TestAtLeasOneIsOk )
 
 	cmd.parse();
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == SL( "100" ) )
+	REQUIRE( timeout.isDefined() == true );
+	REQUIRE( timeout.value() == SL( "100" ) );
 
-	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == SL( "4545" ) )
+	REQUIRE( port.isDefined() == true );
+	REQUIRE( port.value() == SL( "4545" ) );
 
-	CHECK_CONDITION( host.isDefined() == false )
+	REQUIRE( host.isDefined() == false );
 
-	CHECK_CONDITION( g.isDefined() == true )
+	REQUIRE( g.isDefined() == true );
 }
 
 
-TEST( GroupCase, TestAtLeasOneFailed )
+TEST_CASE( "TestAtLeasOneFailed" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -252,11 +253,11 @@ TEST( GroupCase, TestAtLeasOneFailed )
 
 	cmd.addArg( g );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
 
-TEST( GroupCase, TestAtLeasOneWithRequiredFailed )
+TEST_CASE( "TestAtLeasOneWithRequiredFailed" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -275,11 +276,11 @@ TEST( GroupCase, TestAtLeasOneWithRequiredFailed )
 
 	cmd.addArg( g );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
 
-TEST( GroupCase, GroupsIsOk )
+TEST_CASE( "GroupsIsOk" )
 {
 	const int argc = 9;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -311,25 +312,25 @@ TEST( GroupCase, GroupsIsOk )
 
 	cmd.parse();
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value() == SL( "100" ) )
+	REQUIRE( timeout.isDefined() == true );
+	REQUIRE( timeout.value() == SL( "100" ) );
 
-	CHECK_CONDITION( port.isDefined() == true )
-	CHECK_CONDITION( port.value() == SL( "4545" ) )
+	REQUIRE( port.isDefined() == true );
+	REQUIRE( port.value() == SL( "4545" ) );
 
-	CHECK_CONDITION( host.isDefined() == true )
-	CHECK_CONDITION( host.value() == SL( "localhost" ) )
+	REQUIRE( host.isDefined() == true );
+	REQUIRE( host.value() == SL( "localhost" ) );
 
-	CHECK_CONDITION( store.isDefined() == true )
-	CHECK_CONDITION( store.value() == SL( "db" ) )
+	REQUIRE( store.isDefined() == true );
+	REQUIRE( store.value() == SL( "db" ) );
 
-	CHECK_CONDITION( file.isDefined() == false )
+	REQUIRE( file.isDefined() == false );
 
-	CHECK_CONDITION( g.isDefined() == true )
+	REQUIRE( g.isDefined() == true );
 }
 
 
-TEST( GroupCase, GroupsFailed )
+TEST_CASE( "GroupsFailed" )
 {
 	const int argc = 11;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -359,27 +360,19 @@ TEST( GroupCase, GroupsFailed )
 
 	cmd.addArg( g );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( GroupCase, GroupsStuff )
+TEST_CASE( "GroupsStuff" )
 {
 	OnlyOneGroup one( SL( "only_one" ) );
 
 	const GroupIface & g = one;
 
-	CHECK_CONDITION( !g.isWithValue() )
-	CHECK_CONDITION( g.flag().empty() )
-	CHECK_CONDITION( g.argumentName().empty() )
-	CHECK_CONDITION( g.valueSpecifier().empty() )
-	CHECK_CONDITION( g.description().empty() )
-	CHECK_CONDITION( g.longDescription().empty() )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( !g.isWithValue() );
+	REQUIRE( g.flag().empty() );
+	REQUIRE( g.argumentName().empty() );
+	REQUIRE( g.valueSpecifier().empty() );
+	REQUIRE( g.description().empty() );
+	REQUIRE( g.longDescription().empty() );
 }

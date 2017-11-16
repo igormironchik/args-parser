@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( MultiArgTestCase, TestAllIsOk1 )
+TEST_CASE( "TestAllIsOk1" )
 {
 	const int argc = 10;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -61,33 +62,33 @@ TEST( MultiArgTestCase, TestAllIsOk1 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( multi.isDefined() == true )
+	REQUIRE( multi.isDefined() == true );
 
 	const StringList values = multi.values();
 
-	CHECK_CONDITION( multi.count() == 5 )
-	CHECK_CONDITION( values.size() == 5 )
+	REQUIRE( multi.count() == 5 );
+	REQUIRE( values.size() == 5 );
 
-	CHECK_CONDITION( multi.value() == SL( "100" ) )
+	REQUIRE( multi.value() == SL( "100" ) );
 
 	auto it = values.begin();
 
-	CHECK_CONDITION( *it == SL( "100" ) )
+	REQUIRE( *it == SL( "100" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "200" ) )
+	REQUIRE( *it == SL( "200" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "300" ) )
+	REQUIRE( *it == SL( "300" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "400" ) )
+	REQUIRE( *it == SL( "400" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "500" ) )
+	REQUIRE( *it == SL( "500" ) );
 }
 
-TEST( MultiArgTestCase, TestAllIsOk2 )
+TEST_CASE( "TestAllIsOk2" )
 {
 	const int argc = 11;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -107,36 +108,36 @@ TEST( MultiArgTestCase, TestAllIsOk2 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( multi.isDefined() == true )
+	REQUIRE( multi.isDefined() == true );
 
 	const StringList values = multi.values();
 
-	CHECK_CONDITION( multi.count() == 5 )
-	CHECK_CONDITION( values.size() == 5 )
+	REQUIRE( multi.count() == 5 );
+	REQUIRE( values.size() == 5 );
 
-	CHECK_CONDITION( multi.value() == SL( "100" ) )
+	REQUIRE( multi.value() == SL( "100" ) );
 
 	auto it = values.begin();
 
-	CHECK_CONDITION( *it == SL( "100" ) )
+	REQUIRE( *it == SL( "100" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "200" ) )
+	REQUIRE( *it == SL( "200" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "300" ) )
+	REQUIRE( *it == SL( "300" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "400" ) )
+	REQUIRE( *it == SL( "400" ) );
 	++it;
 
-	CHECK_CONDITION( *it == SL( "500" ) )
+	REQUIRE( *it == SL( "500" ) );
 
-	CHECK_CONDITION( timeout.isDefined() == true )
-	CHECK_CONDITION( timeout.value().empty() )
+	REQUIRE( timeout.isDefined() == true );
+	REQUIRE( timeout.value().empty() );
 }
 
-TEST( MultiArgTestCase, TestAllIsOk3 )
+TEST_CASE( "TestAllIsOk3" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -151,11 +152,11 @@ TEST( MultiArgTestCase, TestAllIsOk3 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( multi.isDefined() == true )
-	CHECK_CONDITION( multi.count() == 4 )
+	REQUIRE( multi.isDefined() == true );
+	REQUIRE( multi.count() == 4 );
 }
 
-TEST( MultiArgTestCase, TestAllIsOk4 )
+TEST_CASE( "TestAllIsOk4" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -169,13 +170,13 @@ TEST( MultiArgTestCase, TestAllIsOk4 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( multi.isDefined() == false )
-	CHECK_CONDITION( multi.value() == SL( "default" ) )
-	CHECK_CONDITION( multi.values().size() == 1 )
-	CHECK_CONDITION( multi.values().front() == SL( "default" ) )
+	REQUIRE( multi.isDefined() == false );
+	REQUIRE( multi.value() == SL( "default" ) );
+	REQUIRE( multi.values().size() == 1 );
+	REQUIRE( multi.values().front() == SL( "default" ) );
 }
 
-TEST( MultiArgTestCase, TestAllIsOk5 )
+TEST_CASE( "TestAllIsOk5" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -188,15 +189,15 @@ TEST( MultiArgTestCase, TestAllIsOk5 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( multi.isDefined() == false )
-	CHECK_CONDITION( multi.value().empty() )
-	CHECK_CONDITION( multi.values().size() == 0 )
-	CHECK_CONDITION( multi.count() == 0 )
-	CHECK_CONDITION( multi.defaultValue().empty() )
-	CHECK_CONDITION( multi.defaultValues().empty() )
+	REQUIRE( multi.isDefined() == false );
+	REQUIRE( multi.value().empty() );
+	REQUIRE( multi.values().size() == 0 );
+	REQUIRE( multi.count() == 0 );
+	REQUIRE( multi.defaultValue().empty() );
+	REQUIRE( multi.defaultValues().empty() );
 }
 
-TEST( MultiArgTestCase, NotDefinedValue )
+TEST_CASE( "NotDefinedValue" )
 {
 	const int argc = 8;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -216,16 +217,16 @@ TEST( MultiArgTestCase, NotDefinedValue )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() == String( SL( "Argument \"--multi"
-			"\" requires value that wasn't presented." ) ) )
+		REQUIRE( x.desc() == String( SL( "Argument \"--multi"
+			"\" requires value that wasn't presented." ) ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( MultiArgTestCase, NotDefinedValue2 )
+TEST_CASE( "NotDefinedValue2" )
 {
 	const int argc = 9;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -248,48 +249,40 @@ TEST( MultiArgTestCase, NotDefinedValue2 )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() == String( SL( "Argument \"--multi"
-			"\" requires value that wasn't presented." ) ) )
+		REQUIRE( x.desc() == String( SL( "Argument \"--multi"
+			"\" requires value that wasn't presented." ) ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( MultiArgTestCase, TestStuff )
+TEST_CASE( "TestStuff" )
 {
 	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true );
 
 	Arg & arg = multi;
 
-	CHECK_CONDITION( arg.defaultValue().empty() )
-	CHECK_CONDITION( multi.defaultValues().empty() )
-	CHECK_CONDITION( arg.value().empty() )
+	REQUIRE( arg.defaultValue().empty() );
+	REQUIRE( multi.defaultValues().empty() );
+	REQUIRE( arg.value().empty() );
 
 	arg.setDefaultValue( SL( "1" ) );
 
-	CHECK_CONDITION( arg.defaultValue() == SL( "1" ) )
-	CHECK_CONDITION( multi.defaultValues().size() == 1 )
-	CHECK_CONDITION( multi.defaultValues().front() == SL( "1" ) )
-	CHECK_CONDITION( arg.value() == SL( "1" ) )
-	CHECK_CONDITION( multi.values().size() == 1 )
-	CHECK_CONDITION( multi.values().front() == SL( "1" ) )
+	REQUIRE( arg.defaultValue() == SL( "1" ) );
+	REQUIRE( multi.defaultValues().size() == 1 );
+	REQUIRE( multi.defaultValues().front() == SL( "1" ) );
+	REQUIRE( arg.value() == SL( "1" ) );
+	REQUIRE( multi.values().size() == 1 );
+	REQUIRE( multi.values().front() == SL( "1" ) );
 
 	arg.setValue( SL( "2" ) );
 
-	CHECK_CONDITION( arg.defaultValue() == SL( "1" ) )
-	CHECK_CONDITION( multi.defaultValues().size() == 1 )
-	CHECK_CONDITION( multi.defaultValues().front() == SL( "1" ) )
-	CHECK_CONDITION( arg.value() == SL( "2" ) )
-	CHECK_CONDITION( multi.values().size() == 1 )
-	CHECK_CONDITION( multi.values().front() == SL( "2" ) )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( arg.defaultValue() == SL( "1" ) );
+	REQUIRE( multi.defaultValues().size() == 1 );
+	REQUIRE( multi.defaultValues().front() == SL( "1" ) );
+	REQUIRE( arg.value() == SL( "2" ) );
+	REQUIRE( multi.values().size() == 1 );
+	REQUIRE( multi.values().front() == SL( "2" ) );
 }

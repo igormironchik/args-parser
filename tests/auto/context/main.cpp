@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -41,7 +42,7 @@
 using namespace Args;
 
 
-TEST( ContextTestCase, TestContext )
+TEST_CASE( "TestContext" )
 {
 	ContextInternal internal;
 
@@ -55,32 +56,24 @@ TEST( ContextTestCase, TestContext )
 
 	Context ctx( std::move( internal ) );
 
-	CHECK_CONDITION( *ctx.next() == SL( "-a" ) )
+	REQUIRE( *ctx.next() == SL( "-a" ) );
 
 	ctx.prepend( SL( "value" ) );
 
-	CHECK_CONDITION( *ctx.next() == SL( "value" ) )
+	REQUIRE( *ctx.next() == SL( "value" ) );
 
 	ctx.putBack();
 
-	CHECK_CONDITION( *ctx.next() == SL( "value" ) )
-	CHECK_CONDITION( *ctx.next() == SL( "--timeout" ) )
-	CHECK_CONDITION( *ctx.next() == SL( "100" ) )
-	CHECK_CONDITION( *ctx.next() == SL( "--port" ) )
-	CHECK_CONDITION( *ctx.next() == SL( "4545" ) )
-	CHECK_CONDITION( *ctx.next() == SL( "--host" ) )
+	REQUIRE( *ctx.next() == SL( "value" ) );
+	REQUIRE( *ctx.next() == SL( "--timeout" ) );
+	REQUIRE( *ctx.next() == SL( "100" ) );
+	REQUIRE( *ctx.next() == SL( "--port" ) );
+	REQUIRE( *ctx.next() == SL( "4545" ) );
+	REQUIRE( *ctx.next() == SL( "--host" ) );
 
-	CHECK_CONDITION( ctx.atEnd() == false )
+	REQUIRE( ctx.atEnd() == false );
 
-	CHECK_CONDITION( *ctx.next() == SL( "localhost" ) )
+	REQUIRE( *ctx.next() == SL( "localhost" ) );
 
-	CHECK_CONDITION( ctx.atEnd() == true )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( ctx.atEnd() == true );
 }

@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( CommandCase, TestAllIsOk1 )
+TEST_CASE( "TestAllIsOk1" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -62,37 +63,37 @@ TEST( CommandCase, TestAllIsOk1 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( f.isDefined() == true )
-	CHECK_CONDITION( f.value() == SL( "local" ) )
+	REQUIRE( f.isDefined() == true );
+	REQUIRE( f.value() == SL( "local" ) );
 
-	CHECK_CONDITION( c.isDefined() == true )
-	CHECK_CONDITION( c.value() == SL( "100" ) )
-	CHECK_CONDITION( c.values().size() == 3 )
+	REQUIRE( c.isDefined() == true );
+	REQUIRE( c.value() == SL( "100" ) );
+	REQUIRE( c.values().size() == 3 );
 
 	auto it = c.values().begin();
 
-	CHECK_CONDITION( *it == SL( "100" ) )
+	REQUIRE( *it == SL( "100" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "4545" ) )
+	REQUIRE( *it == SL( "4545" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "500" ) )
+	REQUIRE( *it == SL( "500" ) );
 }
 
-TEST( CommandCase, WrongName1 )
+TEST_CASE( "WrongName1" )
 {
-	CHECK_THROW( Command c( SL( "-a" ) ), BaseException )
+	REQUIRE_THROWS_AS( Command c( SL( "-a" ) ), BaseException );
 }
 
-TEST( CommandCase, WrongName2 )
+TEST_CASE( "WrongName2" )
 {
-	CHECK_THROW( Command c( SL( "--name" ) ), BaseException )
+	REQUIRE_THROWS_AS( Command c( SL( "--name" ) ), BaseException );
 }
 
-TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
+TEST_CASE( "TestNotDefinedRequiredArgInCommand" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -107,10 +108,10 @@ TEST( CommandCase, TestNotDefinedRequiredArgInCommand )
 
 	cmd.addArg( c );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( CommandCase, TestManyArgs )
+TEST_CASE( "TestManyArgs" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -125,10 +126,10 @@ TEST( CommandCase, TestManyArgs )
 
 	cmd.addArg( c );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( CommandCase, TestRedefinition )
+TEST_CASE( "TestRedefinition" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -142,10 +143,10 @@ TEST( CommandCase, TestRedefinition )
 	cmd.addArg( c );
 	cmd.addArg( d );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( CommandCase, TestNotDefinedCommand )
+TEST_CASE( "TestNotDefinedCommand" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -158,10 +159,10 @@ TEST( CommandCase, TestNotDefinedCommand )
 	cmd.addArg( c );
 	cmd.addArg( d );
 
-	CHECK_THROW( cmd.parse(), BaseException )
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
-TEST( CommandCase, TestAllIsOk2 )
+TEST_CASE( "TestAllIsOk2" )
 {
 	const int argc = 7;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -179,27 +180,27 @@ TEST( CommandCase, TestAllIsOk2 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( f.isDefined() == true )
-	CHECK_CONDITION( f.value() == SL( "local" ) )
+	REQUIRE( f.isDefined() == true );
+	REQUIRE( f.value() == SL( "local" ) );
 
-	CHECK_CONDITION( c.isDefined() == true )
-	CHECK_CONDITION( c.value() == SL( "100" ) )
-	CHECK_CONDITION( c.values().size() == 3 )
+	REQUIRE( c.isDefined() == true );
+	REQUIRE( c.value() == SL( "100" ) );
+	REQUIRE( c.values().size() == 3 );
 
 	auto it = c.values().begin();
 
-	CHECK_CONDITION( *it == SL( "100" ) )
+	REQUIRE( *it == SL( "100" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "4545" ) )
+	REQUIRE( *it == SL( "4545" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "500" ) )
+	REQUIRE( *it == SL( "500" ) );
 }
 
-TEST( CommandCase, TestAllIsOk3 )
+TEST_CASE( "TestAllIsOk3" )
 {
 	const int argc = 5;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -216,26 +217,26 @@ TEST( CommandCase, TestAllIsOk3 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( f.isDefined() == false )
+	REQUIRE( f.isDefined() == false );
 
-	CHECK_CONDITION( c.isDefined() == true )
-	CHECK_CONDITION( c.value() == SL( "100" ) )
-	CHECK_CONDITION( c.values().size() == 3 )
+	REQUIRE( c.isDefined() == true );
+	REQUIRE( c.value() == SL( "100" ) );
+	REQUIRE( c.values().size() == 3 );
 
 	auto it = c.values().begin();
 
-	CHECK_CONDITION( *it == SL( "100" ) )
+	REQUIRE( *it == SL( "100" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "4545" ) )
+	REQUIRE( *it == SL( "4545" ) );
 
 	++it;
 
-	CHECK_CONDITION( *it == SL( "500" ) )
+	REQUIRE( *it == SL( "500" ) );
 }
 
-TEST( CommandCase, TestAllIsOk4 )
+TEST_CASE( "TestAllIsOk4" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -248,11 +249,11 @@ TEST( CommandCase, TestAllIsOk4 )
 	cmd.addArg( c );
 	cmd.addArg( d );
 
-	CHECK_CONDITION( c.isDefined() == false )
-	CHECK_CONDITION( d.isDefined() == false )
+	REQUIRE( c.isDefined() == false );
+	REQUIRE( d.isDefined() == false );
 }
 
-TEST( CommandCase, TestAllIsOk5 )
+TEST_CASE( "TestAllIsOk5" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -265,14 +266,14 @@ TEST( CommandCase, TestAllIsOk5 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( a.isDefined() == false )
-	CHECK_CONDITION( a.value().empty() )
-	CHECK_CONDITION( a.values().empty() )
-	CHECK_CONDITION( a.defaultValue().empty() )
-	CHECK_CONDITION( a.defaultValues().empty() )
+	REQUIRE( a.isDefined() == false );
+	REQUIRE( a.value().empty() );
+	REQUIRE( a.values().empty() );
+	REQUIRE( a.defaultValue().empty() );
+	REQUIRE( a.defaultValues().empty() );
 }
 
-TEST( CommandCase, TestAllIsOk6 )
+TEST_CASE( "TestAllIsOk6" )
 {
 	const int argc = 1;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
@@ -286,16 +287,16 @@ TEST( CommandCase, TestAllIsOk6 )
 
 	cmd.parse();
 
-	CHECK_CONDITION( a.isDefined() == false )
-	CHECK_CONDITION( a.value() == SL( "default" ) )
-	CHECK_CONDITION( a.values().size() == 1 )
-	CHECK_CONDITION( a.values().front() == SL( "default" ) )
-	CHECK_CONDITION( a.defaultValue() == SL( "default" ) )
-	CHECK_CONDITION( a.defaultValues().size() == 1 )
-	CHECK_CONDITION( a.defaultValues().front() == SL( "default" ) )
+	REQUIRE( a.isDefined() == false );
+	REQUIRE( a.value() == SL( "default" ) );
+	REQUIRE( a.values().size() == 1 );
+	REQUIRE( a.values().front() == SL( "default" ) );
+	REQUIRE( a.defaultValue() == SL( "default" ) );
+	REQUIRE( a.defaultValues().size() == 1 );
+	REQUIRE( a.defaultValues().front() == SL( "default" ) );
 }
 
-TEST( CommandCase, TestMisspelling )
+TEST_CASE( "TestMisspelling" )
 {
 	CmdLine cmd;
 
@@ -308,77 +309,69 @@ TEST( CommandCase, TestMisspelling )
 
 	StringList correct;
 
-	CHECK_CONDITION( add.isMisspelledName( SL( "dad" ), correct ) )
-	CHECK_CONDITION( correct.size() == 1 )
-	CHECK_CONDITION( correct.front() == SL( "add" ) )
+	REQUIRE( add.isMisspelledName( SL( "dad" ), correct ) );
+	REQUIRE( correct.size() == 1 );
+	REQUIRE( correct.front() == SL( "add" ) );
 
 	correct.clear();
 
-	CHECK_CONDITION( add.isMisspelledName( SL( "fiel" ), correct ) )
-	CHECK_CONDITION( correct.size() == 1 )
-	CHECK_CONDITION( correct.front() == SL( "file" ) )
+	REQUIRE( add.isMisspelledName( SL( "fiel" ), correct ) );
+	REQUIRE( correct.size() == 1 );
+	REQUIRE( correct.front() == SL( "file" ) );
 
 	correct.clear();
 
-	CHECK_CONDITION( !add.isMisspelledCommand( SL( "fiel" ), correct ) )
+	REQUIRE( !add.isMisspelledCommand( SL( "fiel" ), correct ) );
 
-	CHECK_CONDITION( add.isMisspelledCommand( SL( "dad" ), correct ) )
-	CHECK_CONDITION( correct.size() == 1 )
-	CHECK_CONDITION( correct.front() == SL( "add" ) )
+	REQUIRE( add.isMisspelledCommand( SL( "dad" ), correct ) );
+	REQUIRE( correct.size() == 1 );
+	REQUIRE( correct.front() == SL( "add" ) );
 
 	correct.clear();
 
-	CHECK_CONDITION( cmd.isMisspelledName( SL( "dad" ), correct ) )
-	CHECK_CONDITION( correct.size() == 1 )
-	CHECK_CONDITION( correct.front() == SL( "add" ) )
+	REQUIRE( cmd.isMisspelledName( SL( "dad" ), correct ) );
+	REQUIRE( correct.size() == 1 );
+	REQUIRE( correct.front() == SL( "add" ) );
 }
 
-TEST( CommandCase, TestStuff )
+TEST_CASE( "TestStuff" )
 {
 	Command add( SL( "add" ) );
 
 	ArgIface & a = add;
 
-	CHECK_CONDITION( a.description().empty() )
-	CHECK_CONDITION( a.longDescription().empty() )
+	REQUIRE( a.description().empty() );
+	REQUIRE( a.longDescription().empty() );
 
 	add.setDescription( SL( "desc" ) );
 
-	CHECK_CONDITION( a.description() == SL( "desc" ) )
-	CHECK_CONDITION( a.longDescription() == SL( "desc" ) )
+	REQUIRE( a.description() == SL( "desc" ) );
+	REQUIRE( a.longDescription() == SL( "desc" ) );
 
 	add.setLongDescription( SL( "long" ) );
 
-	CHECK_CONDITION( a.description() == SL( "desc" ) )
-	CHECK_CONDITION( a.longDescription() == SL( "long" ) )
+	REQUIRE( a.description() == SL( "desc" ) );
+	REQUIRE( a.longDescription() == SL( "long" ) );
 
-	CHECK_CONDITION( a.valueSpecifier().empty() )
+	REQUIRE( a.valueSpecifier().empty() );
 
 	add.setValueSpecifier( SL( "val" ) );
 
-	CHECK_CONDITION( a.valueSpecifier() == SL( "val" ) )
+	REQUIRE( a.valueSpecifier() == SL( "val" ) );
 
-	CHECK_CONDITION( !a.isDefined() )
+	REQUIRE( !a.isDefined() );
 
 	GroupIface & g = add;
 
-	CHECK_CONDITION( !g.isRequired() )
+	REQUIRE( !g.isRequired() );
 
 	g.setRequired();
 
-	CHECK_CONDITION( !g.isRequired() )
+	REQUIRE( !g.isRequired() );
 
 	Command c( SL( "c" ), ValueOptions::ManyValues );
 
 	ArgIface & a2 = c;
 
-	CHECK_CONDITION( a2.isWithValue() )
-}
-
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( a2.isWithValue() );
 }

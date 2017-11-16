@@ -28,8 +28,9 @@
 	OTHER DEALINGS IN THE SOFTWARE.
 */
 
-// UnitTest include.
-#include <UnitTest/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// doctest include.
+#include <doctest.h>
 
 // Args include.
 #include <Args/all.hpp>
@@ -44,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST( ArgExceptions, TestNoValueForArg )
+TEST_CASE( "TestNoValueForArg" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -59,16 +60,16 @@ TEST( ArgExceptions, TestNoValueForArg )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Argument \"-a\" requires value that wasn't presented." ) )
+		REQUIRE( x.desc() ==
+			SL( "Argument \"-a\" requires value that wasn't presented." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestRequiredArgInAllOfGroup )
+TEST_CASE( "TestRequiredArgInAllOfGroup" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -85,17 +86,17 @@ TEST( ArgExceptions, TestRequiredArgInAllOfGroup )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Required argument \"-a\" is not allowed to be in "
-				"AllOf group \"group\"." ) )
+				"AllOf group \"group\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestAlreadyInCmdLine1 )
+TEST_CASE( "TestAlreadyInCmdLine1" )
 {
 	CmdLine cmd;
 
@@ -110,16 +111,16 @@ TEST( ArgExceptions, TestAlreadyInCmdLine1 )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Argument \"-a\" already in the command line parser." ) )
+		REQUIRE( x.desc() ==
+			SL( "Argument \"-a\" already in the command line parser." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestAlreadyInCmdLine2 )
+TEST_CASE( "TestAlreadyInCmdLine2" )
 {
 	CmdLine cmd;
 
@@ -131,16 +132,16 @@ TEST( ArgExceptions, TestAlreadyInCmdLine2 )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Argument \"-a\" already in the command line parser." ) )
+		REQUIRE( x.desc() ==
+			SL( "Argument \"-a\" already in the command line parser." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestAddingNull )
+TEST_CASE( "TestAddingNull" )
 {
 	CmdLine cmd;
 
@@ -149,17 +150,17 @@ TEST( ArgExceptions, TestAddingNull )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Attempt to add nullptr to the "
-				"command line as argument." ) )
+				"command line as argument." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestEmptyNameOfArgAsCommand )
+TEST_CASE( "TestEmptyNameOfArgAsCommand" )
 {
 	try {
 		CmdLine cmd;
@@ -170,16 +171,16 @@ TEST( ArgExceptions, TestEmptyNameOfArgAsCommand )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "ArgAsCommand can't be with empty name." ) )
+		REQUIRE( x.desc() ==
+			SL( "ArgAsCommand can't be with empty name." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestDissallowedNameOfArgAsCommand )
+TEST_CASE( "TestDissallowedNameOfArgAsCommand" )
 {
 	try {
 		CmdLine cmd;
@@ -192,16 +193,16 @@ TEST( ArgExceptions, TestDissallowedNameOfArgAsCommand )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Disallowed name \"arg with space\" for the argument." ) )
+		REQUIRE( x.desc() ==
+			SL( "Disallowed name \"arg with space\" for the argument." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestEmptyNameOfCommand )
+TEST_CASE( "TestEmptyNameOfCommand" )
 {
 	try {
 		CmdLine cmd;
@@ -212,16 +213,16 @@ TEST( ArgExceptions, TestEmptyNameOfCommand )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Command can't be with empty name." ) )
+		REQUIRE( x.desc() ==
+			SL( "Command can't be with empty name." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestRedefinitionOfCommand )
+TEST_CASE( "TestRedefinitionOfCommand" )
 {
 	try {
 		CmdLine cmd;
@@ -236,16 +237,16 @@ TEST( ArgExceptions, TestRedefinitionOfCommand )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Redefinition of command with name \"cmd\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Redefinition of command with name \"cmd\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestDissallowedNameOfCommand )
+TEST_CASE( "TestDissallowedNameOfCommand" )
 {
 	try {
 		CmdLine cmd;
@@ -258,16 +259,16 @@ TEST( ArgExceptions, TestDissallowedNameOfCommand )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Disallowed name \"cmd with space\" for the command." ) )
+		REQUIRE( x.desc() ==
+			SL( "Disallowed name \"cmd with space\" for the command." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestArgAlreadyDefined )
+TEST_CASE( "TestArgAlreadyDefined" )
 {
 	try {
 		const int argc = 3;
@@ -282,16 +283,16 @@ TEST( ArgExceptions, TestArgAlreadyDefined )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Argument \"-a\" already defined." ) )
+		REQUIRE( x.desc() ==
+			SL( "Argument \"-a\" already defined." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestArgRedefinition )
+TEST_CASE( "TestArgRedefinition" )
 {
 	try {
 		CmdLine cmd;
@@ -303,16 +304,16 @@ TEST( ArgExceptions, TestArgRedefinition )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Redefinition of argument witg flag \"-a\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Redefinition of argument witg flag \"-a\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestDissallowedFlag )
+TEST_CASE( "TestDissallowedFlag" )
 {
 	try {
 		CmdLine cmd;
@@ -323,16 +324,16 @@ TEST( ArgExceptions, TestDissallowedFlag )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Disallowed flag \"-~\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Disallowed flag \"-~\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestArgNameRedefinition )
+TEST_CASE( "TestArgNameRedefinition" )
 {
 	try {
 		CmdLine cmd;
@@ -344,16 +345,16 @@ TEST( ArgExceptions, TestArgNameRedefinition )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Redefinition of argument with name \"--name\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Redefinition of argument with name \"--name\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestArgDissallowedName )
+TEST_CASE( "TestArgDissallowedName" )
 {
 	try {
 		CmdLine cmd;
@@ -364,16 +365,16 @@ TEST( ArgExceptions, TestArgDissallowedName )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Disallowed name \"--~~\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Disallowed name \"--~~\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestArgEmptyNameAndFlag )
+TEST_CASE( "TestArgEmptyNameAndFlag" )
 {
 	try {
 		CmdLine cmd;
@@ -384,17 +385,17 @@ TEST( ArgExceptions, TestArgEmptyNameAndFlag )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Arguments with empty flag and name "
-				"are disallowed." ) )
+				"are disallowed." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestCommandIngroup )
+TEST_CASE( "TestCommandIngroup" )
 {
 	try {
 		AllOfGroup g( SL( "" ) );
@@ -403,17 +404,17 @@ TEST( ArgExceptions, TestCommandIngroup )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Commands not allowed in groups. "
-				"You are trying to add command \"c\" to group \"\"." ) )
+				"You are trying to add command \"c\" to group \"\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestCommandIngroup2 )
+TEST_CASE( "TestCommandIngroup2" )
 {
 	try {
 		AllOfGroup g( SL( "" ) );
@@ -423,17 +424,17 @@ TEST( ArgExceptions, TestCommandIngroup2 )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Commands not allowed in groups. "
-				"You are trying to add command \"c\" to group \"\"." ) )
+				"You are trying to add command \"c\" to group \"\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestCommandIngroup3 )
+TEST_CASE( "TestCommandIngroup3" )
 {
 	try {
 		AllOfGroup g( SL( "" ) );
@@ -442,17 +443,17 @@ TEST( ArgExceptions, TestCommandIngroup3 )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Commands not allowed in groups. "
-				"You are trying to add command \"c\" to group \"\"." ) )
+				"You are trying to add command \"c\" to group \"\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestMisspelledSubcommand )
+TEST_CASE( "TestMisspelledSubcommand" )
 {
 	try {
 		const int argc = 3;
@@ -470,16 +471,16 @@ TEST( ArgExceptions, TestMisspelledSubcommand )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Unknown argument \"bac\".\n\nProbably you mean \"abc or cba\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Unknown argument \"bac\".\n\nProbably you mean \"abc or cba\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestUnknownFlag )
+TEST_CASE( "TestUnknownFlag" )
 {
 	try {
 		const int argc = 2;
@@ -492,16 +493,16 @@ TEST( ArgExceptions, TestUnknownFlag )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
-			SL( "Unknown argument \"-h\"." ) )
+		REQUIRE( x.desc() ==
+			SL( "Unknown argument \"-h\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
+	REQUIRE( false );
 }
 
-TEST( ArgExceptions, TestWrongCombo )
+TEST_CASE( "TestWrongCombo" )
 {
 	try {
 		const int argc = 2;
@@ -517,19 +518,12 @@ TEST( ArgExceptions, TestWrongCombo )
 	}
 	catch( const BaseException & x )
 	{
-		CHECK_CONDITION( x.desc() ==
+		REQUIRE( x.desc() ==
 			SL( "Only last argument in "
-				"flags combo can be with value. Flags combo is \"-ab\"." ) )
+				"flags combo can be with value. Flags combo is \"-ab\"." ) );
 
 		return;
 	}
 
-	CHECK_CONDITION( false )
-}
-
-int main()
-{
-	RUN_ALL_TESTS()
-
-	return 0;
+	REQUIRE( false );
 }
