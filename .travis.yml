@@ -39,5 +39,6 @@ script:
       make; \
       ctest --output-on-failure; \
       cd ..; \
-      coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles -e doc -e UnitTest -e tests -e samples; \
+      coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles \
+      -e doc -e UnitTest -e tests -e samples -e 3rdparty; \
       fi
