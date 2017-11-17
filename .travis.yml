@@ -32,13 +32,13 @@ addons:
 script:
   - |
     if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then \
-      export CXX="g++-4.9" CC="gcc-4.9"; \
-      mkdir build; \
-      cd build; \
-      cmake -DENABLE_COVERAGE=ON ..; \
-      make; \
-      ctest --output-on-failure; \
-      cd ..; \
+      export CXX="g++-4.9" CC="gcc-4.9" || { exit 1; }; \
+      mkdir build || { exit 1; }; \
+      cd build || { exit 1; }; \
+      cmake -DENABLE_COVERAGE=ON .. || { exit 1; }; \
+      make || { exit 1; }; \
+      ctest --output-on-failure || { exit 1; }; \
+      cd .. || { exit 1; }; \
       coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles \
-      -e doc -e UnitTest -e tests -e samples -e 3rdparty; \
+      -e doc -e UnitTest -e tests -e samples -e 3rdparty || { exit 1; }; \
       fi
