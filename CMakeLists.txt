@@ -16,6 +16,10 @@ file( COPY runtests.rb
 
 project( Args )
 
+add_library( Args INTERFACE )
+
+target_include_directories( Args INTERFACE . )
+
 add_subdirectory( samples )
 
 enable_testing()
