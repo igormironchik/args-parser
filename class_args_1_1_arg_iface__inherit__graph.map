@@ -1,0 +1,11 @@
+<map id="Args::ArgIface" name="Args::ArgIface">
+<area shape="rect" id="node2" href="$class_args_1_1_arg.html" title="Argument with one value that can be present only once in the command line. " alt="" coords="193,56,267,83"/>
+<area shape="rect" id="node5" href="$class_args_1_1_arg_as_command.html" title="This is argument with name without dashes. " alt="" coords="156,107,304,133"/>
+<area shape="rect" id="node6" href="$class_args_1_1_group_iface.html" title="Interface for the groups. " alt="" coords="171,157,289,184"/>
+<area shape="rect" id="node3" href="$class_args_1_1_help.html" title="Help argument. " alt="" coords="391,5,471,32"/>
+<area shape="rect" id="node4" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="379,56,482,83"/>
+<area shape="rect" id="node7" href="$class_args_1_1_all_of_group.html" title="Group of args where all arguments should be defined. " alt="" coords="371,107,490,133"/>
+<area shape="rect" id="node8" href="$class_args_1_1_at_least_one_group.html" title="Group of args where at least one argument should be defined. " alt="" coords="352,157,509,184"/>
+<area shape="rect" id="node9" href="$class_args_1_1_command.html" title="Command in the command line interface. " alt="" coords="374,208,487,235"/>
+<area shape="rect" id="node10" href="$class_args_1_1_only_one_group.html" title="Group of args where only one argument can be defined. " alt="" coords="361,259,500,285"/>
+</map>
