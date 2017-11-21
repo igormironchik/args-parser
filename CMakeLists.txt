@@ -18,7 +18,9 @@ project( Args )
 
 add_library( Args INTERFACE )
 
-target_include_directories( Args INTERFACE . )
+target_include_directories( Args INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} )
+
+set( Args_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE )
 
 add_subdirectory( samples )
 
