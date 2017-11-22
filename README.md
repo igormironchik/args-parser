@@ -4,22 +4,6 @@ This is Args.
 
 Args is a small C++ header-only library for parsing command line arguments.
 
-# Compilling
-
-Just run build.rb which is a Ruby program and a project file or use QMake
-or CMake project.
-
-# Requirements
-
-For compiling Args with Ruby you should have installed:
-
- * Ruby programming language (http://www.ruby-lang.org/en/)
- * mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
-
-or use
-
- * QMake, CMake
-
 # Syntax
 
  * Argument starts with two dashes. For example ```--argument```.
@@ -89,6 +73,21 @@ project and just do ```add_subdirectory()```, if you will do so you have to
 add include directory path to your project with
 ```include_directories( ${Args_INCLUDE_DIRECTORIES} )```. With QMake you can
 use ```Args/Args.pri```.
+
+What does ```build.rb``` file for?
+
+ * ```build.rb``` is Ruby program for building Args, this is project file for
+Mxx_ru build system. In most cases this file is not necessary and can be simply
+ignored. Long time ago I used Mxx_ru as build system in my projects and this
+file is just because of historical reasons. In the subdirectories you can find
+different Ruby scripts, like ```prj.rb```, these files are project files for
+corresponding subprojects (examples/tests) for Mxx_ru build system.
+
+What does ```runtests.rb``` file for?
+
+ * ```runtests.rb``` is simple Ruby script to launch all tests. This file is
+copying to build directory by CMake and QMake and can be used to launch tests.
+And sure with CMake you can use ctest executable to launch tests too.
           
 # Example
 

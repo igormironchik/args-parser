@@ -2,22 +2,6 @@
 /*!
 	\mainpage
 
-	\section compiling Compilling
-
-	Just run build.rb which is a Ruby program and a project file or use QMake
-	or CMake project.
-
-	\subsection requirements Requirements
-
-	For compiling Args with Ruby you should have installed:
-
-	\li Ruby programming language (http://www.ruby-lang.org/en/)
-	\li mxx_ru Ruby gem (https://sourceforge.net/p/mxxru/wiki/Home/)
-
-	or use
-
-	\li QMake or CMake
-
 	\section syntax Syntax
 
 	\li Argument starts with two dashes. For example \c --argument.
@@ -87,6 +71,21 @@
 	add include directory path to your project with
 	\c include_directories( \c ${Args_INCLUDE_DIRECTORIES} \c ). With QMake you can
 	use \c Args/Args.pri.
+
+	What does \c build.rb file for?
+
+	\li \c build.rb is Ruby program for building Args, this is project file for
+	Mxx_ru build system. In most cases this file is not necessary and can be simply
+	ignored. Long time ago I used Mxx_ru as build system in my projects and this
+	file is just because of historical reasons. In the subdirectories you can find
+	different Ruby scripts, like \c prj.rb, these files are project files for
+	corresponding subprojects (examples/tests) for Mxx_ru build system.
+
+	What does \c runtests.rb file for?
+
+	\li \c runtests.rb is simple Ruby script to launch all tests. This file is
+	copying to build directory by CMake and QMake and can be used to launch tests.
+	And sure with CMake you can use ctest executable to launch tests too.
 
 	\section example Example
 
