@@ -1,5 +1,7 @@
 var class_args_1_1_arg_iface =
 [
+    [ "ArgIface", "class_args_1_1_arg_iface.html#af307f61d284cf1e74f90a8c948ff5c08", null ],
+    [ "~ArgIface", "class_args_1_1_arg_iface.html#a6044f97f138745cce1ae4c9035bf8dcd", null ],
     [ "argumentName", "class_args_1_1_arg_iface.html#ac3ee8f604f790204c140154dad2e81e4", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_arg_iface.html#a93fdd42c29c4ecaecba94911ca57e523", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_arg_iface.html#aecd81cf515c566fe66f63d4cf5c4c1d5", null ],
@@ -18,5 +20,7 @@ var class_args_1_1_arg_iface =
     [ "process", "class_args_1_1_arg_iface.html#a5082f3a4e08984b8acb046efe7ace3f5", null ],
     [ "setCmdLine", "class_args_1_1_arg_iface.html#a91e60599c6dd5f0a4bb19ab29930aa65", null ],
     [ "type", "class_args_1_1_arg_iface.html#a76ea6e8e9de8eb515efdf9f650af061a", null ],
-    [ "valueSpecifier", "class_args_1_1_arg_iface.html#a58734c1dfd51771046331c225be3dfdb", null ]
+    [ "valueSpecifier", "class_args_1_1_arg_iface.html#a58734c1dfd51771046331c225be3dfdb", null ],
+    [ "CmdLine", "class_args_1_1_arg_iface.html#a18cbb9362f4835b4f5be1429a8104856", null ],
+    [ "GroupIface", "class_args_1_1_arg_iface.html#a3b1fdf5f0c2690a8cc71428caa916960", null ]
 ];

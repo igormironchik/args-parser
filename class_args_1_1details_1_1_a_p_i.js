@@ -1,5 +1,7 @@
 var class_args_1_1details_1_1_a_p_i =
 [
+    [ "API", "class_args_1_1details_1_1_a_p_i.html#a758532079f664463fed00375e38b47ad", null ],
+    [ "~API", "class_args_1_1details_1_1_a_p_i.html#a5f004fe5a6f1d0160e2565d79158ea5a", null ],
     [ "addAllOfGroup", "class_args_1_1details_1_1_a_p_i.html#a7178df37f3019f35efa81daa4cae28cb", null ],
     [ "addArgAsCommand", "class_args_1_1details_1_1_a_p_i.html#a3be1b321c112366fdfc6899cd2f9e036", null ],
     [ "addArgAsCommandWithDefaulValues", "class_args_1_1details_1_1_a_p_i.html#a0f60daded0751ae11c4fe4c018f459fd", null ],

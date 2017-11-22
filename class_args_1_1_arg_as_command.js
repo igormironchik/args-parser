@@ -1,5 +1,7 @@
 var class_args_1_1_arg_as_command =
 [
+    [ "ArgAsCommand", "class_args_1_1_arg_as_command.html#aaefd2ce44f7b6eece509752b7ef1a8da", null ],
+    [ "~ArgAsCommand", "class_args_1_1_arg_as_command.html#afb40a52d116968dbca03f09efba6c8a3", null ],
     [ "argumentName", "class_args_1_1_arg_as_command.html#acbe579e54adca59bf9c971441be34e1a", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_arg_as_command.html#a8fc702f643bc72a4c30a77f73379b0c4", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_arg_as_command.html#ad79de7e0fc9e506c7df7a8d647fb2e60", null ],

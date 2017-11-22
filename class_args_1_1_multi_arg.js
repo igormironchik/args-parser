@@ -3,6 +3,7 @@ var class_args_1_1_multi_arg =
     [ "MultiArg", "class_args_1_1_multi_arg.html#acbd3dd3307015bccfab1f2d474c76611", null ],
     [ "MultiArg", "class_args_1_1_multi_arg.html#aee544eb96f664d2f73c5b920f3a87f0a", null ],
     [ "MultiArg", "class_args_1_1_multi_arg.html#a1d30ec4247c8addf4592c6684edbc553", null ],
+    [ "~MultiArg", "class_args_1_1_multi_arg.html#aa12b7c91f15e68bba4928be42c7cb8db", null ],
     [ "clear", "class_args_1_1_multi_arg.html#a7fec44dbf6122186216e964e4b225113", null ],
     [ "count", "class_args_1_1_multi_arg.html#a808461276dddb210a1d8ca9216b3f4fb", null ],
     [ "defaultValue", "class_args_1_1_multi_arg.html#afee08a2bce8b5cbcf5f9a84caf8e8342", null ],

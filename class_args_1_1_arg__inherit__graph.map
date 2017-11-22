@@ -1,5 +1,5 @@
 <map id="Args::Arg" name="Args::Arg">
-<area shape="rect" id="node3" href="$class_args_1_1_help.html" title="Help argument. " alt="" coords="5,155,85,181"/>
-<area shape="rect" id="node4" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="110,155,213,181"/>
-<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments. " alt="" coords="51,5,154,32"/>
+<area shape="rect" id="node3" href="$class_args_1_1_help.html" title="Help argument. " alt="" coords="5,155,89,181"/>
+<area shape="rect" id="node4" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="113,155,219,181"/>
+<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments. " alt="" coords="53,5,159,32"/>
 </map>

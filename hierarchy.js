@@ -18,12 +18,14 @@ var hierarchy =
         [ "Args::OnlyOneGroup", "class_args_1_1_only_one_group.html", null ]
       ] ]
     ] ],
-    [ "Args::BaseException", "class_args_1_1_base_exception.html", [
-      [ "Args::HelpHasBeenPrintedException", "class_args_1_1_help_has_been_printed_exception.html", null ]
-    ] ],
     [ "Args::Context", "class_args_1_1_context.html", null ],
     [ "Args::details::Deleter< T >", "class_args_1_1details_1_1_deleter.html", null ],
     [ "Args::HelpPrinterIface", "class_args_1_1_help_printer_iface.html", [
       [ "Args::HelpPrinter", "class_args_1_1_help_printer.html", null ]
+    ] ],
+    [ "logic_error", null, [
+      [ "Args::BaseException", "class_args_1_1_base_exception.html", [
+        [ "Args::HelpHasBeenPrintedException", "class_args_1_1_help_has_been_printed_exception.html", null ]
+      ] ]
     ] ]
 ];

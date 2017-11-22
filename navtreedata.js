@@ -9,6 +9,16 @@ var NAVTREE =
     [ "Different types of list of strings.", "index.html#stringlist", null ],
     [ "Q/A", "index.html#qa", null ],
     [ "Example", "index.html#example", null ],
+    [ "Namespaces", null, [
+      [ "Namespace List", "namespaces.html", "namespaces" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
@@ -18,7 +28,8 @@ var NAVTREE =
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ]
+        [ "Enumerator", "functions_eval.html", null ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
@@ -33,8 +44,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-".html",
-"class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01true_01_4.html#a4616f31df945d931c353b0de5248e104"
+"all_8hpp.html",
+"class_args_1_1_multi_arg.html#aa12b7c91f15e68bba4928be42c7cb8db"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

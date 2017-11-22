@@ -1,5 +1,7 @@
 var class_args_1_1_command =
 [
+    [ "Command", "class_args_1_1_command.html#ac44422a3138ba76375904a8436d2cd42", null ],
+    [ "~Command", "class_args_1_1_command.html#ae4493f136fed851d1222f8ad1609b2f6", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_command.html#a7867a0a188bf5f9af40928d68440e70c", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_command.html#a6260159eb5d66b337e9570055e514d33", null ],
     [ "clear", "class_args_1_1_command.html#a853e728bb0c826ae9a31bda99cf9f593", null ],
@@ -25,5 +27,7 @@ var class_args_1_1_command =
     [ "type", "class_args_1_1_command.html#a677afad407e20aa83857ffb685e28ec4", null ],
     [ "value", "class_args_1_1_command.html#ae4a5dbb9d3805fe83da01f13306a83cf", null ],
     [ "values", "class_args_1_1_command.html#a7b1216fb43c0ad0c8458941f34cbece7", null ],
-    [ "valueSpecifier", "class_args_1_1_command.html#a5c4bbc2c84a419528f946b16584015b9", null ]
+    [ "valueSpecifier", "class_args_1_1_command.html#a5c4bbc2c84a419528f946b16584015b9", null ],
+    [ "CmdLine", "class_args_1_1_command.html#a18cbb9362f4835b4f5be1429a8104856", null ],
+    [ "HelpPrinter", "class_args_1_1_command.html#ae57e172ab53c4f7c6d5d76fb18afc58e", null ]
 ];

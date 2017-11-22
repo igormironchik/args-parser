@@ -2,6 +2,8 @@ var class_args_1_1_group_iface =
 [
     [ "ArgPtr", "class_args_1_1_group_iface.html#a539cbb2d7e60f80eb8eb1ac10cfd574e", null ],
     [ "Arguments", "class_args_1_1_group_iface.html#abed85fa1e10d61d9b8cb61f0f1d50b6e", null ],
+    [ "GroupIface", "class_args_1_1_group_iface.html#add4e157dd242be0be3b0f076052044d9", null ],
+    [ "~GroupIface", "class_args_1_1_group_iface.html#af9cdc945c531d944c10dbed283f3621f", null ],
     [ "addArg", "class_args_1_1_group_iface.html#ad109e49e11aa5cbd58d813bdeb8932f6", null ],
     [ "addArg", "class_args_1_1_group_iface.html#a7266b013199540d902003dba1e833ebe", null ],
     [ "addArg", "class_args_1_1_group_iface.html#af7725d7452bf4097f8b051d8dbfe6fa0", null ],

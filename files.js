@@ -22,7 +22,7 @@ var files =
     [ "enums.hpp", "enums_8hpp.html", "enums_8hpp" ],
     [ "exceptions.hpp", "exceptions_8hpp.html", [
       [ "BaseException", "class_args_1_1_base_exception.html", "class_args_1_1_base_exception" ],
-      [ "HelpHasBeenPrintedException", "class_args_1_1_help_has_been_printed_exception.html", null ]
+      [ "HelpHasBeenPrintedException", "class_args_1_1_help_has_been_printed_exception.html", "class_args_1_1_help_has_been_printed_exception" ]
     ] ],
     [ "group_iface.hpp", "group__iface_8hpp.html", [
       [ "GroupIface", "class_args_1_1_group_iface.html", "class_args_1_1_group_iface" ]

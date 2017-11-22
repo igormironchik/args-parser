@@ -1,5 +1,7 @@
 var class_args_1_1_help_printer_iface =
 [
+    [ "HelpPrinterIface", "class_args_1_1_help_printer_iface.html#a1e427f7384df69bcbb453e12c7ceb54e", null ],
+    [ "~HelpPrinterIface", "class_args_1_1_help_printer_iface.html#aad0bfdbd5a9d6d29c09973857d0d72c5", null ],
     [ "findArgument", "class_args_1_1_help_printer_iface.html#a49be946734c55273554b55b01d73db1e", null ],
     [ "print", "class_args_1_1_help_printer_iface.html#ade5c4e6ad7eb9da9880bee0c76f2a30d", null ],
     [ "print", "class_args_1_1_help_printer_iface.html#abb50d812535ed747ac1fac30cc5cffab", null ],
