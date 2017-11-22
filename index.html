@@ -102,21 +102,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">Args Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="compiling"></a>
-Compilling</h1>
-<p>Just run build.rb which is a Ruby program and a project file or use QMake or CMake project.</p>
-<h2><a class="anchor" id="requirements"></a>
-Requirements</h2>
-<p>For compiling <a class="el" href="namespace_args.html">Args</a> with Ruby you should have installed:</p>
-<ul>
-<li>Ruby programming language (<a href="http://www.ruby-lang.org/en/">http://www.ruby-lang.org/en/</a>) </li>
-<li>mxx_ru Ruby gem (<a href="https://sourceforge.net/p/mxxru/wiki/Home/">https://sourceforge.net/p/mxxru/wiki/Home/</a>)</li>
-</ul>
-<p>or use</p>
-<ul>
-<li>QMake or CMake</li>
-</ul>
-<h1><a class="anchor" id="syntax"></a>
+<div class="textblock"><h1><a class="anchor" id="syntax"></a>
 Syntax</h1>
 <ul>
 <li>Argument starts with two dashes. For example <code>&ndash;argument</code>. </li>
@@ -155,6 +141,14 @@ Q/A</h1>
 <p>How can I add <a class="el" href="namespace_args.html">Args</a> to my project?</p>
 <ul>
 <li>The simplest way is just copy <a class="el" href="namespace_args.html">Args</a> directory with headers to any location in your project. With CMake you can clone entire <a class="el" href="namespace_args.html">Args</a> project somewhere in your project and just do <code>add_subdirectory()</code>, if you will do so you have to add include directory path to your project with <code>include_directories</code>( <code>${Args_INCLUDE_DIRECTORIES}</code> <code></code>). With QMake you can use <code>Args/Args.pri</code>.</li>
+</ul>
+<p>What does <code>build.rb</code> file for?</p>
+<ul>
+<li><code>build.rb</code> is Ruby program for building <a class="el" href="namespace_args.html">Args</a>, this is project file for Mxx_ru build system. In most cases this file is not necessary and can be simply ignored. Long time ago I used Mxx_ru as build system in my projects and this file is just because of historical reasons. In the subdirectories you can find different Ruby scripts, like <code>prj.rb</code>, these files are project files for corresponding subprojects (examples/tests) for Mxx_ru build system.</li>
+</ul>
+<p>What does <code>runtests.rb</code> file for?</p>
+<ul>
+<li><code>runtests.rb</code> is simple Ruby script to launch all tests. This file is copying to build directory by CMake and QMake and can be used to launch tests. And sure with CMake you can use ctest executable to launch tests too.</li>
 </ul>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
