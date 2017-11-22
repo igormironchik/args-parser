@@ -80,6 +80,15 @@ arguments, so it will be possible to initialize argument in one line?
 
  * This is impossible because constructors will be ambiguous but you can use
 auxiliary API that allows to define arguments in one line of code.
+
+How can I add Args to my project?
+
+ * The simplest way is just copy Args directory with headers to any location in
+your project. With CMake you can clone entire Args project somewhere in your
+project and just do ```add_subdirectory()```, if you will do so you have to
+add include directory path to your project with
+```include_directories( ${Args_INCLUDE_DIRECTORIES} )```. With QMake you can
+use ```Args/Args.pri```.
           
 # Example
 
