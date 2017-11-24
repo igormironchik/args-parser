@@ -5,7 +5,7 @@ set( Args_MAJOR_VERSION 5 )
 set( Args_MINOR_VERSION 0 )
 set( Args_PATCH_VERSION 1 )
 set( Args_VERSION
-  ${Args_MAJOR_VERSION}.${Args_MINOR_VERSION}.${Args_PATCH_VERSION} )
+	${Args_MAJOR_VERSION}.${Args_MINOR_VERSION}.${Args_PATCH_VERSION} )
 
 option( BUILD_EXAMPLES "Build examples? Default ON." ON )
 option( BUILD_TESTS "Build tests? Default ON." ON )
@@ -49,7 +49,6 @@ if( ${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME} )
 			Args/arg_as_command.hpp
 			Args/arg.hpp
 			Args/arg_iface.hpp
-			Args/Args.pri
 			Args/cmd_line.hpp
 			Args/command.hpp
 			Args/context.hpp
