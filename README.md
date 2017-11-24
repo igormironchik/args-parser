@@ -74,6 +74,11 @@ add include directory path to your project with
 ```include_directories( ${Args_INCLUDE_DIRECTORIES} )```. With QMake you can
 use ```Args/Args.pri```.
 
+ * You can clone/download Args, build and install Args with CMake. In this
+case it will be possible to use ```find_package( Args )``` in CMakeLists.txt of
+your project, and sure you can use ```${Args_INCLUDE_DIRECTORIES}``` in your
+CMake scripts.
+
 What does ```build.rb``` file for?
 
  * ```build.rb``` is Ruby program for building Args, this is project file for

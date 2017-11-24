@@ -72,6 +72,11 @@
 	\c include_directories( \c ${Args_INCLUDE_DIRECTORIES} \c ). With QMake you can
 	use \c Args/Args.pri.
 
+	\li You can clone/download Args, build and install Args with CMake. In this
+	case it will be possible to use \c find_package( \c Args \c ) in CMakeLists.txt of
+	your project, and sure you can use \c ${Args_INCLUDE_DIRECTORIES} in your
+	CMake scripts.
+
 	What does \c build.rb file for?
 
 	\li \c build.rb is Ruby program for building Args, this is project file for
