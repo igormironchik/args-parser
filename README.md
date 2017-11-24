@@ -19,7 +19,7 @@ of arguments can be specified more than once in the command line. And the result
 of the argument will be ```StringList```.
  * ```Command``` class can be used to define command in command line interface.
 Command is the argument without dash/dashes at the beginning, ```add``` for example.
- * Command can has children arguments or even subcommands. Subcommand can be
+ * ```Command``` can has children arguments or even subcommands. Subcommand can be
 added using ```ArgAsCommand``` class.
  * In Args groups can be used to group arguments into groups to check their
 definitions after parsing, so if constraint of group will be violated
