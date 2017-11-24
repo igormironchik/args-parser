@@ -142,6 +142,9 @@ Q/A</h1>
 <ul>
 <li>The simplest way is just copy <a class="el" href="namespace_args.html">Args</a> directory with headers to any location in your project. With CMake you can clone entire <a class="el" href="namespace_args.html">Args</a> project somewhere in your project and just do <code>add_subdirectory()</code>, if you will do so you have to add include directory path to your project with <code>include_directories</code>( <code>${Args_INCLUDE_DIRECTORIES}</code> <code></code>). With QMake you can use <code>Args/Args.pri</code>.</li>
 </ul>
+<ul>
+<li>You can clone/download <a class="el" href="namespace_args.html">Args</a>, build and install <a class="el" href="namespace_args.html">Args</a> with CMake. In this case it will be possible to use <code>find_package</code>( <code><a class="el" href="namespace_args.html">Args</a></code> <code></code>) in CMakeLists.txt of your project, and sure you can use <code>${Args_INCLUDE_DIRECTORIES}</code> in your CMake scripts.</li>
+</ul>
 <p>What does <code>build.rb</code> file for?</p>
 <ul>
 <li><code>build.rb</code> is Ruby program for building <a class="el" href="namespace_args.html">Args</a>, this is project file for Mxx_ru build system. In most cases this file is not necessary and can be simply ignored. Long time ago I used Mxx_ru as build system in my projects and this file is just because of historical reasons. In the subdirectories you can find different Ruby scripts, like <code>prj.rb</code>, these files are project files for corresponding subprojects (examples/tests) for Mxx_ru build system.</li>
