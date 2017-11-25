@@ -1,8 +1,5 @@
+@PACKAGE_INIT@
 
-set( Args_CMAKE_DIR "@CMAKE_INSTALL_PREFIX@/lib/cmake/Args" )
+set( CMAKE_CXX_STANDARD 14 )
 
-set( Args_INCLUDE_DIRECTORIES "@CMAKE_INSTALL_PREFIX@/include" )
- 
-if( NOT TARGET Args )
-	include( "${Args_CMAKE_DIR}/ArgsTargets.cmake" )
-endif()
+include( "${CMAKE_CURRENT_LIST_DIR}/ArgsTargets.cmake" )

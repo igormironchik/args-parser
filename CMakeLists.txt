@@ -1,11 +1,7 @@
 
-cmake_minimum_required( VERSION 2.8.11 )
+cmake_minimum_required( VERSION 3.1 )
 
-set( Args_MAJOR_VERSION 5 )
-set( Args_MINOR_VERSION 0 )
-set( Args_PATCH_VERSION 1 )
-set( Args_VERSION
-	${Args_MAJOR_VERSION}.${Args_MINOR_VERSION}.${Args_PATCH_VERSION} )
+set( ARGS_VERSION "5.0.1" )
 
 option( BUILD_EXAMPLES "Build examples? Default ON." ON )
 option( BUILD_TESTS "Build tests? Default ON." ON )
@@ -79,19 +75,20 @@ if( ${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME} )
 		DESTINATION lib/cmake/Args
 	)
 
-	configure_file( ArgsConfig.cmake.in
-		"ArgsConfig.cmake" @ONLY )
+	include( CMakePackageConfigHelpers )
+
+	write_basic_package_version_file(
+		"${CMAKE_CURRENT_BINARY_DIR}/ArgsConfigVersion.cmake"
+		VERSION ${ARGS_VERSION}
+		COMPATIBILITY AnyNewerVersion )
+
+	configure_package_config_file( ArgsConfig.cmake.in
+		"${CMAKE_CURRENT_BINARY_DIR}/ArgsConfig.cmake"
+		INSTALL_DESTINATION lib/cmake/Args )
 
 	install( FILES ${PROJECT_BINARY_DIR}/ArgsConfig.cmake
-		DESTINATION lib/cmake/Args
-	)
-
-	configure_file( ArgsConfigVersion.cmake.in
-		"ArgsConfigVersion.cmake" @ONLY )
-
-	install( FILES ${PROJECT_BINARY_DIR}/ArgsConfigVersion.cmake
-		DESTINATION lib/cmake/Args
-	)
+			${PROJECT_BINARY_DIR}/ArgsConfigVersion.cmake
+		DESTINATION lib/cmake/Args )
 
 else()
 
