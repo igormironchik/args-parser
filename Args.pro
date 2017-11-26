@@ -11,7 +11,6 @@ OTHER_FILES = README.md \
 	.travis.yml \
 	doc/Doxyfile \
 	doc/oneline.cpp \
-	ArgsConfig.cmake.in \
-	ArgsConfigVersion.cmake.in
+	ArgsConfig.cmake.in
 
 include( Args/Args.pri )

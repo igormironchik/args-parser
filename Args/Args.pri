@@ -1,5 +1,7 @@
 
 INCLUDEPATH += $$PWD $$PWD/..
+DEPENDPATH += $$PWD $$PWD/..
+CONFIG += c++14
 
 HEADERS += $$PWD/arg_iface.hpp \
 	$$PWD/arg.hpp \
