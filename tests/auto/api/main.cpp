@@ -259,7 +259,10 @@ TEST_CASE( "TestGetterSetterOfArg" )
 	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
 	REQUIRE( a1->defaultValue() == SL( "val" ) );
 
-	const auto * a2 = static_cast< const Arg* > ( cmd.findArgument( SL( "-2" ) ) );
+	const CmdLine & tmpCmd = cmd;
+
+	const auto * a2 = static_cast< const Arg* > (
+		tmpCmd.findArgument( SL( "-2" ) ) );
 
 	REQUIRE( a2->description() == SL( "desc" ) );
 	REQUIRE( a2->longDescription() == SL( "long desc" ) );
