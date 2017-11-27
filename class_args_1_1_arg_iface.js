@@ -9,7 +9,6 @@ var class_args_1_1_arg_iface =
     [ "cmdLine", "class_args_1_1_arg_iface.html#a8d2de217cc525325ff92db33daea2142", null ],
     [ "description", "class_args_1_1_arg_iface.html#a47258e141220e3e453adbc5d6896e68b", null ],
     [ "findArgument", "class_args_1_1_arg_iface.html#a21d4c495703e7a9f91a4846cf33b0694", null ],
-    [ "findArgument", "class_args_1_1_arg_iface.html#a3e3e4ead9944c59fdd59346a8f3305a7", null ],
     [ "flag", "class_args_1_1_arg_iface.html#aac5fc358e87077beb2c5a8e7399d989a", null ],
     [ "isDefined", "class_args_1_1_arg_iface.html#ad5ccd4790f559c0d327f3c868d5d1fc0", null ],
     [ "isMisspelledName", "class_args_1_1_arg_iface.html#ae0182bc67cad9789068b1f84353d8635", null ],

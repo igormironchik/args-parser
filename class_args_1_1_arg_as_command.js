@@ -10,7 +10,6 @@ var class_args_1_1_arg_as_command =
     [ "defaultValues", "class_args_1_1_arg_as_command.html#a36191ac7f1b66cd3b05f2715850d5d13", null ],
     [ "description", "class_args_1_1_arg_as_command.html#a740429d40ba0bb5a1c6fefe46b2ff379", null ],
     [ "findArgument", "class_args_1_1_arg_as_command.html#ac50fbff5d9a6cb03d4aecc7b47666f4c", null ],
-    [ "findArgument", "class_args_1_1_arg_as_command.html#a828ece53b1a56390f76d09e48d993251", null ],
     [ "flag", "class_args_1_1_arg_as_command.html#a83d63d2a3887a2453e6197454c540052", null ],
     [ "isDefined", "class_args_1_1_arg_as_command.html#a9eb91f6feeae7a6b14a20b3717471684", null ],
     [ "isMisspelledName", "class_args_1_1_arg_as_command.html#a8daa7434636a6a1bbcbe4120b1c90b28", null ],

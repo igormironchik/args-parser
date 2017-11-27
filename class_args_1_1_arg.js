@@ -11,7 +11,6 @@ var class_args_1_1_arg =
     [ "defaultValue", "class_args_1_1_arg.html#abfa3f29694768ae80586107747a8c925", null ],
     [ "description", "class_args_1_1_arg.html#adb952a96632f9d870358990d3dcc5aca", null ],
     [ "findArgument", "class_args_1_1_arg.html#a0bc10ceb083bb6253d2d90ae378f6e25", null ],
-    [ "findArgument", "class_args_1_1_arg.html#a10df1137aa8a63b7f8648c8ed881ca39", null ],
     [ "flag", "class_args_1_1_arg.html#a0a568460e9a2ebc16bcac7d6042ab98a", null ],
     [ "isDefined", "class_args_1_1_arg.html#a40346796e2a8f67b3aa35b253c374c35", null ],
     [ "isMisspelledName", "class_args_1_1_arg.html#a7481a9d8319ca0aed12460fbebeaf023", null ],

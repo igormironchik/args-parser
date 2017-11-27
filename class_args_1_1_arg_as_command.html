@@ -201,8 +201,6 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac50fbff5d9a6cb03d4aecc7b47666f4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_arg_as_command.html#ac50fbff5d9a6cb03d4aecc7b47666f4c">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;<a class="el" href="class_args_1_1_arg_as_command.html#ad6ca2cb8c17e129bb2fdd2dc6d9902cf">name</a>) override</td></tr>
 <tr class="separator:ac50fbff5d9a6cb03d4aecc7b47666f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a828ece53b1a56390f76d09e48d993251"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_arg_as_command.html#a828ece53b1a56390f76d09e48d993251">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;<a class="el" href="class_args_1_1_arg_as_command.html#ad6ca2cb8c17e129bb2fdd2dc6d9902cf">name</a>) const override</td></tr>
-<tr class="separator:a828ece53b1a56390f76d09e48d993251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5328b78a40de46e3a4946888146e77af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_arg_as_command.html#a5328b78a40de46e3a4946888146e77af">process</a> (<a class="el" href="class_args_1_1_context.html">Context</a> &amp;context) override</td></tr>
 <tr class="memdesc:a5328b78a40de46e3a4946888146e77af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process argument's staff, for example take values from context.  <a href="#a5328b78a40de46e3a4946888146e77af">More...</a><br /></td></tr>
 <tr class="separator:a5328b78a40de46e3a4946888146e77af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -346,7 +344,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="class_args_1_1_arg_iface.html#a93fdd42c29c4ecaecba94911ca57e523">Args::ArgIface</a>.</p>
 
-<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00377">377</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
+<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00356">356</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
 
 </div>
 </div>
@@ -394,7 +392,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="class_args_1_1_arg_iface.html#aecd81cf515c566fe66f63d4cf5c4c1d5">Args::ArgIface</a>.</p>
 
-<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00353">353</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
+<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00332">332</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
 
 </div>
 </div>
@@ -546,48 +544,6 @@ template&lt;typename T &gt; </div>
 <p>Implements <a class="el" href="class_args_1_1_arg_iface.html#a21d4c495703e7a9f91a4846cf33b0694">Args::ArgIface</a>.</p>
 
 <p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00271">271</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a828ece53b1a56390f76d09e48d993251"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>* Args::ArgAsCommand::findArgument </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Argument for the given name.</dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">Pointer</td><td>to the <a class="el" href="class_args_1_1_arg_iface.html" title="Interface for arguments. ">ArgIface</a> if this argument handles argument with the given name. </td></tr>
-    <tr><td class="paramname">nullptr</td><td>if this argument doesn't know about argument with name. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>Name of the argument. Can be for example "-t" or "--timeout". </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="class_args_1_1_arg_iface.html#a3e3e4ead9944c59fdd59346a8f3305a7">Args::ArgIface</a>.</p>
-
-<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00292">292</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
 
 </div>
 </div>
@@ -839,7 +795,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="class_args_1_1_arg_iface.html#a5082f3a4e08984b8acb046efe7ace3f5">Args::ArgIface</a>.</p>
 
-<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00310">310</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
+<p>Definition at line <a class="el" href="arg__as__command_8hpp_source.html#l00289">289</a> of file <a class="el" href="arg__as__command_8hpp_source.html">arg_as_command.hpp</a>.</p>
 
 </div>
 </div>

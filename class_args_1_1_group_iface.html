@@ -210,8 +210,6 @@ Static Public Attributes</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a162c990b3d48034b0c4cd87e381e9e81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_group_iface.html#a162c990b3d48034b0c4cd87e381e9e81">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;<a class="el" href="class_args_1_1_group_iface.html#a35ab6895f43b83efe410595ab9b04f2d">name</a>) override</td></tr>
 <tr class="separator:a162c990b3d48034b0c4cd87e381e9e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f8eaef3de4aad3944e1c21f9f76a5b3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_group_iface.html#a8f8eaef3de4aad3944e1c21f9f76a5b3">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;<a class="el" href="class_args_1_1_group_iface.html#a35ab6895f43b83efe410595ab9b04f2d">name</a>) const override</td></tr>
-<tr class="separator:a8f8eaef3de4aad3944e1c21f9f76a5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a3207f8a38ad28908030ee1666c699"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_group_iface.html#a86a3207f8a38ad28908030ee1666c699">process</a> (<a class="el" href="class_args_1_1_context.html">Context</a> &amp;) override</td></tr>
 <tr class="memdesc:a86a3207f8a38ad28908030ee1666c699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process argument's staff, for example take values from context.  <a href="#a86a3207f8a38ad28908030ee1666c699">More...</a><br /></td></tr>
 <tr class="separator:a86a3207f8a38ad28908030ee1666c699"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -474,7 +472,7 @@ template&lt;typename T &gt; </div>
 
 <p>Reimplemented in <a class="el" href="class_args_1_1_all_of_group.html#a434a21338f1ea92c9280d087237124df">Args::AllOfGroup</a>, and <a class="el" href="class_args_1_1_only_one_group.html#afbc4d6b37bfe55ec10ebfd264592af02">Args::OnlyOneGroup</a>.</p>
 
-<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00298">298</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00270">270</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
 
 </div>
 </div>
@@ -524,7 +522,7 @@ template&lt;typename T &gt; </div>
 
 <p>Reimplemented in <a class="el" href="class_args_1_1_at_least_one_group.html#ae1c332ef11b43281e64ef68fe29fb395">Args::AtLeastOneGroup</a>, <a class="el" href="class_args_1_1_all_of_group.html#a36d12ff82afa70aa7c209368bf5f5743">Args::AllOfGroup</a>, and <a class="el" href="class_args_1_1_only_one_group.html#a4bc35f4ff2cf39464dcc3aef345f298d">Args::OnlyOneGroup</a>.</p>
 
-<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00287">287</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00259">259</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
 
 </div>
 </div>
@@ -654,49 +652,6 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8f8eaef3de4aad3944e1c21f9f76a5b3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>* Args::GroupIface::findArgument </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Argument for the given name.</dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">Pointer</td><td>to the <a class="el" href="class_args_1_1_arg_iface.html" title="Interface for arguments. ">ArgIface</a> if this argument handles argument with the given name. </td></tr>
-    <tr><td class="paramname">nullptr</td><td>if this argument doesn't know about argument with name.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Looks only in children. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>Name of the argument. Can be for example "-t" or "--timeout". </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="class_args_1_1_arg_iface.html#a3e3e4ead9944c59fdd59346a8f3305a7">Args::ArgIface</a>.</p>
-
-<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00252">252</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a175d5c25129acfb6a111ccb7b6773a60"></a>
 <div class="memitem">
 <div class="memproto">
@@ -767,7 +722,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="class_args_1_1_arg_iface.html#ae0182bc67cad9789068b1f84353d8635">Args::ArgIface</a>.</p>
 
-<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00319">319</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00291">291</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
 
 </div>
 </div>
@@ -911,7 +866,7 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="class_args_1_1_arg_iface.html#a5082f3a4e08984b8acb046efe7ace3f5">Args::ArgIface</a>.</p>
 
-<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00275">275</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00247">247</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
 
 </div>
 </div>
@@ -941,7 +896,7 @@ template&lt;typename T &gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_args_1_1_arg_iface.html#a91e60599c6dd5f0a4bb19ab29930aa65">Args::ArgIface</a>.</p>
 
-<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00310">310</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
+<p>Definition at line <a class="el" href="group__iface_8hpp_source.html#l00282">282</a> of file <a class="el" href="group__iface_8hpp_source.html">group_iface.hpp</a>.</p>
 
 </div>
 </div>

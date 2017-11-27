@@ -14,7 +14,6 @@ var class_args_1_1_group_iface =
     [ "clear", "class_args_1_1_group_iface.html#a8e997d6f7408725b73815d01646a8f01", null ],
     [ "description", "class_args_1_1_group_iface.html#a80c3f6e390ec4cd2c391ad904ad3461d", null ],
     [ "findArgument", "class_args_1_1_group_iface.html#a162c990b3d48034b0c4cd87e381e9e81", null ],
-    [ "findArgument", "class_args_1_1_group_iface.html#a8f8eaef3de4aad3944e1c21f9f76a5b3", null ],
     [ "flag", "class_args_1_1_group_iface.html#a175d5c25129acfb6a111ccb7b6773a60", null ],
     [ "isMisspelledName", "class_args_1_1_group_iface.html#aababa870d10ac0d157d76a1521405346", null ],
     [ "isRequired", "class_args_1_1_group_iface.html#a4f993ea7753fe141dfd680098aa5d2b5", null ],
