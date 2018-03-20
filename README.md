@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/igormironchik/args-parser.svg?branch=master)](https://travis-ci.org/igormironchik/args-parser)[![Build status](https://ci.appveyor.com/api/projects/status/p9jg1bgicqvoryh1/branch/master?svg=true)](https://ci.appveyor.com/project/igormironchik/args-parser/branch/master)[![Coverage Status](https://coveralls.io/repos/github/igormironchik/args-parser/badge.svg?branch=master)](https://coveralls.io/github/igormironchik/args-parser?branch=master)[![Coverity Scan](https://scan.coverity.com/projects/14278/badge.svg)](https://scan.coverity.com/projects/igormironchik-args-parser)[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/imironchik/donate)
 
 This is Args.
 
