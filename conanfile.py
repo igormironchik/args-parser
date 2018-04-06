@@ -11,7 +11,7 @@ class ArgsConan(ConanFile):
 
     def package(self):
         self.copy("COPYING", src=".", dst=".")
-        self.copy("*.hpp", src="./Args", dst="./Args")
+        self.copy("*.hpp", src="Args", dst="Args")
         
     def package_info(self):
-        self.cpp_info.includedirs = ["Args"]
+        self.cpp_info.includedirs = ["."]
