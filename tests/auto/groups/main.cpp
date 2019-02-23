@@ -178,6 +178,29 @@ TEST_CASE( "TestAllOfFailed" )
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
+TEST_CASE( "TestAllOfFailed2" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "100" ),
+		SL( "-h" ), SL( "localhost" ) };
+
+	CmdLine cmd( argc, argv );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
+
+	AllOfGroup g( SL( "all_of" ) );
+	g.addArg( timeout );
+	g.addArg( port );
+	g.addArg( host );
+
+	cmd.addArg( g );
+
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
+}
+
 
 TEST_CASE( "TestAllOfWithRequiredFailed" )
 {
