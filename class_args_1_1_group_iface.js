@@ -10,7 +10,7 @@ var class_args_1_1_group_iface =
     [ "argumentName", "class_args_1_1_group_iface.html#a4cfc694ff015254f0936eb44f05ec64a", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_group_iface.html#ae7cc78f54741e35464de5158ea4d5f64", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_group_iface.html#acecfc2b3d15ec7d47e1b475ef16d48c0", null ],
-    [ "children", "class_args_1_1_group_iface.html#abd8d9d67c25679deb6199bdb1ba70122", null ],
+    [ "children", "class_args_1_1_group_iface.html#aeb9bcd238b99e5fff93a17d193dde6a1", null ],
     [ "clear", "class_args_1_1_group_iface.html#a8e997d6f7408725b73815d01646a8f01", null ],
     [ "description", "class_args_1_1_group_iface.html#a80c3f6e390ec4cd2c391ad904ad3461d", null ],
     [ "findArgument", "class_args_1_1_group_iface.html#a162c990b3d48034b0c4cd87e381e9e81", null ],

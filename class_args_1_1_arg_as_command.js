@@ -6,8 +6,8 @@ var class_args_1_1_arg_as_command =
     [ "checkCorrectnessAfterParsing", "class_args_1_1_arg_as_command.html#a8fc702f643bc72a4c30a77f73379b0c4", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_arg_as_command.html#ad79de7e0fc9e506c7df7a8d647fb2e60", null ],
     [ "clear", "class_args_1_1_arg_as_command.html#a347fd1a756a2be1b7019ea06489dbcdc", null ],
-    [ "defaultValue", "class_args_1_1_arg_as_command.html#a39b520eaeca2dcc69e29b5bd11965e40", null ],
-    [ "defaultValues", "class_args_1_1_arg_as_command.html#a36191ac7f1b66cd3b05f2715850d5d13", null ],
+    [ "defaultValue", "class_args_1_1_arg_as_command.html#a2f156e5bb0989d9cfdcdaa06838c7c79", null ],
+    [ "defaultValues", "class_args_1_1_arg_as_command.html#a7854a82a5df165039236de3da25f0d58", null ],
     [ "description", "class_args_1_1_arg_as_command.html#a740429d40ba0bb5a1c6fefe46b2ff379", null ],
     [ "findArgument", "class_args_1_1_arg_as_command.html#ac50fbff5d9a6cb03d4aecc7b47666f4c", null ],
     [ "flag", "class_args_1_1_arg_as_command.html#a83d63d2a3887a2453e6197454c540052", null ],
@@ -24,7 +24,7 @@ var class_args_1_1_arg_as_command =
     [ "setLongDescription", "class_args_1_1_arg_as_command.html#a363a920625f14f713d04d3d1436a2648", null ],
     [ "setValueSpecifier", "class_args_1_1_arg_as_command.html#a940c06182b7cde8e59f77a5e88302085", null ],
     [ "type", "class_args_1_1_arg_as_command.html#a2bf6f4e9cac1009d1e7b8cc8c80ae7bc", null ],
-    [ "value", "class_args_1_1_arg_as_command.html#aa9caeca12c8f5c9b06711e0b15d410ae", null ],
-    [ "values", "class_args_1_1_arg_as_command.html#a969ed6857f52b390d68d0241920ecb36", null ],
+    [ "value", "class_args_1_1_arg_as_command.html#a11b8a40e312ee34677255ddcf4dc7d5e", null ],
+    [ "values", "class_args_1_1_arg_as_command.html#a957aa531d925c71e8e655f7f49c3726d", null ],
     [ "valueSpecifier", "class_args_1_1_arg_as_command.html#a2ddea0d00b501e922cdf24fb624a62f9", null ]
 ];

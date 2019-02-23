@@ -16,14 +16,14 @@ var class_args_1_1_cmd_line =
     [ "addCommandWithDefaultValues", "class_args_1_1_cmd_line.html#a23a697dc366a889e86cd1b344d5cdf66", null ],
     [ "addHelp", "class_args_1_1_cmd_line.html#aa39c1a3df7c4c50e7865e02a645aa4e7", null ],
     [ "addHelp", "class_args_1_1_cmd_line.html#a73577762e4c08477f2b882d7de7934a4", null ],
-    [ "arguments", "class_args_1_1_cmd_line.html#a3a7cb8c99428dcca329df7d1c20e94f4", null ],
+    [ "arguments", "class_args_1_1_cmd_line.html#abe598c4bcdc1e2541d5e4790d7e60349", null ],
     [ "clear", "class_args_1_1_cmd_line.html#a5701a0c6ce2320df04431f0135ec5551", null ],
     [ "findArgument", "class_args_1_1_cmd_line.html#adcfc288bf86fe5f4ebd2bf668c64ae7f", null ],
-    [ "findArgument", "class_args_1_1_cmd_line.html#a7180732ab898c4b83feecbf2baf8e75f", null ],
-    [ "isDefined", "class_args_1_1_cmd_line.html#ae008fb4f9f47bed9001710b0cc978517", null ],
-    [ "isMisspelledName", "class_args_1_1_cmd_line.html#acc3aff66b1c0780ac8e572f252fda1ab", null ],
+    [ "findArgument", "class_args_1_1_cmd_line.html#a0401e9bdbff0333167d97212c76eb7f1", null ],
+    [ "isDefined", "class_args_1_1_cmd_line.html#a4679a80a349e0b53c9db5860bd6458a9", null ],
+    [ "isMisspelledName", "class_args_1_1_cmd_line.html#a0a7c143c9f76e2c9d90228212fe76c43", null ],
     [ "parse", "class_args_1_1_cmd_line.html#a516ee1a93770584b35bbf334be99d102", null ],
     [ "parse", "class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799", null ],
-    [ "value", "class_args_1_1_cmd_line.html#a460530d745adfba45c6b7c4923048428", null ],
-    [ "values", "class_args_1_1_cmd_line.html#aad11350509acbbf8ac9d4e7f64eabf3e", null ]
+    [ "value", "class_args_1_1_cmd_line.html#a4eb7818afd00b4c84b038c9f358e2c4f", null ],
+    [ "values", "class_args_1_1_cmd_line.html#a78130fd726d583e25f09818b4e9374bc", null ]
 ];
