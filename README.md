@@ -117,28 +117,20 @@ int main( int argc, char ** argv )
 
     cmd.addCommand( "add", ValueOptions::NoValue,
           "Add file." )
-        .addAllOfGroup( "file group" )
-          .addSubCommand( "file", false, ValueOptions::NoValue )
-          .addArgWithFlagAndName( 'f', "file", true, false,
-            "Name of the file.", "", "",
-            "fn" )
-        .end()
-        .addArgWithFlagOnly( 'd', false, false, "Do job." )
+        .addSubCommand( "file", true, ValueOptions::ManyValues, "File name.", "", "", "fn" )
       .end()
       .addCommand( "delete", ValueOptions::NoValue,
           "Delete file." )
-        .addArgWithFlagOnly( 'd', false, false,
-          "Do NOT job." )
+        .addSubCommand( "file", true, ValueOptions::ManyValues, "File name.", "", "", "fn" )
       .end()
-      .addArgWithFlagAndName( 'r', "recursive", false, false,
-        "Do operation recursively?" )
       .addHelp( true, argv[ 0 ],
         "This application just show power of the Args help." );
 
     cmd.parse();
 
-    if( cmd.isDefined( "-f" ) )
-      const auto file = cmd.value( "-f" );
+    if( cmd.isDefined( "file" ) )
+	  for( const auto & fn : cmd.values( "file" ) )
+        outStream() << fn << "\n";
   }
   catch( const HelpHasBeenPrintedException & )
   {

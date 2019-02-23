@@ -192,16 +192,11 @@ protected:
 	{
 		GroupIface::checkCorrectnessAfterParsing();
 
-		bool defined = false;
+		const bool defined = std::any_of( children().cbegin(), children().cend(),
+			[] ( const auto & arg ) { return arg->isDefined(); } );
 
 		const bool all = std::all_of( children().cbegin(), children().cend(),
-			[ & ] ( const auto & arg )
-			{
-				if( arg->isDefined() )
-					defined = true;
-
-				return arg->isDefined();
-			} );
+			[] ( const auto & arg ) { return arg->isDefined(); } );
 
 		if( defined && !all )
 			throw BaseException( String( SL( "All arguments in "
