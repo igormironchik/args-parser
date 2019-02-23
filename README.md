@@ -129,7 +129,7 @@ int main( int argc, char ** argv )
     cmd.parse();
 
     if( cmd.isDefined( "file" ) )
-	  for( const auto & fn : cmd.values( "file" ) )
+      for( const auto & fn : cmd.values( "file" ) )
         outStream() << fn << "\n";
   }
   catch( const HelpHasBeenPrintedException & )
