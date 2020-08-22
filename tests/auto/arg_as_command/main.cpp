@@ -330,3 +330,16 @@ TEST_CASE( "TestMisspelling" )
 	REQUIRE( correct.size() == 1 );
 	REQUIRE( correct.front() == SL( "add" ) );
 }
+
+TEST_CASE( "ArgAsCommandStuff" )
+{
+	ArgAsCommand file( SL( "add" ), false, ValueOptions::ManyValues );
+	file.setDefaultValue( SL( "default" ) );
+
+	REQUIRE( file.defaultValue() == SL( "default" ) );
+	REQUIRE( file.defaultValues().size() == 1 );
+	REQUIRE( file.defaultValues().front() == SL( "default" ) );
+	REQUIRE( !file.isRequired() );
+	REQUIRE( file.isWithValue() );
+	REQUIRE( !file.isDefined() );
+}
