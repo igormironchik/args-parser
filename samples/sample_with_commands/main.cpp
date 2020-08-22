@@ -47,28 +47,15 @@ int main( int argc, char ** argv )
 	try {
 		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-		Arg file( SL( 'f' ), SL( "file" ), true, true );
-		file.setDescription( SL( "Name of the file." ) );
-		file.setValueSpecifier( SL( "fn" ) );
+		Command add( SL( "add" ), ValueOptions::ManyValues );
+		add.setDescription( SL( "Add file(s)." ) );
+		add.setLongDescription( SL( "Add file(s) for monitoring." ) );
+		add.setValueSpecifier( SL( "fn" ) );
 
-		Command add( SL( "add" ) );
-		add.setDescription( SL( "Add new file." ) );
-		add.addArg( file );
-
-		Arg d1( SL( 'd' ), false, false );
-		d1.setDescription( SL( "Do job." ) );
-		add.addArg( d1 );
-
-		Command del( SL( "delete" ) );
-		del.setDescription( SL( "Delete file." ) );
-		del.addArg( file );
-
-		Arg d2( SL( 'd' ), false, false );
-		d2.setDescription( SL( "Do NOT job." ) );
-		del.addArg( d2 );
-
-		Arg recursieve( SL( 'r' ), SL( "recurcieve" ), false, false );
-		recursieve.setDescription( SL( "Do operation recurcively?" ) );
+		Command del( SL( "del" ), ValueOptions::ManyValues );
+		del.setDescription( SL( "Delete file(s)." ) );
+		del.setLongDescription( SL( "Delete file(s) from monitoring." ) );
+		del.setValueSpecifier( SL( "fn" ) );
 
 		Help help;
 		help.setAppDescription(
@@ -77,7 +64,6 @@ int main( int argc, char ** argv )
 
 		cmd.addArg( add );
 		cmd.addArg( del );
-		cmd.addArg( recursieve );
 		cmd.addArg( help );
 
 		cmd.parse();

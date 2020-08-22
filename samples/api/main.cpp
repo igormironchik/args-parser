@@ -45,20 +45,12 @@ int main( int argc, char ** argv )
 	try {
 		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-		cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
-					SL( "Add file." ) )
-				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, true,
-					SL( "Name of the file." ), SL( "" ), SL( "" ),
-					SL( "fn" ) )
-				.addArgWithFlagOnly( SL( 'd' ), false, false, SL( "Do job." ) )
+		cmd.addCommand( SL( "add" ), ValueOptions::ManyValues,
+				SL( "Add file(s)." ), SL( "Add file(s) for monitoring." ), SL( "" ), SL( "fn" ) )
 			.end()
-			.addCommand( SL( "delete" ), ValueOptions::NoValue,
-					SL( "Delete file." ) )
-				.addArgWithFlagOnly( SL( 'd' ), false, false,
-					SL( "Do NOT job." ) )
+			.addCommand( SL( "del" ), ValueOptions::ManyValues,
+				SL( "Delete file(s)." ), SL( "Delete file(s) from monitoring." ), SL( "" ), SL( "fn" ) )
 			.end()
-			.addArgWithFlagAndName( SL( 'r' ), SL( "recursive" ), false, false,
-				SL( "Do operation recursively?" ) )
 			.addHelp( true, argv[ 0 ],
 				SL( "This application just show power of the Args help." ) );
 
