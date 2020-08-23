@@ -32,6 +32,17 @@ if( ${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME} )
 
 		add_subdirectory( tests )
 	endif()
+	
+	if( ENABLE_COVERAGE )
+        set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake )
+        include( Coveralls )
+
+        file( GLOB COVERAGE_SRCS Args/*.hpp )
+
+        coveralls_setup(
+            "${COVERAGE_SRCS}"
+            ON )
+    endif()
 
 	add_library( Args INTERFACE )
 

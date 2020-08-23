@@ -9,7 +9,6 @@ compiler:
   - gcc
 
 before_install:
-  - pip install --user cpp-coveralls
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 addons:
@@ -35,10 +34,7 @@ script:
       export CXX="g++-4.9" CC="gcc-4.9" || { exit 1; }; \
       mkdir build || { exit 1; }; \
       cd build || { exit 1; }; \
-      cmake -DENABLE_COVERAGE=ON .. || { exit 1; }; \
+      cmake -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug .. || { exit 1; }; \
       make || { exit 1; }; \
-      ctest --output-on-failure || { exit 1; }; \
-      cd .. || { exit 1; }; \
-      coveralls --build-root build --gcov-options '\-lp' -e build/CMakeFiles \
-      -e doc -e UnitTest -e tests -e samples -e 3rdparty || { exit 1; }; \
+      make coveralls || { exit 1; }; \
       fi
