@@ -96,7 +96,7 @@ protected:
 		Context & context ) override;
 
 	//! Set command line parser.
-	virtual void setCmdLine( CmdLine * cmdLine )
+	void setCmdLine( CmdLine * cmdLine ) override
 	{
 		Arg::setCmdLine( cmdLine );
 
