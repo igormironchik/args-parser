@@ -27,6 +27,13 @@ addons:
     build_command_prepend: echo 'Starting prebuild step...'; sudo ln -s -f /usr/bin/g++-4.9 /usr/bin/g++; sudo ln -s -f /usr/bin/gcc-4.9 /usr/bin/gcc; mkdir build; cd build; cmake ..; echo 'Prebuild step finished...';
     build_command: make
     branch_pattern: coverity_scan
+    
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}
+  - lcov --directory . --capture --output-file coverage.info coverage info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info 
+  - lcov --list coverage.info
+  - bash <(curl -s https://codecov.io/bash)
 
 script:
   - |
@@ -36,5 +43,5 @@ script:
       cd build || { exit 1; }; \
       cmake -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug .. || { exit 1; }; \
       make || { exit 1; }; \
-      make coveralls || { exit 1; }; \
+      ctest --output-on-failure || { exit 1; }; \
       fi
