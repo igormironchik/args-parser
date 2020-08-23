@@ -13,4 +13,5 @@ MxxRu::Cpp::composite_target() {
 	required_prj( "tests/auto/help/prj.ut.rb" )
 	required_prj( "tests/auto/api/prj.ut.rb" )
 	required_prj( "tests/auto/exceptions/prj.ut.rb" )
+	required_prj( "tests/auto/stuff/prj.ut.rb" )
 }

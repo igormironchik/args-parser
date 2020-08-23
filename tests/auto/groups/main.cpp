@@ -399,3 +399,25 @@ TEST_CASE( "GroupsStuff" )
 	REQUIRE( g.description().empty() );
 	REQUIRE( g.longDescription().empty() );
 }
+
+TEST_CASE( "GroupValue" )
+{
+	const int argc = 1;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+
+	const auto name = SL( "only_one" );
+	const auto not_exists = SL( "not_exists" );
+
+	OnlyOneGroup onlyOne( name );
+	cmd.addArg( onlyOne );
+
+	REQUIRE( cmd.value( name ).empty() );
+	REQUIRE( cmd.value( not_exists ).empty() );
+
+	REQUIRE( cmd.values( name ).empty() );
+	REQUIRE( cmd.values( not_exists ).empty() );
+
+	REQUIRE( !cmd.isDefined( not_exists ) );
+}
