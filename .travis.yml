@@ -54,6 +54,8 @@ matrix:
     dist: xcode12u
     before_install:
       - brew install qt5
+    env:
+      - Qt5_DIR=/usr/local/opt/qt/lib/cmake
       
     script:
       - mkdir build
