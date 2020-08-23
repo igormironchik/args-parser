@@ -58,10 +58,7 @@ bool eatValues( Ctx & context, Container & container,
 		auto last = std::find_if( context.begin(), context.end(),
 			[ & ] ( const String & v ) -> bool
 			{
-				if( details::isArgument( v ) || details::isFlag( v ) )
-					return true;
-				else
-					return( cmdLine->findArgument( v ) != nullptr );
+				return( cmdLine->findArgument( v ) != nullptr );
 			}
 		);
 
@@ -100,11 +97,8 @@ String eatOneValue( Ctx & context,
 	{
 		auto val = context.next();
 
-		if( !details::isArgument( *val ) && !details::isFlag( *val ) )
-		{
-			if( !cmdLine->findArgument( *val ) )
-				return *val;
-		}
+		if( !cmdLine->findArgument( *val ) )
+			return *val;
 
 		context.putBack();
 	}
