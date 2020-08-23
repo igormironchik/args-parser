@@ -236,7 +236,10 @@ protected:
 				return tmp;
 		}
 
-		return nullptr;
+		if( m_name == name )
+			return this;
+		else
+			return nullptr;
 	}
 
 	/*!
