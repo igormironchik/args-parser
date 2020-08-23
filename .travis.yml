@@ -56,11 +56,13 @@ matrix:
       - brew install qt5
     env:
       - Qt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5
+      - Qt5Core_DIR=/usr/local/opt/qt5/lib/cmake/Qt5Core
       
     script:
-      - mkdir build
-      - cd build
-      - cmake ..
-      - make
-      - ctest --output-on-failure
+      - |
+        { mkdir build || { exit 1; }; \
+          cd build || { exit 1; }; \
+          cmake .. || { exit 1; }; \
+          make || { exit 1; }; \
+          ctest --output-on-failure || { exit 1; }; }
       
