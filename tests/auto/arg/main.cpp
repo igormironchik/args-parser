@@ -158,4 +158,14 @@ TEST_CASE( "TestStuff" )
 
 	REQUIRE( a.value() == SL( "2" ) );
 	REQUIRE( a.defaultValue() == SL( "1" ) );
+
+	const int argc = 1;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ) };
+
+	CmdLine cmd( argc, argv );
+	cmd.addArg( a );
+
+	const CmdLine & c_cmd = cmd;
+
+	REQUIRE( !c_cmd.findArgument( SL( "no" ) ) );
 }
