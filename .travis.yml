@@ -55,7 +55,7 @@ matrix:
     before_install:
       - brew install qt5
     env:
-      - Qt5_DIR=/usr/local/opt/qt/lib/cmake
+      - Qt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5
       
     script:
       - mkdir build
