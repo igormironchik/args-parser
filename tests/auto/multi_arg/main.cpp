@@ -197,6 +197,34 @@ TEST_CASE( "TestAllIsOk5" )
 	REQUIRE( multi.defaultValues().empty() );
 }
 
+TEST_CASE( "TestAllIsOk6" )
+{
+	const int argc = 7;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ), SL( "-m" ), SL( "1" ),
+		SL( "-t" ), SL( "--not" ), SL( "-m" ), SL( "2" ) };
+
+	CmdLine cmd( argc, argv );
+
+	MultiArg multi( SL( 'm' ), String( SL( "multi" ) ), true, false );
+
+	cmd.addArg( multi );
+
+	cmd.parse();
+
+	const auto v = multi.values();
+
+	REQUIRE( multi.isDefined() );
+	REQUIRE( !multi.value().empty() );
+	REQUIRE( v.size() == 4 );
+	REQUIRE( multi.count() == 4 );
+	REQUIRE( multi.defaultValue().empty() );
+	REQUIRE( multi.defaultValues().empty() );
+	REQUIRE( v.at( 0 ) == SL( "1" ) );
+	REQUIRE( v.at( 1 ) == SL( "-t" ) );
+	REQUIRE( v.at( 2 ) == SL( "--not" ) );
+	REQUIRE( v.at( 3 ) == SL( "2" ) );
+}
+
 TEST_CASE( "NotDefinedValue" )
 {
 	const int argc = 8;
