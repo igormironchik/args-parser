@@ -54,7 +54,6 @@ matrix:
     dist: xcode12u
     before_install:
       - brew install qt5
-      - brew link qt5 --force
       
     script:
       - mkdir build
