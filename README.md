@@ -6,27 +6,27 @@ Args is a small C++ header-only library for parsing command line arguments.
 
 # Syntax
 
- * Argument starts with two dashes. For example ```--argument```.
- * Flag starts with one dash. For example ```-b```.
+ * Argument starts with two dashes. For example `--argument`.
+ * Flag starts with one dash. For example `-b`.
  * If argument has value than value can be specified after space or after equal sign.
-For example ```--argument value``` and ```--argument=value```.
+For example `--argument value` and `--argument=value`.
  * Flags without values can be combined into one block. For example
-```-abc``` defines three flags ```-a```, ```-b``` and ```-c```.
+`-abc` defines three flags `-a`, `-b` and `-c`.
  * The last flag in flag's block can be with value. Then it's possible to type the next
-```-abc=value```. And here flag ```-c``` will have value ```value```.
- * ```MultiArg``` class provides ability to define more than one value for argument. This type
+`-abc=value`. And here flag `-c` will have value `value`.
+ * `MultiArg` class provides ability to define more than one value for argument. This type
 of arguments can be specified more than once in the command line. And the resulted value
-of the argument will be ```StringList```.
- * ```Command``` class can be used to define command in command line interface.
-Command is the argument without dash/dashes at the beginning, ```add``` for example.
- * ```Command``` can has children arguments or even subcommands. Subcommand can be
-added using ```ArgAsCommand``` class.
+of the argument will be `StringList`.
+ * `Command` class can be used to define command in command line interface.
+Command is the argument without dash/dashes at the beginning, `add` for example.
+ * `Command` can has children arguments or even subcommands. Subcommand can be
+added using `ArgAsCommand` class.
  * In Args groups can be used to group arguments into groups to check their
 definitions after parsing, so if constraint of group will be violated
 exception will be thrown.
- * Args provides ```Help``` argument that provides help printing. ```Help```
-uses ```-h, --help``` arguments. ```Help``` can receive value with name
-of argument or command to print help about. If ```Help``` will receive name
+ * Args provides `Help` argument that provides help printing. `Help`
+uses `-h, --help` arguments. `Help` can receive value with name
+of argument or command to print help about. If `Help` will receive name
 of the command as value then can be set second value with name of subcommand
 or child argument to receive help about child argument.
  * If Args don't know about argument in command line interface it provides
@@ -47,15 +47,15 @@ std::wstring and QString.
 # Different types of list of strings.
 
 Args extensively uses list of string in internal structures and to return
-values of arguments outside. In the code this is ```StringList```
-type defined in ```Args/types.hpp```. By default underlying type is
-```std::vector``` or ```QVector``` when building with Qt that can be changed
-to ```std::list```, ```QLinkedList``` or ```std::deque```, ```QList```.
+values of arguments outside. In the code this is `StringList`
+type defined in `Args/types.hpp`. By default underlying type is
+`std::vector` or `QVector` when building with Qt that can be changed
+to `std::list`, `QLinkedList` or `std::deque`, `QList`.
 
- * Define ARGS_LIST to build Args with ```std::list```, ```QLinkedList```
-as ```StringList```
- * Define ARGS_DEQUE to build Args with ```std::deque```, ```QList```
-as ```StringList```
+ * Define `ARGS_LIST` to build Args with `std::list`, `QLinkedList`
+as `StringList`
+ * Define `ARGS_DEQUE` to build Args with `std::deque`, `QList`
+as `StringList`
 
 # Q/A
 
@@ -69,28 +69,28 @@ How can I add Args to my project?
 
  * The simplest way is just copy Args directory with headers to any location in
 your project. With CMake you can clone entire Args project somewhere in your
-project and just do ```add_subdirectory()```, if you will do so you have to
+project and just do `add_subdirectory()`, if you will do so you have to
 add include directory path to your project with
-```include_directories( ${Args_INCLUDE_DIRECTORIES} )```. With QMake you can
-use ```Args/Args.pri```.
+`include_directories( ${Args_INCLUDE_DIRECTORIES} )`. With QMake you can
+use `Args/Args.pri`.
 
  * You can clone/download Args, build and install Args with CMake. In this
-case it will be possible to use ```find_package( Args )``` in CMakeLists.txt of
-your project, and sure you can use ```${Args_INCLUDE_DIRECTORIES}``` in your
+case it will be possible to use `find_package( Args )` in CMakeLists.txt of
+your project, and sure you can use `${Args_INCLUDE_DIRECTORIES}` in your
 CMake scripts.
 
-What does ```build.rb``` file for?
+What does `build.rb` file for?
 
- * ```build.rb``` is Ruby program for building Args, this is project file for
+ * `build.rb` is Ruby program for building Args, this is project file for
 Mxx_ru build system. In most cases this file is not necessary and can be simply
 ignored. Long time ago I used Mxx_ru as build system in my projects and this
 file is just because of historical reasons. In the subdirectories you can find
-different Ruby scripts, like ```prj.rb```, these files are project files for
+different Ruby scripts, like `prj.rb`, these files are project files for
 corresponding subprojects (examples/tests) for Mxx_ru build system.
 
-What does ```runtests.rb``` file for?
+What does `runtests.rb` file for?
 
- * ```runtests.rb``` is simple Ruby script to launch all tests. This file is
+ * `runtests.rb` is simple Ruby script to launch all tests. This file is
 copying to build directory by CMake and QMake and can be used to launch tests.
 And sure with CMake you can use ctest executable to launch tests too.
           
