@@ -45,7 +45,7 @@ using namespace Args;
 #endif
 
 
-TEST_CASE( "TestAllIsOk1" )
+TEST_CASE( "TestFormatCorrectNames" )
 {
 	StringList list;
 
@@ -55,4 +55,10 @@ TEST_CASE( "TestAllIsOk1" )
 	list.push_back( SL( "two" ) );
 
 	REQUIRE( details::formatCorrectNamesString( list ) == SL( "one or two" ) );
+}
+
+TEST_CASE( "TestMisspelledName" )
+{
+	REQUIRE( details::isMisspelledName( SL( "oen" ), SL( "one" ) ) );
+	REQUIRE( !details::isMisspelledName( SL( "" ), SL( "" ) ) );
 }

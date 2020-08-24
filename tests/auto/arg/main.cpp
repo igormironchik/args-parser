@@ -169,3 +169,29 @@ TEST_CASE( "TestStuff" )
 
 	REQUIRE( !c_cmd.findArgument( SL( "no" ) ) );
 }
+
+TEST_CASE( "TestUndefinedValue" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-t" ), SL( "-t" ) };
+
+	CmdLine cmd( argc, argv );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+
+	cmd.addArg( &timeout );
+
+	try {
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		REQUIRE(
+			x.desc() == String( SL( "Argument \"--timeout\" requires value that wasn't presented." ) ) );
+
+		return;
+	}
+
+	REQUIRE( false );
+}
