@@ -1,4 +1,4 @@
-[![Build](https://github.com/igormironchik/args-parser/workflows/build/badge.svg)](https://github.com/igormironchik/args-parser/actions)[![Build status](https://ci.appveyor.com/api/projects/status/p9jg1bgicqvoryh1/branch/master?svg=true)](https://ci.appveyor.com/project/igormironchik/args-parser/branch/master)[![codecov](https://codecov.io/gh/igormironchik/args-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/igormironchik/args-parser)[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build](https://github.com/igormironchik/args-parser/workflows/build/badge.svg)](https://github.com/igormironchik/args-parser/actions)[![codecov](https://codecov.io/gh/igormironchik/args-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/igormironchik/args-parser)[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 This is Args.
 
