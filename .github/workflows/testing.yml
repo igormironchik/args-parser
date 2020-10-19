@@ -61,7 +61,7 @@ jobs:
     #    uses a compiled language
 
     - name: Build and Test
-    - run: |
+      run: |
        cmake -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug .
        make
        ctest --output-on-failure --verbose
@@ -100,10 +100,10 @@ jobs:
         version: '5.15.0'
         
     - name: Enable developer command prompt
-    - uses: ilammy/msvc-dev-cmd@v1
+      uses: ilammy/msvc-dev-cmd@v1
 
     - name: Build and Test
-    - run: |
+      run: |
        cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Relese .
        nmake
        ctest --output-on-failure --verbose
