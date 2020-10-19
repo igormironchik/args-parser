@@ -14,7 +14,7 @@ on:
 
 jobs:
   linux:
-    name: Build and Test
+    name: linux
     runs-on: ubuntu-latest
 
     strategy:
@@ -60,6 +60,7 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
+    - name: Build and Test
     - run: |
        cmake -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug .
        make
@@ -70,7 +71,7 @@ jobs:
        bash <(curl -s https://codecov.io/bash)
 
   windows:
-    name: Build and Test
+    name: windows
     runs-on: windows-latest
 
     strategy:
@@ -97,7 +98,11 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         version: '5.15.0'
+        
+    - name: Enable developer command prompt
+    - uses: ilammy/msvc-dev-cmd@v1
 
+    - name: Build and Test
     - run: |
        cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Relese .
        nmake
