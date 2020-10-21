@@ -56,6 +56,10 @@ jobs:
       env:
         TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
         
+    - name: Run CMake
+      run: |
+        cmake .
+        
     - name: Build with cov-build
       run: |
         export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
