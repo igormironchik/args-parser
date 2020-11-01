@@ -56,8 +56,6 @@ enum class ValueOptions {
 enum class ArgType {
 	//! Command.
 	Command,
-	//! Argument as command.
-	ArgAsCommand,
 	//! Argument.
 	Arg,
 	//! Multi argument

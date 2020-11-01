@@ -42,7 +42,6 @@ if( ${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME} )
 	install( FILES
 			Args/all.hpp
 			Args/api.hpp
-			Args/arg_as_command.hpp
 			Args/arg.hpp
 			Args/arg_iface.hpp
 			Args/cmd_line.hpp

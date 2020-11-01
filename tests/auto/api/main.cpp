@@ -47,9 +47,9 @@ using namespace Args;
 
 TEST_CASE( "TestAllIsOk" )
 {
-	const int argc = 7;
+	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "add" ), SL( "file" ),
+		SL( "add" ),
 		SL( "-f" ), SL( "test.txt" ),
 		SL( "-d" ), SL( "-r" ) };
 
@@ -58,7 +58,6 @@ TEST_CASE( "TestAllIsOk" )
 	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
 				SL( "Add file." ) )
 			.addAllOfGroup( SL( "file group" ) )
-				.addSubCommand( SL( "file" ), false, ValueOptions::NoValue )
 				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
 					SL( "Name of the file." ), SL( "" ), SL( "" ),
 					SL( "fn" ) )
@@ -97,7 +96,6 @@ TEST_CASE( "TestAllIsOk" )
 	cmd.parse();
 
 	REQUIRE( cmd.isDefined( SL( "add" ) ) );
-	REQUIRE( cmd.isDefined( SL( "file" ) ) );
 	REQUIRE( cmd.isDefined( SL( "-f" ) ) );
 	REQUIRE( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) );
 	REQUIRE( cmd.values( SL( "-f" ) ).size() == 1 );
@@ -111,9 +109,9 @@ TEST_CASE( "TestAllIsOk" )
 
 TEST_CASE( "TestAllIsOkReparse" )
 {
-	const int argc = 7;
+	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "add" ), SL( "file" ),
+		SL( "add" ),
 		SL( "-f" ), SL( "test.txt" ),
 		SL( "-d" ), SL( "-r" ) };
 
@@ -122,7 +120,6 @@ TEST_CASE( "TestAllIsOkReparse" )
 	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
 				SL( "Add file." ) )
 			.addAllOfGroup( SL( "file group" ) )
-				.addSubCommand( SL( "file" ), false, ValueOptions::NoValue )
 				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
 					SL( "Name of the file." ), SL( "" ), SL( "" ),
 					SL( "fn" ) )
@@ -142,20 +139,15 @@ TEST_CASE( "TestAllIsOkReparse" )
 		.addMultiArgWithDefaulValues( SL( '1' ), SL( "11" ) )
 		.addMultiArgWithFlagOnlyAndDefaultValues( SL( '2' ) )
 		.addMultiArgWithNameOnlyAndDefaultValues( SL( "22" ) )
-		.addArgAsCommandWithDefaulValues( SL( "33" ) )
-		.addSubCommandWithDefaultValues( SL( "44" ) )
 		.addAtLeastOneGroup( SL( "5" ) )
 			.addMultiArgWithDefaulValues( SL( '6' ), SL( "66" ) )
 			.addMultiArgWithFlagOnlyAndDefaultValues( SL( '7' ) )
 			.addMultiArgWithNameOnlyAndDefaultValues( SL( "77" ) )
-			.addArgAsCommandWithDefaulValues( SL( "88" ) )
-			.addSubCommandWithDefaultValues( SL( "99" ) )
 		.end();
 
 	cmd.parse();
 
 	REQUIRE( cmd.isDefined( SL( "add" ) ) );
-	REQUIRE( cmd.isDefined( SL( "file" ) ) );
 	REQUIRE( cmd.isDefined( SL( "-f" ) ) );
 	REQUIRE( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) );
 	REQUIRE( cmd.values( SL( "-f" ) ).size() == 1 );
@@ -178,9 +170,9 @@ TEST_CASE( "TestAllIsOkReparse" )
 
 TEST_CASE( "TestAllIsOkWithEmptyCtor" )
 {
-	const int argc = 7;
+	const int argc = 6;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "add" ), SL( "file" ),
+		SL( "add" ),
 		SL( "-f" ), SL( "test.txt" ),
 		SL( "-d" ), SL( "-r" ) };
 
@@ -189,7 +181,6 @@ TEST_CASE( "TestAllIsOkWithEmptyCtor" )
 	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
 				SL( "Add file." ) )
 			.addAllOfGroup( SL( "file group" ) )
-				.addSubCommand( SL( "file" ), false, ValueOptions::NoValue )
 				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
 					SL( "Name of the file." ), SL( "" ), SL( "" ),
 					SL( "fn" ) )
@@ -228,7 +219,6 @@ TEST_CASE( "TestAllIsOkWithEmptyCtor" )
 	cmd.parse( argc, argv );
 
 	REQUIRE( cmd.isDefined( SL( "add" ) ) );
-	REQUIRE( cmd.isDefined( SL( "file" ) ) );
 	REQUIRE( cmd.isDefined( SL( "-f" ) ) );
 	REQUIRE( cmd.value( SL( "-f" ) ) == SL( "test.txt" ) );
 	REQUIRE( cmd.values( SL( "-f" ) ).size() == 1 );
@@ -380,83 +370,6 @@ TEST_CASE( "TestGetterSetterOfMultiArgWithValues" )
 	REQUIRE( cmd.values( SL( "-1" ) ).back() == SL( "val2" ) );
 }
 
-TEST_CASE( "TestGetterSetterOfArgAsCommand" )
-{
-	CmdLine cmd;
-
-	cmd.addArgAsCommand( SL( "arg1" ), false, ValueOptions::OneValue,
-		SL( "desc" ), SL( "long desc" ), SL( "val" ), SL( "vs" ) )
-		.addArgAsCommandWithDefaulValues( SL( "arg2" ), false,
-			ValueOptions::ManyValues, SL( "desc" ), SL( "long desc" ),
-			{ SL( "val1" ), SL( "val2" ) }, SL( "vs" ) );
-
-	auto * a1 = static_cast< ArgAsCommand* > (
-		cmd.findArgument( SL( "arg1" ) ) );
-
-	REQUIRE( a1->description() == SL( "desc" ) );
-	REQUIRE( a1->longDescription() == SL( "long desc" ) );
-	REQUIRE( a1->value() == SL( "val" ) );
-	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a1->defaultValue() == SL( "val" ) );
-
-	const auto * a2 = static_cast< const ArgAsCommand* > (
-		cmd.findArgument( SL( "arg2" ) ) );
-
-	REQUIRE( a2->description() == SL( "desc" ) );
-	REQUIRE( a2->longDescription() == SL( "long desc" ) );
-	REQUIRE( a2->value() == SL( "val1" ) );
-	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a2->defaultValue() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().size() == 2 );
-	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
-
-	REQUIRE( cmd.value( SL( "arg1" ) ) == SL( "val" ) );
-	REQUIRE( cmd.values( SL( "arg1" ) ).size() == 1 );
-	REQUIRE( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) );
-
-	REQUIRE( cmd.value( SL( "arg2" ) ) == SL( "val1" ) );
-	REQUIRE( cmd.values( SL( "arg2" ) ).size() == 2 );
-	REQUIRE( cmd.values( SL( "arg2" ) ).front() == SL( "val1" ) );
-	REQUIRE( cmd.values( SL( "arg2" ) ).back() == SL( "val2" ) );
-}
-
-TEST_CASE( "TestGetterSetterOfSubCommand" )
-{
-	CmdLine cmd;
-
-	cmd.addSubCommand( SL( "arg1" ), false, ValueOptions::OneValue,
-		SL( "desc" ), SL( "long desc" ), SL( "val" ), SL( "vs" ) )
-		.addSubCommandWithDefaultValues( SL( "arg2" ), false,
-			ValueOptions::ManyValues, SL( "desc" ), SL( "long desc" ),
-			{ SL( "val1" ), SL( "val2" ) }, SL( "vs" ) );
-
-	auto * a1 = static_cast< ArgAsCommand* > (
-		cmd.findArgument( SL( "arg1" ) ) );
-
-	REQUIRE( a1->description() == SL( "desc" ) );
-	REQUIRE( a1->longDescription() == SL( "long desc" ) );
-	REQUIRE( a1->value() == SL( "val" ) );
-	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a1->defaultValue() == SL( "val" ) );
-
-	const auto * a2 = static_cast< const ArgAsCommand* > (
-		cmd.findArgument( SL( "arg2" ) ) );
-
-	REQUIRE( a2->description() == SL( "desc" ) );
-	REQUIRE( a2->longDescription() == SL( "long desc" ) );
-	REQUIRE( a2->value() == SL( "val1" ) );
-	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a2->defaultValue() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().size() == 2 );
-	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
-
-	REQUIRE( cmd.value( SL( "arg1" ) ) == SL( "val" ) );
-	REQUIRE( cmd.values( SL( "arg1" ) ).size() == 1 );
-	REQUIRE( cmd.values( SL( "arg1" ) ).front() == SL( "val" ) );
-}
-
 TEST_CASE( "TestGetterSetterOfArgInGroup" )
 {
 	CmdLine cmd;
@@ -581,74 +494,6 @@ TEST_CASE( "TestGetterSetterOfMultiArgWithValuesInGroup" )
 	REQUIRE( a3->defaultValues().size() == 2 );
 	REQUIRE( a3->defaultValues().front() == SL( "val1" ) );
 	REQUIRE( a3->defaultValues().back() == SL( "val2" ) );
-}
-
-TEST_CASE( "TestGetterSetterOfArgAsCommandInGroup" )
-{
-	CmdLine cmd;
-
-	cmd.addAllOfGroup( SL( "group" ) )
-		.addArgAsCommand( SL( "arg1" ), false, ValueOptions::OneValue,
-		SL( "desc" ), SL( "long desc" ), SL( "val" ), SL( "vs" ) )
-		.addArgAsCommandWithDefaulValues( SL( "arg2" ), false,
-			ValueOptions::ManyValues, SL( "desc" ), SL( "long desc" ),
-			{ SL( "val1" ), SL( "val2" ) }, SL( "vs" ) )
-		.end();
-
-	auto * a1 = static_cast< ArgAsCommand* > (
-		cmd.findArgument( SL( "arg1" ) ) );
-
-	REQUIRE( a1->description() == SL( "desc" ) );
-	REQUIRE( a1->longDescription() == SL( "long desc" ) );
-	REQUIRE( a1->value() == SL( "val" ) );
-	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a1->defaultValue() == SL( "val" ) );
-
-	const auto * a2 = static_cast< const ArgAsCommand* > (
-		cmd.findArgument( SL( "arg2" ) ) );
-
-	REQUIRE( a2->description() == SL( "desc" ) );
-	REQUIRE( a2->longDescription() == SL( "long desc" ) );
-	REQUIRE( a2->value() == SL( "val1" ) );
-	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a2->defaultValue() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().size() == 2 );
-	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
-}
-
-TEST_CASE( "TestGetterSetterOfSubCommandInGroup" )
-{
-	CmdLine cmd;
-
-	cmd.addAllOfGroup( SL( "group" ) )
-		.addSubCommand( SL( "arg1" ), false, ValueOptions::OneValue,
-		SL( "desc" ), SL( "long desc" ), SL( "val" ), SL( "vs" ) )
-		.addSubCommandWithDefaultValues( SL( "arg2" ), false,
-			ValueOptions::ManyValues, SL( "desc" ), SL( "long desc" ),
-			{ SL( "val1" ), SL( "val2" ) }, SL( "vs" ) )
-		.end();
-
-	auto * a1 = static_cast< ArgAsCommand* > (
-		cmd.findArgument( SL( "arg1" ) ) );
-
-	REQUIRE( a1->description() == SL( "desc" ) );
-	REQUIRE( a1->longDescription() == SL( "long desc" ) );
-	REQUIRE( a1->value() == SL( "val" ) );
-	REQUIRE( a1->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a1->defaultValue() == SL( "val" ) );
-
-	const auto * a2 = static_cast< const ArgAsCommand* > (
-		cmd.findArgument( SL( "arg2" ) ) );
-
-	REQUIRE( a2->description() == SL( "desc" ) );
-	REQUIRE( a2->longDescription() == SL( "long desc" ) );
-	REQUIRE( a2->value() == SL( "val1" ) );
-	REQUIRE( a2->valueSpecifier() == SL( "vs" ) );
-	REQUIRE( a2->defaultValue() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().size() == 2 );
-	REQUIRE( a2->defaultValues().front() == SL( "val1" ) );
-	REQUIRE( a2->defaultValues().back() == SL( "val2" ) );
 }
 
 TEST_CASE( "TestGetterSetterOfCommand" )

@@ -44,6 +44,7 @@
 #include "command.hpp"
 #include "types.hpp"
 #include "help_printer_iface.hpp"
+#include "cmd_line.hpp"
 
 
 namespace Args {
@@ -80,7 +81,9 @@ public:
 		//! Name of the argument. I.e. "-t" or "--timeout".
 		const String & name,
 		//! Output stream for the printing help.
-		OutStreamType & to ) override;
+		OutStreamType & to,
+		//! Parent command if present.
+		Command * parent = nullptr ) override;
 
 	//! Print help for command's argument.
 	void print(
@@ -474,9 +477,9 @@ HelpPrinter::print( OutStreamType & to )
 }
 
 inline void
-HelpPrinter::print( const String & name, OutStreamType & to )
+HelpPrinter::print( const String & name, OutStreamType & to, Command * parent )
 {
-	auto * arg = m_cmdLine->findArgument( name );
+	auto * arg = ( parent ? parent->findChild( name ) : m_cmdLine->findArgument( name ) );
 
 	if( arg && arg->type() == ArgType::Command )
 	{
@@ -513,7 +516,6 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 
 		gmaxFlag += 2;
 		gmaxName += 2;
-//			gmaxCommand += 2;
 
 		// Prepare arguments of command.
 		std::vector< ArgIface* > required;
@@ -544,24 +546,65 @@ HelpPrinter::print( const String & name, OutStreamType & to )
 			[] ( const auto & a1, const auto & a2 )
 				{ return details::argNameLess( a1, a2 ); } );
 
+		std::sort( commands.begin(), commands.end(),
+			[] ( const auto & c1, const auto & c2 )
+				{ return details::argNameLess( c1, c2 ); } );
+
 		maxFlag += 2;
 		maxName += 2;
-//			maxCommand += 2;
+		maxCommand += 2;
 
 		// Print.
 		printString( to, splitToWords( cmd->longDescription() ), 0, 0, 0 );
 
 		to << "\n\n";
-		to << "USAGE: " << name;
 
-		if( cmd->isWithValue() )
-			to << " <" << cmd->valueSpecifier() << ">";
+		if( commands.empty() )
+		{
+			to << "USAGE: " << name;
 
-		if( !grequired.empty() || !goptional.empty() ||
-			!required.empty() || !optional.empty() )
+			if( cmd->isWithValue() )
+				to << " <" << cmd->valueSpecifier() << ">";
+
+			if( !grequired.empty() || !goptional.empty() ||
+				!required.empty() || !optional.empty() )
+					to << " <options>";
+
+			to << "\n\n";
+		}
+		else
+		{
+			to << "USAGE: " << name << " <command>";
+
+			if( !optional.empty() || !required.empty() )
 				to << " <options>";
 
-		to << "\n\n";
+			to << "\n\n";
+
+			std::for_each( commands.cbegin(), commands.cend(),
+				[ & ] ( Command * cmd )
+				{
+					String::size_type pos = 2;
+
+					to << "  " << cmd->name();
+
+					pos += cmd->name().length();
+
+					if( cmd->isWithValue() )
+					{
+						to << " <" << cmd->valueSpecifier() << ">";
+
+						pos += 3 + cmd->valueSpecifier().length();
+					}
+
+					printString( to, splitToWords( cmd->description() ), pos,
+						maxCommand + 1, 0 );
+
+					to << "\n";
+				} );
+
+			to << "\n";
+		}
 
 		// Print command's arguments.
 		auto printArg = std::bind( &HelpPrinter::printOnlyFor, this,
@@ -832,8 +875,10 @@ HelpPrinter::print( Command * cmd, const String & name,
 	{
 		ArgIface * arg = cmd->findChild( name );
 
-		if( arg )
+		if( arg && arg->type() != ArgType::Command )
 			print( arg, to );
+		else if( arg->type() == ArgType::Command )
+			print( arg->name(), to );
 		else
 			print( cmd->name(), to );
 	}

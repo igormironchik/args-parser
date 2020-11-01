@@ -160,48 +160,6 @@ TEST_CASE( "TestAddingNull" )
 	REQUIRE( false );
 }
 
-TEST_CASE( "TestEmptyNameOfArgAsCommand" )
-{
-	try {
-		CmdLine cmd;
-
-		ArgAsCommand a( SL( "" ) );
-
-		cmd.addArg( a );
-	}
-	catch( const BaseException & x )
-	{
-		REQUIRE( x.desc() ==
-			SL( "ArgAsCommand can't be with empty name." ) );
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
-TEST_CASE( "TestDissallowedNameOfArgAsCommand" )
-{
-	try {
-		CmdLine cmd;
-
-		ArgAsCommand a( SL( "arg with space" ) );
-
-		cmd.addArg( a );
-
-		cmd.parse();
-	}
-	catch( const BaseException & x )
-	{
-		REQUIRE( x.desc() ==
-			SL( "Disallowed name \"arg with space\" for the argument." ) );
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
 TEST_CASE( "TestEmptyNameOfCommand" )
 {
 	try {
@@ -446,33 +404,6 @@ TEST_CASE( "TestCommandIngroup3" )
 		REQUIRE( x.desc() ==
 			SL( "Commands not allowed in groups. "
 				"You are trying to add command \"c\" to group \"\"." ) );
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
-TEST_CASE( "TestMisspelledSubcommand" )
-{
-	try {
-		const int argc = 3;
-		const CHAR * argv[ argc ] = { SL( "program.exe" ),
-			SL( "cmd" ), SL( "bac" ) };
-
-		CmdLine cmd;
-
-		cmd.addCommand( SL( "cmd" ) )
-				.addSubCommand( SL( "abc" ) )
-				.addSubCommand( SL( "cba" ) )
-			.end();
-
-		cmd.parse( argc, argv );
-	}
-	catch( const BaseException & x )
-	{
-		REQUIRE( x.desc() ==
-			SL( "Unknown argument \"bac\".\n\nProbably you mean \"abc or cba\"." ) );
 
 		return;
 	}

@@ -52,6 +52,7 @@ class ArgIface {
 
 	friend class CmdLine;
 	friend class GroupIface;
+	friend class Command;
 
 public:
 	ArgIface()

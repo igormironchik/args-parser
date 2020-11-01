@@ -47,15 +47,23 @@ int main( int argc, char ** argv )
 	try {
 		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-		Command add( SL( "add" ), ValueOptions::ManyValues );
-		add.setDescription( SL( "Add file(s)." ) );
-		add.setLongDescription( SL( "Add file(s) for monitoring." ) );
-		add.setValueSpecifier( SL( "fn" ) );
+		Command add( SL( "add" ), ValueOptions::NoValue, true );
+		add.setDescription( SL( "Add item." ) );
+		add.setLongDescription( SL( "Add item for monitoring. The type "
+			"of item is defined by subcommand." ) );
 
-		Command del( SL( "del" ), ValueOptions::ManyValues );
-		del.setDescription( SL( "Delete file(s)." ) );
-		del.setLongDescription( SL( "Delete file(s) from monitoring." ) );
-		del.setValueSpecifier( SL( "fn" ) );
+		Command del( SL( "del" ), ValueOptions::NoValue, true );
+		del.setDescription( SL( "Delete item." ) );
+		del.setLongDescription( SL( "Delete item from monitoring. The type "
+			"of item is defined by subcommand." ) );
+
+		Command file( SL( "file" ), ValueOptions::ManyValues );
+		file.setDescription( SL( "File item." ) );
+		file.setLongDescription( SL( "File item to work with." ) );
+		file.setValueSpecifier( SL( "fn" ) );
+
+		add.addCommand( file );
+		del.addCommand( file );
 
 		Help help;
 		help.setAppDescription(
@@ -67,6 +75,13 @@ int main( int argc, char ** argv )
 		cmd.addArg( help );
 
 		cmd.parse();
+
+		Args::outStream() << SL( "Files:\n\n" );
+
+		for( const auto & name: file.values() )
+			Args::outStream() << name << SL( "\n" );
+
+		Args::outStream() << SL( "\n" );
 	}
 	catch( const HelpHasBeenPrintedException & )
 	{

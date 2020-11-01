@@ -42,6 +42,7 @@
 	#include <sstream>
 #endif
 
+
 namespace Args {
 
 #ifdef ARGS_WSTRING_BUILD
@@ -513,14 +514,14 @@ TEST_CASE( "TestHelpOfSubcommand" )
 	try {
 		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-		Command add( SL( "add" ) );
+		Command add( SL( "add" ), ValueOptions::NoValue, true );
 		add.setDescription( SL( "Add new file." ) );
 
-		ArgAsCommand file( SL( "file" ), false, ValueOptions::OneValue );
+		Command file( SL( "file" ), ValueOptions::OneValue );
 		file.setDescription( SL( "Add file." ) );
 		file.setLongDescription( SL( "Add file. File can exist but if "
 			"it's not so new file will be created." ) );
-		add.addArg( file );
+		add.addCommand( file );
 
 		Help help;
 		help.setAppDescription(
@@ -536,18 +537,22 @@ TEST_CASE( "TestHelpOfSubcommand" )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		REQUIRE( g_string ==
-			"USAGE: [ file <arg> ] \n"
+			"Add file. File can exist but if it's not so new file will be created. \n"
 			"\n"
-			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" );
+			"USAGE: file <arg> <options>\n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" );
 
 		g_string.clear();
 #else
 		REQUIRE( g_argsOutStream.str() == SL(
-			"USAGE: [ file <arg> ] \n"
+			"Add file. File can exist but if it's not so new file will be created. \n"
 			"\n"
-			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" ) );
+			"USAGE: file <arg> <options>\n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -558,7 +563,7 @@ TEST_CASE( "TestHelpOfSubcommand" )
 	REQUIRE( false );
 }
 
-TEST_CASE( "TestHelpOfArgAsCommand" )
+TEST_CASE( "TestHelpOfCommand" )
 {
 	const int argc = 2;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ),
@@ -567,7 +572,7 @@ TEST_CASE( "TestHelpOfArgAsCommand" )
 	try {
 		CmdLine cmd( argc, argv );
 
-		ArgAsCommand add( SL( "add" ) );
+		Command add( SL( "add" ) );
 		add.setDescription( SL( "Add new file." ) );
 		add.setLongDescription( SL( "Add file. File can exist but if it's "
 			"not so new file will be created." ) );
@@ -586,18 +591,22 @@ TEST_CASE( "TestHelpOfArgAsCommand" )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		REQUIRE( g_string ==
-			"USAGE: [ add ] \n"
+			"Add file. File can exist but if it's not so new file will be created. \n"
 			"\n"
-			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" );
+			"USAGE: add <options>\n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" );
 
 		g_string.clear();
 #else
 		REQUIRE( g_argsOutStream.str() == SL(
-			"USAGE: [ add ] \n"
+			"Add file. File can exist but if it's not so new file will be created. \n"
 			"\n"
-			"       Add file. File can exist but if it's not so new file will be \n"
-			"       created. \n\n" ) );
+			"USAGE: add <options>\n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" ) );
 
 		g_argsOutStream.str( SL( "" ) );
 #endif
@@ -794,45 +803,6 @@ TEST_CASE( "TestNotRequiredAllOfGroupHelp" )
 	REQUIRE( false );
 }
 
-TEST_CASE( "TestArgAsCommandHelp" )
-{
-	const int argc = 3;
-	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "-h" ), SL( "sub" ) };
-
-	try {
-		CmdLine cmd;
-
-		cmd.addArgAsCommand( SL( "sub" ), true, ValueOptions::OneValue,
-				SL( "ArgAsCommand." ) )
-			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
-
-		cmd.parse( argc, argv );
-	}
-	catch( const HelpHasBeenPrintedException & )
-	{
-#ifdef ARGS_QSTRING_BUILD
-		REQUIRE( g_string ==
-			"USAGE: sub <arg> \n"
-			"\n"
-			"       ArgAsCommand. \n\n" );
-
-		g_string.clear();
-#else
-		REQUIRE( g_argsOutStream.str() == SL(
-			"USAGE: sub <arg> \n"
-			"\n"
-			"       ArgAsCommand. \n\n" ) );
-
-		g_argsOutStream.str( SL( "" ) );
-#endif
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
 TEST_CASE( "TestFlagWithBigVSHelp" )
 {
 	const int argc = 2;
@@ -987,114 +957,6 @@ TEST_CASE( "TestFlagAndNameWithBigVSHelp" )
 	REQUIRE( false );
 }
 
-TEST_CASE( "TestHelpWithCommandAndArgAsCommand" )
-{
-	const int argc = 2;
-	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "-h" ) };
-
-	try {
-		CmdLine cmd;
-
-		cmd.addCommand( SL( "cmd" ), ValueOptions::OneValue, SL( "Command." ) )
-			.end()
-			.addArgAsCommand( SL( "arg" ), true, ValueOptions::OneValue,
-				SL( "Argument." ) )
-			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
-
-		cmd.parse( argc, argv );
-	}
-	catch( const HelpHasBeenPrintedException & )
-	{
-#ifdef ARGS_QSTRING_BUILD
-		REQUIRE( g_string ==
-			"Test help. \n"
-			"\n"
-			"USAGE: executable <command> <options>\n"
-			"\n"
-			"  cmd <arg> Command. \n"
-			"\n"
-			"REQUIRED:\n"
-			"     arg <arg>    Argument. \n"
-			"\n"
-			"OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" );
-
-		g_string.clear();
-#else
-		REQUIRE( g_argsOutStream.str() == SL(
-			"Test help. \n"
-			"\n"
-			"USAGE: executable <command> <options>\n"
-			"\n"
-			"  cmd <arg> Command. \n"
-			"\n"
-			"REQUIRED:\n"
-			"     arg <arg>    Argument. \n"
-			"\n"
-			"OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" ) );
-
-		g_argsOutStream.str( SL( "" ) );
-#endif
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
-TEST_CASE( "TestHelpWithCommandAndArgAsCommandForCmd" )
-{
-	const int argc = 3;
-	const CHAR * argv[ argc ] = { SL( "program.exe" ),
-		SL( "-h" ), SL( "cmd" ) };
-
-	try {
-		CmdLine cmd;
-
-		cmd.addCommand( SL( "cmd" ), ValueOptions::OneValue, SL( "Command." ) )
-			.end()
-			.addArgAsCommand( SL( "arg" ), true, ValueOptions::OneValue,
-				SL( "Argument." ) )
-			.addHelp( true, SL( "executable" ), SL( "Test help." ) );
-
-		cmd.parse( argc, argv );
-	}
-	catch( const HelpHasBeenPrintedException & )
-	{
-#ifdef ARGS_QSTRING_BUILD
-		REQUIRE( g_string ==
-			"Command. \n"
-			"\n"
-			"USAGE: cmd <arg> <options>\n"
-			"\n"
-			"GLOBAL REQUIRED:\n"
-			"     arg <arg>    Argument. \n\n"
-			"GLOBAL OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" );
-
-		g_string.clear();
-#else
-		REQUIRE( g_argsOutStream.str() == SL(
-			"Command. \n"
-			"\n"
-			"USAGE: cmd <arg> <options>\n"
-			"\n"
-			"GLOBAL REQUIRED:\n"
-			"     arg <arg>    Argument. \n\n"
-			"GLOBAL OPTIONAL:\n"
-			" -h, --help <arg> Print this help. \n\n" ) );
-
-		g_argsOutStream.str( SL( "" ) );
-#endif
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
 TEST_CASE( "TestHelpOfCommand2" )
 {
 	const int argc = 4;
@@ -1143,17 +1005,14 @@ TEST_CASE( "TestHelpOfCommand2" )
 	{
 #ifdef ARGS_QSTRING_BUILD
 		REQUIRE( g_string ==
-			"Add new file. \n"
+			"This application just show power of the Args help. \n"
 			"\n"
-			"USAGE: add <options>\n"
+			"USAGE: executable <command> <options>\n"
 			"\n"
-			"REQUIRED:\n"
-			" -f, --file <fn> Name of the file. \n"
+			"  add    Add new file. \n"
+			"  delete Delete file. \n"
 			"\n"
 			"OPTIONAL:\n"
-			" -d              Do job. \n"
-			"\n"
-			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" );
@@ -1161,17 +1020,14 @@ TEST_CASE( "TestHelpOfCommand2" )
 		g_string.clear();
 #else
 		REQUIRE( g_argsOutStream.str() == SL(
-			"Add new file. \n"
+			"This application just show power of the Args help. \n"
 			"\n"
-			"USAGE: add <options>\n"
+			"USAGE: executable <command> <options>\n"
 			"\n"
-			"REQUIRED:\n"
-			" -f, --file <fn> Name of the file. \n"
+			"  add    Add new file. \n"
+			"  delete Delete file. \n"
 			"\n"
 			"OPTIONAL:\n"
-			" -d              Do job. \n"
-			"\n"
-			"GLOBAL OPTIONAL:\n"
 			" -h, --help <arg> Print this help. \n"
 			"\n"
 			" -r, --recurcieve Do operation recurcively? \n\n" ) );

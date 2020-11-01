@@ -7,7 +7,6 @@ SUBDIRS = arg \
 	multi_arg \
 	groups \
 	command \
-	arg_as_command \
 	help \
 	api \
 	exceptions

@@ -38,6 +38,7 @@
 #include "utils.hpp"
 #include "exceptions.hpp"
 #include "types.hpp"
+#include "command.hpp"
 
 // C++ include.
 #include <memory>
@@ -138,7 +139,7 @@ Help::process( Context & context )
 {
 	if( !context.atEnd() )
 	{
-		const String arg = *context.next();
+		String arg = *context.next();
 
 		// Argument or flag.
 		if( details::isArgument( arg ) || details::isFlag( arg ) )
@@ -151,11 +152,49 @@ Help::process( Context & context )
 			// Command.
 			if( tmp && tmp->type() == ArgType::Command )
 			{
-				if( !context.atEnd() )
-					m_printer->print( static_cast< Command* > ( tmp ),
-						*context.next(), g_argsOutStream );
-				else
-					m_printer->print( arg, g_argsOutStream );
+				bool printed = false;
+
+				auto * cmd = static_cast< Command* > ( tmp );
+
+				while( !context.atEnd() )
+				{
+					arg = *context.next();
+
+					if( tmp && tmp->type() == ArgType::Command )
+					{
+						cmd = static_cast< Command* > ( tmp );
+
+						// Argument or flag.
+						if( details::isArgument( arg ) || details::isFlag( arg ) )
+						{
+							m_printer->print( arg, g_argsOutStream, cmd );
+
+							printed = true;
+
+							break;
+						}
+						// Command?
+						else
+							tmp = cmd->findChild( arg );
+					}
+					else
+					{
+						m_printer->print( g_argsOutStream );
+
+						printed = true;
+
+						break;
+					}
+				}
+
+				if( !printed )
+				{
+					if( tmp )
+						m_printer->print( tmp->name(), g_argsOutStream,
+							( cmd != tmp ? cmd : nullptr) );
+					else
+						m_printer->print( g_argsOutStream );
+				}
 			}
 			else if( tmp )
 				m_printer->print( arg, g_argsOutStream );

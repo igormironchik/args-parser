@@ -92,19 +92,7 @@ public:
 		!std::is_base_of< Command, T >::value >::type
 	addArg( T & arg )
 	{
-		if( arg.type() == ArgType::Command )
-			throw BaseException( String( SL( "Commands not allowed in groups. "
-				"You are trying to add command \"" ) ) + arg.name() +
-				SL( "\" to group \"" ) + name() + SL( "\"." ) );
-
-		if( std::find( m_children.cbegin(), m_children.cend(),
-			ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) ) ==
-			m_children.cend() )
-				m_children.push_back(
-					ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
-
-		if( cmdLine() )
-			arg.setCmdLine( cmdLine() );
+		addArg( ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
@@ -113,19 +101,7 @@ public:
 		!std::is_base_of< Command, T >::value >::type
 	addArg( T * arg )
 	{
-		if( arg->type() == ArgType::Command )
-			throw BaseException( String( SL( "Commands not allowed in groups. "
-				"You are trying to add command \"" ) ) + arg->name() +
-				SL( "\" to group \"" ) + name() + SL( "\"." ) );
-
-		if( std::find( m_children.cbegin(), m_children.cend(),
-			ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) ) ==
-				m_children.cend() )
-					m_children.push_back(
-						ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
-
-		if( cmdLine() )
-			arg->setCmdLine( cmdLine() );
+		addArg( ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
 	}
 
 	//! Add argument.
@@ -136,12 +112,14 @@ public:
 				"You are trying to add command \"" ) ) + arg->name() +
 				SL( "\" to group \"" ) + name() + SL( "\"." ) );
 
-		if( cmdLine() )
-			arg->setCmdLine( cmdLine() );
-
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
-				m_children.push_back( std::move( arg ) );
+		{
+			if( cmdLine() )
+				arg->setCmdLine( cmdLine() );
+
+			m_children.push_back( std::move( arg ) );
+		}
 	}
 
 	/*!
@@ -306,11 +284,13 @@ protected:
 		return ret;
 	}
 
+protected:
+	//! List of children.
+	Arguments m_children;
+
 private:
 	DISABLE_COPY( GroupIface )
 
-	//! List of children.
-	Arguments m_children;
 	//! Name.
 	String m_name;
 	//! Is required?

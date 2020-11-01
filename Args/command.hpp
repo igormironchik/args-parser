@@ -32,6 +32,7 @@
 #define ARGS__COMMAND_HPP__INCLUDED
 
 // Args include.
+#include "api.hpp"
 #include "group_iface.hpp"
 #include "utils.hpp"
 #include "context.hpp"
@@ -52,14 +53,18 @@ class Command final
 {
 	friend class CmdLine;
 	friend class HelpPrinter;
+	friend class Help;
 
 public:
 	template< typename T >
 	explicit Command( T && nm,
-		ValueOptions opt = ValueOptions::NoValue )
+		ValueOptions opt = ValueOptions::NoValue,
+		bool isSubCommandRequired = false )
 		:	GroupIface( std::forward< T > ( nm ) )
 		,	m_opt( opt )
 		,	m_isDefined( false )
+		,	m_isSubCommandRequired( isSubCommandRequired )
+		,	m_subCommand( nullptr )
 	{
 		if( details::isArgument( name() ) || details::isFlag( name() ) )
 			throw BaseException( String( SL( "Command's name can't "
@@ -251,6 +256,35 @@ public:
 		GroupIface::clear();
 	}
 
+	//! Add sub-command.
+	template< typename T >
+	typename std::enable_if< std::is_base_of< Command, T >::value >::type
+	addCommand( T & arg )
+	{
+		addCommand( ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
+	}
+
+	//! Add sub-command.
+	template< typename T >
+	typename std::enable_if< std::is_base_of< Command, T >::value >::type
+	addCommand( T * arg )
+	{
+		addCommand( ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
+	}
+
+	//! Add sub-command.
+	void addCommand( ArgPtr arg )
+	{
+		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
+			m_children.cend() )
+		{
+			m_children.push_back( std::move( arg ) );
+
+			if( cmdLine() )
+				arg->setCmdLine( cmdLine() );
+		}
+	}
+
 protected:
 	/*!
 		\return Argument for the given name.
@@ -289,7 +323,12 @@ protected:
 		*/
 		const String & name )
 	{
-		return GroupIface::findArgument( name );
+		auto * arg = GroupIface::findArgument( name );
+
+		if( !arg && m_subCommand )
+			return m_subCommand->findChild( name );
+
+		return arg;
 	}
 
 	/*!
@@ -365,6 +404,21 @@ protected:
 	{
 		if( isDefined() )
 			GroupIface::checkCorrectnessAfterParsing();
+
+		if( isDefined() && m_isSubCommandRequired && !m_subCommand )
+			throw BaseException( String( SL( "Wasn't defined required sub-command of command \"" ) ) +
+				name() + SL( "\"." ) );
+	}
+
+	//! Set current subcommand.
+	void setCurrentSubCommand( Command * sub )
+	{
+		if( !m_subCommand )
+			m_subCommand = sub;
+		else
+			throw BaseException( String( SL( "Only one sub-command of command \"" ) ) +
+				name() + SL( "\" can be defined. \"" ) + m_subCommand->name() +
+				SL( "\" already defined." ) );
 	}
 
 private:
@@ -380,10 +434,14 @@ private:
 	String m_longDescription;
 	//! Is defined.
 	bool m_isDefined;
+	//! Is sub-command required?
+	bool m_isSubCommandRequired;
 	//! Values.
 	StringList m_values;
 	//! Default values.
 	StringList m_defaultValues;
+	//! Current sub-command.
+	Command * m_subCommand;
 }; // class Command
 
 } /* namespace Args */

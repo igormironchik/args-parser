@@ -69,7 +69,9 @@ public:
 		//! Name of the argument. I.e. "-t" or "--timeout".
 		const String & name,
 		//! Output stream for the printing help.
-		OutStreamType & to ) = 0;
+		OutStreamType & to,
+		//! Parent command if present.
+		Command * parent = nullptr ) = 0;
 
 	//! Print help for command's argument.
 	virtual void print(

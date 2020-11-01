@@ -302,8 +302,8 @@ TEST_CASE( "TestMisspelling" )
 
 	Command add( SL( "add" ) );
 
-	ArgAsCommand file( SL( "file" ) );
-	add.addArg( file );
+	Command file( SL( "file" ) );
+	add.addCommand( file );
 
 	cmd.addArg( add );
 

@@ -134,6 +134,7 @@ public:
 	explicit CmdLine( CmdLineOpts opt = Empty )
 		:	details::API< CmdLine, CmdLine, ArgPtr, true > ( *this, *this )
 		,	m_command( nullptr )
+		,	m_currCommand( nullptr )
 		,	m_opt( opt )
 	{
 	}
@@ -186,8 +187,6 @@ public:
 	{
 		m_context = std::move( details::makeContext( argc, argv ) );
 
-		clear();
-
 		parse();
 	}
 
@@ -206,9 +205,9 @@ public:
 			else
 				return (*it)->findArgument( name );
 		}
-		else if( m_command )
+		else if( m_currCommand )
 		{
-			ArgIface * tmp = m_command->findChild( name );
+			ArgIface * tmp = m_currCommand->findChild( name );
 
 			if( tmp )
 				return tmp;
@@ -409,9 +408,6 @@ public:
 				case ArgType::Command :
 					return ( static_cast< const Command* > ( arg )->value() );
 
-				case ArgType::ArgAsCommand :
-					return ( static_cast< const ArgAsCommand* > ( arg )->value() );
-
 				case ArgType::Arg :
 					return ( static_cast< const Arg* > ( arg )->value() );
 
@@ -440,9 +436,6 @@ public:
 			{
 				case ArgType::Command :
 					return ( static_cast< const Command* > ( arg )->values() );
-
-				case ArgType::ArgAsCommand :
-					return ( static_cast< const ArgAsCommand* > ( arg )->values() );
 
 				case ArgType::Arg :
 					return StringList(
@@ -482,6 +475,8 @@ public:
 			[] ( const auto & a ) { a->clear(); } );
 
 		m_command = nullptr;
+		m_currCommand = nullptr;
+		m_prevCommand.clear();
 	}
 
 private:
@@ -516,8 +511,12 @@ private:
 	Context m_context;
 	//! Arguments.
 	Arguments m_args;
-	//! Current command.
+	//! Current top command.
 	Command * m_command;
+	//! Current command.
+	Command * m_currCommand;
+	//! Previous command.
+	std::vector< Command * > m_prevCommand;
 	//! Option.
 	CmdLineOpts m_opt;
 }; // class CmdLine
@@ -536,6 +535,7 @@ inline
 	:	details::API< CmdLine, CmdLine, ArgPtr, true > ( *this, *this )
 	,	m_context( details::makeContext( argc, argv ) )
 	,	m_command( nullptr )
+	,	m_currCommand( nullptr )
 	,	m_opt( opt )
 {
 }
@@ -572,6 +572,8 @@ CmdLine::addArg( ArgIface & arg )
 inline void
 CmdLine::parse()
 {
+	clear();
+
 	checkCorrectnessBeforeParsing();
 
 	while( !m_context.atEnd() )
@@ -630,24 +632,70 @@ CmdLine::parse()
 		{
 			auto * tmp = findArgument( word );
 
+			auto check = [this, &tmp, &word] ()
+			{
+				const auto & args = m_args;
+
+				const auto it = std::find_if( args.cbegin(),
+					args.cend(), [&tmp] ( const auto & arg ) -> bool
+						{ return ( arg.get() == tmp ); } );
+
+				if( m_command && it != args.cend() && !m_command->findChild( word ) )
+					throw BaseException( String( SL(
+							"Only one command from one level can be specified. "
+							"But you defined \"" ) ) +
+						word + SL( "\" and \"" ) + m_command->name() + SL( "\"." ) );
+			};
+
 			if( tmp )
 			{
 				if( tmp->type() == ArgType::Command )
 				{
-					if( m_command )
-						throw BaseException( String( SL( "Only one command can be "
-							"specified. But you entered \"" ) ) + m_command->name() +
-							SL( "\" and \"" ) + tmp->name() + SL( "\"." ) );
+					if( !m_prevCommand.empty() )
+					{
+						for( const auto & prev : m_prevCommand )
+						{
+							const auto & args = prev->children();
+
+							const auto it = std::find_if( args.cbegin(),
+								args.cend(), [&tmp] ( const auto & arg ) -> bool
+									{ return ( arg.get() == tmp ); } );
+
+							if( it != args.cend() && !m_currCommand->findChild( word ) )
+								throw BaseException( String( SL(
+										"Only one command from one level can be specified. "
+										"But you defined \"" ) ) +
+									word + SL( "\" and \"" ) + prev->name() + SL( "\"." ) );
+						}
+
+						check();
+					}
 					else
+						check();
+
+					if( !m_command )
 					{
 						m_command = static_cast< Command* > ( tmp );
 
+						m_currCommand = m_command;
+
 						m_command->process( m_context );
 					}
+					else
+					{
+						auto * cmd = static_cast< Command* > ( tmp );
+
+						m_prevCommand.push_back( m_currCommand );
+
+						m_currCommand->setCurrentSubCommand( cmd );
+
+						m_currCommand = cmd;
+
+						m_currCommand->process( m_context );
+					}
 				}
-				// Argument is as a command
 				else
-					tmp->process( m_context );
+					printInfoAboutUnknownArgument( word );
 			}
 			else
 				printInfoAboutUnknownArgument( word );
