@@ -191,7 +191,7 @@ Help::process( Context & context )
 				{
 					if( tmp )
 						m_printer->print( tmp->name(), g_argsOutStream,
-							( cmd != tmp ? cmd : nullptr) );
+							( cmd != tmp ? cmd : nullptr ) );
 					else
 						m_printer->print( g_argsOutStream );
 				}
