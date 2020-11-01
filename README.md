@@ -93,7 +93,23 @@ What does `runtests.rb` file for?
  * `runtests.rb` is simple Ruby script to launch all tests. This file is
 copying to build directory by CMake and QMake and can be used to launch tests.
 And sure with CMake you can use ctest executable to launch tests too.
-          
+
+Why should I use this library?
+
+ * There are tons of libraries for parsing command line arguments in the
+Internet. But Args provides possibility to define commands, for example
+
+    ```
+    git add -A
+    git commit
+    git push
+    ```
+
+    Help output is very user-friendly. I tried to do help very useful for user.
+
+    If you need only simple arguments in style `--do-it <value>` then possibly
+    you will find another library more useful for you, but who knows...
+
 # Example
 
 First of all you must know that practically all classes of the Args throws exceptions on errors
