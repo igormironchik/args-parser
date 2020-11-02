@@ -132,6 +132,31 @@ TEST_CASE( "TestRedifinition" )
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
+TEST_CASE( "TestDeepRedifinition" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ), SL( "1.txt" ), SL( "url" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
+			.addCommand( SL( "url" ), ValueOptions::OneValue, false )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
+			.addCommand( SL( "url" ), ValueOptions::OneValue, false )
+			.end()
+		.end()
+	.end();
+
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
+}
+
 TEST_CASE( "TestOkWithSubCommand" )
 {
 	const int argc = 4;
