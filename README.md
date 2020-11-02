@@ -19,8 +19,7 @@ of arguments can be specified more than once in the command line. And the result
 of the argument will be `StringList`.
  * `Command` class can be used to define command in command line interface.
 Command is the argument without dash/dashes at the beginning, `add` for example.
- * `Command` can has children arguments or even subcommands. Subcommand can be
-added using `ArgAsCommand` class.
+ * `Command` can has children arguments or even subcommands.
  * In Args groups can be used to group arguments into groups to check their
 definitions after parsing, so if constraint of group will be violated
 exception will be thrown.
@@ -110,6 +109,15 @@ Internet. But Args provides possibility to define commands, for example
     If you need only simple arguments in style `--do-it <value>` then possibly
     you will find another library more useful for you, but who knows...
 
+# Changelog
+
+ * 6.0.0.0
+
+    In this version was removed `ArgAsCommand` class, and was added fully-featured
+    support for sub-commands, that can be created with `Command` class, i.e.
+    `Command` can has `Command` as child. So it's possible to create such cli
+    as `git submodule update --init --recursive`.
+
 # Example
 
 First of all you must know that practically all classes of the Args throws exceptions on errors
@@ -131,13 +139,13 @@ int main( int argc, char ** argv )
   try {
     CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-    cmd.addCommand( "add", ValueOptions::NoValue,
-          "Add file." )
-        .addSubCommand( "file", true, ValueOptions::ManyValues, "File name.", "", "", "fn" )
+    cmd.addCommand( "add", ValueOptions::NoValue, true, "Add file." )
+        .addCommand( "file", ValueOptions::ManyValues, false, "File name.", "", "", "fn" )
+        .end()
       .end()
-      .addCommand( "delete", ValueOptions::NoValue,
-          "Delete file." )
-        .addSubCommand( "file", true, ValueOptions::ManyValues, "File name.", "", "", "fn" )
+      .addCommand( "delete", ValueOptions::NoValue, true, "Delete file." )
+        .addCommand( "file", ValueOptions::ManyValues, false, "File name.", "", "", "fn" )
+        .end()
       .end()
       .addHelp( true, argv[ 0 ],
         "This application just show power of the Args help." );

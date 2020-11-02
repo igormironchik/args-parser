@@ -17,8 +17,7 @@
 		line. And the resulted value of the argument will be Args::StringList.
 	\li Args::Command class can be used to define command in command line interface.
 	   Command is the argument without dash/dashes at the beginning, \c add for example.
-	\li Args::Command can has children arguments or even subcommands. Subcommand can be
-	   added using Args::ArgAsCommand class.
+	\li Args::Command can has children arguments or even subcommands.
 	\li In Args groups can be used to group arguments into groups to check their
 		definitions after parsing, so if constraint of group will be violated
 		exception will be thrown.
@@ -91,6 +90,36 @@
 	\li \c runtests.rb is simple Ruby script to launch all tests. This file is
 	copying to build directory by CMake and QMake and can be used to launch tests.
 	And sure with CMake you can use ctest executable to launch tests too.
+	
+	Why should I use this library?
+
+    \li There are tons of libraries for parsing command line arguments in the
+    Internet. But Args provides possibility to define commands, for example
+
+    \verbatim
+    git add -A
+    git commit
+    git push
+    \endverbatim
+
+    Help output is very user-friendly. I tried to do help very useful for user.
+
+    If you need only simple arguments in style
+    
+    \verbatim --do-it <value>\endverbatim
+    
+    then possibly you will find another library more useful for you, but who knows...
+
+    \section changelog Changelog
+
+    \li 6.0.0.0
+
+    In this version was removed \c ArgAsCommand class, and was added fully-featured
+    support for sub-commands, that can be created with Args::Command class, i.e.
+    Args::Command can has Args::Command as child. So it's possible to create such cli
+    as
+    
+    \verbatim git submodule update --init --recursive \endverbatim
 
 	\section example Example
 

@@ -8,13 +8,13 @@ int main( int argc, char ** argv )
   try {
     CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	cmd.addCommand( "add", ValueOptions::NoValue,
-          "Add file." )
-        .addSubCommand( "file", true, ValueOptions::ManyValues, "File name.", "", "", "fn" )
+	cmd.addCommand( "add", ValueOptions::NoValue, true, "Add file." )
+        .addCommand( "file", ValueOptions::ManyValues, false, "File name.", "", "", "fn" )
+        .end()
       .end()
-      .addCommand( "delete", ValueOptions::NoValue,
-          "Delete file." )
-        .addSubCommand( "file", true, ValueOptions::ManyValues, "File name.", "", "", "fn" )
+      .addCommand( "delete", ValueOptions::NoValue, true, "Delete file." )
+        .addCommand( "file", ValueOptions::ManyValues, false, "File name.", "", "", "fn" )
+        .end()
       .end()
       .addHelp( true, argv[ 0 ],
         "This application just show power of the Args help." );
