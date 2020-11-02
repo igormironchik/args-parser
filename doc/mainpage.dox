@@ -94,25 +94,25 @@
 	Why should I use this library?
 
     \li There are tons of libraries for parsing command line arguments in the
-    Internet. But Args provides possibility to define commands, for example
-
+    Internet. But Args provides possibility to define commands, for example\n
+    \n
     \verbatim
     git add -A
     git commit
     git push
     \endverbatim
-
-    Help output is very user-friendly. I tried to do help very useful for user.
-
-    If you need only simple arguments in style
-    
+    \n
+    Help output is very user-friendly. I tried to do help very useful for user.\n
+    \n
+    If you need only simple arguments in style\n
+    \n
     \verbatim --do-it <value>\endverbatim
-    
+    \n
     then possibly you will find another library more useful for you, but who knows...
 
     \section changelog Changelog
 
-    \li 6.0.0.0
+    \subsection six_zero 6.0.0.0
 
     In this version was removed \c ArgAsCommand class, and was added fully-featured
     support for sub-commands, that can be created with Args::Command class, i.e.
