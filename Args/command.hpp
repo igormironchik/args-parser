@@ -275,6 +275,10 @@ public:
 	//! Add sub-command.
 	void addCommand( ArgPtr arg )
 	{
+		if( m_opt != ValueOptions::NoValue )
+			throw BaseException( String( SL( "Addition of commands to command with "
+				"value is disallowed." ) ) );
+
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
 		{

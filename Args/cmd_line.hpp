@@ -205,12 +205,15 @@ public:
 			else
 				return (*it)->findArgument( name );
 		}
-		else if( m_currCommand )
+		else if( !m_prevCommand.empty() )
 		{
-			ArgIface * tmp = m_currCommand->findChild( name );
+			for( const auto & c : m_prevCommand )
+			{
+				ArgIface * tmp = c->findChild( name );
 
-			if( tmp )
-				return tmp;
+				if( tmp )
+					return tmp;
+			}
 		}
 
 		return nullptr;
@@ -231,12 +234,15 @@ public:
 			else
 				return (*it)->findArgument( name );
 		}
-		else if( m_command )
+		else if( !m_prevCommand.empty() )
 		{
-			const ArgIface * tmp = m_command->findChild( name );
+			for( const auto & c : m_prevCommand )
+			{
+				ArgIface * tmp = c->findChild( name );
 
-			if( tmp )
-				return tmp;
+				if( tmp )
+					return tmp;
+			}
 		}
 
 		return nullptr;
@@ -282,6 +288,8 @@ public:
 		NAME && name,
 		//! Value type.
 		ValueOptions opt = ValueOptions::NoValue,
+		//! Is sub-command required?
+		bool isSubCommandRequired = false,
 		//! Description of the argument.
 		const String & desc = String(),
 		//! Long description.
@@ -292,7 +300,7 @@ public:
 		const String & valueSpecifier = String() )
 	{
 		auto cmd = std::unique_ptr< Command, details::Deleter< ArgIface > > (
-			new Command( std::forward< NAME > ( name ), opt ),
+			new Command( std::forward< NAME > ( name ), opt, isSubCommandRequired ),
 			details::Deleter< ArgIface > ( true ) );
 
 		if( !desc.empty() )
@@ -323,6 +331,8 @@ public:
 		NAME && name,
 		//! Value type.
 		ValueOptions opt = ValueOptions::NoValue,
+		//! Is sub-command required?
+		bool isSubCommandRequired = false,
 		//! Description of the argument.
 		const String & desc = String(),
 		//! Long description.
@@ -333,7 +343,7 @@ public:
 		const String & valueSpecifier = String() )
 	{
 		auto cmd = std::unique_ptr< Command, details::Deleter< ArgIface > > (
-			new Command( std::forward< NAME > ( name ), opt ),
+			new Command( std::forward< NAME > ( name ), opt, isSubCommandRequired ),
 			details::Deleter< ArgIface > ( true ) );
 
 		if( !desc.empty() )
@@ -679,17 +689,19 @@ CmdLine::parse()
 
 						m_currCommand = m_command;
 
+						m_prevCommand.push_back( m_command );
+
 						m_command->process( m_context );
 					}
 					else
 					{
 						auto * cmd = static_cast< Command* > ( tmp );
 
-						m_prevCommand.push_back( m_currCommand );
-
 						m_currCommand->setCurrentSubCommand( cmd );
 
 						m_currCommand = cmd;
+
+						m_prevCommand.push_back( m_currCommand );
 
 						m_currCommand->process( m_context );
 					}

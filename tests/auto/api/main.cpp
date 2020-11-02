@@ -55,7 +55,7 @@ TEST_CASE( "TestAllIsOk" )
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, false,
 				SL( "Add file." ) )
 			.addAllOfGroup( SL( "file group" ) )
 				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
@@ -64,7 +64,7 @@ TEST_CASE( "TestAllIsOk" )
 			.end()
 			.addArgWithFlagOnly( SL( 'd' ), false, false, SL( "Do job." ) )
 		.end()
-		.addCommand( SL( "delete" ), ValueOptions::NoValue,
+		.addCommand( SL( "delete" ), ValueOptions::NoValue, false,
 				SL( "Delete file." ) )
 			.addArgWithFlagOnly( SL( 'd' ), false, false,
 				SL( "Do NOT job." ) )
@@ -117,7 +117,7 @@ TEST_CASE( "TestAllIsOkReparse" )
 
 	CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, false,
 				SL( "Add file." ) )
 			.addAllOfGroup( SL( "file group" ) )
 				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
@@ -126,7 +126,7 @@ TEST_CASE( "TestAllIsOkReparse" )
 			.end()
 			.addArgWithFlagOnly( SL( 'd' ), false, false, SL( "Do job." ) )
 		.end()
-		.addCommand( SL( "delete" ), ValueOptions::NoValue,
+		.addCommand( SL( "delete" ), ValueOptions::NoValue, false,
 				SL( "Delete file." ) )
 			.addArgWithFlagOnly( SL( 'd' ), false, false,
 				SL( "Do NOT job." ) )
@@ -178,7 +178,7 @@ TEST_CASE( "TestAllIsOkWithEmptyCtor" )
 
 	CmdLine cmd( CmdLine::CommandIsRequired );
 
-	cmd.addCommand( SL( "add" ), ValueOptions::NoValue,
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, false,
 				SL( "Add file." ) )
 			.addAllOfGroup( SL( "file group" ) )
 				.addArgWithFlagAndName( SL( 'f' ), SL( "file" ), true, false,
@@ -187,7 +187,7 @@ TEST_CASE( "TestAllIsOkWithEmptyCtor" )
 			.end()
 			.addArgWithFlagOnly( SL( 'd' ), false, false, SL( "Do job." ) )
 		.end()
-		.addCommand( SL( "delete" ), ValueOptions::NoValue,
+		.addCommand( SL( "delete" ), ValueOptions::NoValue, false,
 				SL( "Delete file." ) )
 			.addArgWithFlagOnly( SL( 'd' ), false, false,
 				SL( "Do NOT job." ) )
@@ -500,11 +500,11 @@ TEST_CASE( "TestGetterSetterOfCommand" )
 {
 	CmdLine cmd;
 
-	cmd.addCommand( SL( "cmd1" ), ValueOptions::OneValue,
+	cmd.addCommand( SL( "cmd1" ), ValueOptions::OneValue, false,
 			SL( "desc" ), SL( "long desc" ), SL( "val" ),
 			SL( "vs" ) )
 		.end()
-		.addCommandWithDefaultValues( SL( "cmd2" ), ValueOptions::ManyValues,
+		.addCommandWithDefaultValues( SL( "cmd2" ), ValueOptions::ManyValues, false,
 			SL( "desc" ), SL( "long desc" ), { SL( "val1" ), SL( "val2" ) },
 			SL( "vs" ) )
 		.end();

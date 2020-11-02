@@ -1529,6 +1529,8 @@ public:
 		NAME && name,
 		//! Value type.
 		ValueOptions opt = ValueOptions::NoValue,
+		//! Is sub-command required?
+		bool isSubCommandRequired = false,
 		//! Description of the argument.
 		const String & desc = String(),
 		//! Long description.
@@ -1539,7 +1541,7 @@ public:
 		const String & valueSpecifier = String() )
 	{
 		auto cmd = std::unique_ptr< Command, details::Deleter< ArgIface > > (
-			new Command( std::forward< NAME > ( name ), opt ),
+			new Command( std::forward< NAME > ( name ), opt, isSubCommandRequired ),
 			details::Deleter< ArgIface > ( true ) );
 
 		if( !desc.empty() )
@@ -1570,6 +1572,8 @@ public:
 		NAME && name,
 		//! Value type.
 		ValueOptions opt = ValueOptions::NoValue,
+		//! Is sub-command required?
+		bool isSubCommandRequired = false,
 		//! Description of the argument.
 		const String & desc = String(),
 		//! Long description.
@@ -1580,7 +1584,7 @@ public:
 		const String & valueSpecifier = String() )
 	{
 		auto cmd = std::unique_ptr< Command, details::Deleter< ArgIface > > (
-			new Command( std::forward< NAME > ( name ), opt ),
+			new Command( std::forward< NAME > ( name ), opt, isSubCommandRequired ),
 			details::Deleter< ArgIface > ( true ) );
 
 		if( !desc.empty() )
