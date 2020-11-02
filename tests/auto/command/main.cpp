@@ -93,6 +93,14 @@ TEST_CASE( "WrongName2" )
 	REQUIRE_THROWS_AS( Command c( SL( "--name" ) ), BaseException );
 }
 
+TEST_CASE( "DissallowedNesting" )
+{
+	Command cmd1( SL( "cmd1" ), ValueOptions::OneValue );
+	Command cmd2( SL( "cmd2" ), ValueOptions::OneValue );
+
+	REQUIRE_THROWS_AS( cmd1.addCommand( cmd2 ), BaseException );
+}
+
 TEST_CASE( "TestNotDefinedRequiredArgInCommand" )
 {
 	const int argc = 5;
@@ -184,6 +192,27 @@ TEST_CASE( "TestOkWithSubCommand" )
 
 	REQUIRE( v.size() == 1 );
 	REQUIRE( v.front() == SL( "1.txt" ) );
+}
+
+TEST_CASE( "TestOkWithSubCommand" )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
+		.end()
+	.end();
+
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
 TEST_CASE( "TestManyArgs" )
