@@ -121,13 +121,44 @@ TEST_CASE( "TestRedifinition" )
 
 	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true )
 			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
 		.end()
 		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
 			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
 		.end()
 	.end();
 
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
+}
+
+TEST_CASE( "TestOkWithSubCommand" )
+{
+	const int argc = 4;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ), SL( "1.txt" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+			.end()
+		.end()
+	.end();
+
+	cmd.parse();
+
+	REQUIRE( cmd.isDefined( SL( "add" ) ) );
+	REQUIRE( cmd.isDefined( SL( "file" ) ) );
+
+	const auto v = cmd.values( SL( "file" ) );
+
+	REQUIRE( v.size() == 1 );
+	REQUIRE( v.front() == SL( "1.txt" ) );
 }
 
 TEST_CASE( "TestManyArgs" )
