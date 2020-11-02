@@ -111,6 +111,25 @@ TEST_CASE( "TestNotDefinedRequiredArgInCommand" )
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
 
+TEST_CASE( "TestRedifinition" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "add" ), SL( "file" ), SL( "1.txt" ), SL( "del" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
+		.end()
+	.end();
+
+	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
+}
+
 TEST_CASE( "TestManyArgs" )
 {
 	const int argc = 5;

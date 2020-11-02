@@ -1010,10 +1010,10 @@ private:
 }; // class API
 
 //! Auxiliary API.
-template< typename ARGPTR >
-class API< Command, Command, ARGPTR, false > {
+template< typename PARENT, typename ARGPTR >
+class API< PARENT, Command, ARGPTR, false > {
 public:
-	API( Command & parent, Command & self )
+	API( PARENT & parent, Command & self )
 		:	m_parent( parent )
 		,	m_self( self )
 	{
@@ -1025,7 +1025,7 @@ public:
 
 	//! Add OnlyOneGroup.
 	template< typename NAME >
-	API< API< Command, Command, ARGPTR >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
+	API< API< PARENT, Command, ARGPTR >, OnlyOneGroup, ARGPTR > addOnlyOneGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
@@ -1041,13 +1041,13 @@ public:
 
 		m_self.addArg( std::move( a ) );
 
-		return API< API< Command, Command, ARGPTR >, OnlyOneGroup, ARGPTR >
+		return API< API< PARENT, Command, ARGPTR >, OnlyOneGroup, ARGPTR >
 			( *this, g );
 	}
 
 	//! Add AllOfGroup.
 	template< typename NAME >
-	API< API< Command, Command, ARGPTR >, AllOfGroup, ARGPTR > addAllOfGroup(
+	API< API< PARENT, Command, ARGPTR >, AllOfGroup, ARGPTR > addAllOfGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
@@ -1063,13 +1063,13 @@ public:
 
 		m_self.addArg( std::move( a ) );
 
-		return API< API< Command, Command, ARGPTR >, AllOfGroup, ARGPTR >
+		return API< API< PARENT, Command, ARGPTR >, AllOfGroup, ARGPTR >
 			( *this, g );
 	}
 
 	//! Add AtLeastOneGroup.
 	template< typename NAME >
-	API< API< Command, Command, ARGPTR >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
+	API< API< PARENT, Command, ARGPTR >, AtLeastOneGroup, ARGPTR > addAtLeastOneGroup(
 		//! Name of the group.
 		NAME && name,
 		//! Is group required?
@@ -1085,13 +1085,13 @@ public:
 
 		m_self.addArg( std::move( a ) );
 
-		return API< API< Command, Command, ARGPTR >, AtLeastOneGroup, ARGPTR >
+		return API< API< PARENT, Command, ARGPTR >, AtLeastOneGroup, ARGPTR >
 			( *this, g );
 	}
 
 	//! Add argument.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addArgWithFlagAndName(
+	API< PARENT, Command, ARGPTR, false > & addArgWithFlagAndName(
 		//! Flag for this argument.
 		Char flag,
 		//! Name for this argument.
@@ -1135,7 +1135,7 @@ public:
 	}
 
 	//! Add argument with flag only.
-	API< Command, Command, ARGPTR, false > & addArgWithFlagOnly(
+	API< PARENT, Command, ARGPTR, false > & addArgWithFlagOnly(
 		//! Flag for this argument.
 		Char flag,
 		//! Is this argument with value?
@@ -1177,7 +1177,7 @@ public:
 
 	//! Add argument with name only.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addArgWithNameOnly(
+	API< PARENT, Command, ARGPTR, false > & addArgWithNameOnly(
 		//! Name for this argument.
 		NAME && name,
 		//! Is this argument with value?
@@ -1220,7 +1220,7 @@ public:
 
 	//! Add multi argument.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addMultiArg(
+	API< PARENT, Command, ARGPTR, false > & addMultiArg(
 		//! Flag for this argument.
 		Char flag,
 		//! Name for this argument.
@@ -1264,7 +1264,7 @@ public:
 	}
 
 	//! Add multi argument with flag only.
-	API< Command, Command, ARGPTR, false > & addMultiArgWithFlagOnly(
+	API< PARENT, Command, ARGPTR, false > & addMultiArgWithFlagOnly(
 		//! Flag for this argument.
 		Char flag,
 		//! Is this argument with value?
@@ -1306,7 +1306,7 @@ public:
 
 	//! Add multi argument with name only.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addMultiArgWithNameOnly(
+	API< PARENT, Command, ARGPTR, false > & addMultiArgWithNameOnly(
 		//! Name for this argument.
 		NAME && name,
 		//! Is this argument with value?
@@ -1349,7 +1349,7 @@ public:
 
 	//! Add multi argument.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addMultiArgWithDefaulValues(
+	API< PARENT, Command, ARGPTR, false > & addMultiArgWithDefaulValues(
 		//! Flag for this argument.
 		Char flag,
 		//! Name for this argument.
@@ -1393,7 +1393,7 @@ public:
 	}
 
 	//! Add multi argument with flag only.
-	API< Command, Command, ARGPTR, false > & addMultiArgWithFlagOnlyAndDefaultValues(
+	API< PARENT, Command, ARGPTR, false > & addMultiArgWithFlagOnlyAndDefaultValues(
 		//! Flag for this argument.
 		Char flag,
 		//! Is this argument with value?
@@ -1435,7 +1435,7 @@ public:
 
 	//! Add multi argument with name only.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addMultiArgWithNameOnlyAndDefaultValues(
+	API< PARENT, Command, ARGPTR, false > & addMultiArgWithNameOnlyAndDefaultValues(
 		//! Name for this argument.
 		NAME && name,
 		//! Is this argument with value?
@@ -1478,7 +1478,7 @@ public:
 
 	//! Add sub command.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addCommand(
+	API< PARENT, Command, ARGPTR, false > & addCommand(
 		//! Name.
 		NAME && name,
 		//! Is required?
@@ -1501,7 +1501,7 @@ public:
 
 	//! Add sub command.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > & addCommandWithDefaultValues(
+	API< PARENT, Command, ARGPTR, false > & addCommandWithDefaultValues(
 		//! Name.
 		NAME && name,
 		//! Is required?
@@ -1524,7 +1524,7 @@ public:
 
 	//! Add Command.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > addCommand(
+	API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > addCommand(
 		//! Name of the group.
 		NAME && name,
 		//! Value type.
@@ -1562,12 +1562,12 @@ public:
 
 		m_self.addCommand( std::move( arg ) );
 
-		return API< Command, Command, ARGPTR, false > ( *this, c );
+		return API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > ( *this, c );
 	}
 
 	//! Add Command.
 	template< typename NAME >
-	API< Command, Command, ARGPTR, false > addCommandWithDefaultValues(
+	API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > addCommandWithDefaultValues(
 		//! Name of the group.
 		NAME && name,
 		//! Value type.
@@ -1605,18 +1605,18 @@ public:
 
 		m_self.addCommand( std::move( arg ) );
 
-		return API< Command, Command, ARGPTR, false > ( *this, c );
+		return API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > ( *this, c );
 	}
 
 	//! End this group. \return Command object.
-	Command & end() const
+	PARENT & end() const
 	{
 		return m_parent;
 	}
 
 private:
 	//! Parent.
-	Command & m_parent;
+	PARENT & m_parent;
 	//! Self object.
 	Command & m_self;
 }; // class API

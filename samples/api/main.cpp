@@ -45,10 +45,10 @@ int main( int argc, char ** argv )
 	try {
 		CmdLine cmd( argc, argv, CmdLine::CommandIsRequired );
 
-		cmd.addCommand( SL( "add" ), ValueOptions::ManyValues,
+		cmd.addCommand( SL( "add" ), ValueOptions::ManyValues, false,
 				SL( "Add file(s)." ), SL( "Add file(s) for monitoring." ), SL( "" ), SL( "fn" ) )
 			.end()
-			.addCommand( SL( "del" ), ValueOptions::ManyValues,
+			.addCommand( SL( "del" ), ValueOptions::ManyValues, false,
 				SL( "Delete file(s)." ), SL( "Delete file(s) from monitoring." ), SL( "" ), SL( "fn" ) )
 			.end()
 			.addHelp( true, argv[ 0 ],

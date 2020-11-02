@@ -282,10 +282,10 @@ public:
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
 		{
-			m_children.push_back( std::move( arg ) );
-
 			if( cmdLine() )
 				arg->setCmdLine( cmdLine() );
+
+			m_children.push_back( std::move( arg ) );
 		}
 	}
 
