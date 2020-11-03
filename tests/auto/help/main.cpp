@@ -1040,3 +1040,175 @@ TEST_CASE( "TestHelpOfCommand2" )
 
 	REQUIRE( false );
 }
+
+TEST_CASE( "TestHelpWithCommands" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true , SL( "Add item to..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true, SL( "Delete item from..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
+	.end();
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+			"Add item to... \n"
+			"\n"
+			"USAGE: add <command>\n"
+			"\n"
+			"  file <fn> File item. \n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"Add item to... \n"
+			"\n"
+			"USAGE: add <command>\n"
+			"\n"
+			"  file <fn> File item. \n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
+
+TEST_CASE( "TestHelpWithCommandsNested" )
+{
+	const int argc = 4;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ), SL( "file" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true , SL( "Add item to..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true, SL( "Delete item from..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
+	.end();
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+			"File item. \n"
+			"\n"
+			"USAGE: file <fn> <options>\n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"File item. \n"
+			"\n"
+			"USAGE: file <fn> <options>\n"
+			"\n"
+			"GLOBAL OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
+
+TEST_CASE( "TestHelpWithWrongCommand" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ), SL( "file" ), SL( "dummy" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true , SL( "Add item to..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true, SL( "Delete item from..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
+	.end();
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+			"Help with commands. \n"
+			"\n"
+			"USAGE: program.exe <command> <options>\n"
+			"\n"
+			"  add Add item to... \n"
+			"  del Delete item from... \n"
+			"\n"
+			"OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"Help with commands. \n"
+			"\n"
+			"USAGE: program.exe <command> <options>\n"
+			"\n"
+			"  add Add item to... \n"
+			"  del Delete item from... \n"
+			"\n"
+			"OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
