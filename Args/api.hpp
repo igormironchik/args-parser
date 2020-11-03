@@ -1476,52 +1476,6 @@ public:
 		return *this;
 	}
 
-	//! Add sub command.
-	template< typename NAME >
-	API< PARENT, Command, ARGPTR, false > & addCommand(
-		//! Name.
-		NAME && name,
-		//! Is required?
-		bool required = false,
-		//! Value type.
-		ValueOptions opt = ValueOptions::NoValue,
-		//! Description of the argument.
-		const String & desc = String(),
-		//! Long description.
-		const String & longDesc = String(),
-		//! Default value.
-		const String & defaultValue = String(),
-		//! Value specifier.
-		const String & valueSpecifier = String() )
-	{
-		return addArgAsCommand( std::forward< NAME > ( name ),
-			required, opt, desc, longDesc,
-			defaultValue, valueSpecifier );
-	}
-
-	//! Add sub command.
-	template< typename NAME >
-	API< PARENT, Command, ARGPTR, false > & addCommandWithDefaultValues(
-		//! Name.
-		NAME && name,
-		//! Is required?
-		bool required = false,
-		//! Value type.
-		ValueOptions opt = ValueOptions::NoValue,
-		//! Description of the argument.
-		const String & desc = String(),
-		//! Long description.
-		const String & longDesc = String(),
-		//! Default value.
-		const StringList & defaultValues = StringList(),
-		//! Value specifier.
-		const String & valueSpecifier = String() )
-	{
-		return addArgAsCommandWithDefaulValues( std::forward< NAME > ( name ),
-			required, opt, desc, longDesc,
-			defaultValues, valueSpecifier );
-	}
-
 	//! Add Command.
 	template< typename NAME >
 	API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > addCommand(

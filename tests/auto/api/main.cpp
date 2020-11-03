@@ -541,3 +541,37 @@ TEST_CASE( "TestGetterSetterOfCommand" )
 	REQUIRE( cmd.values( SL( "cmd2" ) ).front() == SL( "val1" ) );
 	REQUIRE( cmd.values( SL( "cmd2" ) ).back() == SL( "val2" ) );
 }
+
+TEST_CASE( "JustCompileIt" )
+{
+	CmdLine cmd;
+
+	cmd.addCommandWithDefaultValues( SL( "cmd1" ), ValueOptions::NoValue, false,
+		SL( "1" ), SL( "2" ), { SL( "1" ), SL( "2" ) }, SL( "3" ) )
+			.addOnlyOneGroup( SL( "group1" ), false ).end()
+			.addAllOfGroup( SL( "group2" ), false ).end()
+			.addAtLeastOneGroup( SL( "group3" ), false ).end()
+			.addArgWithFlagAndName( SL( 'a' ), SL( "flag1" ), true, false, SL( "1" ),
+				SL( "2" ), SL( "3" ), SL( "vs" ) )
+			.addArgWithFlagOnly( SL( 'b' ), false, false, SL( "1" ), SL( "2" ),
+				SL( "3" ), SL( "vs" ) )
+			.addArgWithNameOnly( SL( "flag2" ), false, false, SL( "1" ), SL( "2" ),
+				SL( "3" ), SL( "vs" ) )
+			.addMultiArg( SL( 'c' ), SL( "flag3" ), false, false, SL( "1" ), SL( "2" ),
+				SL( "3" ), SL( "vs" ) )
+			.addMultiArgWithFlagOnly( SL( 'd' ), false, false, SL( "1" ), SL( "2" ),
+				SL( "3" ), SL( "vs" ) )
+			.addMultiArgWithNameOnly( SL( "flag4" ), false, false, SL( "1" ), SL( "2" ),
+				SL( "3" ), SL( "vs" ) )
+			.addMultiArgWithDefaulValues( SL( 'e' ), SL( "flag5" ), false, false, SL( "1" ), SL( "2" ),
+				{ SL( "3" ), SL( "4" ) }, SL( "vs" ) )
+			.addMultiArgWithFlagOnlyAndDefaultValues( SL( 'f' ), false, false, SL( "1" ), SL( "2" ),
+				{ SL( "3" ), SL( "4" ) }, SL( "vs" ) )
+			.addMultiArgWithNameOnlyAndDefaultValues( SL( "flag6" ), false, false, SL( "1" ), SL( "2" ),
+				{ SL( "3" ), SL( "4" ) }, SL( "vs" ) )
+			.addCommand( SL( "cmd2" ), ValueOptions::NoValue, false, SL( "1" ), SL( "2" ),
+				SL( "3" ), SL( "vs" ) ).end()
+			.addCommandWithDefaultValues( SL( "cmd3" ), ValueOptions::NoValue, false, SL( "1" ), SL( "2" ),
+				{ SL( "3" ), SL( "4" ) }, SL( "vs" ) ).end()
+		.end().end();
+}
