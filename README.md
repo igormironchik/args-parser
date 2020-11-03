@@ -78,15 +78,6 @@ case it will be possible to use `find_package( Args )` in CMakeLists.txt of
 your project, and sure you can use `${Args_INCLUDE_DIRECTORIES}` in your
 CMake scripts.
 
-What does `build.rb` file for?
-
- * `build.rb` is Ruby program for building Args, this is project file for
-Mxx_ru build system. In most cases this file is not necessary and can be simply
-ignored. Long time ago I used Mxx_ru as build system in my projects and this
-file is just because of historical reasons. In the subdirectories you can find
-different Ruby scripts, like `prj.rb`, these files are project files for
-corresponding subprojects (examples/tests) for Mxx_ru build system.
-
 What does `runtests.rb` file for?
 
  * `runtests.rb` is simple Ruby script to launch all tests. This file is
