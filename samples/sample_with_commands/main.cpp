@@ -62,6 +62,12 @@ int main( int argc, char ** argv )
 		file.setLongDescription( SL( "File item to work with." ) );
 		file.setValueSpecifier( SL( "fn" ) );
 
+		Arg arg( SL( 'w' ), SL( "work" ), false );
+		arg.setDescription( SL( "Do the work fith files." ) );
+		arg.setLongDescription( SL( "Do the work set in the configuration with files." ) );
+
+		file.addArg( arg );
+
 		add.addCommand( file );
 		del.addCommand( file );
 

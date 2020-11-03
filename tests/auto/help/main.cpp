@@ -1212,3 +1212,57 @@ TEST_CASE( "TestHelpWithWrongCommand" )
 
 	REQUIRE( false );
 }
+
+TEST_CASE( "TestHelpOfArgInCommand" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ), SL( "file" ), SL( "-w" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true , SL( "Add item to..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+				.addArgWithFlagAndName( SL( 'w' ), SL( "work" ), false, false,
+					SL( "Do the work fith files." ),
+					SL( "Do the work set in the configuration with files." ) )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true, SL( "Delete item from..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+				.addArgWithFlagAndName( SL( 'w' ), SL( "work" ), false, false,
+					SL( "Do the work fith files." ),
+					SL( "Do the work set in the configuration with files." ) )
+			.end()
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
+	.end();
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+			"USAGE: [ -w, --work ] \n"
+			"\n"
+			"       Do the work set in the configuration with files. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"USAGE: [ -w, --work ] \n"
+			"\n"
+			"       Do the work set in the configuration with files. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
