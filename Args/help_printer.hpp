@@ -85,15 +85,6 @@ public:
 		//! Parent command if present.
 		Command * parent = nullptr ) override;
 
-	//! Print help for command's argument.
-	void print(
-		//! Command.
-		Command * cmd,
-		//! Name of the argument. I.e. "-t" or "--timeout".
-		const String & name,
-		//! Output stream for the printing help.
-		OutStreamType & to ) override;
-
 	//! Set executable name.
 	void setExecutable( const String & exe ) override;
 
@@ -865,25 +856,6 @@ HelpPrinter::printString( OutStreamType & to,
 			}
 		}
 	);
-}
-
-inline void
-HelpPrinter::print( Command * cmd, const String & name,
-	OutStreamType & to )
-{
-	if( cmd )
-	{
-		ArgIface * arg = cmd->findChild( name );
-
-		if( arg && arg->type() != ArgType::Command )
-			print( arg, to );
-		else if( arg->type() == ArgType::Command )
-			print( arg->name(), to );
-		else
-			print( cmd->name(), to );
-	}
-	else
-		print( to );
 }
 
 } /* namespace Args */

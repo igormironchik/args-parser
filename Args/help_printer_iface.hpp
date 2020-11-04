@@ -73,15 +73,6 @@ public:
 		//! Parent command if present.
 		Command * parent = nullptr ) = 0;
 
-	//! Print help for command's argument.
-	virtual void print(
-		//! Command.
-		Command * cmd,
-		//! Name of the argument. I.e. "-t" or "--timeout".
-		const String & name,
-		//! Output stream for the printing help.
-		OutStreamType & to ) = 0;
-
 	//! Set executable name.
 	virtual void setExecutable( const String & exe ) = 0;
 
