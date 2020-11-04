@@ -1,3 +1,4 @@
 <map id="Args::CmdLine" name="Args::CmdLine">
-<area shape="rect" id="node2" href="$class_args_1_1details_1_1_a_p_i.html" title="Args::details::API\l\&lt; CmdLine, CmdLine,\l std::unique_ptr\&lt; ArgIface,\l details::Deleter\&lt; ArgIface\l \&gt; \&gt;, true \&gt;" alt="" coords="5,5,183,91"/>
+<area shape="rect" id="node1" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ..." alt="" coords="249,35,365,61"/>
+<area shape="rect" id="node2" href="$class_args_1_1details_1_1_a_p_i.html" title=" " alt="" coords="5,5,201,91"/>
 </map>

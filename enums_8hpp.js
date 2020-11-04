@@ -2,7 +2,6 @@ var enums_8hpp =
 [
     [ "ArgType", "enums_8hpp.html#a45fadc7cbb15a8d6824e7e127b32aa95", [
       [ "Command", "enums_8hpp.html#a45fadc7cbb15a8d6824e7e127b32aa95aee97be03cb04119af45014d815621ce1", null ],
-      [ "ArgAsCommand", "enums_8hpp.html#a45fadc7cbb15a8d6824e7e127b32aa95aa8a6862829bace2bc76dea528e1a171d", null ],
       [ "Arg", "enums_8hpp.html#a45fadc7cbb15a8d6824e7e127b32aa95a5f85cc4dd7469f669cfe263789933216", null ],
       [ "MultiArg", "enums_8hpp.html#a45fadc7cbb15a8d6824e7e127b32aa95a6247fbc13094859dbfb459bd4d282bbc", null ],
       [ "OnlyOneGroup", "enums_8hpp.html#a45fadc7cbb15a8d6824e7e127b32aa95ae0e31d99434b879541949fe830bc6356", null ],

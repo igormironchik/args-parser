@@ -1,7 +1,10 @@
 var class_args_1_1_command =
 [
-    [ "Command", "class_args_1_1_command.html#ac44422a3138ba76375904a8436d2cd42", null ],
+    [ "Command", "class_args_1_1_command.html#a6e06c934d5ed41261885e5a36e19dc14", null ],
     [ "~Command", "class_args_1_1_command.html#ae4493f136fed851d1222f8ad1609b2f6", null ],
+    [ "addCommand", "class_args_1_1_command.html#ad07eaf465bf01a8539631ecc0c64a9a1", null ],
+    [ "addCommand", "class_args_1_1_command.html#ad9c6bd1357ae9ed311dd65c4ad40b7fd", null ],
+    [ "addCommand", "class_args_1_1_command.html#a50028eb75d52545a7430b1cae65c3c27", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_command.html#a7867a0a188bf5f9af40928d68440e70c", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_command.html#a6260159eb5d66b337e9570055e514d33", null ],
     [ "clear", "class_args_1_1_command.html#a853e728bb0c826ae9a31bda99cf9f593", null ],
@@ -16,6 +19,7 @@ var class_args_1_1_command =
     [ "isWithValue", "class_args_1_1_command.html#a62d2cf50641b1587d657e3d46d4eaae2", null ],
     [ "longDescription", "class_args_1_1_command.html#ac97fb688f685db1fc9665724f1b687ff", null ],
     [ "process", "class_args_1_1_command.html#a360a2d7df9f6dc442c3d926dad1f5d15", null ],
+    [ "setCurrentSubCommand", "class_args_1_1_command.html#afa80c4f4971a4fc7dd235d0470d930fd", null ],
     [ "setDefaultValue", "class_args_1_1_command.html#a4021a8df2721fc19bad372456fe837a5", null ],
     [ "setDefaultValues", "class_args_1_1_command.html#a3e052fbbd0e711cc9b1b16cbd84fa7e6", null ],
     [ "setDescription", "class_args_1_1_command.html#a8b14a1bcee1202a5e1d668eeec66fce1", null ],
@@ -27,5 +31,6 @@ var class_args_1_1_command =
     [ "values", "class_args_1_1_command.html#a71c04eb807945ca046aad834f876d996", null ],
     [ "valueSpecifier", "class_args_1_1_command.html#a5c4bbc2c84a419528f946b16584015b9", null ],
     [ "CmdLine", "class_args_1_1_command.html#a18cbb9362f4835b4f5be1429a8104856", null ],
+    [ "Help", "class_args_1_1_command.html#ae0125c749a8ca82b522c83d55eee9a22", null ],
     [ "HelpPrinter", "class_args_1_1_command.html#ae57e172ab53c4f7c6d5d76fb18afc58e", null ]
 ];

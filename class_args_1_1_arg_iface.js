@@ -21,5 +21,6 @@ var class_args_1_1_arg_iface =
     [ "type", "class_args_1_1_arg_iface.html#a76ea6e8e9de8eb515efdf9f650af061a", null ],
     [ "valueSpecifier", "class_args_1_1_arg_iface.html#a58734c1dfd51771046331c225be3dfdb", null ],
     [ "CmdLine", "class_args_1_1_arg_iface.html#a18cbb9362f4835b4f5be1429a8104856", null ],
+    [ "Command", "class_args_1_1_arg_iface.html#a62a7fc89f0ee4604e3ccab9b6b6a343f", null ],
     [ "GroupIface", "class_args_1_1_arg_iface.html#a3b1fdf5f0c2690a8cc71428caa916960", null ]
 ];

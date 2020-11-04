@@ -4,9 +4,9 @@ var class_args_1_1_group_iface =
     [ "Arguments", "class_args_1_1_group_iface.html#abed85fa1e10d61d9b8cb61f0f1d50b6e", null ],
     [ "GroupIface", "class_args_1_1_group_iface.html#add4e157dd242be0be3b0f076052044d9", null ],
     [ "~GroupIface", "class_args_1_1_group_iface.html#af9cdc945c531d944c10dbed283f3621f", null ],
+    [ "addArg", "class_args_1_1_group_iface.html#af7725d7452bf4097f8b051d8dbfe6fa0", null ],
     [ "addArg", "class_args_1_1_group_iface.html#ad109e49e11aa5cbd58d813bdeb8932f6", null ],
     [ "addArg", "class_args_1_1_group_iface.html#a7266b013199540d902003dba1e833ebe", null ],
-    [ "addArg", "class_args_1_1_group_iface.html#af7725d7452bf4097f8b051d8dbfe6fa0", null ],
     [ "argumentName", "class_args_1_1_group_iface.html#a4cfc694ff015254f0936eb44f05ec64a", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_group_iface.html#ae7cc78f54741e35464de5158ea4d5f64", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_group_iface.html#acecfc2b3d15ec7d47e1b475ef16d48c0", null ],
@@ -23,5 +23,6 @@ var class_args_1_1_group_iface =
     [ "process", "class_args_1_1_group_iface.html#a86a3207f8a38ad28908030ee1666c699", null ],
     [ "setCmdLine", "class_args_1_1_group_iface.html#a20c5a5712d16e37e4dd401f3520df741", null ],
     [ "setRequired", "class_args_1_1_group_iface.html#a6bab0ea5df847bf2740eedc6b7ee5d46", null ],
-    [ "valueSpecifier", "class_args_1_1_group_iface.html#a56e92c4a46f735cbc7413f75264fa1df", null ]
+    [ "valueSpecifier", "class_args_1_1_group_iface.html#a56e92c4a46f735cbc7413f75264fa1df", null ],
+    [ "m_children", "class_args_1_1_group_iface.html#aa93708982373f4c296e671cb26262957", null ]
 ];

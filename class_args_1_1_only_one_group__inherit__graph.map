@@ -1,4 +1,5 @@
 <map id="Args::OnlyOneGroup" name="Args::OnlyOneGroup">
-<area shape="rect" id="node2" href="$class_args_1_1_group_iface.html" title="Interface for the groups. " alt="" coords="16,80,137,107"/>
-<area shape="rect" id="node3" href="$class_args_1_1_arg_iface.html" title="Interface for arguments. " alt="" coords="23,5,130,32"/>
+<area shape="rect" id="node1" title="Group of args where only one argument can be defined." alt="" coords="5,155,160,181"/>
+<area shape="rect" id="node2" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="17,80,148,107"/>
+<area shape="rect" id="node3" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="26,5,139,32"/>
 </map>

@@ -1,3 +1,4 @@
 <map id="Args::Arg" name="Args::Arg">
-<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments. " alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node1" title="Argument with one value that can be present only once in the command line." alt="" coords="21,80,103,107"/>
+<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="5,5,119,32"/>
 </map>

@@ -3,8 +3,6 @@ var class_args_1_1details_1_1_a_p_i =
     [ "API", "class_args_1_1details_1_1_a_p_i.html#a758532079f664463fed00375e38b47ad", null ],
     [ "~API", "class_args_1_1details_1_1_a_p_i.html#a5f004fe5a6f1d0160e2565d79158ea5a", null ],
     [ "addAllOfGroup", "class_args_1_1details_1_1_a_p_i.html#a7178df37f3019f35efa81daa4cae28cb", null ],
-    [ "addArgAsCommand", "class_args_1_1details_1_1_a_p_i.html#a3be1b321c112366fdfc6899cd2f9e036", null ],
-    [ "addArgAsCommandWithDefaulValues", "class_args_1_1details_1_1_a_p_i.html#a0f60daded0751ae11c4fe4c018f459fd", null ],
     [ "addArgWithFlagAndName", "class_args_1_1details_1_1_a_p_i.html#afe7cdf3edefa81e6d3dab0881cf123d7", null ],
     [ "addArgWithFlagOnly", "class_args_1_1details_1_1_a_p_i.html#a5fa5250cdf974349ced4b1082b7bffc8", null ],
     [ "addArgWithNameOnly", "class_args_1_1details_1_1_a_p_i.html#a7cded1cdd89086681874f07abefc9f77", null ],
@@ -16,7 +14,5 @@ var class_args_1_1details_1_1_a_p_i =
     [ "addMultiArgWithNameOnly", "class_args_1_1details_1_1_a_p_i.html#af52bf390dc2671f682c22a53abfc275e", null ],
     [ "addMultiArgWithNameOnlyAndDefaultValues", "class_args_1_1details_1_1_a_p_i.html#a7a6e6e47d3aec563155e801f770d83c9", null ],
     [ "addOnlyOneGroup", "class_args_1_1details_1_1_a_p_i.html#a63a9724033ea91cb80beca72b2db9438", null ],
-    [ "addSubCommand", "class_args_1_1details_1_1_a_p_i.html#ab3f0b6e7ffedbb20f508ed254dda1c3e", null ],
-    [ "addSubCommandWithDefaultValues", "class_args_1_1details_1_1_a_p_i.html#a5264407739a11101ca310f78c6415d56", null ],
     [ "end", "class_args_1_1details_1_1_a_p_i.html#aaca65852a6972ae2197552c9b588a26a", null ]
 ];
