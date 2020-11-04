@@ -178,13 +178,7 @@ Help::process( Context & context )
 							tmp = cmd->findChild( arg );
 					}
 					else
-					{
-						m_printer->print( g_argsOutStream );
-
-						printed = true;
-
 						break;
-					}
 				}
 
 				if( !printed )
@@ -196,8 +190,6 @@ Help::process( Context & context )
 						m_printer->print( g_argsOutStream );
 				}
 			}
-			else if( tmp )
-				m_printer->print( arg, g_argsOutStream );
 			else
 				m_printer->print( g_argsOutStream );
 		}

@@ -1266,3 +1266,63 @@ TEST_CASE( "TestHelpOfArgInCommand" )
 
 	REQUIRE( false );
 }
+
+TEST_CASE( "TestHelpWithWrongCommand2" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ), SL( "dummy" ), SL( "dummy" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true , SL( "Add item to..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addCommand( SL( "del" ), ValueOptions::NoValue, true, SL( "Delete item from..." ) )
+			.addCommand( SL( "file" ), ValueOptions::OneValue, false, SL( "File item." ), SL( "" ),
+				SL( "" ), SL( "fn" ) )
+			.end()
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
+	.end();
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+			"Help with commands. \n"
+			"\n"
+			"USAGE: program.exe <command> <options>\n"
+			"\n"
+			"  add Add item to... \n"
+			"  del Delete item from... \n"
+			"\n"
+			"OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"Help with commands. \n"
+			"\n"
+			"USAGE: program.exe <command> <options>\n"
+			"\n"
+			"  add Add item to... \n"
+			"  del Delete item from... \n"
+			"\n"
+			"OPTIONAL:\n"
+			" -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
