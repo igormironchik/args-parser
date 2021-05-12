@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Args: Main Page</title>
+<title>args-parser: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,8 +25,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Args
-   &#160;<span id="projectnumber">6.0.0.0</span>
+   <div id="projectname">args-parser
+   &#160;<span id="projectnumber">6.0.1.0</span>
    </div>
   </td>
  </tr>
@@ -83,7 +83,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Args Documentation</div>  </div>
+<div class="title">args-parser Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="syntax"></a>
@@ -98,23 +98,23 @@ Syntax</h1>
 <li><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Args::Command</a> class can be used to define command in command line interface. Command is the argument without dash/dashes at the beginning, <code>add</code> for example. </li>
 <li><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Args::Command</a> can has children arguments or even subcommands. </li>
 <li>In <a class="el" href="namespace_args.html">Args</a> groups can be used to group arguments into groups to check their definitions after parsing, so if constraint of group will be violated exception will be thrown. </li>
-<li><a class="el" href="namespace_args.html">Args</a> provides <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> argument that provides help printing. <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> uses <code>-h</code>, <code>&ndash;help</code> arguments. <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> can receive value with name of argument or command to print help about. If <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> will receive name of the command as value then can be set second value with name of subcommand or child argument to receive help about child argument. </li>
-<li>If <a class="el" href="namespace_args.html">Args</a> don't know about argument in command line interface it provides information about possible arguments if some misspelling was in command line interface. If <a class="el" href="namespace_args.html">Args</a> can't assume anything about entered argument it will just say about unknown argument through the exception and parsing will fail.</li>
+<li>args-parser provides <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> argument that provides help printing. <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> uses <code>-h</code>, <code>&ndash;help</code> arguments. <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> can receive value with name of argument or command to print help about. If <a class="el" href="class_args_1_1_help.html" title="Help argument.">Args::Help</a> will receive name of the command as value then can be set second value with name of subcommand or child argument to receive help about child argument. </li>
+<li>If args-parser don't know about argument in command line interface it provides information about possible arguments if some misspelling was in command line interface. If args-parser can't assume anything about entered argument it will just say about unknown argument through the exception and parsing will fail.</li>
 </ul>
 <h1><a class="anchor" id="types"></a>
 Different types of strings.</h1>
-<p>Since version 4.0.0 <a class="el" href="namespace_args.html">Args</a> can be built with different strings - std::string, std::wstring and QString.</p>
+<p>Since version 4.0.0 args-parser can be built with different strings - std::string, std::wstring and QString.</p>
 <ul>
-<li>To build <a class="el" href="namespace_args.html">Args</a> with <code>std::wstring</code> support define <code>ARGS_WSTRING_BUILD</code> </li>
-<li>To build <a class="el" href="namespace_args.html">Args</a> with <code>QString</code> support define <code>ARGS_QSTRING_BUILD</code> </li>
-<li>If nothing was defined then <a class="el" href="namespace_args.html">Args</a> will be build with <code>std::string</code>.</li>
+<li>To build args-parser with <code>std::wstring</code> support define <code>ARGS_WSTRING_BUILD</code> </li>
+<li>To build args-parser with <code>QString</code> support define <code>ARGS_QSTRING_BUILD</code> </li>
+<li>If nothing was defined then args-parser will be build with <code>std::string</code>.</li>
 </ul>
 <h1><a class="anchor" id="stringlist"></a>
 Different types of list of strings.</h1>
-<p><a class="el" href="namespace_args.html">Args</a> extensively uses list of string in internal structures and to return values of arguments outside. In the code this is <a class="el" href="namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a" title="List of strings.">Args::StringList</a> type defined in <a class="el" href="types_8hpp.html">Args/types.hpp</a>. By default underlying type is <code>std::vector</code> or <code>QVector</code> when building with Qt that can be changed to <code>std::list</code>, <code>QLinkedList</code> or <code>std::deque</code>, <code>QList</code>.</p>
+<p>args-parser extensively uses list of string in internal structures and to return values of arguments outside. In the code this is <a class="el" href="namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a" title="List of strings.">Args::StringList</a> type defined in <a class="el" href="types_8hpp.html">args-parser/types.hpp</a>. By default underlying type is <code>std::vector</code> or <code>QVector</code> when building with Qt that can be changed to <code>std::list</code>, <code>QLinkedList</code> or <code>std::deque</code>, <code>QList</code>.</p>
 <ul>
-<li>Define <code>ARGS_LIST</code> to build <a class="el" href="namespace_args.html">Args</a> with <code>std::list</code>, <code>QLinkedList</code> as <code>StringList</code> </li>
-<li>Define <code>ARGS_DEQUE</code> to build <a class="el" href="namespace_args.html">Args</a> with <code>std::deque</code>, <code>QList</code> as <code>StringList</code> </li>
+<li>Define <code>ARGS_LIST</code> to build args-parser with <code>std::list</code>, <code>QLinkedList</code> as <code>StringList</code> </li>
+<li>Define <code>ARGS_DEQUE</code> to build args-parser with <code>std::deque</code>, <code>QList</code> as <code>StringList</code> </li>
 </ul>
 <h1><a class="anchor" id="qa"></a>
 Q/A</h1>
@@ -122,20 +122,16 @@ Q/A</h1>
 <ul>
 <li>This is impossible because constructors will be ambiguous but you can use auxiliary API that allows to define arguments in one line of code.</li>
 </ul>
-<p>How can I add <a class="el" href="namespace_args.html">Args</a> to my project?</p>
+<p>How can I add args-parser to my project?</p>
 <ul>
-<li>The simplest way is just copy <a class="el" href="namespace_args.html">Args</a> directory with headers to any location in your project. With CMake you can clone entire <a class="el" href="namespace_args.html">Args</a> project somewhere in your project and just do <code>add_subdirectory()</code>, if you will do so you have to add include directory path to your project with <code>include_directories</code>( <code>${Args_INCLUDE_DIRECTORIES}</code> <code></code>). With QMake you can use <code>Args/Args.pri</code>.</li>
+<li>The simplest way is just copy args-parser directory with headers to any location in your project. With CMake you can clone entire args-parser project somewhere in your project and just do <code>add_subdirectory()</code>, if you will do so you have to add include directory path to your project with <code>include_directories</code>( <code>${args-parser_INCLUDE_DIRECTORIES}</code> <code></code>).</li>
 </ul>
 <ul>
-<li>You can clone/download <a class="el" href="namespace_args.html">Args</a>, build and install <a class="el" href="namespace_args.html">Args</a> with CMake. In this case it will be possible to use <code>find_package</code>( <code><a class="el" href="namespace_args.html">Args</a></code> <code></code>) in CMakeLists.txt of your project, and sure you can use <code>${Args_INCLUDE_DIRECTORIES}</code> in your CMake scripts.</li>
-</ul>
-<p>What does <code>runtests.rb</code> file for?</p>
-<ul>
-<li><code>runtests.rb</code> is simple Ruby script to launch all tests. This file is copying to build directory by CMake and QMake and can be used to launch tests. And sure with CMake you can use ctest executable to launch tests too.</li>
+<li>You can clone/download args-parser, build and install it with CMake. In this case it will be possible to use <code>find_package</code>( <code>args-parser</code> <code></code>) in CMakeLists.txt of your project.</li>
 </ul>
 <p>Why should I use this library?</p>
 <ul>
-<li>There are tons of libraries for parsing command line arguments in the Internet. But <a class="el" href="namespace_args.html">Args</a> provides possibility to define commands, for example<br  />
+<li>There are tons of libraries for parsing command line arguments in the Internet. But args-parser provides possibility to define commands, for example<br  />
 <br  />
 <pre class="fragment">git add -A
 git commit
@@ -155,10 +151,10 @@ Changelog</h1>
 <p>In this version was removed <code>ArgAsCommand</code> class, and was added fully-featured support for sub-commands, that can be created with <a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Args::Command</a> class, i.e. <a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Args::Command</a> can has <a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Args::Command</a> as child. So it's possible to create such cli as</p>
 <pre class="fragment">git submodule update --init --recursive </pre><h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>First of all you must know that practically all classes of the <a class="el" href="namespace_args.html">Args</a> throws exceptions on errors and there is one specific exceptions that inform you about that that help was shown. This specific exception (<code>HelpHasBeenPrintedException</code>) is needed for processing program's logic that usually stops execution at this point.</p>
-<p>Since version 5.0.0 <a class="el" href="namespace_args.html">Args</a> provides two API: the old one and auxiliary API that allows to define arguments in one line of code. Let's look.</p>
-<div class="fragment"><div class="line"><span class="comment">// Args include.</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="all_8hpp.html">Args/all.hpp</a>&gt;</span></div>
+<p>First of all you must know that practically all classes of the args-parser throws exceptions on errors and there is one specific exceptions that inform you about that that help was shown. This specific exception (<code>HelpHasBeenPrintedException</code>) is needed for processing program's logic that usually stops execution at this point.</p>
+<p>Since version 5.0.0 args-parser provides two API: the old one and auxiliary API that allows to define arguments in one line of code. Let's look.</p>
+<div class="fragment"><div class="line"><span class="comment">// args-parser include.</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="all_8hpp.html">args-parser/all.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_args.html">Args</a>;</div>
 <div class="line"> </div>
@@ -176,7 +172,7 @@ Example</h1>
 <div class="line">        .end()</div>
 <div class="line">      .end()</div>
 <div class="line">      .addHelp( <span class="keyword">true</span>, argv[ 0 ],</div>
-<div class="line">        <span class="stringliteral">&quot;This application just show power of the Args help.&quot;</span> );</div>
+<div class="line">        <span class="stringliteral">&quot;This application just show power of the args-parser help.&quot;</span> );</div>
 <div class="line"> </div>
 <div class="line">    cmd.parse();</div>
 <div class="line"> </div>
@@ -198,8 +194,8 @@ Example</h1>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>And with the old syntax.</p>
-<div class="fragment"><div class="line"><span class="comment">// Args include.</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="all_8hpp.html">Args/all.hpp</a>&gt;</span></div>
+<div class="fragment"><div class="line"><span class="comment">// args-parser include.</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="all_8hpp.html">args-parser/all.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// C++ include.</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -246,7 +242,7 @@ Example</h1>
 <div class="line">    help.<a class="code" href="class_args_1_1_help.html#a48a728755a2dff6c3a1bcfffcf565b25">setExecutable</a>( argv[ 0 ] );</div>
 <div class="line">    <span class="comment">// And set description of the application.</span></div>
 <div class="line">    help.<a class="code" href="class_args_1_1_help.html#a9c0fd6b01d09eb02e29fecf81d34409c">setAppDescription</a>( <span class="stringliteral">&quot;This application just show &quot;</span></div>
-<div class="line">      <span class="stringliteral">&quot;the power of Args.&quot;</span> );</div>
+<div class="line">      <span class="stringliteral">&quot;the power of args-parser.&quot;</span> );</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Now add our argument to the command line.</span></div>
 <div class="line">    cmd.addArg( host );</div>
@@ -274,7 +270,7 @@ Example</h1>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Help output for the example with the old syntax.</p>
-<pre class="fragment">This application just show the power of Args.
+<pre class="fragment">This application just show the power of args-parser.
 
 USAGE: sample.help.exe -s, --host &lt;arg&gt; -p, --port &lt;arg&gt; [ -h, --help &lt;arg&gt; ]
        [ --timeout &lt;ms&gt; ]

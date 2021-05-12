@@ -22,7 +22,7 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "Args", "index.html", [
+  [ "args-parser", "index.html", [
     [ "Syntax", "index.html#syntax", null ],
     [ "Different types of strings.", "index.html#types", null ],
     [ "Different types of list of strings.", "index.html#stringlist", null ],
