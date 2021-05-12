@@ -1,5 +1,0 @@
-
-DEFINES += ARGS_QSTRING_BUILD
-
-QT += core
-QT -= gui

@@ -1,5 +1,5 @@
-// Args include.
-#include <Args/all.hpp>
+// args-parser include.
+#include <args-parser/all.hpp>
 
 // C++ include.
 #include <iostream>
@@ -46,7 +46,7 @@ int main( int argc, char ** argv )
     help.setExecutable( argv[ 0 ] );
     // And set description of the application.
     help.setAppDescription( "This application just show "
-      "the power of Args." );
+      "the power of args-parser." );
 
 	// Now add our argument to the command line.
 	cmd.addArg( host );

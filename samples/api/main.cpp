@@ -30,7 +30,7 @@
 */
 
 // Args include.
-#include <Args/all.hpp>
+#include <args-parser/all.hpp>
 
 
 using namespace Args;

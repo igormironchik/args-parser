@@ -1,5 +1,5 @@
-// Args include.
-#include <Args/all.hpp>
+// args-parser include.
+#include <args-parser/all.hpp>
 
 using namespace Args;
 
@@ -17,7 +17,7 @@ int main( int argc, char ** argv )
         .end()
       .end()
       .addHelp( true, argv[ 0 ],
-        "This application just show power of the Args help." );
+        "This application just show power of the args-parser help." );
 
     cmd.parse();
 

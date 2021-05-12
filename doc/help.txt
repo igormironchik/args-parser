@@ -1,4 +1,4 @@
-This application just show the power of Args.
+This application just show the power of args-parser.
 
 USAGE: sample.help.exe -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ]
        [ --timeout <ms> ]

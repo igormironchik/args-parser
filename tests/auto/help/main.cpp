@@ -33,7 +33,7 @@
 #include <doctest.h>
 
 // Args include.
-#include <Args/all.hpp>
+#include <args-parser/all.hpp>
 
 #ifdef ARGS_QSTRING_BUILD
 	#include <QString>
