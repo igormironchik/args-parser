@@ -92,6 +92,12 @@ Internet. But args-parser provides possibility to define commands, for example
     If you need only simple arguments in style `--do-it <value>` then possibly
     you will find another library more useful for you, but who knows...
 
+    This library is highly efficient in performance. On Intel (R) Core (TM)
+    i5-7200U CPU @ 2.50GHz args-parser occupies 0.5 milliseconds for 1000
+    arguments vith value. Really, guys, do you look at performance or something
+    that library can do? This library is very flexible with powerfull help
+    printing. What do you need more?
+
 # Changelog
 
  * 6.0.0.0
