@@ -353,64 +353,6 @@ TEST_CASE( "TestArgEmptyNameAndFlag" )
 	REQUIRE( false );
 }
 
-TEST_CASE( "TestCommandIngroup" )
-{
-	try {
-		AllOfGroup g( SL( "" ) );
-		Command c( SL( "c" ) );
-		g.addArg( (ArgIface&) c );
-	}
-	catch( const BaseException & x )
-	{
-		REQUIRE( x.desc() ==
-			SL( "Commands not allowed in groups. "
-				"You are trying to add command \"c\" to group \"\"." ) );
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
-TEST_CASE( "TestCommandIngroup2" )
-{
-	try {
-		AllOfGroup g( SL( "" ) );
-		AllOfGroup::ArgPtr c( new Command( SL( "c" ) ),
-			details::Deleter< ArgIface > ( true ) );
-		g.addArg( std::move( c ) );
-	}
-	catch( const BaseException & x )
-	{
-		REQUIRE( x.desc() ==
-			SL( "Commands not allowed in groups. "
-				"You are trying to add command \"c\" to group \"\"." ) );
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
-TEST_CASE( "TestCommandIngroup3" )
-{
-	try {
-		AllOfGroup g( SL( "" ) );
-		Command c( SL( "c" ) );
-		g.addArg( (ArgIface*) &c );
-	}
-	catch( const BaseException & x )
-	{
-		REQUIRE( x.desc() ==
-			SL( "Commands not allowed in groups. "
-				"You are trying to add command \"c\" to group \"\"." ) );
-
-		return;
-	}
-
-	REQUIRE( false );
-}
-
 TEST_CASE( "TestUnknownFlag" )
 {
 	try {

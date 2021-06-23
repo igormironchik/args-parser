@@ -575,3 +575,122 @@ TEST_CASE( "JustCompileIt" )
 				{ SL( "3" ), SL( "4" ) }, SL( "vs" ) ).end()
 		.end().end();
 }
+
+TEST_CASE( "CommandInGroup1" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "compress" ), SL( "./dir" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( "extract", ValueOptions::OneValue,
+			false, "Extract file", "", "", "fn" )
+		.end()
+		.addOnlyOneGroup( "use command or option, not both" )
+			.addCommand( "compress", ValueOptions::OneValue,
+				false, "Compress file", "", "", "fn" )
+			.end()
+			.addArgWithFlagOnly( 'c', true, false, "Compress file",
+				"Compress file or folder", "", "fn" )
+		.end()
+		.addHelp( true, argv[ 0 ], "unzip application" );
+
+	cmd.parse();
+
+	REQUIRE( cmd.isDefined( "compress" ) == true );
+	REQUIRE( cmd.value( "compress" ) == SL( "./dir" ) );
+	REQUIRE( cmd.isDefined( "extract" ) == false );
+	REQUIRE( cmd.isDefined( "-c" ) == false );
+}
+
+TEST_CASE( "CommandInGroup2" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-c" ), SL( "./dir" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( "extract", ValueOptions::OneValue,
+			false, "Extract file", "", "", "fn" )
+		.end()
+		.addOnlyOneGroup( "use command or option, not both" )
+			.addCommand( "compress", ValueOptions::OneValue,
+				false, "Compress file", "", "", "fn" )
+			.end()
+			.addArgWithFlagOnly( 'c', true, false, "Compress file",
+				"Compress file or folder", "", "fn" )
+		.end()
+		.addHelp( true, argv[ 0 ], "unzip application" );
+
+	cmd.parse();
+
+	REQUIRE( cmd.isDefined( "-c" ) == true );
+	REQUIRE( cmd.value( "-c" ) == SL( "./dir" ) );
+	REQUIRE( cmd.isDefined( "extract" ) == false );
+	REQUIRE( cmd.isDefined( "compress" ) == false );
+}
+
+TEST_CASE( "CommandInGroup3" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "extract" ), SL( "1.zip" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( "extract", ValueOptions::OneValue,
+			false, "Extract file", "", "", "fn" )
+		.end()
+		.addOnlyOneGroup( "use command or option, not both" )
+			.addCommand( "compress", ValueOptions::OneValue,
+				false, "Compress file", "", "", "fn" )
+			.end()
+			.addArgWithFlagOnly( 'c', true, false, "Compress file",
+				"Compress file or folder", "", "fn" )
+		.end()
+		.addHelp( true, argv[ 0 ], "unzip application" );
+
+	cmd.parse();
+
+	REQUIRE( cmd.isDefined( "extract" ) == true );
+	REQUIRE( cmd.value( "extract" ) == SL( "1.zip" ) );
+	REQUIRE( cmd.isDefined( "-c" ) == false );
+	REQUIRE( cmd.isDefined( "compress" ) == false );
+}
+
+TEST_CASE( "CommandInGroup4" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-c" ), SL( "./dir" ), SL( "compress" ), SL( "./dir" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( "extract", ValueOptions::OneValue,
+			false, "Extract file", "", "", "fn" )
+		.end()
+		.addOnlyOneGroup( "use command or option, not both" )
+			.addCommand( "compress", ValueOptions::OneValue,
+				false, "Compress file", "", "", "fn" )
+			.end()
+			.addArgWithFlagOnly( 'c', true, false, "Compress file",
+				"Compress file or folder", "", "fn" )
+		.end()
+		.addHelp( true, argv[ 0 ], "unzip application" );
+
+	try {
+		cmd.parse();
+	}
+	catch( const BaseException & x )
+	{
+		REQUIRE( x.desc() ==
+			SL( "Only one argument can be defined in OnlyOne group \"use command or option, "
+				"not both\". Whereas defined \"compress\" and \"-c\"." ) );
+
+		return;
+	}
+
+	REQUIRE( false );
+}

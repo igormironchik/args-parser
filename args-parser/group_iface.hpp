@@ -107,11 +107,6 @@ public:
 	//! Add argument.
 	void addArg( ArgPtr arg )
 	{
-		if( arg->type() == ArgType::Command )
-			throw BaseException( String( SL( "Commands not allowed in groups. "
-				"You are trying to add command \"" ) ) + arg->name() +
-				SL( "\" to group \"" ) + name() + SL( "\"." ) );
-
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )
 		{

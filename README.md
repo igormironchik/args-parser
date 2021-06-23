@@ -106,6 +106,10 @@ Internet. But args-parser provides possibility to define commands, for example
     support for sub-commands, that can be created with `Command` class, i.e.
     `Command` can has `Command` as child. So it's possible to create such cli
     as `git submodule update --init --recursive`.
+    
+ * 6.1.0.0
+ 
+     Added possibility to add `Command` into groups.
 
 # Example
 
