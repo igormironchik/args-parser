@@ -641,11 +641,11 @@ TEST_CASE( "CommandInGroup3" )
 	CmdLine cmd( argc, argv );
 
 	cmd.addCommand( "extract", ValueOptions::OneValue,
-			false, "Extract file", "", "", "fn" )
+			false, "Extract file", "Extract file", "", "fn" )
 		.end()
 		.addOnlyOneGroup( "use command or option, not both" )
 			.addCommand( "compress", ValueOptions::OneValue,
-				false, "Compress file", "", "", "fn" )
+				false, "Compress file", "Compress file", "./", "fn" )
 			.end()
 			.addArgWithFlagOnly( 'c', true, false, "Compress file",
 				"Compress file or folder", "", "fn" )
@@ -658,6 +658,8 @@ TEST_CASE( "CommandInGroup3" )
 	REQUIRE( cmd.value( "extract" ) == SL( "1.zip" ) );
 	REQUIRE( cmd.isDefined( "-c" ) == false );
 	REQUIRE( cmd.isDefined( "compress" ) == false );
+
+	REQUIRE( cmd.value( "compress" ) == SL( "./" ) );
 }
 
 TEST_CASE( "CommandInGroup4" )
@@ -693,4 +695,38 @@ TEST_CASE( "CommandInGroup4" )
 	}
 
 	REQUIRE( false );
+}
+
+TEST_CASE( "CommandInGroup5" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "extract" ), SL( "1.zip" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( "extract", ValueOptions::OneValue,
+			false, "Extract file", "Extract file", "", "fn" )
+		.end()
+		.addOnlyOneGroup( "use command or option, not both" )
+			.addCommandWithDefaultValues( "compress", ValueOptions::OneValue,
+				false, "Compress file", "Compress file", { "./", "~/Work" } , "fn" )
+			.end()
+			.addArgWithFlagOnly( 'c', true, false, "Compress file",
+				"Compress file or folder", "", "fn" )
+		.end()
+		.addHelp( true, argv[ 0 ], "unzip application" );
+
+	cmd.parse();
+
+	REQUIRE( cmd.isDefined( "extract" ) == true );
+	REQUIRE( cmd.value( "extract" ) == SL( "1.zip" ) );
+	REQUIRE( cmd.isDefined( "-c" ) == false );
+	REQUIRE( cmd.isDefined( "compress" ) == false );
+
+	REQUIRE( cmd.value( "compress" ) == SL( "./" ) );
+	const auto values = cmd.values( "compress" );
+	REQUIRE( values.size() == 2 );
+	REQUIRE( values.at( 0 ) == SL( "./" ) );
+	REQUIRE( values.at( 1 ) == SL( "~/Work" ) );
 }
