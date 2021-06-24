@@ -730,3 +730,76 @@ TEST_CASE( "CommandInGroup5" )
 	REQUIRE( values.at( 0 ) == SL( "./" ) );
 	REQUIRE( values.at( 1 ) == SL( "~/Work" ) );
 }
+
+TEST_CASE( "CommandInGroup6" )
+{
+	const int argc = 4;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "extract" ), SL( "file" ), SL( "1.zip" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addOnlyOneGroup( "command or option" )
+		.addCommand( "extract", ValueOptions::NoValue,
+			true, "Extract file", "Extract file", "", "" )
+				.addOnlyOneGroup( "file or folder" )
+					.addCommand( "file", ValueOptions::ManyValues, false, "Extract file",
+						"Extract file", "", "fn" )
+					.end()
+					.addCommand( "folder", ValueOptions::ManyValues, false, "Extract folder",
+						"Extract folder", "", "dir" )
+					.end()
+				.end()
+		.end()
+		.addArgWithFlagOnly( 'e', true, false, "Extract file", "Extract file", "", "fn" )
+	.end()
+	.addHelp( true, argv[ 0 ], "commands in groups" );
+
+	cmd.parse();
+
+	REQUIRE( cmd.isDefined( "extract" ) == true );
+	REQUIRE( cmd.isDefined( "file" ) == true );
+
+	REQUIRE( cmd.value( "file" ) == SL( "1.zip" ) );
+	const auto values = cmd.values( "file" );
+	REQUIRE( values.size() == 1 );
+	REQUIRE( values.at( 0 ) == SL( "1.zip" ) );
+
+	REQUIRE( cmd.isDefined( "folder" ) == false );
+	REQUIRE( cmd.isDefined( "-e" ) == false );
+}
+
+TEST_CASE( "CommandInGroup7" )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "extract" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addOnlyOneGroup( "command or option" )
+		.addCommand( "extract", ValueOptions::NoValue,
+			true, "Extract file", "Extract file", "", "" )
+				.addOnlyOneGroup( "file or folder" )
+					.addCommand( "file", ValueOptions::ManyValues, false, "Extract file",
+						"Extract file", "", "fn" )
+					.end()
+					.addCommand( "folder", ValueOptions::ManyValues, false, "Extract folder",
+						"Extract folder", "", "dir" )
+					.end()
+				.end()
+		.end()
+		.addArgWithFlagOnly( 'e', true, false, "Extract file", "Extract file", "", "fn" )
+	.end()
+	.addHelp( true, argv[ 0 ], "commands in groups" );
+
+	try {
+		cmd.parse();
+	}
+	catch( const BaseException & )
+	{
+		return;
+	}
+
+	REQUIRE( false );
+}
