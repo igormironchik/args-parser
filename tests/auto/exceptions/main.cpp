@@ -263,7 +263,7 @@ TEST_CASE( "TestArgRedefinition" )
 	catch( const BaseException & x )
 	{
 		REQUIRE( x.desc() ==
-			SL( "Redefinition of argument witg flag \"-a\"." ) );
+			SL( "Redefinition of argument with flag \"-a\"." ) );
 
 		return;
 	}
