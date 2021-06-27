@@ -1753,12 +1753,6 @@ public:
 		return API< PARENT, Command, ARGPTR, false > ( m_self, c );
 	}
 
-	//! End this group. \return Parent object.
-	PARENT & end() const
-	{
-		return m_parent;
-	}
-
 private:
 	//! Parent.
 	PARENT & m_parent;

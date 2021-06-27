@@ -573,7 +573,7 @@ TEST_CASE( "JustCompileIt" )
 				SL( "3" ), SL( "vs" ) ).end()
 			.addCommandWithDefaultValues( SL( "cmd3" ), ValueOptions::NoValue, false, SL( "1" ), SL( "2" ),
 				{ SL( "3" ), SL( "4" ) }, SL( "vs" ) ).end()
-		.end().end();
+		.end();
 }
 
 TEST_CASE( "CommandInGroup1" )

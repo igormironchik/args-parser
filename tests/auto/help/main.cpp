@@ -1059,8 +1059,7 @@ TEST_CASE( "TestHelpWithCommands" )
 				SL( "" ), SL( "fn" ) )
 			.end()
 		.end()
-		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
-	.end();
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
 
 	try {
 		cmd.parse();
@@ -1117,8 +1116,7 @@ TEST_CASE( "TestHelpWithCommandsNested" )
 				SL( "" ), SL( "fn" ) )
 			.end()
 		.end()
-		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
-	.end();
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
 
 	try {
 		cmd.parse();
@@ -1171,8 +1169,7 @@ TEST_CASE( "TestHelpWithWrongCommand" )
 				SL( "" ), SL( "fn" ) )
 			.end()
 		.end()
-		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
-	.end();
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
 
 	try {
 		cmd.parse();
@@ -1237,8 +1234,7 @@ TEST_CASE( "TestHelpOfArgInCommand" )
 					SL( "Do the work set in the configuration with files." ) )
 			.end()
 		.end()
-		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
-	.end();
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
 
 	try {
 		cmd.parse();
@@ -1285,8 +1281,7 @@ TEST_CASE( "TestHelpWithWrongCommand2" )
 				SL( "" ), SL( "fn" ) )
 			.end()
 		.end()
-		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) )
-	.end();
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
 
 	try {
 		cmd.parse();

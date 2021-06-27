@@ -134,8 +134,7 @@ TEST_CASE( "TestRedifinition" )
 		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
 			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
 			.end()
-		.end()
-	.end();
+		.end();
 
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
@@ -159,8 +158,7 @@ TEST_CASE( "TestDeepRedifinition" )
 			.end()
 			.addCommand( SL( "url" ), ValueOptions::OneValue, false )
 			.end()
-		.end()
-	.end();
+		.end();
 
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }
@@ -180,8 +178,7 @@ TEST_CASE( "TestOkWithSubCommand" )
 		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
 			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
 			.end()
-		.end()
-	.end();
+		.end();
 
 	cmd.parse();
 
@@ -209,8 +206,7 @@ TEST_CASE( "TestOkWithSubCommand" )
 		.addCommand( SL( "del" ), ValueOptions::NoValue, true )
 			.addCommand( SL( "file" ), ValueOptions::OneValue, false )
 			.end()
-		.end()
-	.end();
+		.end();
 
 	REQUIRE_THROWS_AS( cmd.parse(), BaseException );
 }

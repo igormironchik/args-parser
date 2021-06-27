@@ -472,6 +472,9 @@ HelpPrinter::print( const String & name, OutStreamType & to, Command * parent )
 {
 	auto * arg = ( parent ? parent->findChild( name ) : m_cmdLine->findArgument( name ) );
 
+	if( parent && !arg )
+		arg = m_cmdLine->findArgument( name );
+
 	if( arg && arg->type() == ArgType::Command )
 	{
 		Command * cmd = static_cast < Command* > ( arg );
