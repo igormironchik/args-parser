@@ -352,7 +352,7 @@ Arg::checkCorrectnessBeforeParsing( StringList & flags,
 
 			if( it != flags.end() )
 				throw BaseException( String( SL( "Redefinition of argument "
-					"witg flag \"" ) ) + flag + SL( "\"." ) );
+					"with flag \"" ) ) + flag + SL( "\"." ) );
 			else
 				flags.push_back( flag );
 		}
