@@ -1321,3 +1321,41 @@ TEST_CASE( "TestHelpWithWrongCommand2" )
 
 	REQUIRE( false );
 }
+
+TEST_CASE( "TestHelpWithGlobalArgUnderCommand" )
+{
+	const int argc = 4;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ), SL( "add" ), SL( "-f" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::NoValue, true , SL( "Add item to..." ) )
+		.end()
+		.addArgWithFlagOnly( 'f', false, false, "File object." )
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+				 "USAGE: [ -f ] \n\n"
+				 "       File object. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"USAGE: [ -f ] \n\n"
+			"       File object. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
