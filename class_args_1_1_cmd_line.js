@@ -12,8 +12,6 @@ var class_args_1_1_cmd_line =
     [ "addArg", "class_args_1_1_cmd_line.html#abaee0982c710c5d12f045fae9b5ce01b", null ],
     [ "addArg", "class_args_1_1_cmd_line.html#a400e04c0ce3f4097e258a5ebcd1ed579", null ],
     [ "addArg", "class_args_1_1_cmd_line.html#abc86296682a6d42df7707b8edd6795a6", null ],
-    [ "addCommand", "class_args_1_1_cmd_line.html#af7d8d77eb582d80da273578f71a6d5ce", null ],
-    [ "addCommandWithDefaultValues", "class_args_1_1_cmd_line.html#ae8d50678ae60e5f4684b8ee2d0635c45", null ],
     [ "addHelp", "class_args_1_1_cmd_line.html#aa39c1a3df7c4c50e7865e02a645aa4e7", null ],
     [ "addHelp", "class_args_1_1_cmd_line.html#a73577762e4c08477f2b882d7de7934a4", null ],
     [ "arguments", "class_args_1_1_cmd_line.html#abe598c4bcdc1e2541d5e4790d7e60349", null ],
