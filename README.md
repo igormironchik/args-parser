@@ -110,6 +110,11 @@ Internet. But args-parser provides possibility to define commands, for example
  * 6.1.0.0
  
      Added possibility to add `Command` into groups.
+     
+ * 6.1.1.0
+     
+     Improved API with new syntax, not it's impossible to mess with end() methods.
+     Fixed issue with printing help of global argument under command.
 
 # Example
 
