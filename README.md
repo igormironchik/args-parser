@@ -6,8 +6,8 @@ args-parser is a small C++ header-only library for parsing command line argument
 
 # Syntax
 
- * An Argument starts with two dashes. For example `--argument`.
- * A Flag starts with one dash. For example `-b`.
+ * An argument starts with two dashes. For example `--argument`.
+ * A flag starts with one dash. For example `-b`.
  * If an argument has a value, then the value can be specified after a space or after an equal sign.
 For example `--argument value` and `--argument=value`.
  * Flags without values can be combined into one block. For example
