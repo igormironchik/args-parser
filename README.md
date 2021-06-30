@@ -6,15 +6,14 @@ args-parser is a small C++ header-only library for parsing command line argument
 
 # Syntax
 
- * Argument starts with two dashes. For example `--argument`.
- * Flag starts with one dash. For example `-b`.
- * If argument has value than value can be specified after space or after equal sign.
+ * An Argument starts with two dashes. For example `--argument`.
+ * A Flag starts with one dash. For example `-b`.
+ * If an argument has a value, then the value can be specified after a space or after an equal sign.
 For example `--argument value` and `--argument=value`.
  * Flags without values can be combined into one block. For example
 `-abc` defines three flags `-a`, `-b` and `-c`.
- * The last flag in flag's block can be with value. Then it's possible to type the next
-`-abc=value`. And here flag `-c` will have value `value`.
- * `MultiArg` class provides ability to define more than one value for argument. This type
+ * The last flag in a flags' block can have a value. For example `-abc=value`. And here, flag `-c` will have the value `value`.
+ * `MultiArg` class provides the ability to define more than one value for an argument. These types
 of arguments can be specified more than once in the command line. And the resulted value
 of the argument will be `StringList`.
  * `Command` class can be used to define command in command line interface.
@@ -25,9 +24,9 @@ definitions after parsing, so if constraint of group will be violated
 exception will be thrown.
  * args-parser provides `Help` argument that provides help printing. `Help`
 uses `-h, --help` arguments. `Help` can receive value with name
-of argument or command to print help about. If `Help` will receive name
-of the command as value then can be set second value with name of subcommand
-or child argument to receive help about child argument.
+of argument or command to print help about. If `Help` receives the name
+of a command as the value, then the name of a subcommand or a child argument
+can also be provided as the next value, to get help about the subcommand/child argument.
  * If args-parser don't know about argument in command line interface it provides
 information about possible arguments if some misspelling was in command
 line interface. If args-parser can't assume anything about entered argument it
@@ -78,8 +77,8 @@ your project.
 
 Why should I use this library?
 
- * There are tons of libraries for parsing command line arguments in the
-Internet. But args-parser provides possibility to define commands, for example
+ * There are tons of libraries for parsing command line arguments on the
+Internet. But args-parser also provides the possibility to define commands, like
 
     ```
     git add -A
@@ -87,7 +86,7 @@ Internet. But args-parser provides possibility to define commands, for example
     git push
     ```
 
-    Help output is very user-friendly. I tried to do help very useful for user.
+    Help output is very user-friendly.
 
     If you need only simple arguments in style `--do-it <value>` then possibly
     you will find another library more useful for you, but who knows...
