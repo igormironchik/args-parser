@@ -281,3 +281,7 @@ OPTIONAL:
 ```
 
 That's it. Use it and enjoy it. Good luck.
+
+# Donate
+
+[Donate with BTC](https://github.com/igormironchik)
