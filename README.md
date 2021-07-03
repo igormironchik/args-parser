@@ -112,7 +112,7 @@ Internet. But args-parser also provides the possibility to define commands, like
      
  * 6.1.1.0
      
-     Improved API with new syntax, not it's impossible to mess with end() methods.
+     Improved API with new syntax, now it's impossible to mess with end() methods.
      Fixed issue with printing help of global argument under command.
 
 # Example
