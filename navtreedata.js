@@ -23,14 +23,13 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "args-parser", "index.html", [
-    [ "Syntax", "index.html#syntax", null ],
-    [ "Different types of strings.", "index.html#types", null ],
-    [ "Different types of list of strings.", "index.html#stringlist", null ],
-    [ "Q/A", "index.html#qa", null ],
-    [ "Changelog", "index.html#changelog", [
-      [ "6.0.0.0", "index.html#six_zero", null ]
-    ] ],
-    [ "Example", "index.html#example", null ],
+    [ "Syntax", "index.html#autotoc_md0", null ],
+    [ "Different types of strings.", "index.html#autotoc_md1", null ],
+    [ "Different types of list of strings.", "index.html#autotoc_md2", null ],
+    [ "Q/A", "index.html#autotoc_md3", null ],
+    [ "Changelog", "index.html#autotoc_md4", null ],
+    [ "Example", "index.html#autotoc_md5", null ],
+    [ "Donate", "index.html#autotoc_md6", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
