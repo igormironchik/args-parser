@@ -168,6 +168,55 @@ int main( int argc, char ** argv )
 }
 ```
 
+```cpp
+#include <args-parser/all.hpp>
+
+using namespace Args;
+
+void process( bool b, const std::string & value )
+{
+  outStream() << "Boolean: " << b << " , value: \"" << value << "\"\n";
+}
+
+int main( int argc, char ** argv )
+{
+  try {
+    CmdLine cmd( argc, argv );
+
+    cmd.addArgWithFlagAndName( 'b', "bool", false, false, "Boolean flag",
+        "Boolean flag, used without value" )
+      .addArgWithFlagAndName( 'v', "value", true, false, "With value",
+        "Argument with value", "", "VAL" )
+      .addHelp( true, argv[ 0 ], "CLI with boolean and value." );
+
+    cmd.parse();
+
+    bool b = false;
+    std::string value;
+
+    if( cmd.isDefined( "-b" ) )
+      b = true;
+
+    if( cmd.isDefined( "-v" ) )
+      value = cmd.value( "-v" );
+
+    process( b, value );
+  }
+  catch( const HelpHasBeenPrintedException & )
+  {
+    return 0;
+  }
+  catch( const BaseException & x )
+  {
+    outStream() << x.desc() << "\n";
+
+    return 1;
+  }
+
+  return 0;
+}
+```
+
 And with the old syntax.
 
 
