@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">args-parser Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://github.com/igormironchik/args-parser/actions"><img src="https://github.com/igormironchik/args-parser/workflows/build/badge.svg"></a><a href="https://codecov.io/gh/igormironchik/args-parser"><img src="https://codecov.io/gh/igormironchik/args-parser/branch/master/graph/badge.svg"></a><a href="https://opensource.org/licenses/MIT"><object type="image/svg+xml" data="https://img.shields.io/badge/license-MIT-blue.svg" style="pointer-events: none;">License: MIT</object></a></p>
+<div class="textblock"><p><a href="https://github.com/igormironchik/args-parser/actions"><img src="https://github.com/igormironchik/args-parser/workflows/build/badge.svg"></a><a href="https://codecov.io/gh/igormironchik/args-parser"><img src="https://codecov.io/gh/igormironchik/args-parser/branch/master/graph/badge.svg"></a><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a></p>
 <p>This is args-parser.</p>
 <p>args-parser is a small C++ header-only library for parsing command line arguments.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
@@ -136,8 +136,7 @@ Q/A</h1>
 
 <pre class="fragment">git add -A
 git commit
-git push
-</pre>
+git push</pre>
 
 <p>Help output is very user-friendly.</p>
 
@@ -194,6 +193,52 @@ Example</h1>
 <div class="line">    <span class="keywordflow">if</span>( cmd.isDefined( <span class="stringliteral">&quot;file&quot;</span> ) )</div>
 <div class="line">      <span class="keywordflow">for</span>( <span class="keyword">const</span> <span class="keyword">auto</span> &amp; fn : cmd.values( <span class="stringliteral">&quot;file&quot;</span> ) )</div>
 <div class="line">        outStream() &lt;&lt; fn &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">catch</span>( <span class="keyword">const</span> <a class="code" href="class_args_1_1_help_has_been_printed_exception.html">HelpHasBeenPrintedException</a> &amp; )</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">catch</span>( <span class="keyword">const</span> <a class="code" href="class_args_1_1_base_exception.html">BaseException</a> &amp; x )</div>
+<div class="line">  {</div>
+<div class="line">    outStream() &lt;&lt; x.<a class="code" href="class_args_1_1_base_exception.html#a13b3de9b6eb0fe2653233f848c5bcca9">desc</a>() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> 1;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="all_8hpp.html">args-parser/all.hpp</a>&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_args.html">Args</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> process( <span class="keywordtype">bool</span> b, <span class="keyword">const</span> std::string &amp; value )</div>
+<div class="line">{</div>
+<div class="line">  outStream() &lt;&lt; <span class="stringliteral">&quot;Boolean: &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; , value: \&quot;&quot;</span> &lt;&lt; value &lt;&lt; <span class="stringliteral">&quot;\&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> ** argv )</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">try</span> {</div>
+<div class="line">    <a class="code" href="class_args_1_1_cmd_line.html">CmdLine</a> cmd( argc, argv );</div>
+<div class="line"> </div>
+<div class="line">    cmd.addArgWithFlagAndName( <span class="charliteral">&#39;b&#39;</span>, <span class="stringliteral">&quot;bool&quot;</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="stringliteral">&quot;Boolean flag&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;Boolean flag, used without value&quot;</span> )</div>
+<div class="line">      .addArgWithFlagAndName( <span class="charliteral">&#39;v&#39;</span>, <span class="stringliteral">&quot;value&quot;</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="stringliteral">&quot;With value&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;Argument with value&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;VAL&quot;</span> )</div>
+<div class="line">      .addHelp( <span class="keyword">true</span>, argv[ 0 ], <span class="stringliteral">&quot;CLI with boolean and value.&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    cmd.parse();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">bool</span> b = <span class="keyword">false</span>;</div>
+<div class="line">    std::string value;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span>( cmd.isDefined( <span class="stringliteral">&quot;-b&quot;</span> ) )</div>
+<div class="line">      b = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span>( cmd.isDefined( <span class="stringliteral">&quot;-v&quot;</span> ) )</div>
+<div class="line">      value = cmd.value( <span class="stringliteral">&quot;-v&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    process( b, value );</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">catch</span>( <span class="keyword">const</span> <a class="code" href="class_args_1_1_help_has_been_printed_exception.html">HelpHasBeenPrintedException</a> &amp; )</div>
 <div class="line">  {</div>
