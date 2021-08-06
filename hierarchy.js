@@ -24,7 +24,7 @@ var hierarchy =
     [ "Args::HelpPrinterIface", "class_args_1_1_help_printer_iface.html", [
       [ "Args::HelpPrinter", "class_args_1_1_help_printer.html", null ]
     ] ],
-    [ "logic_error", null, [
+    [ "std::logic_error", null, [
       [ "Args::BaseException", "class_args_1_1_base_exception.html", [
         [ "Args::HelpHasBeenPrintedException", "class_args_1_1_help_has_been_printed_exception.html", null ]
       ] ]
