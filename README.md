@@ -97,6 +97,33 @@ Internet. But args-parser also provides the possibility to define commands, like
     that library can do? This library is very flexible with powerfull help
     printing. What do you need more?
 
+How to print help programmatically?
+
+ * For those, who use old style syntax the answer should be on the plate, as developer
+can look at the code of `Help` class, that implements help argument. But for those, who
+prefer one-line syntax the answer can be not so evident, but it's so too. It doesn't matter
+what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. line:
+
+   ```cpp
+   cmd.addHelp( true, argv[ 0 ],
+     "This application just show power of the Args help." );
+   ```
+
+   Is just a wrapper around of `Help` class. For printing help `args-parser` uses
+   `HelpPrinter` class. So developer can use it for printing help in some rare cases,
+   as:
+
+   ```cpp
+   HelpPrinter printer;
+
+   printer.setExecutable( argv[ 0 ] );
+   printer.setAppDescription( "This application just show power of the Args help." );
+   printer.setLineLength( length );
+   printer.setCmdLine( cmd );
+
+   printer.print( outStream() );
+   ```
+
 # Changelog
 
  * 6.0.0.0
@@ -105,13 +132,13 @@ Internet. But args-parser also provides the possibility to define commands, like
     support for sub-commands, that can be created with `Command` class, i.e.
     `Command` can has `Command` as child. So it's possible to create such cli
     as `git submodule update --init --recursive`.
-    
+
  * 6.1.0.0
- 
+
      Added possibility to add `Command` into groups.
-     
+
  * 6.1.1.0
-     
+
      Improved API with new syntax, now it's impossible to mess with end() methods.
      Fixed issue with printing help of global argument under command.
 
