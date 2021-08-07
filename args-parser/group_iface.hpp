@@ -87,17 +87,13 @@ public:
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value >::type
-	addArg( T & arg )
+	void addArg( ArgIface & arg )
 	{
 		addArg( ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value >::type
-	addArg( T * arg )
+	void addArg( ArgIface * arg )
 	{
 		addArg( ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
 	}

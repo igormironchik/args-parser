@@ -525,10 +525,8 @@ public:
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
-		API< PARENT, Command, ARGPTR, false > >::type
-	addArg( T & arg )
+	API< PARENT, Command, ARGPTR, false >
+	addArg( ArgIface & arg )
 	{
 		m_self.addArg( arg );
 
@@ -536,10 +534,8 @@ public:
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
-		API< PARENT, Command, ARGPTR, false > >::type
-	addArg( T * arg )
+	API< PARENT, Command, ARGPTR, false >
+	addArg( ArgIface * arg )
 	{
 		m_self.addArg( arg );
 
@@ -1128,10 +1124,8 @@ public:
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
-		API< PARENT, SELF, ARGPTR, false > >::type
-	addArg( T & arg )
+	API< PARENT, SELF, ARGPTR, false >
+	addArg( ArgIface & arg )
 	{
 		m_self.addArg( arg );
 
@@ -1139,10 +1133,8 @@ public:
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
-		API< PARENT, SELF, ARGPTR, false > >::type
-	addArg( T * arg )
+	API< PARENT, SELF, ARGPTR, false >
+	addArg( ArgIface * arg )
 	{
 		m_self.addArg( arg );
 
