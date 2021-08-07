@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">args-parser<span id="projectnumber">&#160;6.1.1.2</span>
+   <div id="projectname">args-parser<span id="projectnumber">&#160;6.2.0.0</span>
    </div>
   </td>
  </tr>
@@ -159,6 +159,20 @@ template&lt;typename NAME &gt; </td></tr>
 <tr class="memitem:a7b86f2ae402f4b846c9307eef66f85af"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1details_1_1_a_p_i.html">API</a>&lt; PARENT, SELF, ARGPTR, false &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>addMultiArgWithNameOnlyAndDefaultValues</b> (NAME &amp;&amp;name, bool isWithValue=false, bool isRequired=false, const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;desc=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>(), const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;longDesc=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>(), const <a class="el" href="namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a">StringList</a> &amp;defaultValues=<a class="el" href="namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a">StringList</a>(), const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;valueSpecifier=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>())</td></tr>
 <tr class="memdesc:a7b86f2ae402f4b846c9307eef66f85af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add multi argument with name only. <br /></td></tr>
 <tr class="separator:a7b86f2ae402f4b846c9307eef66f85af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc0a55f657127afbe2f90ea4eb2984b1"><td class="memTemplParams" colspan="2"><a id="afc0a55f657127afbe2f90ea4eb2984b1" name="afc0a55f657127afbe2f90ea4eb2984b1"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:afc0a55f657127afbe2f90ea4eb2984b1"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>, T &gt;::value, <a class="el" href="class_args_1_1details_1_1_a_p_i.html">API</a>&lt; PARENT, SELF, ARGPTR, false &gt;&gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><b>addArg</b> (T &amp;arg)</td></tr>
+<tr class="memdesc:afc0a55f657127afbe2f90ea4eb2984b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add argument. <br /></td></tr>
+<tr class="separator:afc0a55f657127afbe2f90ea4eb2984b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9430fb881b4993b450f9d297e9766ee5"><td class="memTemplParams" colspan="2"><a id="a9430fb881b4993b450f9d297e9766ee5" name="a9430fb881b4993b450f9d297e9766ee5"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9430fb881b4993b450f9d297e9766ee5"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>, T &gt;::value, <a class="el" href="class_args_1_1details_1_1_a_p_i.html">API</a>&lt; PARENT, SELF, ARGPTR, false &gt;&gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><b>addArg</b> (T *arg)</td></tr>
+<tr class="memdesc:a9430fb881b4993b450f9d297e9766ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add argument. <br /></td></tr>
+<tr class="separator:a9430fb881b4993b450f9d297e9766ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87a2c33c95aa60add0612417b31a3547"><td class="memItemLeft" align="right" valign="top"><a id="a87a2c33c95aa60add0612417b31a3547" name="a87a2c33c95aa60add0612417b31a3547"></a>
+<a class="el" href="class_args_1_1details_1_1_a_p_i.html">API</a>&lt; PARENT, SELF, ARGPTR, false &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>addArg</b> (<a class="el" href="class_args_1_1_group_iface.html#a539cbb2d7e60f80eb8eb1ac10cfd574e">GroupIface::ArgPtr</a> arg)</td></tr>
+<tr class="memdesc:a87a2c33c95aa60add0612417b31a3547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add argument. <br /></td></tr>
+<tr class="separator:a87a2c33c95aa60add0612417b31a3547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a228d7fe9539387fa5806eed5ac0bdd17"><td class="memTemplParams" colspan="2"><a id="a228d7fe9539387fa5806eed5ac0bdd17" name="a228d7fe9539387fa5806eed5ac0bdd17"></a>
 template&lt;typename NAME &gt; </td></tr>
 <tr class="memitem:a228d7fe9539387fa5806eed5ac0bdd17"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1details_1_1_a_p_i.html">API</a>&lt; <a class="el" href="class_args_1_1details_1_1_a_p_i.html">API</a>&lt; PARENT, SELF, ARGPTR, false &gt;, <a class="el" href="class_args_1_1_command.html">Command</a>, ARGPTR, false &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>addCommand</b> (NAME &amp;&amp;name, <a class="el" href="namespace_args.html#a5481495a11baecb3c28e0f4b39ff7dd0">ValueOptions</a> opt=<a class="el" href="namespace_args.html#a5481495a11baecb3c28e0f4b39ff7dd0ad50dfcd4fe8be490a6759f4396f6a4c5">ValueOptions::NoValue</a>, bool isSubCommandRequired=false, const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;desc=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>(), const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;longDesc=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>(), const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;defaultValue=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>(), const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;valueSpecifier=<a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a>())</td></tr>
@@ -178,7 +192,7 @@ PARENT &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () co
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename PARENT, typename SELF, typename ARGPTR&gt;<br />
 class Args::details::API&lt; PARENT, SELF, ARGPTR, false &gt;</div><p >Auxiliary <a class="el" href="class_args_1_1details_1_1_a_p_i.html" title="Auxiliary API.">API</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="api_8hpp_source.html#l00633">633</a> of file <a class="el" href="api_8hpp_source.html">api.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="api_8hpp_source.html#l00664">664</a> of file <a class="el" href="api_8hpp_source.html">api.hpp</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="api_8hpp_source.html">api.hpp</a></li>
 </ul>

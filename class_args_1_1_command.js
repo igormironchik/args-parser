@@ -2,9 +2,10 @@ var class_args_1_1_command =
 [
     [ "Command", "class_args_1_1_command.html#a6e06c934d5ed41261885e5a36e19dc14", null ],
     [ "~Command", "class_args_1_1_command.html#ae4493f136fed851d1222f8ad1609b2f6", null ],
-    [ "addCommand", "class_args_1_1_command.html#ad07eaf465bf01a8539631ecc0c64a9a1", null ],
-    [ "addCommand", "class_args_1_1_command.html#a57e7c64a54bc86007d5d4e2b0aac23ff", null ],
-    [ "addCommand", "class_args_1_1_command.html#aae14298b04b94512cf63e2aa3172ed4f", null ],
+    [ "addArg", "class_args_1_1_command.html#a5924b07475c3ca05e1c99305cf7bc8d5", null ],
+    [ "addArg", "class_args_1_1_command.html#a8f39710b6fb5bde263e86cbeea44323e", null ],
+    [ "addArg", "class_args_1_1_command.html#ae7b5ce09c599d6ae41cceccb76fa3a9e", null ],
+    [ "addArg", "class_args_1_1_command.html#a6e97e40f7eb4665126326ea3403b2672", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_command.html#a7867a0a188bf5f9af40928d68440e70c", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_command.html#a6260159eb5d66b337e9570055e514d33", null ],
     [ "clear", "class_args_1_1_command.html#a853e728bb0c826ae9a31bda99cf9f593", null ],
