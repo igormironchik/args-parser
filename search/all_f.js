@@ -12,11 +12,12 @@ var searchData=
   ['setflag_9',['setFlag',['../class_args_1_1_arg.html#aa4f59fb7cdcf5228e38c88afc2f3bb95',1,'Args::Arg']]],
   ['setlinelength_10',['setLineLength',['../class_args_1_1_help.html#a2cb208d20786a53d9936f1343e664eab',1,'Args::Help::setLineLength()'],['../class_args_1_1_help_printer.html#ab37fe132c82ec1139b02c2e108bfe68b',1,'Args::HelpPrinter::setLineLength()'],['../class_args_1_1_help_printer_iface.html#a577d6294d53fe468f18fdb75bb6414cc',1,'Args::HelpPrinterIface::setLineLength()']]],
   ['setlongdescription_11',['setLongDescription',['../class_args_1_1_arg.html#ab1702bc9d0a77908430d969ab1a89a98',1,'Args::Arg::setLongDescription()'],['../class_args_1_1_command.html#afab49b3a78842d0ff50f1ddae7ecf2fa',1,'Args::Command::setLongDescription()']]],
-  ['setrequired_12',['setRequired',['../class_args_1_1_group_iface.html#a6bab0ea5df847bf2740eedc6b7ee5d46',1,'Args::GroupIface::setRequired()'],['../class_args_1_1_command.html#a996142cb0b9eb14b34c8f09adbc52a50',1,'Args::Command::setRequired()'],['../class_args_1_1_arg.html#a8cc38a0bb8702fb7cf64e84d9789dc55',1,'Args::Arg::setRequired(bool on=true)']]],
-  ['setvalue_13',['setValue',['../class_args_1_1_arg.html#a49b67dfa1abfe0c3ad9c0214bfc6aec3',1,'Args::Arg::setValue()'],['../class_args_1_1_multi_arg.html#a64f8e89a187f76644f877df69453d4d1',1,'Args::MultiArg::setValue()']]],
-  ['setvaluespecifier_14',['setValueSpecifier',['../class_args_1_1_arg.html#a5ed76e4be38432249031ad766dae144e',1,'Args::Arg::setValueSpecifier()'],['../class_args_1_1_command.html#ac13675292384e44e3e30ce0bae2bb366',1,'Args::Command::setValueSpecifier()']]],
-  ['setwithvalue_15',['setWithValue',['../class_args_1_1_arg.html#acce01f42d76feced15174c0b83331478',1,'Args::Arg']]],
-  ['sl_16',['SL',['../types_8hpp.html#aa3f5a9c8674bf8da32d2f69dd383807d',1,'types.hpp']]],
-  ['string_17',['String',['../namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689',1,'Args']]],
-  ['stringlist_18',['StringList',['../namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a',1,'Args']]]
+  ['setprinter_12',['setPrinter',['../class_args_1_1_help.html#aab06842936c8939decfc52fe546f210e',1,'Args::Help']]],
+  ['setrequired_13',['setRequired',['../class_args_1_1_command.html#a996142cb0b9eb14b34c8f09adbc52a50',1,'Args::Command::setRequired()'],['../class_args_1_1_group_iface.html#a6bab0ea5df847bf2740eedc6b7ee5d46',1,'Args::GroupIface::setRequired()'],['../class_args_1_1_arg.html#a8cc38a0bb8702fb7cf64e84d9789dc55',1,'Args::Arg::setRequired(bool on=true)']]],
+  ['setvalue_14',['setValue',['../class_args_1_1_arg.html#a49b67dfa1abfe0c3ad9c0214bfc6aec3',1,'Args::Arg::setValue()'],['../class_args_1_1_multi_arg.html#a64f8e89a187f76644f877df69453d4d1',1,'Args::MultiArg::setValue()']]],
+  ['setvaluespecifier_15',['setValueSpecifier',['../class_args_1_1_arg.html#a5ed76e4be38432249031ad766dae144e',1,'Args::Arg::setValueSpecifier()'],['../class_args_1_1_command.html#ac13675292384e44e3e30ce0bae2bb366',1,'Args::Command::setValueSpecifier()']]],
+  ['setwithvalue_16',['setWithValue',['../class_args_1_1_arg.html#acce01f42d76feced15174c0b83331478',1,'Args::Arg']]],
+  ['sl_17',['SL',['../types_8hpp.html#aa3f5a9c8674bf8da32d2f69dd383807d',1,'types.hpp']]],
+  ['string_18',['String',['../namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689',1,'Args']]],
+  ['stringlist_19',['StringList',['../namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a',1,'Args']]]
 ];

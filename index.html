@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">args-parser<span id="projectnumber">&#160;6.1.1.0</span>
+   <div id="projectname">args-parser<span id="projectnumber">&#160;6.1.1.1</span>
    </div>
   </td>
  </tr>
@@ -120,16 +120,16 @@ Different types of list of strings.</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Q/A</h1>
-<p >Why not to add description, long description, etc into constructors of arguments, so it will be possible to initialize argument in one line?</p>
+<p ><b>Why not to add description, long description, etc into constructors of arguments, so it will be possible to initialize argument in one line?</b></p>
 <ul>
 <li>This is impossible because constructors will be ambiguous but you can use auxiliary API that allows to define arguments in one line of code.</li>
 </ul>
-<p >How can I add args-parser to my project?</p>
+<p ><b>How can I add args-parser to my project?</b></p>
 <ul>
 <li>The simplest way is just copy args-parser directory with headers to any location in your project. With CMake you can clone entire <code>args-parser</code> project somewhere in your project and just do <code>add_subdirectory()</code>, if you will do so you have to add include directory path to your project with <code>include_directories( ${args-parser_INCLUDE_DIRECTORIES} )</code>.</li>
 <li>You can clone/download args-parser, build and install it with CMake. In this case it will be possible to use <code>find_package( args-parser )</code> in CMakeLists.txt of your project.</li>
 </ul>
-<p >Why should I use this library?</p>
+<p ><b>Why should I use this library?</b></p>
 <ul>
 <li><p class="startli">There are tons of libraries for parsing command line arguments on the Internet. But args-parser also provides the possibility to define commands, like</p>
 <div class="fragment"><div class="line">git add -A</div>
@@ -140,7 +140,7 @@ Q/A</h1>
 <p class="startli">This library is highly efficient in performance. On Intel (R) Core (TM) i5-7200U CPU @ 2.50GHz args-parser occupies 0.5 milliseconds for 1000 arguments with value. Really, guys, do you look at performance or something that library can do? This library is very flexible with powerfull help printing. What do you need more?</p>
 </li>
 </ul>
-<p >How to print help programmatically?</p>
+<p ><b>How to print help programmatically?</b></p>
 <ul>
 <li><p class="startli">For those, who use old style syntax the answer should be on the plate, as developer can look at the code of <code>Help</code> class, that implements help argument. But for those, who prefer one-line syntax the answer can be not so evident, but it's so too. It doesn't matter what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. line:</p>
 <div class="fragment"><div class="line">cmd.addHelp( <span class="keyword">true</span>, argv[ 0 ],</div>
@@ -156,6 +156,16 @@ Q/A</h1>
 <div class="line">printer.print( outStream() );</div>
 </div><!-- fragment --></li>
 </ul>
+<p ><b>Why doesn't args-parser provide bindings of variables to arguments?</b></p>
+<ul>
+<li>This is a question of why doesn't <code>args-parser</code> provide validators? It's the same. I decided that this aspect is very application specific. There is no need for such library to do any conversions of arguments' values, to bind them to some variables. This will do API very complex only. I know what you will say: this is very nice feature, it helps... Really? How often and hom much it helped you? Arguments parser should handle the string that user provided to the application, it should separate arguments, commands, values, store it in internal state of parser, and allow to developer just write some <code>if</code> operators to choose branch of the programm logic. What will give you, as to developer, if values will be bind to concrete variables? Will not you write the same code with <code>if</code> operators? So why I should do the library more complex?</li>
+</ul>
+<p ><b>Why don't you provide comparisons with othe CLI libraries?</b></p>
+<ul>
+<li><p class="startli">I found only one library at GitHub that can compete with <code>args-parser</code>, and this is <a href="https://github.com/CLIUtils/CLI11">CLI11</a>. And here is the question of the taste more. But <code>CLI11</code> can handle commands as usual arguments, it's doesn't matter how much times they presend in command line, whereas 'args-parser' handles commands as commands. Theirs approach possibly more flexible, but when I designed <code>args-parser</code> I thought on commands as on some action to do in application's logic, whereas arguments are for data. I can do the same, but is it needed?</p>
+<p class="startli"><code>CLI11</code> has possibility to set formatter of the help, <code>args-parser</code> allow to set custom <code>HelpPrinterIface</code> on the <code>Help</code> argument. But who and when will do it? And I believe that help in <code>args-parser</code> is a little better than in <code>CLI11</code>.</p>
+</li>
+</ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Changelog</h1>
 <ul>
@@ -167,6 +177,9 @@ Changelog</h1>
 </li>
 <li><p class="startli">6.1.1.0</p>
 <p class="startli">Improved API with new syntax, now it's impossible to mess with end() methods. Fixed issue with printing help of global argument under command.</p>
+</li>
+<li><p class="startli">6.1.1.1</p>
+<p class="startli">Added possibility to set up custom help printer in help argument.</p>
 </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
@@ -354,8 +367,8 @@ Example</h1>
 <div class="ttc" id="aclass_args_1_1_cmd_line_html"><div class="ttname"><a href="class_args_1_1_cmd_line.html">Args::CmdLine</a></div><div class="ttdoc">CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ...</div><div class="ttdef"><b>Definition:</b> <a href="cmd__line_8hpp_source.html#l00115">cmd_line.hpp:118</a></div></div>
 <div class="ttc" id="aclass_args_1_1_help_has_been_printed_exception_html"><div class="ttname"><a href="class_args_1_1_help_has_been_printed_exception.html">Args::HelpHasBeenPrintedException</a></div><div class="ttdoc">This exception notifies about that help has been printed.</div><div class="ttdef"><b>Definition:</b> <a href="exceptions_8hpp_source.html#l00079">exceptions.hpp:81</a></div></div>
 <div class="ttc" id="aclass_args_1_1_help_html"><div class="ttname"><a href="class_args_1_1_help.html">Args::Help</a></div><div class="ttdoc">Help argument.</div><div class="ttdef"><b>Definition:</b> <a href="help_8hpp_source.html#l00074">help.hpp:76</a></div></div>
-<div class="ttc" id="aclass_args_1_1_help_html_a48a728755a2dff6c3a1bcfffcf565b25"><div class="ttname"><a href="class_args_1_1_help.html#a48a728755a2dff6c3a1bcfffcf565b25">Args::Help::setExecutable</a></div><div class="ttdeci">void setExecutable(const String &amp;exe)</div><div class="ttdoc">Set executable name.</div><div class="ttdef"><b>Definition:</b> <a href="help_8hpp_source.html#l00120">help.hpp:120</a></div></div>
-<div class="ttc" id="aclass_args_1_1_help_html_a9c0fd6b01d09eb02e29fecf81d34409c"><div class="ttname"><a href="class_args_1_1_help.html#a9c0fd6b01d09eb02e29fecf81d34409c">Args::Help::setAppDescription</a></div><div class="ttdeci">void setAppDescription(const String &amp;desc)</div><div class="ttdoc">Set description for the application.</div><div class="ttdef"><b>Definition:</b> <a href="help_8hpp_source.html#l00126">help.hpp:126</a></div></div>
+<div class="ttc" id="aclass_args_1_1_help_html_a48a728755a2dff6c3a1bcfffcf565b25"><div class="ttname"><a href="class_args_1_1_help.html#a48a728755a2dff6c3a1bcfffcf565b25">Args::Help::setExecutable</a></div><div class="ttdeci">void setExecutable(const String &amp;exe)</div><div class="ttdoc">Set executable name.</div><div class="ttdef"><b>Definition:</b> <a href="help_8hpp_source.html#l00123">help.hpp:123</a></div></div>
+<div class="ttc" id="aclass_args_1_1_help_html_a9c0fd6b01d09eb02e29fecf81d34409c"><div class="ttname"><a href="class_args_1_1_help.html#a9c0fd6b01d09eb02e29fecf81d34409c">Args::Help::setAppDescription</a></div><div class="ttdeci">void setAppDescription(const String &amp;desc)</div><div class="ttdoc">Set description for the application.</div><div class="ttdef"><b>Definition:</b> <a href="help_8hpp_source.html#l00129">help.hpp:129</a></div></div>
 </div><!-- fragment --><p >Help output for the example with the old syntax.</p>
 <div class="fragment"><div class="line">This application just show the power of args-parser.</div>
 <div class="line"> </div>
