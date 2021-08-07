@@ -48,7 +48,7 @@ namespace Args {
 //
 
 //! Command in the command line interface.
-class Command final
+class Command
 	:	public GroupIface
 {
 	friend class CmdLine;

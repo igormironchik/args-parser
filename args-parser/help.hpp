@@ -71,7 +71,7 @@ namespace Args {
 //
 
 //! Help argument.
-class Help final
+class Help
 	:	public Arg
 {
 public:

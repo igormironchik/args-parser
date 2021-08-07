@@ -60,7 +60,7 @@ class ArgIface;
 /*!
 	HelpPrinter is a class that prints help.
 */
-class HelpPrinter final
+class HelpPrinter
 	:	public HelpPrinterIface
 {
 public:
