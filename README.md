@@ -142,7 +142,7 @@ operators? So why I should do the library more complex?
  * I found only one library at GitHub that can compete with `args-parser`, and this is
 [CLI11](https://github.com/CLIUtils/CLI11). And here is the question of the taste more.
 But `CLI11` can handle commands as usual arguments, it's doesn't matter how much times
-they presend in command line, whereas 'args-parser' handles commands as commands. Theirs
+they presend in command line, whereas `args-parser` handles commands as commands. Theirs
 approach possibly more flexible, but when I designed `args-parser` I thought on commands
 as on some action to do in application's logic, whereas arguments are for data. I can do
 the same, but is it needed?
