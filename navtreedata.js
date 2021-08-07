@@ -68,7 +68,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_8hpp.html",
-"class_args_1_1_command.html#a8f39710b6fb5bde263e86cbeea44323e",
+"class_args_1_1_command.html#a996142cb0b9eb14b34c8f09adbc52a50",
 "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01false_01_4.html"
 ];
 
