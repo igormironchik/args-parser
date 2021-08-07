@@ -57,13 +57,13 @@ as `StringList`
 
 # Q/A
 
-Why not to add description, long description, etc into constructors of
-arguments, so it will be possible to initialize argument in one line?
+**Why not to add description, long description, etc into constructors of
+arguments, so it will be possible to initialize argument in one line?**
 
  * This is impossible because constructors will be ambiguous but you can use
 auxiliary API that allows to define arguments in one line of code.
 
-How can I add args-parser to my project?
+**How can I add args-parser to my project?**
 
  * The simplest way is just copy args-parser directory with headers to any location in
 your project. With CMake you can clone entire `args-parser` project somewhere in your
@@ -75,7 +75,7 @@ add include directory path to your project with
 case it will be possible to use `find_package( args-parser )` in CMakeLists.txt of
 your project.
 
-Why should I use this library?
+**Why should I use this library?**
 
  * There are tons of libraries for parsing command line arguments on the
 Internet. But args-parser also provides the possibility to define commands, like
@@ -97,7 +97,7 @@ Internet. But args-parser also provides the possibility to define commands, like
     that library can do? This library is very flexible with powerfull help
     printing. What do you need more?
 
-How to print help programmatically?
+**How to print help programmatically?**
 
  * For those, who use old style syntax the answer should be on the plate, as developer
 can look at the code of `Help` class, that implements help argument. But for those, who
@@ -124,6 +124,33 @@ what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. l
    printer.print( outStream() );
    ```
 
+**Why doesn't args-parser provide bindings of variables to arguments?**
+
+ * This is a question of why doesn't `args-parser` provide validators? It's the same.
+I decided that this aspect is very application specific. There is no need for such library
+to do any conversions of arguments' values, to bind them to some variables. This will
+do API very complex only. I know what you will say: this is very nice feature, it helps...
+Really? How often and hom much it helped you? Arguments parser should handle the string
+that user provided to the application, it should separate arguments, commands, values,
+store it in internal state of parser, and allow to developer just write some `if`
+operators to choose branch of the programm logic. What will give you, as to developer,
+if values will be bind to concrete variables? Will not you write the same code with `if`
+operators? So why I should do the library more complex?
+
+**Why don't you provide comparisons with othe CLI libraries?**
+
+ * I found only one library at GitHub that can compete with `args-parser`, and this is
+[CLI11](https://github.com/CLIUtils/CLI11). And here is the question of the taste more.
+But `CLI11` can handle commands as usual arguments, it's doesn't matter how much times
+they presend in command line, whereas 'args-parser' handles commands as commands. Theirs
+approach possibly more flexible, but when I designed `args-parser` I thought on commands
+as on some action to do in application's logic, whereas arguments are for data. I can do
+the same, but is it needed?
+
+   `CLI11` has possibility to set formatter of the help, `args-parser` allow to set
+   custom `HelpPrinterIface` on the `Help` argument. But who and when will do it?
+   And I believe that help in `args-parser` is a little better than in `CLI11`.
+
 # Changelog
 
  * 6.0.0.0
@@ -141,6 +168,10 @@ what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. l
 
      Improved API with new syntax, now it's impossible to mess with end() methods.
      Fixed issue with printing help of global argument under command.
+
+ * 6.1.1.1
+
+    Added possibility to set up custom help printer in help argument.
 
 # Example
 

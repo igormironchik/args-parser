@@ -86,6 +86,9 @@ public:
 	//! Set line length for the help.
 	void setLineLength( String::size_type length );
 
+	//! Set printer.
+	void setPrinter( std::unique_ptr< HelpPrinterIface > p );
+
 protected:
 	/*!
 		Process argument's staff, for example take values from
@@ -132,6 +135,12 @@ inline void
 Help::setLineLength( String::size_type length )
 {
 	m_printer->setLineLength( length );
+}
+
+inline void
+Help::setPrinter( std::unique_ptr< HelpPrinterIface > p )
+{
+	m_printer.reset( p.release() );
 }
 
 inline void
