@@ -68,8 +68,8 @@ int main( int argc, char ** argv )
 
 		file.addArg( arg );
 
-		add.addCommand( file );
-		del.addCommand( file );
+		add.addArg( file );
+		del.addArg( file );
 
 		Help help;
 		help.setAppDescription(

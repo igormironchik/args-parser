@@ -521,7 +521,7 @@ TEST_CASE( "TestHelpOfSubcommand" )
 		file.setDescription( SL( "Add file." ) );
 		file.setLongDescription( SL( "Add file. File can exist but if "
 			"it's not so new file will be created." ) );
-		add.addCommand( file );
+		add.addArg( file );
 
 		Help help;
 		help.setAppDescription(

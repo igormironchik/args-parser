@@ -524,6 +524,37 @@ public:
 		return *this;
 	}
 
+	//! Add argument. \note Developer should handle lifetime of the argument.
+	template< typename T >
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
+		API< PARENT, Command, ARGPTR, false > >::type
+	addArg( T & arg )
+	{
+		m_self.addArg( arg );
+
+		return *this;
+	}
+
+	//! Add argument. \note Developer should handle lifetime of the argument.
+	template< typename T >
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
+		API< PARENT, Command, ARGPTR, false > >::type
+	addArg( T * arg )
+	{
+		m_self.addArg( arg );
+
+		return *this;
+	}
+
+	//! Add argument.
+	API< PARENT, Command, ARGPTR, false >
+	addArg( GroupIface::ArgPtr arg )
+	{
+		m_self.addArg( std::move( arg ) );
+
+		return *this;
+	}
+
 	//! Add Command.
 	template< typename NAME >
 	API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > addCommand(
@@ -562,7 +593,7 @@ public:
 
 		ARGPTR arg = std::move( cmd );
 
-		m_self.addCommand( std::move( arg ) );
+		m_self.addArg( std::move( arg ) );
 
 		return API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > ( *this, c );
 	}
@@ -605,7 +636,7 @@ public:
 
 		ARGPTR arg = std::move( cmd );
 
-		m_self.addCommand( std::move( arg ) );
+		m_self.addArg( std::move( arg ) );
 
 		return API< API< PARENT, Command, ARGPTR, false >, Command, ARGPTR, false > ( *this, c );
 	}
@@ -1092,6 +1123,37 @@ public:
 		ARGPTR a = std::move( arg );
 
 		m_self.addArg( std::move( a ) );
+
+		return *this;
+	}
+
+	//! Add argument. \note Developer should handle lifetime of the argument.
+	template< typename T >
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
+		API< PARENT, SELF, ARGPTR, false > >::type
+	addArg( T & arg )
+	{
+		m_self.addArg( arg );
+
+		return *this;
+	}
+
+	//! Add argument. \note Developer should handle lifetime of the argument.
+	template< typename T >
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value,
+		API< PARENT, SELF, ARGPTR, false > >::type
+	addArg( T * arg )
+	{
+		m_self.addArg( arg );
+
+		return *this;
+	}
+
+	//! Add argument.
+	API< PARENT, SELF, ARGPTR, false >
+	addArg( GroupIface::ArgPtr arg )
+	{
+		m_self.addArg( std::move( arg ) );
 
 		return *this;
 	}

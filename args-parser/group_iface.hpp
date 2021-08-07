@@ -88,8 +88,7 @@ public:
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
 	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value &&
-		!std::is_base_of< Command, T >::value >::type
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value >::type
 	addArg( T & arg )
 	{
 		addArg( ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
@@ -97,15 +96,14 @@ public:
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
 	template< typename T >
-	typename std::enable_if< std::is_base_of< ArgIface, T >::value &&
-		!std::is_base_of< Command, T >::value >::type
+	typename std::enable_if< std::is_base_of< ArgIface, T >::value >::type
 	addArg( T * arg )
 	{
 		addArg( ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
 	}
 
 	//! Add argument.
-	void addArg( ArgPtr arg )
+	virtual void addArg( ArgPtr arg )
 	{
 		if( std::find( m_children.cbegin(), m_children.cend(), arg ) ==
 			m_children.cend() )

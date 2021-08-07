@@ -256,26 +256,12 @@ public:
 		GroupIface::clear();
 	}
 
-	//! Add sub-command.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< Command, T >::value >::type
-	addCommand( T & arg )
-	{
-		addCommand( ArgPtr( &arg, details::Deleter< ArgIface > ( false ) ) );
-	}
+	using GroupIface::addArg;
 
-	//! Add sub-command.
-	template< typename T >
-	typename std::enable_if< std::is_base_of< Command, T >::value >::type
-	addCommand( T * arg )
+	//! Add argument.
+	void addArg( ArgPtr arg ) override
 	{
-		addCommand( ArgPtr( arg, details::Deleter< ArgIface > ( false ) ) );
-	}
-
-	//! Add sub-command.
-	void addCommand( ArgPtr arg )
-	{
-		if( m_opt != ValueOptions::NoValue )
+		if( arg->type() == ArgType::Command && m_opt != ValueOptions::NoValue )
 			throw BaseException( String( SL( "Addition of commands to command with "
 				"value is disallowed." ) ) );
 

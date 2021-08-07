@@ -98,7 +98,7 @@ TEST_CASE( "DissallowedNesting" )
 	Command cmd1( SL( "cmd1" ), ValueOptions::OneValue );
 	Command cmd2( SL( "cmd2" ), ValueOptions::OneValue );
 
-	REQUIRE_THROWS_AS( cmd1.addCommand( cmd2 ), BaseException );
+	REQUIRE_THROWS_AS( cmd1.addArg( cmd2 ), BaseException );
 }
 
 TEST_CASE( "TestNotDefinedRequiredArgInCommand" )
@@ -403,7 +403,7 @@ TEST_CASE( "TestMisspelling" )
 	Command add( SL( "add" ) );
 
 	Command file( SL( "file" ) );
-	add.addCommand( file );
+	add.addArg( file );
 
 	cmd.addArg( add );
 
