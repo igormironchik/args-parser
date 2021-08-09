@@ -153,24 +153,24 @@ the same, but is it needed?
 
 # Changelog
 
- * 6.2.0.0
+ * **6.2.0.0**
 
    Allowed to inherit from some classes. Added `addArg()` methods into API.
     
- * 6.1.1.1
+ * **6.1.1.1**
 
    Added possibility to set up custom help printer in help argument.
     
- * 6.1.1.0
+ * **6.1.1.0**
 
    Improved API with new syntax, now it's impossible to mess with end() methods.
    Fixed issue with printing help of global argument under command.
      
- * 6.1.0.0
+ * **6.1.0.0**
 
    Added possibility to add `Command` into groups.
 
- * 6.0.0.0
+ * **6.0.0.0**
 
    In this version was removed `ArgAsCommand` class, and was added fully-featured
    support for sub-commands, that can be created with `Command` class, i.e.
