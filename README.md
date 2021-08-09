@@ -142,7 +142,7 @@ operators? So why I should do the library more complex?
  * I found only one library at GitHub that can compete with `args-parser`, and this is
 [CLI11](https://github.com/CLIUtils/CLI11). And here is the question of the taste more.
 But `CLI11` can handle commands as usual arguments, it's doesn't matter how much times
-they presend in command line, whereas `args-parser` handles commands as commands. Theirs
+they present in command line, whereas `args-parser` handles commands as commands. Theirs
 approach possibly more flexible, but when I designed `args-parser` I thought on commands
 as on some action to do in application's logic, whereas arguments are for data. I can do
 the same, but is it needed?
@@ -151,21 +151,26 @@ the same, but is it needed?
    custom `HelpPrinterIface` on the `Help` argument. But who and when will do it?
    And I believe that help in `args-parser` is a little better than in `CLI11`.
 
+   `CLI11` works more with callbacks, whereas `args-parser` uses hierarchy of
+   classes with polymorphism. In `args-parser` you can inherit from any argument's
+   class, override methods you need and receive something very application specific.
+   And again, this is more question of taste.
+
 # Changelog
 
  * **6.2.0.0**
 
    Allowed to inherit from some classes. Added `addArg()` methods into API.
-    
+
  * **6.1.1.1**
 
    Added possibility to set up custom help printer in help argument.
-    
+
  * **6.1.1.0**
 
    Improved API with new syntax, now it's impossible to mess with end() methods.
    Fixed issue with printing help of global argument under command.
-     
+
  * **6.1.0.0**
 
    Added possibility to add `Command` into groups.
