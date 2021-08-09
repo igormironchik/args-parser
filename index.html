@@ -162,8 +162,9 @@ Q/A</h1>
 </ul>
 <p ><b>Why don't you provide comparisons with othe CLI libraries?</b></p>
 <ul>
-<li><p class="startli">I found only one library at GitHub that can compete with <code>args-parser</code>, and this is <a href="https://github.com/CLIUtils/CLI11">CLI11</a>. And here is the question of the taste more. But <code>CLI11</code> can handle commands as usual arguments, it's doesn't matter how much times they presend in command line, whereas <code>args-parser</code> handles commands as commands. Theirs approach possibly more flexible, but when I designed <code>args-parser</code> I thought on commands as on some action to do in application's logic, whereas arguments are for data. I can do the same, but is it needed?</p>
+<li><p class="startli">I found only one library at GitHub that can compete with <code>args-parser</code>, and this is <a href="https://github.com/CLIUtils/CLI11">CLI11</a>. And here is the question of the taste more. But <code>CLI11</code> can handle commands as usual arguments, it's doesn't matter how much times they present in command line, whereas <code>args-parser</code> handles commands as commands. Theirs approach possibly more flexible, but when I designed <code>args-parser</code> I thought on commands as on some action to do in application's logic, whereas arguments are for data. I can do the same, but is it needed?</p>
 <p class="startli"><code>CLI11</code> has possibility to set formatter of the help, <code>args-parser</code> allow to set custom <code>HelpPrinterIface</code> on the <code>Help</code> argument. But who and when will do it? And I believe that help in <code>args-parser</code> is a little better than in <code>CLI11</code>.</p>
+<p class="startli"><code>CLI11</code> works more with callbacks, whereas <code>args-parser</code> uses hierarchy of classes with polymorphism. In <code>args-parser</code> you can inherit from any argument's class, override methods you need and receive something very application specific. And again, this is more question of taste.</p>
 </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
