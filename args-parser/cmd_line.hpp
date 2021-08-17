@@ -107,18 +107,22 @@ String formatCorrectNamesString( const StringList & names )
 // CmdLine
 //
 
+template< typename PARENT, typename SELF, typename ARGPTR >
+using CmdLineAPI = details::API< PARENT, SELF, ARGPTR, true >;
+
+using ArgPtrToAPI = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
+
 /*!
 	CmdLine is class that holds all rguments and parse
 	command line arguments in the correspondence with holded
 	arguments.
 */
 class CmdLine final
-	:	public details::API< CmdLine, CmdLine,
-			std::unique_ptr< ArgIface, details::Deleter< ArgIface > >, true >
+	:	public CmdLineAPI< CmdLine, CmdLine, ArgPtrToAPI >
 {
 public:
 	//! Smart pointer to the argument.
-	using ArgPtr = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
+	using ArgPtr = ArgPtrToAPI;
 	//! List of child arguments.
 	using Arguments = std::vector< ArgPtr >;
 
