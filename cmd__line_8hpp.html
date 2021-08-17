@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('cmd__line_8hpp.html',''); initResizabl
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">cmd_line.hpp File Reference</div></div>
 </div><!--header-->
@@ -131,10 +132,17 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_args_1_1details"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_args_1_1details.html">Args::details</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a72f1f063d9af139f4beb1de3e69c8a72"><td class="memTemplParams" colspan="2">template&lt;typename PARENT , typename SELF , typename ARGPTR &gt; </td></tr>
+<tr class="memitem:a72f1f063d9af139f4beb1de3e69c8a72"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_args.html#a72f1f063d9af139f4beb1de3e69c8a72">Args::CmdLineAPI</a> = details::API&lt; PARENT, SELF, ARGPTR, true &gt;</td></tr>
+<tr class="separator:a72f1f063d9af139f4beb1de3e69c8a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e25303e412f7bdfd904c5899267ec1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_args.html#a31e25303e412f7bdfd904c5899267ec1">Args::ArgPtrToAPI</a> = std::unique_ptr&lt; ArgIface, details::Deleter&lt; ArgIface &gt; &gt;</td></tr>
+<tr class="separator:a31e25303e412f7bdfd904c5899267ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adc602ce2c132a051f490a68f1540c047"><td class="memItemLeft" align="right" valign="top"><a id="adc602ce2c132a051f490a68f1540c047" name="adc602ce2c132a051f490a68f1540c047"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>Args::details::formatCorrectNamesString</b> (const StringList &amp;names)</td></tr>
+<tr class="memitem:adc602ce2c132a051f490a68f1540c047"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_args_1_1details.html#adc602ce2c132a051f490a68f1540c047">Args::details::formatCorrectNamesString</a> (const StringList &amp;names)</td></tr>
 <tr class="separator:adc602ce2c132a051f490a68f1540c047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

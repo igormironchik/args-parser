@@ -113,59 +113,375 @@ $(document).ready(function(){initNavTree('class_args_1_1_help_printer.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a59901eee7b01933fd3ce96fbe6286eda"><td class="memItemLeft" align="right" valign="top"><a id="a59901eee7b01933fd3ce96fbe6286eda" name="a59901eee7b01933fd3ce96fbe6286eda"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>ArgPtr</b> = std::unique_ptr&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>, <a class="el" href="class_args_1_1details_1_1_deleter.html">details::Deleter</a>&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> &gt; &gt;</td></tr>
-<tr class="memdesc:a59901eee7b01933fd3ce96fbe6286eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Smart pointer to the argument. <br /></td></tr>
+<tr class="memitem:a59901eee7b01933fd3ce96fbe6286eda"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#a59901eee7b01933fd3ce96fbe6286eda">ArgPtr</a> = std::unique_ptr&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>, <a class="el" href="class_args_1_1details_1_1_deleter.html">details::Deleter</a>&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> &gt; &gt;</td></tr>
+<tr class="memdesc:a59901eee7b01933fd3ce96fbe6286eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Smart pointer to the argument.  <a href="class_args_1_1_help_printer.html#a59901eee7b01933fd3ce96fbe6286eda">More...</a><br /></td></tr>
 <tr class="separator:a59901eee7b01933fd3ce96fbe6286eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac200ef599034d42d0ad189198fdb9351"><td class="memItemLeft" align="right" valign="top"><a id="ac200ef599034d42d0ad189198fdb9351" name="ac200ef599034d42d0ad189198fdb9351"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HelpPrinter</b> ()</td></tr>
+<tr class="memitem:ac200ef599034d42d0ad189198fdb9351"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#ac200ef599034d42d0ad189198fdb9351">HelpPrinter</a> ()</td></tr>
 <tr class="separator:ac200ef599034d42d0ad189198fdb9351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceac735f18fae837ba365bb5cc1c0d3d"><td class="memItemLeft" align="right" valign="top"><a id="aceac735f18fae837ba365bb5cc1c0d3d" name="aceac735f18fae837ba365bb5cc1c0d3d"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~HelpPrinter</b> ()</td></tr>
+<tr class="memitem:aceac735f18fae837ba365bb5cc1c0d3d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#aceac735f18fae837ba365bb5cc1c0d3d">~HelpPrinter</a> ()</td></tr>
 <tr class="separator:aceac735f18fae837ba365bb5cc1c0d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9df0fd989c325686a2992b968ac0728"><td class="memItemLeft" align="right" valign="top"><a id="ad9df0fd989c325686a2992b968ac0728" name="ad9df0fd989c325686a2992b968ac0728"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (<a class="el" href="namespace_args.html#a667af1c8d270011ba71c49313df5711e">OutStreamType</a> &amp;to) override</td></tr>
-<tr class="memdesc:ad9df0fd989c325686a2992b968ac0728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for all arguments. <br /></td></tr>
+<tr class="memitem:ad9df0fd989c325686a2992b968ac0728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#ad9df0fd989c325686a2992b968ac0728">print</a> (<a class="el" href="namespace_args.html#a667af1c8d270011ba71c49313df5711e">OutStreamType</a> &amp;to) override</td></tr>
+<tr class="memdesc:ad9df0fd989c325686a2992b968ac0728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for all arguments.  <a href="class_args_1_1_help_printer.html#ad9df0fd989c325686a2992b968ac0728">More...</a><br /></td></tr>
 <tr class="separator:ad9df0fd989c325686a2992b968ac0728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a530ca3f32fb58a6737e6c794209958ab"><td class="memItemLeft" align="right" valign="top"><a id="a530ca3f32fb58a6737e6c794209958ab" name="a530ca3f32fb58a6737e6c794209958ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;name, <a class="el" href="namespace_args.html#a667af1c8d270011ba71c49313df5711e">OutStreamType</a> &amp;to, <a class="el" href="class_args_1_1_command.html">Command</a> *parent=nullptr) override</td></tr>
-<tr class="memdesc:a530ca3f32fb58a6737e6c794209958ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for the given argument. <br /></td></tr>
+<tr class="memitem:a530ca3f32fb58a6737e6c794209958ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#a530ca3f32fb58a6737e6c794209958ab">print</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;name, <a class="el" href="namespace_args.html#a667af1c8d270011ba71c49313df5711e">OutStreamType</a> &amp;to, <a class="el" href="class_args_1_1_command.html">Command</a> *parent=nullptr) override</td></tr>
+<tr class="memdesc:a530ca3f32fb58a6737e6c794209958ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for the given argument.  <a href="class_args_1_1_help_printer.html#a530ca3f32fb58a6737e6c794209958ab">More...</a><br /></td></tr>
 <tr class="separator:a530ca3f32fb58a6737e6c794209958ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dce9c3fc9fd3e5d9ce88a1d6da2912b"><td class="memItemLeft" align="right" valign="top"><a id="a5dce9c3fc9fd3e5d9ce88a1d6da2912b" name="a5dce9c3fc9fd3e5d9ce88a1d6da2912b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setExecutable</b> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;exe) override</td></tr>
-<tr class="memdesc:a5dce9c3fc9fd3e5d9ce88a1d6da2912b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set executable name. <br /></td></tr>
+<tr class="memitem:a5dce9c3fc9fd3e5d9ce88a1d6da2912b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#a5dce9c3fc9fd3e5d9ce88a1d6da2912b">setExecutable</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;exe) override</td></tr>
+<tr class="memdesc:a5dce9c3fc9fd3e5d9ce88a1d6da2912b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set executable name.  <a href="class_args_1_1_help_printer.html#a5dce9c3fc9fd3e5d9ce88a1d6da2912b">More...</a><br /></td></tr>
 <tr class="separator:a5dce9c3fc9fd3e5d9ce88a1d6da2912b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8624a5f240628b575d6d8c90715a5dc"><td class="memItemLeft" align="right" valign="top"><a id="ab8624a5f240628b575d6d8c90715a5dc" name="ab8624a5f240628b575d6d8c90715a5dc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAppDescription</b> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;desc) override</td></tr>
-<tr class="memdesc:ab8624a5f240628b575d6d8c90715a5dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set description for the application. <br /></td></tr>
+<tr class="memitem:ab8624a5f240628b575d6d8c90715a5dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#ab8624a5f240628b575d6d8c90715a5dc">setAppDescription</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;desc) override</td></tr>
+<tr class="memdesc:ab8624a5f240628b575d6d8c90715a5dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set description for the application.  <a href="class_args_1_1_help_printer.html#ab8624a5f240628b575d6d8c90715a5dc">More...</a><br /></td></tr>
 <tr class="separator:ab8624a5f240628b575d6d8c90715a5dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58e5fe54468f19e603fc4dcd1843bba9"><td class="memItemLeft" align="right" valign="top"><a id="a58e5fe54468f19e603fc4dcd1843bba9" name="a58e5fe54468f19e603fc4dcd1843bba9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCmdLine</b> (<a class="el" href="class_args_1_1_cmd_line.html">CmdLine</a> *cmd) override</td></tr>
-<tr class="memdesc:a58e5fe54468f19e603fc4dcd1843bba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set command line. <br /></td></tr>
+<tr class="memitem:a58e5fe54468f19e603fc4dcd1843bba9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#a58e5fe54468f19e603fc4dcd1843bba9">setCmdLine</a> (<a class="el" href="class_args_1_1_cmd_line.html">CmdLine</a> *cmd) override</td></tr>
+<tr class="memdesc:a58e5fe54468f19e603fc4dcd1843bba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set command line.  <a href="class_args_1_1_help_printer.html#a58e5fe54468f19e603fc4dcd1843bba9">More...</a><br /></td></tr>
 <tr class="separator:a58e5fe54468f19e603fc4dcd1843bba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab37fe132c82ec1139b02c2e108bfe68b"><td class="memItemLeft" align="right" valign="top"><a id="ab37fe132c82ec1139b02c2e108bfe68b" name="ab37fe132c82ec1139b02c2e108bfe68b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLineLength</b> (String::size_type length) override</td></tr>
-<tr class="memdesc:ab37fe132c82ec1139b02c2e108bfe68b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set line length for the help. <br /></td></tr>
+<tr class="memitem:ab37fe132c82ec1139b02c2e108bfe68b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#ab37fe132c82ec1139b02c2e108bfe68b">setLineLength</a> (String::size_type length) override</td></tr>
+<tr class="memdesc:ab37fe132c82ec1139b02c2e108bfe68b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set line length for the help.  <a href="class_args_1_1_help_printer.html#ab37fe132c82ec1139b02c2e108bfe68b">More...</a><br /></td></tr>
 <tr class="separator:ab37fe132c82ec1139b02c2e108bfe68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9db181603275c720fcb72f3cb34762c4"><td class="memItemLeft" align="right" valign="top"><a id="a9db181603275c720fcb72f3cb34762c4" name="a9db181603275c720fcb72f3cb34762c4"></a>
-<a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>findArgument</b> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;name) override</td></tr>
+<tr class="memitem:a9db181603275c720fcb72f3cb34762c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer.html#a9db181603275c720fcb72f3cb34762c4">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;name) override</td></tr>
 <tr class="separator:a9db181603275c720fcb72f3cb34762c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_args_1_1_help_printer_iface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_args_1_1_help_printer_iface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_args_1_1_help_printer_iface.html">Args::HelpPrinterIface</a></td></tr>
-<tr class="memitem:a1e427f7384df69bcbb453e12c7ceb54e inherit pub_methods_class_args_1_1_help_printer_iface"><td class="memItemLeft" align="right" valign="top"><a id="a1e427f7384df69bcbb453e12c7ceb54e" name="a1e427f7384df69bcbb453e12c7ceb54e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HelpPrinterIface</b> ()</td></tr>
+<tr class="memitem:a1e427f7384df69bcbb453e12c7ceb54e inherit pub_methods_class_args_1_1_help_printer_iface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer_iface.html#a1e427f7384df69bcbb453e12c7ceb54e">HelpPrinterIface</a> ()</td></tr>
 <tr class="separator:a1e427f7384df69bcbb453e12c7ceb54e inherit pub_methods_class_args_1_1_help_printer_iface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad0bfdbd5a9d6d29c09973857d0d72c5 inherit pub_methods_class_args_1_1_help_printer_iface"><td class="memItemLeft" align="right" valign="top"><a id="aad0bfdbd5a9d6d29c09973857d0d72c5" name="aad0bfdbd5a9d6d29c09973857d0d72c5"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~HelpPrinterIface</b> ()</td></tr>
+<tr class="memitem:aad0bfdbd5a9d6d29c09973857d0d72c5 inherit pub_methods_class_args_1_1_help_printer_iface"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_help_printer_iface.html#aad0bfdbd5a9d6d29c09973857d0d72c5">~HelpPrinterIface</a> ()</td></tr>
 <tr class="separator:aad0bfdbd5a9d6d29c09973857d0d72c5 inherit pub_methods_class_args_1_1_help_printer_iface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="class_args_1_1_help_printer.html" title="HelpPrinter is a class that prints help.">HelpPrinter</a> is a class that prints help. </p>
 
 <p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00063">63</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a59901eee7b01933fd3ce96fbe6286eda" name="a59901eee7b01933fd3ce96fbe6286eda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59901eee7b01933fd3ce96fbe6286eda">&#9670;&nbsp;</a></span>ArgPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_args_1_1_help_printer.html#a59901eee7b01933fd3ce96fbe6286eda">Args::HelpPrinter::ArgPtr</a> =  std::unique_ptr&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>, <a class="el" href="class_args_1_1details_1_1_deleter.html">details::Deleter</a>&lt; <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> &gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Smart pointer to the argument. </p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00068">68</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac200ef599034d42d0ad189198fdb9351" name="ac200ef599034d42d0ad189198fdb9351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac200ef599034d42d0ad189198fdb9351">&#9670;&nbsp;</a></span>HelpPrinter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Args::HelpPrinter::HelpPrinter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00151">151</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aceac735f18fae837ba365bb5cc1c0d3d" name="aceac735f18fae837ba365bb5cc1c0d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceac735f18fae837ba365bb5cc1c0d3d">&#9670;&nbsp;</a></span>~HelpPrinter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Args::HelpPrinter::~HelpPrinter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00158">158</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9db181603275c720fcb72f3cb34762c4" name="a9db181603275c720fcb72f3cb34762c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9db181603275c720fcb72f3cb34762c4">&#9670;&nbsp;</a></span>findArgument()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a>* Args::HelpPrinter::findArgument </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Argument for the given name. </dd></dl>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#a49be946734c55273554b55b01d73db1e">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00101">101</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a530ca3f32fb58a6737e6c794209958ab" name="a530ca3f32fb58a6737e6c794209958ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a530ca3f32fb58a6737e6c794209958ab">&#9670;&nbsp;</a></span>print() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Args::HelpPrinter::print </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_args.html#a667af1c8d270011ba71c49313df5711e">OutStreamType</a> &amp;&#160;</td>
+          <td class="paramname"><em>to</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_args_1_1_command.html">Command</a> *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print help for the given argument. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the argument. I.e. "-t" or "--timeout". </td></tr>
+    <tr><td class="paramname">to</td><td>Output stream for the printing help. </td></tr>
+    <tr><td class="paramname">parent</td><td>Parent command if present. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#a79559cf5692e31f65ee5be8c711ef95c">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00471">471</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad9df0fd989c325686a2992b968ac0728" name="ad9df0fd989c325686a2992b968ac0728"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9df0fd989c325686a2992b968ac0728">&#9670;&nbsp;</a></span>print() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Args::HelpPrinter::print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_args.html#a667af1c8d270011ba71c49313df5711e">OutStreamType</a> &amp;&#160;</td>
+          <td class="paramname"><em>to</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print help for all arguments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">to</td><td>Output stream for the printing help. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#ade5c4e6ad7eb9da9880bee0c76f2a30d">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00339">339</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab8624a5f240628b575d6d8c90715a5dc" name="ab8624a5f240628b575d6d8c90715a5dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8624a5f240628b575d6d8c90715a5dc">&#9670;&nbsp;</a></span>setAppDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Args::HelpPrinter::setAppDescription </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>desc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set description for the application. </p>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#ac12de938e7bceca0a9be42a2bdfc4a66">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00687">687</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a58e5fe54468f19e603fc4dcd1843bba9" name="a58e5fe54468f19e603fc4dcd1843bba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58e5fe54468f19e603fc4dcd1843bba9">&#9670;&nbsp;</a></span>setCmdLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Args::HelpPrinter::setCmdLine </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_args_1_1_cmd_line.html">CmdLine</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set command line. </p>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#a0ab8d632b015cb6b85ef7c17c5197079">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00693">693</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5dce9c3fc9fd3e5d9ce88a1d6da2912b" name="a5dce9c3fc9fd3e5d9ce88a1d6da2912b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dce9c3fc9fd3e5d9ce88a1d6da2912b">&#9670;&nbsp;</a></span>setExecutable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Args::HelpPrinter::setExecutable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>exe</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set executable name. </p>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#a2339f0ed804fd7fae8e88fa9b7100ccc">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00681">681</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab37fe132c82ec1139b02c2e108bfe68b" name="ab37fe132c82ec1139b02c2e108bfe68b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab37fe132c82ec1139b02c2e108bfe68b">&#9670;&nbsp;</a></span>setLineLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Args::HelpPrinter::setLineLength </td>
+          <td>(</td>
+          <td class="paramtype">String::size_type&#160;</td>
+          <td class="paramname"><em>length</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set line length for the help. </p>
+
+<p>Implements <a class="el" href="class_args_1_1_help_printer_iface.html#a577d6294d53fe468f18fdb75bb6414cc">Args::HelpPrinterIface</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="help__printer_8hpp_source.html#l00699">699</a> of file <a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="help__printer_8hpp_source.html">help_printer.hpp</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,6 +1,6 @@
 var class_args_1_1_cmd_line =
 [
-    [ "ArgPtr", "class_args_1_1_cmd_line.html#a3dca8b7c7d2abba7d5ade593b1b03ed2", null ],
+    [ "ArgPtr", "class_args_1_1_cmd_line.html#a946b94f53f6c598ae969b6e7752fcb4b", null ],
     [ "Arguments", "class_args_1_1_cmd_line.html#ac931f5762dbdf1179a085f85ca70451e", null ],
     [ "CmdLineOpts", "class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a", [
       [ "Empty", "class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f", null ],

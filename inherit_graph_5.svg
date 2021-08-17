@@ -11,11 +11,11 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01false_01_4.html" target="_top" xlink:title="Auxiliary API.">
+<g id="a_node1"><a xlink:href="class_args_1_1details_1_1_a_p_i.html" target="_top" xlink:title="Auxiliary API.">
 <polygon fill="none" stroke="black" points="0,-0.5 0,-41.5 144,-41.5 144,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">Args::details::API</text>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; PARENT, SELF, ARGPTR,</text>
-<text text-anchor="middle" x="72" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> false &gt;</text>
+<text text-anchor="middle" x="72" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> RETPARENT &gt;</text>
 </a>
 </g>
 </g>
