@@ -39,7 +39,7 @@
 #else
 
 // Qt include.
-#include <QRegExp>
+#include <QRegularExpression>
 
 #endif
 
@@ -161,9 +161,11 @@ isCorrectName( const String & name )
 	if( std::regex_search( name, r ) )
 		return false;
 #else
-	QRegExp r( "\\s" );
+	QRegularExpression r( "\\s" );
 
-	if( r.indexIn( name ) != -1 )
+	const auto match = r.match( name );
+
+	if( match.hasMatch() || match.hasPartialMatch() )
 		return false;
 #endif
 
