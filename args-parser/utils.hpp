@@ -163,7 +163,7 @@ isCorrectName( const String & name )
 #else
 	QRegularExpression r( "\\s" );
 
-	const auto match = r.match( name );
+	const auto match = r.match( name, 0, QRegularExpression::PartialPreferFirstMatch );
 
 	if( match.hasMatch() || match.hasPartialMatch() )
 		return false;
