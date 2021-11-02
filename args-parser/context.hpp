@@ -144,9 +144,7 @@ Context::next()
 inline void
 Context::putBack()
 {
-	if( begin() == m_context.begin() )
-		return;
-	else
+	if( begin() != m_context.begin() )
 		--m_it;
 }
 
