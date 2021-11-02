@@ -44,7 +44,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: '6.2.0'
+        version: '6.2.1'
         
     - run: sudo apt install cmake lcov
 
@@ -101,7 +101,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: '6.2.0'
+        version: '6.2.1'
         
     - name: Enable developer command prompt
       uses: ilammy/msvc-dev-cmd@v1
@@ -139,7 +139,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: '6.2.0'
+        version: '6.2.1'
 
     - name: Build and Test
       run: |
