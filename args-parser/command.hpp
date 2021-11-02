@@ -403,12 +403,7 @@ protected:
 	//! Set current subcommand.
 	void setCurrentSubCommand( Command * sub )
 	{
-		if( !m_subCommand )
-			m_subCommand = sub;
-		else
-			throw BaseException( String( SL( "Only one sub-command of command \"" ) ) +
-				name() + SL( "\" can be defined. \"" ) + m_subCommand->name() +
-				SL( "\" already defined." ) );
+		m_subCommand = sub;
 	}
 
 private:
