@@ -5,12 +5,7 @@
 # or to provide custom queries or build logic.
 name: "CodeQL"
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
+on: [workflow_dispatch]
 
 jobs:
   analyze:
