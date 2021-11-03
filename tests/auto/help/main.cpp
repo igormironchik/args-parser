@@ -1458,3 +1458,51 @@ TEST_CASE( "TestHelpCommandWithCommandWithOptions" )
 
 	REQUIRE( false );
 }
+
+TEST_CASE( "TestHelpShortLine" )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	CmdLine cmd( argc, argv );
+
+	cmd.addCommand( SL( "additemtothedatabase" ), ValueOptions::NoValue, true,
+			SL( "Add item to the database..." ) )
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ), 40 );
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+				 "Help with commands. \n\n"
+				 "USAGE: program.exe <command> <options>\n\n"
+				 "  additemtothedatabase\n\n"
+				 "                    Add item to the \n"
+				 "                    database... \n\n"
+				 "OPTIONAL:\n"
+				 " -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+				 "Help with commands. \n\n"
+				 "USAGE: program.exe <command> <options>\n\n"
+				 "  additemtothedatabase\n\n"
+				 "                    Add item to the \n"
+				 "                    database... \n\n"
+				 "OPTIONAL:\n"
+				 " -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
