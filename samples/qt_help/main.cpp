@@ -109,7 +109,7 @@ int main( int argc, char ** argv )
 	{
 		QTextStream out( stdout );
 
-		out << x.desc() << endl;
+		out << x.desc() << "\n";
 
 		return 1;
 	}

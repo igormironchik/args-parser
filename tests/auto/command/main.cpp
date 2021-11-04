@@ -434,6 +434,35 @@ TEST_CASE( "TestMisspelling" )
 	REQUIRE( correct.front() == SL( "add" ) );
 }
 
+TEST_CASE( "TestMIsspelling2" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ), SL( "add" ), SL( "--fiel" ) };
+
+	CmdLine cmd( argc, argv );
+
+	Command add( SL( "add" ) );
+
+	Arg file( SL( "file" ) );
+
+	add.addArg( file );
+
+	cmd.addArg( add );
+
+	try {
+		cmd.parse();
+	}
+	catch ( const BaseException & x )
+	{
+		REQUIRE(
+			x.desc() == String( SL( "Unknown argument \"--fiel\".\n\nProbably you mean \"--file\"." ) ) );
+
+		return;
+	}
+
+	REQUIRE( false );
+}
+
 TEST_CASE( "TestStuff" )
 {
 	Command add( SL( "add" ) );
