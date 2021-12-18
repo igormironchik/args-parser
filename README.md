@@ -397,7 +397,3 @@ OPTIONAL:
 ```
 
 That's it. Use it and enjoy it. Good luck.
-
-# Donate
-
-[![](bitcoin-btc-logo-full.png)](https://github.com/igormironchik)
