@@ -30,7 +30,9 @@ if( ${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME} )
 		add_subdirectory( tests )
 	endif()
 
-	add_library( args-parser INTERFACE )
+	file( GLOB_RECURSE SRC args-parser/* )
+
+	add_library( args-parser INTERFACE ${SRC} )
 	add_library( args-parser::args-parser ALIAS args-parser )
 
 	target_include_directories( args-parser INTERFACE
