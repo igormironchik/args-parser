@@ -31,7 +31,6 @@ var NAVTREE =
     [ "Q/A", "index.html#autotoc_md3", null ],
     [ "Changelog", "index.html#autotoc_md4", null ],
     [ "Example", "index.html#autotoc_md5", null ],
-    [ "Donate", "index.html#autotoc_md6", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -68,7 +67,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_8hpp.html",
-"class_args_1_1_command.html#a996142cb0b9eb14b34c8f09adbc52a50",
+"class_args_1_1_command.html#a96c50ef36fc0830e1f39493b5de6b4b2",
 "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01false_01_4.html"
 ];
 
