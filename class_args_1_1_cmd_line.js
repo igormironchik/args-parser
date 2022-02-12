@@ -2,9 +2,11 @@ var class_args_1_1_cmd_line =
 [
     [ "ArgPtr", "class_args_1_1_cmd_line.html#a946b94f53f6c598ae969b6e7752fcb4b", null ],
     [ "Arguments", "class_args_1_1_cmd_line.html#ac931f5762dbdf1179a085f85ca70451e", null ],
-    [ "CmdLineOpts", "class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a", [
-      [ "Empty", "class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f", null ],
-      [ "CommandIsRequired", "class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aac88ed952379981b912732f0ed4b61e4e", null ]
+    [ "CmdLineOpts", "class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39", null ],
+    [ "CmdLineOpt", "class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0", [
+      [ "Empty", "class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f", null ],
+      [ "CommandIsRequired", "class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0ac88ed952379981b912732f0ed4b61e4e", null ],
+      [ "HandlePositionalArguments", "class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a797eab9adad48dbc78681442907a1b94", null ]
     ] ],
     [ "CmdLine", "class_args_1_1_cmd_line.html#a50150b076991c560f1a31baa2eef49e2", null ],
     [ "CmdLine", "class_args_1_1_cmd_line.html#a8356deaaffcbb41a6dfbeb7c7fb7e9de", null ],
@@ -22,6 +24,8 @@ var class_args_1_1_cmd_line =
     [ "isMisspelledName", "class_args_1_1_cmd_line.html#a0a7c143c9f76e2c9d90228212fe76c43", null ],
     [ "parse", "class_args_1_1_cmd_line.html#a516ee1a93770584b35bbf334be99d102", null ],
     [ "parse", "class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799", null ],
+    [ "parserOptions", "class_args_1_1_cmd_line.html#ad3d1d62090e1c4ababa7c3be479d6e70", null ],
+    [ "positional", "class_args_1_1_cmd_line.html#a01c7e241a376a51f3417ed16271c479b", null ],
     [ "value", "class_args_1_1_cmd_line.html#a4eb7818afd00b4c84b038c9f358e2c4f", null ],
     [ "values", "class_args_1_1_cmd_line.html#a78130fd726d583e25f09818b4e9374bc", null ]
 ];

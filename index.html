@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">args-parser<span id="projectnumber">&#160;6.2.0</span>
+   <div id="projectname">args-parser<span id="projectnumber">&#160;6.3.0</span>
    </div>
   </td>
  </tr>
@@ -166,7 +166,7 @@ Q/A</h1>
 <p class="startli"><code>CLI11</code> has possibility to set formatter of the help, <code>args-parser</code> allow to set custom <code>HelpPrinterIface</code> on the <code>Help</code> argument. But who and when will do it? And I believe that help in <code>args-parser</code> is a little better than in <code>CLI11</code>.</p>
 <p class="startli"><code>CLI11</code> works more with callbacks, whereas <code>args-parser</code> uses hierarchy of classes with polymorphism. In <code>args-parser</code> you can inherit from any argument's class, override methods you need and receive something very application specific. And again, this is more question of taste.</p>
 <p class="startli">Uh, oh, I found one more interesting arguments parsing library, This is <a href="https://github.com/Taywee/args">Taywee/Args</a>. Guys, this is a question of taste. And, as said in <code>CLI11</code> documentation about <code>Taywee/Args</code>, <code>args-parser</code> as <code>CLI11</code> less verbose.</p>
-<p class="startli">What I want to say about minuses of <code>args-parser</code> that I don't support positional arguments. I think on this question. And I don't support other delimiter characters, only <code>-</code> for flags and <code>--</code> for arguments.</p>
+<p class="startli">What I want to say about minuses of <code>args-parser</code>is that I don't support other delimiter characters than <code>-</code> for flags and <code>--</code> for arguments.</p>
 </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>

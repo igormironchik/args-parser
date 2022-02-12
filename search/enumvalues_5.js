@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['onevalue_0',['OneValue',['../namespace_args.html#a5481495a11baecb3c28e0f4b39ff7dd0a35d6be8cc1d375d8aa2feb91254e95c9',1,'Args']]],
-  ['onlyonegroup_1',['OnlyOneGroup',['../namespace_args.html#a45fadc7cbb15a8d6824e7e127b32aa95ae0e31d99434b879541949fe830bc6356',1,'Args']]]
+  ['novalue_0',['NoValue',['../namespace_args.html#a5481495a11baecb3c28e0f4b39ff7dd0ad50dfcd4fe8be490a6759f4396f6a4c5',1,'Args']]]
 ];

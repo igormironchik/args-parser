@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">args-parser<span id="projectnumber">&#160;6.2.0</span>
+   <div id="projectname">args-parser<span id="projectnumber">&#160;6.3.0</span>
    </div>
   </td>
  </tr>
@@ -113,28 +113,34 @@ $(document).ready(function(){initNavTree('class_args_1_1_cmd_line.html',''); ini
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a9e51a8cd221a0fb082048dd6fff2c01a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">CmdLineOpts</a> { <a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f">Empty</a> = 0
-, <a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aac88ed952379981b912732f0ed4b61e4e">CommandIsRequired</a> = 1
+<tr class="memitem:a6f5b91b26d66399d5d35e62f38f819f0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0">CmdLineOpt</a> { <a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f">Empty</a> = 0
+, <a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0ac88ed952379981b912732f0ed4b61e4e">CommandIsRequired</a> = 1
+, <a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a797eab9adad48dbc78681442907a1b94">HandlePositionalArguments</a> = 2
  }</td></tr>
-<tr class="memdesc:a9e51a8cd221a0fb082048dd6fff2c01a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a> line options.  <a href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">More...</a><br /></td></tr>
-<tr class="separator:a9e51a8cd221a0fb082048dd6fff2c01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a6f5b91b26d66399d5d35e62f38f819f0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a> line options.  <a href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0">More...</a><br /></td></tr>
+<tr class="separator:a6f5b91b26d66399d5d35e62f38f819f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a946b94f53f6c598ae969b6e7752fcb4b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a946b94f53f6c598ae969b6e7752fcb4b">ArgPtr</a> = <a class="el" href="namespace_args.html#a31e25303e412f7bdfd904c5899267ec1">ArgPtrToAPI</a></td></tr>
 <tr class="memdesc:a946b94f53f6c598ae969b6e7752fcb4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Smart pointer to the argument.  <a href="class_args_1_1_cmd_line.html#a946b94f53f6c598ae969b6e7752fcb4b">More...</a><br /></td></tr>
 <tr class="separator:a946b94f53f6c598ae969b6e7752fcb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac931f5762dbdf1179a085f85ca70451e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#ac931f5762dbdf1179a085f85ca70451e">Arguments</a> = std::vector&lt; <a class="el" href="class_args_1_1_cmd_line.html#a946b94f53f6c598ae969b6e7752fcb4b">ArgPtr</a> &gt;</td></tr>
 <tr class="memdesc:ac931f5762dbdf1179a085f85ca70451e"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of child arguments.  <a href="class_args_1_1_cmd_line.html#ac931f5762dbdf1179a085f85ca70451e">More...</a><br /></td></tr>
 <tr class="separator:ac931f5762dbdf1179a085f85ca70451e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a788b17034e4c4a76684a91ea16d27f39"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a> = int</td></tr>
+<tr class="memdesc:a788b17034e4c4a76684a91ea16d27f39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage of command line options.  <a href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">More...</a><br /></td></tr>
+<tr class="separator:a788b17034e4c4a76684a91ea16d27f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a50150b076991c560f1a31baa2eef49e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a50150b076991c560f1a31baa2eef49e2">CmdLine</a> (<a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">CmdLineOpts</a> opt=<a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f">Empty</a>)</td></tr>
+<tr class="memitem:a50150b076991c560f1a31baa2eef49e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a50150b076991c560f1a31baa2eef49e2">CmdLine</a> (<a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a> opt=<a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f">Empty</a>)</td></tr>
 <tr class="memdesc:a50150b076991c560f1a31baa2eef49e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct empty <a class="el" href="class_args_1_1_cmd_line.html" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ...">CmdLine</a>.  <a href="class_args_1_1_cmd_line.html#a50150b076991c560f1a31baa2eef49e2">More...</a><br /></td></tr>
 <tr class="separator:a50150b076991c560f1a31baa2eef49e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8356deaaffcbb41a6dfbeb7c7fb7e9de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a8356deaaffcbb41a6dfbeb7c7fb7e9de">CmdLine</a> (int argc, const char *const *argv, <a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">CmdLineOpts</a> opt=<a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f">Empty</a>)</td></tr>
+<tr class="memitem:a8356deaaffcbb41a6dfbeb7c7fb7e9de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a8356deaaffcbb41a6dfbeb7c7fb7e9de">CmdLine</a> (int argc, const char *const *argv, <a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a> opt=<a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f">Empty</a>)</td></tr>
 <tr class="memdesc:a8356deaaffcbb41a6dfbeb7c7fb7e9de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <a class="el" href="class_args_1_1_cmd_line.html" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ...">CmdLine</a> with set command line arguments.  <a href="class_args_1_1_cmd_line.html#a8356deaaffcbb41a6dfbeb7c7fb7e9de">More...</a><br /></td></tr>
 <tr class="separator:a8356deaaffcbb41a6dfbeb7c7fb7e9de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9aa8b6070549efc953051051574cd1a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#ad9aa8b6070549efc953051051574cd1a">~CmdLine</a> ()</td></tr>
 <tr class="separator:ad9aa8b6070549efc953051051574cd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3d1d62090e1c4ababa7c3be479d6e70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#ad3d1d62090e1c4ababa7c3be479d6e70">parserOptions</a> () const</td></tr>
+<tr class="separator:ad3d1d62090e1c4ababa7c3be479d6e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a400e04c0ce3f4097e258a5ebcd1ed579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a400e04c0ce3f4097e258a5ebcd1ed579">addArg</a> (<a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *arg)</td></tr>
 <tr class="memdesc:a400e04c0ce3f4097e258a5ebcd1ed579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add argument.  <a href="class_args_1_1_cmd_line.html#a400e04c0ce3f4097e258a5ebcd1ed579">More...</a><br /></td></tr>
 <tr class="separator:a400e04c0ce3f4097e258a5ebcd1ed579"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0170ab1f92b0f49d9e02f67af11ec799"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799">parse</a> (int argc, const char *const *argv)</td></tr>
 <tr class="memdesc:a0170ab1f92b0f49d9e02f67af11ec799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse arguments.  <a href="class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799">More...</a><br /></td></tr>
 <tr class="separator:a0170ab1f92b0f49d9e02f67af11ec799"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c7e241a376a51f3417ed16271c479b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a">StringList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a01c7e241a376a51f3417ed16271c479b">positional</a> () const</td></tr>
+<tr class="separator:a01c7e241a376a51f3417ed16271c479b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab2817d48764cfe8f1b97d3bd8e136ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#aab2817d48764cfe8f1b97d3bd8e136ea">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;name)</td></tr>
 <tr class="separator:aab2817d48764cfe8f1b97d3bd8e136ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c1f483da0bdbf5e104915ac93bd89bb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_args_1_1_arg_iface.html">ArgIface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_args_1_1_cmd_line.html#a6c1f483da0bdbf5e104915ac93bd89bb">findArgument</a> (const <a class="el" href="namespace_args.html#a18cad76e0fb2f054dc16305cd7ad3689">String</a> &amp;name) const</td></tr>
@@ -273,24 +281,44 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a9e51a8cd221a0fb082048dd6fff2c01a" name="a9e51a8cd221a0fb082048dd6fff2c01a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e51a8cd221a0fb082048dd6fff2c01a">&#9670;&nbsp;</a></span>CmdLineOpts</h2>
+<a id="a788b17034e4c4a76684a91ea16d27f39" name="a788b17034e4c4a76684a91ea16d27f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a788b17034e4c4a76684a91ea16d27f39">&#9670;&nbsp;</a></span>CmdLineOpts</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">Args::CmdLine::CmdLineOpts</a></td>
+          <td class="memname">using <a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">Args::CmdLine::CmdLineOpts</a> =  int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Storage of command line options. </p>
+
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00140">140</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a6f5b91b26d66399d5d35e62f38f819f0" name="a6f5b91b26d66399d5d35e62f38f819f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f5b91b26d66399d5d35e62f38f819f0">&#9670;&nbsp;</a></span>CmdLineOpt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0">Args::CmdLine::CmdLineOpt</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a> line options. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f" name="a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f"></a>Empty&#160;</td><td class="fielddoc"><p >No special options. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f" name="a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f"></a>Empty&#160;</td><td class="fielddoc"><p >No special options. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9e51a8cd221a0fb082048dd6fff2c01aac88ed952379981b912732f0ed4b61e4e" name="a9e51a8cd221a0fb082048dd6fff2c01aac88ed952379981b912732f0ed4b61e4e"></a>CommandIsRequired&#160;</td><td class="fielddoc"><p ><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a> should be defined. </p>
+<tr><td class="fieldname"><a id="a6f5b91b26d66399d5d35e62f38f819f0ac88ed952379981b912732f0ed4b61e4e" name="a6f5b91b26d66399d5d35e62f38f819f0ac88ed952379981b912732f0ed4b61e4e"></a>CommandIsRequired&#160;</td><td class="fielddoc"><p ><a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a> should be defined. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6f5b91b26d66399d5d35e62f38f819f0a797eab9adad48dbc78681442907a1b94" name="a6f5b91b26d66399d5d35e62f38f819f0a797eab9adad48dbc78681442907a1b94"></a>HandlePositionalArguments&#160;</td><td class="fielddoc"><p >Handle positional arguments. </p>
 </td></tr>
 </table>
 
@@ -311,8 +339,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Args::CmdLine::CmdLine </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">CmdLineOpts</a>&#160;</td>
-          <td class="paramname"><em>opt</em> = <code><a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f">Empty</a></code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a>&#160;</td>
+          <td class="paramname"><em>opt</em> = <code><a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f">Empty</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -325,7 +353,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Construct empty <a class="el" href="class_args_1_1_cmd_line.html" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ...">CmdLine</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00138">138</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00143">143</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -353,8 +381,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01a">CmdLineOpts</a>&#160;</td>
-          <td class="paramname"><em>opt</em> = <code><a class="el" href="class_args_1_1_cmd_line.html#a9e51a8cd221a0fb082048dd6fff2c01aa6aae9cfcdc27cde1ca447055bdb9747f">Empty</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a>&#160;</td>
+          <td class="paramname"><em>opt</em> = <code><a class="el" href="class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f">Empty</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -371,7 +399,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Construct <a class="el" href="class_args_1_1_cmd_line.html" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ...">CmdLine</a> with set command line arguments. </p>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00461">461</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00504">504</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +426,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00156">156</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00161">161</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +458,7 @@ Public Member Functions</h2></td></tr>
 <p>Add argument. </p>
 <dl class="section note"><dt>Note</dt><dd>Developer should handle lifetime of the argument. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00495">495</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00538">538</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -461,7 +489,7 @@ Public Member Functions</h2></td></tr>
 <p>Add argument. </p>
 <dl class="section note"><dt>Note</dt><dd>Developer should handle lifetime of the argument. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00472">472</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00515">515</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -491,7 +519,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Add argument. </p>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00167">167</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00178">178</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -552,7 +580,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00289">289</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00306">306</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -630,7 +658,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>All arguments. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00639">639</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00741">741</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -659,7 +687,7 @@ template&lt;typename T &gt; </div>
 
 <p>Clear state of the arguments. </p>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00400">400</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00417">417</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -689,7 +717,7 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Argument for the given name. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>It's impossible to find any <a class="el" href="class_args_1_1_group_iface.html" title="Interface for the groups.">GroupIface</a> with exception of <a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00199">199</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00216">216</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -719,7 +747,7 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Argument for the given name. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>It's impossible to find any <a class="el" href="class_args_1_1_group_iface.html" title="Interface for the groups.">GroupIface</a> with exception of <a class="el" href="class_args_1_1_command.html" title="Command in the command line interface.">Command</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00228">228</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00245">245</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -755,7 +783,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00386">386</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00403">403</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -801,7 +829,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00259">259</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00276">276</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -830,7 +858,7 @@ template&lt;typename T &gt; </div>
 
 <p>Parse arguments. </p>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00501">501</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00544">544</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -870,7 +898,63 @@ template&lt;typename T &gt; </div>
 
 <p>Parse arguments. </p>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00189">189</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00200">200</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad3d1d62090e1c4ababa7c3be479d6e70" name="ad3d1d62090e1c4ababa7c3be479d6e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3d1d62090e1c4ababa7c3be479d6e70">&#9670;&nbsp;</a></span>parserOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39">CmdLineOpts</a> Args::CmdLine::parserOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Parser options. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00166">166</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a01c7e241a376a51f3417ed16271c479b" name="a01c7e241a376a51f3417ed16271c479b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01c7e241a376a51f3417ed16271c479b">&#9670;&nbsp;</a></span>positional()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="namespace_args.html#a1e01fa33c480a2cfc78262b786ef046a">StringList</a> &amp; Args::CmdLine::positional </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Positional arguments. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00209">209</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -905,7 +989,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00325">325</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00342">342</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
@@ -940,7 +1024,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00354">354</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cmd__line_8hpp_source.html#l00371">371</a> of file <a class="el" href="cmd__line_8hpp_source.html">cmd_line.hpp</a>.</p>
 
 </div>
 </div>
