@@ -417,6 +417,28 @@ TEST_CASE( "TestAllIsOk7" )
 	REQUIRE( cmd.positional().front() == SL( "add" ) );
 }
 
+TEST_CASE( "TestAllIsOk7" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ), SL( "del" ), SL( "del" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Command a( SL( "add" ) );
+
+	cmd.addArg( a );
+
+	cmd.parse();
+
+	REQUIRE( a.isDefined() == false );
+	REQUIRE( a.value() == SL( "" ) );
+	REQUIRE( a.values().size() == 0 );
+
+	REQUIRE( cmd.positional().size() == 2 );
+	REQUIRE( cmd.positional().front() == SL( "del" ) );
+	REQUIRE( cmd.positional().back() == SL( "del" ) );
+}
+
 TEST_CASE( "TestMisspelling" )
 {
 	CmdLine cmd;
