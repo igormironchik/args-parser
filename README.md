@@ -161,9 +161,8 @@ the same, but is it needed?
    And, as said in `CLI11` documentation about `Taywee/Args`, `args-parser` as
    `CLI11` less verbose.
    
-   What I want to say about minuses of `args-parser` that I don't support positional
-   arguments. I think on this question. And I don't support other delimiter characters,
-   only `-` for flags and `--` for arguments.
+   What I want to say about minuses of `args-parser`is that I don't support other
+   delimiter characters than `-` for flags and `--` for arguments.
 
 # Changelog
 
