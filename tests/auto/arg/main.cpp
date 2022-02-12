@@ -142,6 +142,146 @@ TEST_CASE( "TestUndefinedRequiredArg" )
 	REQUIRE( false );
 }
 
+TEST_CASE( "TestPositionalButNotFlags" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-ta" ), SL( "100" ),
+		SL( "--host" ), SL( "any" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
+
+	cmd.addArg( &timeout );
+	cmd.addArg( &port );
+	cmd.addArg( &host );
+
+	cmd.parse();
+
+	REQUIRE( timeout.isDefined() == false );
+	REQUIRE( port.isDefined() == false );
+	REQUIRE( host.isDefined() == false );
+
+	REQUIRE( cmd.positional().size() == 4 );
+	REQUIRE( cmd.positional().front() == SL( "-ta" ) );
+	REQUIRE( cmd.positional().back() == SL( "any" ) );
+}
+
+TEST_CASE( "TestPositionalButNotFlags2" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-aa" ), SL( "100" ),
+		SL( "--host" ), SL( "any" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
+
+	cmd.addArg( &timeout );
+	cmd.addArg( &port );
+	cmd.addArg( &host );
+
+	cmd.parse();
+
+	REQUIRE( timeout.isDefined() == false );
+	REQUIRE( port.isDefined() == false );
+	REQUIRE( host.isDefined() == false );
+
+	REQUIRE( cmd.positional().size() == 4 );
+	REQUIRE( cmd.positional().front() == SL( "-aa" ) );
+	REQUIRE( cmd.positional().back() == SL( "any" ) );
+}
+
+TEST_CASE( "TestPositionalButNotArg" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "--aa" ), SL( "100" ),
+		SL( "--host" ), SL( "any" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
+
+	cmd.addArg( &timeout );
+	cmd.addArg( &port );
+	cmd.addArg( &host );
+
+	cmd.parse();
+
+	REQUIRE( timeout.isDefined() == false );
+	REQUIRE( port.isDefined() == false );
+	REQUIRE( host.isDefined() == false );
+
+	REQUIRE( cmd.positional().size() == 4 );
+	REQUIRE( cmd.positional().front() == SL( "--aa" ) );
+	REQUIRE( cmd.positional().back() == SL( "any" ) );
+}
+
+TEST_CASE( "TestPositionalButNotArg2" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "--" ), SL( "100" ),
+		SL( "--host" ), SL( "any" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
+
+	cmd.addArg( &timeout );
+	cmd.addArg( &port );
+	cmd.addArg( &host );
+
+	cmd.parse();
+
+	REQUIRE( timeout.isDefined() == false );
+	REQUIRE( port.isDefined() == false );
+	REQUIRE( host.isDefined() == false );
+
+	REQUIRE( cmd.positional().size() == 3 );
+	REQUIRE( cmd.positional().front() == SL( "100" ) );
+	REQUIRE( cmd.positional().back() == SL( "any" ) );
+}
+
+TEST_CASE( "TestPositionalButNotArg3" )
+{
+	const int argc = 5;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "--arg=value" ), SL( "100" ),
+		SL( "--host" ), SL( "any" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Arg timeout( SL( 't' ), String( SL( "timeout" ) ), true );
+	Arg port( SL( 'p' ), String( SL( "port" ) ), true );
+	Arg host( SL( 'h' ), String( SL( "host" ) ), true );
+
+	cmd.addArg( &timeout );
+	cmd.addArg( &port );
+	cmd.addArg( &host );
+
+	cmd.parse();
+
+	REQUIRE( timeout.isDefined() == false );
+	REQUIRE( port.isDefined() == false );
+	REQUIRE( host.isDefined() == false );
+
+	REQUIRE( cmd.positional().size() == 4 );
+	REQUIRE( cmd.positional().front() == SL( "--arg=value" ) );
+	REQUIRE( cmd.positional().back() == SL( "any" ) );
+}
+
 TEST_CASE( "TestStuff" )
 {
 	Arg a( SL( 't' ), String( SL( "timeout" ) ), true );

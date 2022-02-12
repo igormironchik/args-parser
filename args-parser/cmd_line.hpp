@@ -127,12 +127,17 @@ public:
 	using Arguments = std::vector< ArgPtr >;
 
 	//! Command line options.
-	enum CmdLineOpts {
+	enum CmdLineOpt {
 		//! No special options.
 		Empty = 0,
 		//! Command should be defined.
-		CommandIsRequired = 1
-	}; // enum CmdLineOpts
+		CommandIsRequired = 1,
+		//! Handle positional arguments.
+		HandlePositionalArguments = 2
+	}; // enum CmdLineOpt
+
+	//! Storage of command line options.
+	using CmdLineOpts = int;
 
 	//! Construct empty CmdLine.
 	explicit CmdLine( CmdLineOpts opt = Empty )
@@ -155,6 +160,12 @@ public:
 
 	virtual ~CmdLine()
 	{
+	}
+
+	//! \return Parser options.
+	CmdLineOpts parserOptions() const
+	{
+		return m_opt;
 	}
 
 	//! Add argument. \note Developer should handle lifetime of the argument.
@@ -192,6 +203,12 @@ public:
 		m_context = std::move( details::makeContext( argc, argv ) );
 
 		parse();
+	}
+
+	//! \return Positional arguments.
+	const StringList & positional() const
+	{
+		return m_positional;
 	}
 
 	//! \return Argument for the given name.
@@ -432,6 +449,30 @@ private:
 				word + SL( "\"." ) );
 	}
 
+	//! Save all positional arguments
+	void savePositionalArguments( const String & word, bool splitted, bool valuePrepended )
+	{
+		auto tmp = word;
+
+		if( splitted )
+		{
+			tmp.append( 1, '=' );
+
+			if( valuePrepended )
+				tmp.append( *m_context.next() );
+		}
+
+		if( tmp != String( 2, '-' ) )
+			m_positional.push_back( tmp );
+
+		while( !m_context.atEnd() )
+		{
+			auto it = m_context.next();
+
+			m_positional.push_back( *it );
+		}
+	}
+
 private:
 	DISABLE_COPY( CmdLine )
 
@@ -447,6 +488,8 @@ private:
 	std::vector< Command * > m_prevCommand;
 	//! Option.
 	CmdLineOpts m_opt;
+	//! Positional arguments.
+	StringList m_positional;
 }; // class CmdLine
 
 
@@ -510,12 +553,20 @@ CmdLine::parse()
 
 		const String::size_type eqIt = word.find( '=' );
 
+		bool splitted = false;
+		bool valuePrepended = false;
+
 		if( eqIt != String::npos )
 		{
+			splitted = true;
+
 			const String value = word.substr( eqIt + 1 );
 
 			if( !value.empty() )
+			{
+				valuePrepended = true;
 				m_context.prepend( value );
+			}
 
 			word = word.substr( 0, eqIt );
 		}
@@ -526,11 +577,16 @@ CmdLine::parse()
 
 			if( arg )
 				arg->process( m_context );
+			else if( m_opt & HandlePositionalArguments )
+				savePositionalArguments( word, splitted, valuePrepended );
 			else
 				printInfoAboutUnknownArgument( word );
 		}
 		else if( details::isFlag( word ) )
 		{
+			std::vector< ArgIface* > tmpArgs;
+			bool failed = false;
+
 			for( String::size_type i = 1, length = word.length(); i < length; ++i )
 			{
 				const String flag = String( SL( "-" ) ) +
@@ -544,15 +600,39 @@ CmdLine::parse()
 				auto * arg = findArgument( flag );
 
 				if( !arg )
-					throw BaseException( String( SL( "Unknown argument \"" ) ) +
-						flag + SL( "\"." ) );
+				{
+					failed = true;
+
+					if( !( m_opt & HandlePositionalArguments ) )
+						throw BaseException( String( SL( "Unknown argument \"" ) ) +
+							flag + SL( "\"." ) );
+					else
+						break;
+				}
+				else
+					tmpArgs.push_back( arg );
 
 				if( i < length - 1 && arg->isWithValue() )
-					throw BaseException( String( SL( "Only last argument in "
-						"flags combo can be with value. Flags combo is \"" ) ) +
-						word + SL( "\"." ) );
+				{
+					failed = true;
+
+					if( !( m_opt & HandlePositionalArguments ) )
+						throw BaseException( String( SL( "Only last argument in "
+							"flags combo can be with value. Flags combo is \"" ) ) +
+							word + SL( "\"." ) );
+					else
+						break;
+				}
 				else
 					arg->process( m_context );
+			}
+
+			if( failed && ( m_opt & HandlePositionalArguments ) )
+			{
+				for( auto * a : tmpArgs )
+					a->clear();
+
+				savePositionalArguments( word, splitted, valuePrepended );
 			}
 		}
 		// Command?
@@ -579,27 +659,45 @@ CmdLine::parse()
 			{
 				if( tmp->type() == ArgType::Command )
 				{
-					if( !m_prevCommand.empty() )
-					{
-						for( const auto & prev : m_prevCommand )
+					bool stopProcessing = false;
+
+					try {
+						if( !m_prevCommand.empty() )
 						{
-							const auto & args = prev->children();
+							for( const auto & prev : m_prevCommand )
+							{
+								const auto & args = prev->children();
 
-							const auto it = std::find_if( args.cbegin(),
-								args.cend(), [&tmp] ( const auto & arg ) -> bool
-									{ return ( arg.get() == tmp ); } );
+								const auto it = std::find_if( args.cbegin(),
+									args.cend(), [&tmp] ( const auto & arg ) -> bool
+										{ return ( arg.get() == tmp ); } );
 
-							if( it != args.cend() && !m_currCommand->findChild( word ) )
-								throw BaseException( String( SL(
-										"Only one command from one level can be specified. "
-										"But you defined \"" ) ) +
-									word + SL( "\" and \"" ) + prev->name() + SL( "\"." ) );
+								if( it != args.cend() && !m_currCommand->findChild( word ) )
+									throw BaseException( String( SL(
+											"Only one command from one level can be specified. "
+											"But you defined \"" ) ) +
+										word + SL( "\" and \"" ) + prev->name() + SL( "\"." ) );
+							}
+
+							check();
 						}
-
-						check();
+						else
+							check();
 					}
-					else
-						check();
+					catch( const BaseException & )
+					{
+						if( m_opt & HandlePositionalArguments )
+						{
+							savePositionalArguments( word, splitted, valuePrepended );
+
+							stopProcessing = true;
+						}
+						else
+							throw;
+					}
+
+					if( stopProcessing )
+						continue;
 
 					if( !m_command )
 					{
@@ -624,9 +722,13 @@ CmdLine::parse()
 						m_currCommand->process( m_context );
 					}
 				}
+				else if( m_opt & HandlePositionalArguments )
+					savePositionalArguments( word, splitted, valuePrepended );
 				else
 					printInfoAboutUnknownArgument( word );
 			}
+			else if( m_opt & HandlePositionalArguments )
+				savePositionalArguments( word, splitted, valuePrepended );
 			else
 				printInfoAboutUnknownArgument( word );
 		}
@@ -673,7 +775,7 @@ CmdLine::checkCorrectnessAfterParsing() const
 			{ arg->checkCorrectnessAfterParsing(); }
 	);
 
-	if( m_opt == CommandIsRequired && !m_command )
+	if( m_opt & CommandIsRequired && !m_command )
 		throw BaseException( SL( "Not specified command." ) );
 }
 

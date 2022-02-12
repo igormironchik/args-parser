@@ -142,6 +142,12 @@ private:
 	String::size_type m_lineLength;
 }; // class HelpPrinter
 
+static const String c_positional = SL( "[positional]" );
+
+static const String c_commands = SL( "<command>" );
+
+static const String c_options = SL( "<options>" );
+
 
 //
 // HelpPrinter
@@ -406,16 +412,29 @@ HelpPrinter::print( OutStreamType & to )
 
 		to << "USAGE: ";
 
-		printString( to, usage, 7, 7, 7 );
+		if( m_cmdLine->parserOptions() & CmdLine::HandlePositionalArguments )
+			usage.push_back( c_positional );
+
+		printString( to, usage, 7, 7, 1 );
 
 		to << "\n" << "\n";
 	}
 	else
 	{
-		to << "USAGE: " << m_exeName << " <command>";
+		StringList usage;
+
+		usage.push_back( m_exeName );
+		usage.push_back( c_commands );
 
 		if( !optional.empty() || !required.empty() )
-			to << " <options>";
+			usage.push_back( c_options );
+
+		if( m_cmdLine->parserOptions() & CmdLine::HandlePositionalArguments )
+			usage.push_back( c_positional );
+
+		to << "USAGE: ";
+
+		printString( to, usage, 7, 7, 1 );
 
 		to << "\n" << "\n";
 

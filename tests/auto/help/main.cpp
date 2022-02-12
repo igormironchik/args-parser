@@ -112,8 +112,8 @@ TEST_CASE( "TestSimpleHelp" )
 		REQUIRE( g_string ==
 			"This application just show the power of Args. \n"
 			"\n"
-			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
-			"       --help <arg> ] [ --timeout <ms> ] \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ] \n"
+			"       [ --timeout <ms> ] \n"
 			"\n"
 			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
@@ -130,8 +130,94 @@ TEST_CASE( "TestSimpleHelp" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show the power of Args. \n"
 			"\n"
-			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
-			"       --help <arg> ] [ --timeout <ms> ] \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ] \n"
+			"       [ --timeout <ms> ] \n"
+			"\n"
+			"REQUIRED:\n"
+			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
+			"\n"
+			" -p, --port <arg>   Port number to create socket. \n"
+			"\n"
+			"OPTIONAL:\n"
+			" -h, --help <arg>   Print this help. \n"
+			"\n"
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
+
+TEST_CASE( "TestSimpleHelpWithPositional" )
+{
+	// Suppressing warning.
+	OutStreamType & stream = outStream();
+	(void) stream;
+
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	try {
+		CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+		Arg host( SL( 's' ), SL( "host" ),
+			true, true );
+		host.setDescription( SL( "Host. Can be \"localhost\", "
+			"\"any\" or regular IP." ) );
+		host.setLongDescription( SL( "Host. This argument told to the "
+			"application where to open socket for communication." ) );
+
+		Arg port( SL( 'p' ), SL( "port" ), true, true );
+		port.setDescription( SL( "Port number to create socket." ) );
+
+		Arg timeout( SL( "timeout" ), true );
+		timeout.setValueSpecifier( SL( "ms" ) );
+		timeout.setDescription( SL( "Timeout before new messages will be "
+			"sent in milliseconds." ) );
+
+		Help help;
+		help.setExecutable( SL( "executable" ) );
+		help.setAppDescription( SL( "This application just show "
+			"the power of Args." ) );
+
+		cmd.addArg( host );
+		cmd.addArg( port );
+		cmd.addArg( timeout );
+		cmd.addArg( help );
+
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+			"This application just show the power of Args. \n"
+			"\n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ] \n"
+			"       [ --timeout <ms> ] [positional] \n"
+			"\n"
+			"REQUIRED:\n"
+			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
+			"\n"
+			" -p, --port <arg>   Port number to create socket. \n"
+			"\n"
+			"OPTIONAL:\n"
+			" -h, --help <arg>   Print this help. \n"
+			"\n"
+			"     --timeout <ms> Timeout before new messages will be sent in milliseconds. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+			"This application just show the power of Args. \n"
+			"\n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ] \n"
+			"       [ --timeout <ms> ] [positional] \n"
 			"\n"
 			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
@@ -313,7 +399,7 @@ TEST_CASE( "TestHelpWithCommands" )
 		REQUIRE( g_string ==
 			"This application just show power of the Args help. \n"
 			"\n"
-			"USAGE: executable <command> <options>\n"
+			"USAGE: executable <command> <options> \n"
 			"\n"
 			"  add    Add new file. \n"
 			"  delete Delete file. \n"
@@ -328,7 +414,7 @@ TEST_CASE( "TestHelpWithCommands" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show power of the Args help. \n"
 			"\n"
-			"USAGE: executable <command> <options>\n"
+			"USAGE: executable <command> <options> \n"
 			"\n"
 			"  add    Add new file. \n"
 			"  delete Delete file. \n"
@@ -659,8 +745,8 @@ TEST_CASE( "TestWrongArgForHelp" )
 		REQUIRE( g_string ==
 			"This application just show the power of Args. \n"
 			"\n"
-			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
-			"       --help <arg> ] [ --timeout <ms> ] \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ] \n"
+			"       [ --timeout <ms> ] \n"
 			"\n"
 			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
@@ -677,8 +763,8 @@ TEST_CASE( "TestWrongArgForHelp" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show the power of Args. \n"
 			"\n"
-			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, \n"
-			"       --help <arg> ] [ --timeout <ms> ] \n"
+			"USAGE: executable -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ] \n"
+			"       [ --timeout <ms> ] \n"
 			"\n"
 			"REQUIRED:\n"
 			" -s, --host <arg>   Host. Can be \"localhost\", \"any\" or regular IP. \n"
@@ -874,8 +960,7 @@ TEST_CASE( "TestFlagWithBigVSHelp2" )
 		REQUIRE( g_string ==
 			"Test help. \n"
 			"\n"
-			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
-			"       [ --name ] \n"
+			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] [ --name ] \n"
 			"\n"
 			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
@@ -889,8 +974,7 @@ TEST_CASE( "TestFlagWithBigVSHelp2" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"Test help. \n"
 			"\n"
-			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] \n"
-			"       [ --name ] \n"
+			"USAGE: executable [ -a <bin|lib|shared> ] [ -h, --help <arg> ] [ --name ] \n"
 			"\n"
 			"OPTIONAL:\n"
 			" -a <bin|lib|shared> Argument. \n"
@@ -1007,7 +1091,7 @@ TEST_CASE( "TestHelpOfCommand2" )
 		REQUIRE( g_string ==
 			"This application just show power of the Args help. \n"
 			"\n"
-			"USAGE: executable <command> <options>\n"
+			"USAGE: executable <command> <options> \n"
 			"\n"
 			"  add    Add new file. \n"
 			"  delete Delete file. \n"
@@ -1022,7 +1106,7 @@ TEST_CASE( "TestHelpOfCommand2" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"This application just show power of the Args help. \n"
 			"\n"
-			"USAGE: executable <command> <options>\n"
+			"USAGE: executable <command> <options> \n"
 			"\n"
 			"  add    Add new file. \n"
 			"  delete Delete file. \n"
@@ -1180,7 +1264,7 @@ TEST_CASE( "TestHelpWithWrongCommand" )
 		REQUIRE( g_string ==
 			"Help with commands. \n"
 			"\n"
-			"USAGE: program.exe <command> <options>\n"
+			"USAGE: program.exe <command> <options> \n"
 			"\n"
 			"  add Add item to... \n"
 			"  del Delete item from... \n"
@@ -1193,7 +1277,7 @@ TEST_CASE( "TestHelpWithWrongCommand" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"Help with commands. \n"
 			"\n"
-			"USAGE: program.exe <command> <options>\n"
+			"USAGE: program.exe <command> <options> \n"
 			"\n"
 			"  add Add item to... \n"
 			"  del Delete item from... \n"
@@ -1292,7 +1376,7 @@ TEST_CASE( "TestHelpWithWrongCommand2" )
 		REQUIRE( g_string ==
 			"Help with commands. \n"
 			"\n"
-			"USAGE: program.exe <command> <options>\n"
+			"USAGE: program.exe <command> <options> \n"
 			"\n"
 			"  add Add item to... \n"
 			"  del Delete item from... \n"
@@ -1305,7 +1389,7 @@ TEST_CASE( "TestHelpWithWrongCommand2" )
 		REQUIRE( g_argsOutStream.str() == SL(
 			"Help with commands. \n"
 			"\n"
-			"USAGE: program.exe <command> <options>\n"
+			"USAGE: program.exe <command> <options> \n"
 			"\n"
 			"  add Add item to... \n"
 			"  del Delete item from... \n"
@@ -1381,7 +1465,7 @@ TEST_CASE( "TestHelpCommandWithValue" )
 #ifdef ARGS_QSTRING_BUILD
 		REQUIRE( g_string ==
 				 "Help with commands. \n\n"
-				 "USAGE: program.exe <command> <options>\n\n"
+				 "USAGE: program.exe <command> <options> \n\n"
 				 "  add <item> Add item to... \n\n"
 				 "OPTIONAL:\n"
 				 " -h, --help <arg> Print this help. \n\n" );
@@ -1390,7 +1474,51 @@ TEST_CASE( "TestHelpCommandWithValue" )
 #else
 		REQUIRE( g_argsOutStream.str() == SL(
 				 "Help with commands. \n\n"
-				 "USAGE: program.exe <command> <options>\n\n"
+				 "USAGE: program.exe <command> <options> \n\n"
+				 "  add <item> Add item to... \n\n"
+				 "OPTIONAL:\n"
+				 " -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
+
+TEST_CASE( "TestHelpCommandWithValueWithPositional" )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::OneValue, false, SL( "Add item to..." ), SL( "" ),
+			SL( "" ), SL( "item" ) )
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+				 "Help with commands. \n\n"
+				 "USAGE: program.exe <command> <options> [positional] \n\n"
+				 "  add <item> Add item to... \n\n"
+				 "OPTIONAL:\n"
+				 " -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+				 "Help with commands. \n\n"
+				 "USAGE: program.exe <command> <options> [positional] \n\n"
 				 "  add <item> Add item to... \n\n"
 				 "OPTIONAL:\n"
 				 " -h, --help <arg> Print this help. \n\n" ) );
@@ -1462,7 +1590,7 @@ TEST_CASE( "TestHelpCommandWithCommandWithOptions" )
 TEST_CASE( "TestHelpShortLine" )
 {
 	const int argc = 2;
-	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+	const CHAR * argv[ argc ] = { SL( "program" ),
 		SL( "-h" ) };
 
 	CmdLine cmd( argc, argv );
@@ -1470,7 +1598,7 @@ TEST_CASE( "TestHelpShortLine" )
 	cmd.addCommand( SL( "additemtothedatabase" ), ValueOptions::NoValue, true,
 			SL( "Add item to the database..." ) )
 		.end()
-		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ), 40 );
+		.addHelp( true, SL( "program" ), SL( "Help with commands." ), 40 );
 
 	try {
 		cmd.parse();
@@ -1480,7 +1608,7 @@ TEST_CASE( "TestHelpShortLine" )
 #ifdef ARGS_QSTRING_BUILD
 		REQUIRE( g_string ==
 				 "Help with commands. \n\n"
-				 "USAGE: program.exe <command> <options>\n\n"
+				 "USAGE: program <command> <options> \n\n"
 				 "  additemtothedatabase\n\n"
 				 "                    Add item to the \n"
 				 "                    database... \n\n"
@@ -1491,7 +1619,7 @@ TEST_CASE( "TestHelpShortLine" )
 #else
 		REQUIRE( g_argsOutStream.str() == SL(
 				 "Help with commands. \n\n"
-				 "USAGE: program.exe <command> <options>\n\n"
+				 "USAGE: program <command> <options> \n\n"
 				 "  additemtothedatabase\n\n"
 				 "                    Add item to the \n"
 				 "                    database... \n\n"

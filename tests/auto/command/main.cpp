@@ -396,6 +396,27 @@ TEST_CASE( "TestAllIsOk6" )
 	REQUIRE( a.defaultValues().front() == SL( "default" ) );
 }
 
+TEST_CASE( "TestAllIsOk7" )
+{
+	const int argc = 3;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ), SL( "add" ), SL( "add" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	Command a( SL( "add" ) );
+
+	cmd.addArg( a );
+
+	cmd.parse();
+
+	REQUIRE( a.isDefined() == true );
+	REQUIRE( a.value() == SL( "" ) );
+	REQUIRE( a.values().size() == 0 );
+
+	REQUIRE( cmd.positional().size() == 1 );
+	REQUIRE( cmd.positional().front() == SL( "add" ) );
+}
+
 TEST_CASE( "TestMisspelling" )
 {
 	CmdLine cmd;
@@ -434,7 +455,7 @@ TEST_CASE( "TestMisspelling" )
 	REQUIRE( correct.front() == SL( "add" ) );
 }
 
-TEST_CASE( "TestMIsspelling2" )
+TEST_CASE( "TestMisspelling2" )
 {
 	const int argc = 3;
 	const CHAR * argv[ argc ] = { SL( "program.exe" ), SL( "add" ), SL( "--fiel" ) };

@@ -227,6 +227,11 @@ public:
 		return ( s1.m_str == s2.m_str );
 	}
 
+	friend bool operator != ( const String & s1, const String & s2 )
+	{
+		return ( s1.m_str != s2.m_str );
+	}
+
 	friend String operator + ( const String & s1, const String & s2 )
 	{
 		return String( s1.m_str + s2.m_str );
