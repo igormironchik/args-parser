@@ -46,7 +46,10 @@ jobs:
       with:
         version: '6.2.1'
         
-    - run: sudo apt install cmake lcov
+    - run: sudo apt install lcov
+    
+    - name: Get latest CMake and ninja
+      uses: lukka/get-cmake@latest
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)

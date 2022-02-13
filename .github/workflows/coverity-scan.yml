@@ -41,7 +41,10 @@ jobs:
       with:
         version: '6.2.1'
         
-    - run: sudo apt install cmake wget curl
+    - run: sudo apt install wget curl
+    
+    - name: Get latest CMake and ninja
+      uses: lukka/get-cmake@latest
     
     - name: Download Coverity Build Tool
       run: |
