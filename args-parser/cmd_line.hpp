@@ -323,7 +323,9 @@ public:
 		//! Application description.
 		const String & appDesc = String(),
 		//! Line length.
-		String::size_type length = 79 )
+		String::size_type length = 79,
+		//! Positional string in the help.
+		const String & posDesc = String() )
 	{
 		auto help = std::unique_ptr< Help, details::Deleter< ArgIface > >
 			( new Help( throwExceptionOnPrint ),
@@ -334,6 +336,9 @@ public:
 
 		if( !appDesc.empty() )
 			help->setAppDescription( appDesc );
+
+		if( !posDesc.empty() )
+			setPositionalDescription( posDesc );
 
 		help->setLineLength( length );
 
