@@ -168,6 +168,19 @@ the same, but is it needed?
 
 # Changelog
 
+ * **6.3.1**
+ 
+   Improved performance. Added possibility to set positional arguments string
+   for the help. Added benchmark.
+
+ * **6.3.0**
+ 
+   Added possibility to handle positional arguments.
+   
+ * **6.2.0.1**
+ 
+   Ready for use with Qt6.
+
  * **6.2.0.0**
 
    Allowed to inherit from some classes. Added `addArg()` methods into API.
