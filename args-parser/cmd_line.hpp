@@ -211,6 +211,18 @@ public:
 		return m_positional;
 	}
 
+	//! \return Positional string description for the help.
+	const String & positionalDescription() const
+	{
+		return m_positionalDescription;
+	}
+
+	//! Set positional string description for the help.
+	void setPositionalDescription( const String & d )
+	{
+		m_positionalDescription = d;
+	}
+
 	//! \return Argument for the given name.
 	//! \note It's impossible to find any GroupIface with exception of Command.
 	ArgIface * findArgument( const String & name )
@@ -490,6 +502,8 @@ private:
 	CmdLineOpts m_opt;
 	//! Positional arguments.
 	StringList m_positional;
+	//! Positional string description for the help.
+	String m_positionalDescription;
 }; // class CmdLine
 
 

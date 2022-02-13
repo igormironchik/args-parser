@@ -1532,6 +1532,51 @@ TEST_CASE( "TestHelpCommandWithValueWithPositional" )
 	REQUIRE( false );
 }
 
+TEST_CASE( "TestHelpCommandWithValueWithPositional2" )
+{
+	const int argc = 2;
+	const CHAR * argv[ argc ] = { SL( "program.exe" ),
+		SL( "-h" ) };
+
+	CmdLine cmd( argc, argv, CmdLine::HandlePositionalArguments );
+
+	cmd.addCommand( SL( "add" ), ValueOptions::OneValue, false, SL( "Add item to..." ), SL( "" ),
+			SL( "" ), SL( "item" ) )
+		.end()
+		.addHelp( true, SL( "program.exe" ), SL( "Help with commands." ) );
+	cmd.setPositionalDescription( SL( "FILES" ) );
+
+	try {
+		cmd.parse();
+	}
+	catch( const HelpHasBeenPrintedException & )
+	{
+#ifdef ARGS_QSTRING_BUILD
+		REQUIRE( g_string ==
+				 "Help with commands. \n\n"
+				 "USAGE: program.exe <command> <options> FILES \n\n"
+				 "  add <item> Add item to... \n\n"
+				 "OPTIONAL:\n"
+				 " -h, --help <arg> Print this help. \n\n" );
+
+		g_string.clear();
+#else
+		REQUIRE( g_argsOutStream.str() == SL(
+				 "Help with commands. \n\n"
+				 "USAGE: program.exe <command> <options> FILES \n\n"
+				 "  add <item> Add item to... \n\n"
+				 "OPTIONAL:\n"
+				 " -h, --help <arg> Print this help. \n\n" ) );
+
+		g_argsOutStream.str( SL( "" ) );
+#endif
+
+		return;
+	}
+
+	REQUIRE( false );
+}
+
 TEST_CASE( "TestHelpCommandWithCommandWithOptions" )
 {
 	const int argc = 3;

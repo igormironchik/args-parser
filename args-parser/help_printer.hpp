@@ -413,7 +413,8 @@ HelpPrinter::print( OutStreamType & to )
 		to << "USAGE: ";
 
 		if( m_cmdLine->parserOptions() & CmdLine::HandlePositionalArguments )
-			usage.push_back( c_positional );
+			usage.push_back( m_cmdLine->positionalDescription().empty() ? c_positional :
+				m_cmdLine->positionalDescription() );
 
 		printString( to, usage, 7, 7, 1 );
 
@@ -430,7 +431,8 @@ HelpPrinter::print( OutStreamType & to )
 			usage.push_back( c_options );
 
 		if( m_cmdLine->parserOptions() & CmdLine::HandlePositionalArguments )
-			usage.push_back( c_positional );
+			usage.push_back( m_cmdLine->positionalDescription().empty() ? c_positional :
+				m_cmdLine->positionalDescription() );
 
 		to << "USAGE: ";
 
