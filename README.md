@@ -32,6 +32,11 @@ information about possible arguments if some misspelling was in command
 line interface. If args-parser can't assume anything about entered argument it
 will just say about unknown argument through the exception and parsing will
 fail.
+ * With `CmdLine::HandlePositionalArguments` option provided to `CmdLine`
+constructor, `args-parser` will handle positional arguments, these are such arguments
+that can't be parsed with provided arguments, flags, commands and stay at the end
+of the command line. Be careful with combining `MultiArg` and positional arguments,
+because `MultiArg` can eat almost everything that is not a valid argument.
 
 # Different types of strings.
 
