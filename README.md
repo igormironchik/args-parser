@@ -91,12 +91,6 @@ Internet. But args-parser also provides the possibility to define commands, like
     If you need only simple arguments in style `--do-it <value>` then possibly
     you will find another library more useful for you, but who knows...
 
-    This library is highly efficient in performance. On Intel (R) Core (TM)
-    i5-7200U CPU @ 2.50GHz args-parser occupies 0.5 milliseconds for 1000
-    arguments with value. Really, guys, do you look at performance or something
-    that library can do? This library is very flexible with powerfull help
-    printing. What do you need more?
-
 **How to print help programmatically?**
 
  * For those, who use old style syntax the answer should be on the plate, as developer
@@ -159,7 +153,10 @@ the same, but is it needed?
    Uh, oh, I found one more interesting arguments parsing library, This is
    [Taywee/Args](https://github.com/Taywee/args). Guys, this is a question of taste.
    And, as said in `CLI11` documentation about `Taywee/Args`, `args-parser` as
-   `CLI11` less verbose.
+   `CLI11` less verbose. `Taywee/Args` has benchamrk to compare performance with
+   `TCLAP` and `boost::program_options.`, I want to say that `args-parser` 2 times
+   faster than `Taywee/Args`, dry numbers says that `Tyawee/Args` runs 0.635314
+   second, whereas `args-parser` runs 0.346813 second.
    
    What I want to say about minuses of `args-parser`is that I don't support other
    delimiter characters than `-` for flags and `--` for arguments.
