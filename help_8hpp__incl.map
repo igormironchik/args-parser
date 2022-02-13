@@ -1,26 +1,25 @@
 <map id="help.hpp" name="help.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="658,5,737,32"/>
-<area shape="rect" id="node2" href="$arg_8hpp.html" title=" " alt="" coords="601,304,671,331"/>
-<area shape="rect" id="node4" href="$utils_8hpp.html" title=" " alt="" coords="1197,453,1275,480"/>
-<area shape="rect" id="node6" href="$types_8hpp.html" title=" " alt="" coords="621,528,707,555"/>
-<area shape="rect" id="node13" href="$context_8hpp.html" title=" " alt="" coords="245,379,344,405"/>
-<area shape="rect" id="node15" href="$exceptions_8hpp.html" title=" " alt="" coords="499,453,621,480"/>
-<area shape="rect" id="node18" href="$help__printer__iface_8hpp.html" title=" " alt="" coords="1715,155,1882,181"/>
-<area shape="rect" id="node19" href="$command_8hpp.html" title=" " alt="" coords="579,80,693,107"/>
-<area shape="rect" id="node24" title=" " alt="" coords="1461,379,1539,405"/>
-<area shape="rect" id="node3" href="$arg__iface_8hpp.html" title=" " alt="" coords="971,379,1082,405"/>
-<area shape="rect" id="node10" title=" " alt="" coords="1184,528,1269,555"/>
-<area shape="rect" id="node17" href="$value__utils_8hpp.html" title=" " alt="" coords="673,379,794,405"/>
-<area shape="rect" id="node12" href="$enums_8hpp.html" title=" " alt="" coords="849,453,943,480"/>
-<area shape="rect" id="node5" title=" " alt="" coords="1101,528,1160,555"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1294,528,1386,555"/>
-<area shape="rect" id="node7" title=" " alt="" coords="681,603,740,629"/>
-<area shape="rect" id="node8" title=" " alt="" coords="577,603,657,629"/>
-<area shape="rect" id="node9" title=" " alt="" coords="1102,603,1165,629"/>
-<area shape="rect" id="node14" title=" " alt="" coords="415,453,475,480"/>
-<area shape="rect" id="node16" title=" " alt="" coords="510,528,597,555"/>
-<area shape="rect" id="node20" href="$api_8hpp.html" title=" " alt="" coords="601,155,671,181"/>
-<area shape="rect" id="node23" href="$group__iface_8hpp.html" title=" " alt="" coords="1234,304,1361,331"/>
-<area shape="rect" id="node21" href="$multi__arg_8hpp.html" title=" " alt="" coords="472,229,584,256"/>
-<area shape="rect" id="node22" href="$groups_8hpp.html" title=" " alt="" coords="962,229,1057,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="733,5,811,32"/>
+<area shape="rect" id="node2" href="$arg_8hpp.html" title=" " alt="" coords="650,304,721,331"/>
+<area shape="rect" id="node4" href="$utils_8hpp.html" title=" " alt="" coords="1130,453,1209,480"/>
+<area shape="rect" id="node5" href="$types_8hpp.html" title=" " alt="" coords="618,528,705,555"/>
+<area shape="rect" id="node12" href="$context_8hpp.html" title=" " alt="" coords="296,379,395,405"/>
+<area shape="rect" id="node14" href="$exceptions_8hpp.html" title=" " alt="" coords="750,453,871,480"/>
+<area shape="rect" id="node17" href="$help__printer__iface_8hpp.html" title=" " alt="" coords="1663,155,1830,181"/>
+<area shape="rect" id="node18" href="$command_8hpp.html" title=" " alt="" coords="628,80,743,107"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1511,379,1588,405"/>
+<area shape="rect" id="node3" href="$arg__iface_8hpp.html" title=" " alt="" coords="774,379,885,405"/>
+<area shape="rect" id="node9" title=" " alt="" coords="1127,528,1212,555"/>
+<area shape="rect" id="node16" href="$value__utils_8hpp.html" title=" " alt="" coords="909,379,1030,405"/>
+<area shape="rect" id="node11" href="$enums_8hpp.html" title=" " alt="" coords="529,453,623,480"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1307,528,1399,555"/>
+<area shape="rect" id="node6" title=" " alt="" coords="679,603,737,629"/>
+<area shape="rect" id="node7" title=" " alt="" coords="575,603,655,629"/>
+<area shape="rect" id="node8" title=" " alt="" coords="1122,603,1185,629"/>
+<area shape="rect" id="node13" title=" " alt="" coords="393,453,453,480"/>
+<area shape="rect" id="node15" title=" " alt="" coords="767,528,854,555"/>
+<area shape="rect" id="node19" href="$api_8hpp.html" title=" " alt="" coords="650,155,721,181"/>
+<area shape="rect" id="node22" href="$group__iface_8hpp.html" title=" " alt="" coords="1207,304,1334,331"/>
+<area shape="rect" id="node20" href="$multi__arg_8hpp.html" title=" " alt="" coords="496,229,608,256"/>
+<area shape="rect" id="node21" href="$groups_8hpp.html" title=" " alt="" coords="1018,229,1113,256"/>
 </map>

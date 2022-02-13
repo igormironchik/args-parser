@@ -26,6 +26,8 @@ var class_args_1_1_cmd_line =
     [ "parse", "class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799", null ],
     [ "parserOptions", "class_args_1_1_cmd_line.html#ad3d1d62090e1c4ababa7c3be479d6e70", null ],
     [ "positional", "class_args_1_1_cmd_line.html#a01c7e241a376a51f3417ed16271c479b", null ],
+    [ "positionalDescription", "class_args_1_1_cmd_line.html#aaab9bb5414ff2cd56f36714f86af0f2e", null ],
+    [ "setPositionalDescription", "class_args_1_1_cmd_line.html#a83fd36b93b4eadd658e2dce77c93ecd8", null ],
     [ "value", "class_args_1_1_cmd_line.html#a4eb7818afd00b4c84b038c9f358e2c4f", null ],
     [ "values", "class_args_1_1_cmd_line.html#a78130fd726d583e25f09818b4e9374bc", null ]
 ];

@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">args-parser<span id="projectnumber">&#160;6.3.0</span>
+   <div id="projectname">args-parser<span id="projectnumber">&#160;6.3.1</span>
    </div>
   </td>
  </tr>
@@ -102,6 +102,7 @@ Syntax</h1>
 <li>In args-parser groups can be used to group arguments into groups to check their definitions after parsing, so if constraint of group will be violated exception will be thrown.</li>
 <li>args-parser provides <code>Help</code> argument that provides help printing. <code>Help</code> uses <code>-h, --help</code> arguments. <code>Help</code> can receive value with name of argument or command to print help about. If <code>Help</code> receives the name of a command as the value, then the name of a subcommand or a child argument can also be provided as the next value, to get help about the subcommand/child argument.</li>
 <li>If args-parser don't know about argument in command line interface it provides information about possible arguments if some misspelling was in command line interface. If args-parser can't assume anything about entered argument it will just say about unknown argument through the exception and parsing will fail.</li>
+<li>With <code>CmdLine::HandlePositionalArguments</code> option provided to <code>CmdLine</code> constructor, <code>args-parser</code> will handle positional arguments, these are such arguments that can't be parsed with provided arguments, flags, commands and stay at the end of the command line. Be careful with combining <code>MultiArg</code> and positional arguments, because <code>MultiArg</code> can eat almost everything that is not a valid argument.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Different types of strings.</h1>
@@ -137,7 +138,6 @@ Q/A</h1>
 <div class="line">git push</div>
 </div><!-- fragment --><p class="startli">Help output is very user-friendly.</p>
 <p class="startli">If you need only simple arguments in style <code>--do-it &lt;value&gt;</code> then possibly you will find another library more useful for you, but who knows...</p>
-<p class="startli">This library is highly efficient in performance. On Intel (R) Core (TM) i5-7200U CPU @ 2.50GHz args-parser occupies 0.5 milliseconds for 1000 arguments with value. Really, guys, do you look at performance or something that library can do? This library is very flexible with powerfull help printing. What do you need more?</p>
 </li>
 </ul>
 <p ><b>How to print help programmatically?</b></p>
@@ -165,7 +165,7 @@ Q/A</h1>
 <li><p class="startli">I found only one library at GitHub that can compete with <code>args-parser</code>, and this is <a href="https://github.com/CLIUtils/CLI11">CLI11</a>. And here is the question of the taste more. But <code>CLI11</code> can handle commands as usual arguments, it's doesn't matter how much times they present in command line, whereas <code>args-parser</code> handles commands as commands. Theirs approach possibly more flexible, but when I designed <code>args-parser</code> I thought on commands as on some action to do in application's logic, whereas arguments are for data. I can do the same, but is it needed?</p>
 <p class="startli"><code>CLI11</code> has possibility to set formatter of the help, <code>args-parser</code> allow to set custom <code>HelpPrinterIface</code> on the <code>Help</code> argument. But who and when will do it? And I believe that help in <code>args-parser</code> is a little better than in <code>CLI11</code>.</p>
 <p class="startli"><code>CLI11</code> works more with callbacks, whereas <code>args-parser</code> uses hierarchy of classes with polymorphism. In <code>args-parser</code> you can inherit from any argument's class, override methods you need and receive something very application specific. And again, this is more question of taste.</p>
-<p class="startli">Uh, oh, I found one more interesting arguments parsing library, This is <a href="https://github.com/Taywee/args">Taywee/Args</a>. Guys, this is a question of taste. And, as said in <code>CLI11</code> documentation about <code>Taywee/Args</code>, <code>args-parser</code> as <code>CLI11</code> less verbose.</p>
+<p class="startli">Uh, oh, I found one more interesting arguments parsing library, This is <a href="https://github.com/Taywee/args">Taywee/Args</a>. Guys, this is a question of taste. And, as said in <code>CLI11</code> documentation about <code>Taywee/Args</code>, <code>args-parser</code> as <code>CLI11</code> less verbose. <code>Taywee/Args</code> has benchamrk to compare performance with <code>TCLAP</code> and <code>boost::program_options.</code>, I want to say that <code>args-parser</code> 2 times faster than <code>Taywee/Args</code>, dry numbers says that <code>Tyawee/Args</code> runs 0.635314 second, whereas <code>args-parser</code> runs 0.346813 second.</p>
 <p class="startli">What I want to say about minuses of <code>args-parser</code>is that I don't support other delimiter characters than <code>-</code> for flags and <code>--</code> for arguments.</p>
 </li>
 </ul>
