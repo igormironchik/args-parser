@@ -1,5 +1,5 @@
 
-cmake_minimum_required( VERSION 3.1 )
+cmake_minimum_required( VERSION 3.19 )
 
 set( ARGS_VERSION "6.3.1" )
 
