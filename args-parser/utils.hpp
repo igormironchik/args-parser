@@ -31,18 +31,6 @@
 #ifndef ARGS__UTILS_HPP__INCLUDED
 #define ARGS__UTILS_HPP__INCLUDED
 
-#ifndef ARGS_QSTRING_BUILD
-
-// C++ include.
-#include <regex>
-
-#else
-
-// Qt include.
-#include <QRegularExpression>
-
-#endif
-
 // Args include.
 #include "types.hpp"
 
@@ -149,25 +137,6 @@ isCorrectName( const String & name )
 {
 	if( name.empty() )
 		return false;
-
-#ifndef ARGS_QSTRING_BUILD
-
-#ifdef ARGS_WSTRING_BUILD
-	std::wregex r( L"\\s" );
-#else
-	std::regex r( "\\s" );
-#endif
-
-	if( std::regex_search( name, r ) )
-		return false;
-#else
-	QRegularExpression r( "\\s" );
-
-	const auto match = r.match( name, 0, QRegularExpression::PartialPreferFirstMatch );
-
-	if( match.hasMatch() || match.hasPartialMatch() )
-		return false;
-#endif
 
 	static const String availableSymbols( SL( "0123456789"
 		"abcdefghijklmnopqrstuvwxyz"
