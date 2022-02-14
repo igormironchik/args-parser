@@ -43,9 +43,6 @@ jobs:
         
     - run: sudo apt install wget curl
     
-    - name: Get latest CMake and ninja
-      uses: lukka/get-cmake@latest
-    
     - name: Download Coverity Build Tool
       run: |
         wget -q https://scan.coverity.com/download/cxx/linux64 --post-data "token=$TOKEN&project=igormironchik%2Fargs-parser" -O cov-analysis-linux64.tar.gz
