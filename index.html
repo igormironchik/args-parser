@@ -128,7 +128,8 @@ Q/A</h1>
 <p ><b>How can I add args-parser to my project?</b></p>
 <ul>
 <li>The simplest way is just copy args-parser directory with headers to any location in your project. With CMake you can clone entire <code>args-parser</code> project somewhere in your project and just do <code>add_subdirectory()</code>, if you will do so you have to add include directory path to your project with <code>include_directories( ${args-parser_INCLUDE_DIRECTORIES} )</code>.</li>
-<li>You can clone/download args-parser, build and install it with CMake. In this case it will be possible to use <code>find_package( args-parser )</code> in CMakeLists.txt of your project.</li>
+<li>You can clone/download args-parser, build and install it with CMake. In this case it will be possible to use <code>find_package( args-parser )</code> in <code>CMakeLists.txt</code> of your project.</li>
+<li>You can use <code>Conan</code> package manager.</li>
 </ul>
 <p ><b>Why should I use this library?</b></p>
 <ul>
