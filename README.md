@@ -77,8 +77,10 @@ add include directory path to your project with
 `include_directories( ${args-parser_INCLUDE_DIRECTORIES} )`.
 
  * You can clone/download args-parser, build and install it with CMake. In this
-case it will be possible to use `find_package( args-parser )` in CMakeLists.txt of
+case it will be possible to use `find_package( args-parser )` in `CMakeLists.txt` of
 your project.
+
+ * You can use `Conan` package manager.
 
 **Why should I use this library?**
 
