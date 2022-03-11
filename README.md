@@ -217,6 +217,8 @@ execution at this point.
 Since version 5.0.0 args-parser provides two API: the old one and auxiliary API
 that allows to define arguments in one line of code. Let's look.
 
+## One-line syntax with commands
+
 ```cpp
 // args-parser include.
 #include <args-parser/all.hpp>
@@ -259,6 +261,8 @@ int main( int argc, char ** argv )
   return 0;
 }
 ```
+
+## One-line syntax with arguments
 
 ```cpp
 #include <args-parser/all.hpp>
@@ -309,7 +313,7 @@ int main( int argc, char ** argv )
 }
 ```
 
-And with the old syntax.
+## And with the old syntax
 
 
 ```cpp
