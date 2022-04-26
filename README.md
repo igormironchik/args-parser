@@ -138,7 +138,7 @@ operators to choose branch of the programm logic. What will give you, as to deve
 if values will be bind to concrete variables? Will not you write the same code with `if`
 operators? So why I should do the library more complex?
 
-**Why don't you provide comparisons with othe CLI libraries?**
+**Why don't you provide comparisons with other CLI libraries?**
 
  * I found only one library at GitHub that can compete with `args-parser`, and this is
 [CLI11](https://github.com/CLIUtils/CLI11). And here is the question of the taste more.
