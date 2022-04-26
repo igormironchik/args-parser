@@ -30,7 +30,11 @@ var NAVTREE =
     [ "Different types of list of strings.", "index.html#autotoc_md2", null ],
     [ "Q/A", "index.html#autotoc_md3", null ],
     [ "Changelog", "index.html#autotoc_md4", null ],
-    [ "Example", "index.html#autotoc_md5", null ],
+    [ "Example", "index.html#autotoc_md5", [
+      [ "One-line syntax with commands", "index.html#autotoc_md6", null ],
+      [ "One-line syntax with arguments", "index.html#autotoc_md7", null ],
+      [ "And with the old syntax", "index.html#autotoc_md8", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
