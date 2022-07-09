@@ -118,7 +118,7 @@ public:
 		if( !m_defaultValues.empty() )
 			return m_defaultValues.front();
 		else
-			return m_emptyString;
+			return details::DummyString<>::c_string;
 	}
 
 	//! Set default value. \note Value will be pushed back to the list
@@ -161,9 +161,6 @@ protected:
 private:
 	DISABLE_COPY( MultiArg )
 
-	//! Dummy empty string.
-	static const String m_emptyString;
-
 	//! Values of this argument.
 	StringList m_values;
 	//! Counter.
@@ -171,8 +168,6 @@ private:
 	//! Default values.
 	StringList m_defaultValues;
 }; // class MultiArg
-
-const String MultiArg::m_emptyString;
 
 
 //
@@ -216,7 +211,7 @@ MultiArg::value() const
 	else if( !m_defaultValues.empty() )
 		return m_defaultValues.front();
 	else
-		return m_emptyString;
+		return details::DummyString<>::c_string;
 }
 
 inline void

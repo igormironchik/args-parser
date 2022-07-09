@@ -62,7 +62,7 @@ namespace Args {
 		extern std::stringstream g_argsOutStream;
 	#endif
 #else
-	OutStreamType & g_argsOutStream = outStream();
+	static OutStreamType & g_argsOutStream = outStream();
 #endif // ARGS_TESTING
 
 

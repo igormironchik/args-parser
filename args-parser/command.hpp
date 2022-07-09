@@ -167,7 +167,7 @@ public:
 		else if( !m_defaultValues.empty() )
 			return m_defaultValues.front();
 		else
-			return m_dummyEmptyString;
+			return details::DummyString<>::c_string;
 	}
 
 	//! \return All values for this argument.
@@ -185,7 +185,7 @@ public:
 		if( !m_defaultValues.empty() )
 			return m_defaultValues.front();
 		else
-			return m_dummyEmptyString;
+			return details::DummyString<>::c_string;
 	}
 
 	//! Set default value. \note Value will be pushed back to the list

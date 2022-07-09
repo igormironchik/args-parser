@@ -36,6 +36,7 @@
 #include "utils.hpp"
 #include "exceptions.hpp"
 #include "types.hpp"
+#include "utils.hpp"
 
 // C++ include.
 #include <vector>
@@ -58,10 +59,6 @@ class Command;
 class GroupIface
 	:	public ArgIface
 {
-public:
-	//! Dummy empty string.
-	static const String m_dummyEmptyString;
-
 public:
 	//! Smart pointer to the argument.
 	using ArgPtr = std::unique_ptr< ArgIface, details::Deleter< ArgIface > >;
@@ -143,31 +140,31 @@ public:
 	//! \return Flag.
 	const String & flag() const override
 	{
-		return m_dummyEmptyString;
+		return details::DummyString<>::c_string;
 	}
 
 	//! \return Argument name.
 	const String & argumentName() const override
 	{
-		return m_dummyEmptyString;
+		return details::DummyString<>::c_string;
 	}
 
 	//! \return Value specifier.
 	const String & valueSpecifier() const override
 	{
-		return m_dummyEmptyString;
+		return details::DummyString<>::c_string;
 	}
 
 	//! \return Description of the argument.
 	const String & description() const override
 	{
-		return m_dummyEmptyString;
+		return details::DummyString<>::c_string;
 	}
 
 	//! \return Long description of the argument.
 	const String & longDescription() const override
 	{
-		return m_dummyEmptyString;
+		return details::DummyString<>::c_string;
 	}
 
 	//! Clear state of the argument.
@@ -285,8 +282,6 @@ private:
 	//! Is required?
 	bool m_required;
 }; // class GroupIface
-
-const String GroupIface::m_dummyEmptyString;
 
 } /* namespace Args */
 

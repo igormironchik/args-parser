@@ -76,7 +76,8 @@ static inline ContextInternal
 //
 
 //! \return Prepared for priniting string of correct names.
-String formatCorrectNamesString( const StringList & names )
+static inline String
+formatCorrectNamesString( const StringList & names )
 {
 	if( !names.empty() )
 	{

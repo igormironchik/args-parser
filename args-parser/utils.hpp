@@ -157,7 +157,8 @@ isCorrectName( const String & name )
 //
 
 //! \return Is the given name a misspelling of correct name.
-bool isMisspelledName( const String & misspelled,
+static inline bool
+isMisspelledName( const String & misspelled,
 	const String & correct )
 {
 	if( !misspelled.empty() && !correct.empty() )
@@ -173,6 +174,14 @@ bool isMisspelledName( const String & misspelled,
 	else
 		return false;
 }
+
+template< typename T = void >
+struct DummyString {
+	static const String c_string;
+};
+
+template< typename T >
+const String DummyString< T >::c_string;
 
 } /* namespace details */
 
