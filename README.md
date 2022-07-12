@@ -170,6 +170,10 @@ the same, but is it needed?
 
 # Changelog
 
+ * **6.3.2**
+
+   Fixed multiple definitions when included from different compile units.
+
  * **6.3.1**
  
    Improved performance. Added possibility to set positional arguments string
