@@ -1,6 +1,6 @@
 <map id="Args::Arg" name="Args::Arg">
-<area shape="rect" id="node1" title="Argument with one value that can be present only once in the command line." alt="" coords="72,80,153,107"/>
-<area shape="rect" id="node3" href="$class_args_1_1_help.html" title="Help argument." alt="" coords="5,155,95,181"/>
-<area shape="rect" id="node4" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="119,155,234,181"/>
-<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="56,5,169,32"/>
+<area shape="rect" id="node1" title="Argument with one value that can be present only once in the command line." alt="" coords="72,79,153,104"/>
+<area shape="rect" id="node3" href="$class_args_1_1_help.html" title="Help argument." alt="" coords="5,152,95,177"/>
+<area shape="rect" id="node4" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="119,152,234,177"/>
+<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="56,5,169,31"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="Args::Command" name="Args::Command">
-<area shape="rect" id="node1" title="Command in the command line interface." alt="" coords="7,155,134,181"/>
-<area shape="rect" id="node2" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="5,80,136,107"/>
-<area shape="rect" id="node3" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="14,5,127,32"/>
+<area shape="rect" id="node1" title="Command in the command line interface." alt="" coords="7,152,134,177"/>
+<area shape="rect" id="node2" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="5,79,136,104"/>
+<area shape="rect" id="node3" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="14,5,127,31"/>
 </map>

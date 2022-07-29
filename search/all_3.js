@@ -5,5 +5,6 @@ var searchData=
   ['deleter_2',['Deleter',['../class_args_1_1details_1_1_deleter.html',1,'Args::details::Deleter&lt; T &gt;'],['../class_args_1_1details_1_1_deleter.html#ab125ead9b5ae3d934984ff60e72b817f',1,'Args::details::Deleter::Deleter()']]],
   ['desc_3',['desc',['../class_args_1_1_base_exception.html#ac4a70b746f599645ddd2623236153462',1,'Args::BaseException']]],
   ['description_4',['description',['../class_args_1_1_arg.html#adb952a96632f9d870358990d3dcc5aca',1,'Args::Arg::description()'],['../class_args_1_1_arg_iface.html#aae5b08d1e5b9816cccaa4bfe02b8381f',1,'Args::ArgIface::description()'],['../class_args_1_1_command.html#a92143a2d2999581678cc342ee348ac71',1,'Args::Command::description()'],['../class_args_1_1_group_iface.html#a1924c1005bed9b10ace91175c943fcac',1,'Args::GroupIface::description()']]],
-  ['disable_5fcopy_5',['DISABLE_COPY',['../utils_8hpp.html#affcc47e34c1d76ec5242162539fe90d9',1,'utils.hpp']]]
+  ['disable_5fcopy_5',['DISABLE_COPY',['../utils_8hpp.html#affcc47e34c1d76ec5242162539fe90d9',1,'utils.hpp']]],
+  ['dummystring_6',['DummyString',['../struct_args_1_1details_1_1_dummy_string.html',1,'Args::details']]]
 ];

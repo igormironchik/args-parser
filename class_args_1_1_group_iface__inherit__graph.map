@@ -1,8 +1,8 @@
 <map id="Args::GroupIface" name="Args::GroupIface">
-<area shape="rect" id="node1" title="Interface for the groups." alt="" coords="268,80,399,107"/>
-<area shape="rect" id="node3" href="$class_args_1_1_all_of_group.html" title="Group of args where all arguments should be defined." alt="" coords="5,155,136,181"/>
-<area shape="rect" id="node4" href="$class_args_1_1_at_least_one_group.html" title="Group of args where at least one argument should be defined." alt="" coords="160,155,333,181"/>
-<area shape="rect" id="node5" href="$class_args_1_1_command.html" title="Command in the command line interface." alt="" coords="358,155,485,181"/>
-<area shape="rect" id="node6" href="$class_args_1_1_only_one_group.html" title="Group of args where only one argument can be defined." alt="" coords="509,155,664,181"/>
-<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="277,5,390,32"/>
+<area shape="rect" id="node1" title="Interface for the groups." alt="" coords="268,79,399,104"/>
+<area shape="rect" id="node3" href="$class_args_1_1_all_of_group.html" title="Group of args where all arguments should be defined." alt="" coords="5,152,136,177"/>
+<area shape="rect" id="node4" href="$class_args_1_1_at_least_one_group.html" title="Group of args where at least one argument should be defined." alt="" coords="160,152,333,177"/>
+<area shape="rect" id="node5" href="$class_args_1_1_command.html" title="Command in the command line interface." alt="" coords="358,152,485,177"/>
+<area shape="rect" id="node6" href="$class_args_1_1_only_one_group.html" title="Group of args where only one argument can be defined." alt="" coords="509,152,664,177"/>
+<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="277,5,390,31"/>
 </map>

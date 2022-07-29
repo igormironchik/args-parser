@@ -20,6 +20,7 @@ var hierarchy =
     ] ],
     [ "Args::Context", "class_args_1_1_context.html", null ],
     [ "Args::details::Deleter< T >", "class_args_1_1details_1_1_deleter.html", null ],
+    [ "Args::details::DummyString< T >", "struct_args_1_1details_1_1_dummy_string.html", null ],
     [ "Args::HelpPrinterIface", "class_args_1_1_help_printer_iface.html", [
       [ "Args::HelpPrinter", "class_args_1_1_help_printer.html", null ]
     ] ],
