@@ -184,12 +184,12 @@ the same, but is it needed?
 
 # Example
 
-First of all you must know that practically all classes of the args-parser throws exceptions on errors
+First of all you must know that practically all classes of the `args-parser` throws exceptions on errors
 and there is one specific exceptions that inform you about that that help was shown. This specific
 exception (HelpHasBeenPrintedException) is needed for processing program's logic that usually stops
 execution at this point.
 
-Since version 5.0.0 args-parser provides two API: the old one and auxiliary API
+Since version `5.0.0` `args-parser` provides two API: the old one and auxiliary API
 that allows to define arguments in one line of code. Let's look.
 
 ## One-line syntax with commands
@@ -384,7 +384,7 @@ int main( int argc, char ** argv )
 Help output for the example with the old syntax.
 
 ```
-This application just show the power of args-parser.
+This application just show the power of `args-parser`.
 
 USAGE: sample.help.exe -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ]
        [ --timeout <ms> ]
@@ -400,4 +400,4 @@ OPTIONAL:
      --timeout <ms> Timeout before new messages will be sent in milliseconds.
 ```
 
-That's it. Use it and enjoy it. Good luck.
+*That's it. Use it and enjoy it. Good luck.*
