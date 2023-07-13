@@ -170,46 +170,17 @@ the same, but is it needed?
 
 # Changelog
 
- * **6.3.2**
-
-   Fixed multiple definitions when included from different compile units.
-
- * **6.3.1**
- 
-   Improved performance. Added possibility to set positional arguments string
-   for the help. Added benchmark.
-
- * **6.3.0**
- 
-   Added possibility to handle positional arguments.
-   
- * **6.2.0.1**
- 
-   Ready for use with Qt6.
-
- * **6.2.0.0**
-
-   Allowed to inherit from some classes. Added `addArg()` methods into API.
-
- * **6.1.1.1**
-
-   Added possibility to set up custom help printer in help argument.
-
- * **6.1.1.0**
-
-   Improved API with new syntax, now it's impossible to mess with end() methods.
-   Fixed issue with printing help of global argument under command.
-
- * **6.1.0.0**
-
-   Added possibility to add `Command` into groups.
-
- * **6.0.0.0**
-
-   In this version was removed `ArgAsCommand` class, and was added fully-featured
-   support for sub-commands, that can be created with `Command` class, i.e.
-   `Command` can has `Command` as child. So it's possible to create such cli
-   as `git submodule update --init --recursive`.
+| Version | Changes |
+| --- | --- |
+| **6.3.2** | Fixed multiple definitions when included from different compile units. |
+| **6.3.1** | Improved performance. Added possibility to set positional arguments string for the help. Added benchmark. |
+| **6.3.0** | Added possibility to handle positional arguments. |
+| **6.2.0.1** | Ready for use with Qt6. |
+| **6.2.0.0** | Allowed to inherit from some classes. Added `addArg()` methods into API. |
+| **6.1.1.1** | Added possibility to set up custom help printer in help argument. |
+| **6.1.1.0** | Improved API with new syntax, now it's impossible to mess with end() methods. Fixed issue with printing help of global argument under command. |
+| **6.1.0.0** | Added possibility to add `Command` into groups. |
+| **6.0.0.0** | In this version was removed `ArgAsCommand` class, and was added fully-featured support for sub-commands, that can be created with `Command` class, i.e. `Command` can has `Command` as child. So it's possible to create such cli as `git submodule update --init --recursive`. |
 
 # Example
 
