@@ -1,8 +1,8 @@
 [![Build](https://github.com/igormironchik/args-parser/workflows/build/badge.svg)](https://github.com/igormironchik/args-parser/actions)[![codecov](https://codecov.io/gh/igormironchik/args-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/igormironchik/args-parser)[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is args-parser.
+This is `args-parser`.
 
-args-parser is a small C++ header-only library for parsing command line arguments.
+`args-parser` is a small C++ header-only library for parsing command line arguments.
 
 # Syntax
 
@@ -19,17 +19,17 @@ of the argument will be `StringList`.
  * `Command` class can be used to define command in command line interface.
 Command is the argument without dash/dashes at the beginning, `add` for example.
  * `Command` can has children arguments or even subcommands.
- * In args-parser groups can be used to group arguments into groups to check their
+ * In `args-parser` groups can be used to group arguments into groups to check their
 definitions after parsing, so if constraint of group will be violated
 exception will be thrown.
- * args-parser provides `Help` argument that provides help printing. `Help`
+ * `args-parser` provides `Help` argument that provides help printing. `Help`
 uses `-h, --help` arguments. `Help` can receive value with name
 of argument or command to print help about. If `Help` receives the name
 of a command as the value, then the name of a subcommand or a child argument
 can also be provided as the next value, to get help about the subcommand/child argument.
- * If args-parser don't know about argument in command line interface it provides
+ * If `args-parser` don't know about argument in command line interface it provides
 information about possible arguments if some misspelling was in command
-line interface. If args-parser can't assume anything about entered argument it
+line interface. If `args-parser` can't assume anything about entered argument it
 will just say about unknown argument through the exception and parsing will
 fail.
  * With `CmdLine::HandlePositionalArguments` option provided to `CmdLine`
@@ -40,24 +40,24 @@ because `MultiArg` can eat almost everything that is not a valid argument.
 
 # Different types of strings.
 
-Since version 4.0.0 args-parser can be built with different strings - std::string,
-std::wstring and QString.
+Since version `4.0.0` `args-parser` can be built with different strings - `std::string`,
+`std::wstring` and `QString`.
 
- * To build args-parser with std::wstring support define ARGS_WSTRING_BUILD
- * To build args-parser with QString support define ARGS_QSTRING_BUILD
- * If nothing was defined then args-parser will be build with std::string.
+ * To build `args-parser` with `std::wstring` support define `ARGS_WSTRING_BUILD`
+ * To build `args-parser` with `QString` support define `ARGS_QSTRING_BUILD`
+ * If nothing was defined then `args-parser` will be build with `std::string`.
 
 # Different types of list of strings.
 
-args-parser extensively uses list of string in internal structures and to return
+`args-parser` extensively uses list of string in internal structures and to return
 values of arguments outside. In the code this is `StringList`
 type defined in `args-parser/types.hpp`. By default underlying type is
 `std::vector` or `QVector` when building with Qt that can be changed
 to `std::list`, `QLinkedList` or `std::deque`, `QList`.
 
- * Define `ARGS_LIST` to build args-parser with `std::list`, `QLinkedList`
+ * Define `ARGS_LIST` to build `args-parser` with `std::list`, `QLinkedList`
 as `StringList`
- * Define `ARGS_DEQUE` to build args-parser with `std::deque`, `QList`
+ * Define `ARGS_DEQUE` to build `args-parser` with `std::deque`, `QList`
 as `StringList`
 
 # Q/A
@@ -68,16 +68,16 @@ arguments, so it will be possible to initialize argument in one line?**
  * This is impossible because constructors will be ambiguous but you can use
 auxiliary API that allows to define arguments in one line of code.
 
-**How can I add args-parser to my project?**
+**How can I add `args-parser` to my project?**
 
- * The simplest way is just copy args-parser directory with headers to any location in
+ * The simplest way is just copy `args-parser` directory with headers to any location in
 your project. With CMake you can clone entire `args-parser` project somewhere in your
 project and just do `add_subdirectory()`, if you will do so you have to
 add include directory path to your project with
 `include_directories( ${args-parser_INCLUDE_DIRECTORIES} )`.
 
- * You can clone/download args-parser, build and install it with CMake. In this
-case it will be possible to use `find_package( args-parser )` in `CMakeLists.txt` of
+ * You can clone/download `args-parser`, build and install it with CMake. In this
+case it will be possible to use `find_package( `args-parser` )` in `CMakeLists.txt` of
 your project.
 
  * You can use `Conan` package manager.
@@ -85,7 +85,7 @@ your project.
 **Why should I use this library?**
 
  * There are tons of libraries for parsing command line arguments on the
-Internet. But args-parser also provides the possibility to define commands, like
+Internet. But `args-parser` also provides the possibility to define commands, like
 
     ```
     git add -A
@@ -125,7 +125,7 @@ what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. l
    printer.print( outStream() );
    ```
 
-**Why doesn't args-parser provide bindings of variables to arguments?**
+**Why doesn't `args-parser` provide bindings of variables to arguments?**
 
  * This is a question of why doesn't `args-parser` provide validators? It's the same.
 I decided that this aspect is very application specific. There is no need for such library
