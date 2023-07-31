@@ -597,22 +597,22 @@ HelpPrinter::print( const String & name, OutStreamType & to, Command * parent )
 			to << "\n\n";
 
 			std::for_each( commands.cbegin(), commands.cend(),
-				[ & ] ( Command * cmd )
+				[ & ] ( Command * c )
 				{
 					String::size_type pos = 2;
 
-					to << "  " << cmd->name();
+					to << "  " << c->name();
 
-					pos += cmd->name().length();
+					pos += c->name().length();
 
-					if( cmd->isWithValue() )
+					if( c->isWithValue() )
 					{
-						to << " <" << cmd->valueSpecifier() << ">";
+						to << " <" << c->valueSpecifier() << ">";
 
-						pos += 3 + cmd->valueSpecifier().length();
+						pos += 3 + c->valueSpecifier().length();
 					}
 
-					printString( to, splitToWords( cmd->description() ), pos,
+					printString( to, splitToWords( c->description() ), pos,
 						maxCommand + 1, 0 );
 
 					to << "\n";
