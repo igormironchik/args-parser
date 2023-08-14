@@ -1,4 +1,5 @@
 <map id="Args::details::API&lt; PARENT, SELF, ARGPTR, true &gt;" name="Args::details::API&lt; PARENT, SELF, ARGPTR, true &gt;">
-<area shape="rect" id="node1" title="Auxiliary API." alt="" coords="5,5,197,60"/>
-<area shape="rect" id="node2" href="$class_args_1_1_cmd_line.html" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ..." alt="" coords="5,108,197,148"/>
+<area shape="rect" id="Node000001" title="Auxiliary API." alt="" coords="5,5,197,60"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_cmd_line.html" title="CmdLine is class that holds all rguments and parse command line arguments in the correspondence with ..." alt="" coords="5,108,197,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,74,104,108,99,108,99,74"/>
 </map>

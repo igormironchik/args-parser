@@ -1,7 +1,13 @@
 <map id="help_printer_iface.hpp" name="help_printer_iface.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="77,5,243,31"/>
-<area shape="rect" id="node2" href="$help_8hpp.html" title=" " alt="" coords="82,79,161,104"/>
-<area shape="rect" id="node5" href="$help__printer_8hpp.html" title=" " alt="" coords="97,225,223,251"/>
-<area shape="rect" id="node3" href="$cmd__line_8hpp.html" title=" " alt="" coords="59,152,168,177"/>
-<area shape="rect" id="node4" href="$all_8hpp.html" title=" " alt="" coords="5,225,72,251"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="77,5,243,31"/>
+<area shape="rect" id="Node000002" href="$help_8hpp.html" title=" " alt="" coords="82,79,161,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,44,130,80,125,77,145,42"/>
+<area shape="rect" id="Node000005" href="$help__printer_8hpp.html" title=" " alt="" coords="97,225,223,251"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="170,43,182,104,185,141,183,178,168,226,163,224,177,177,180,141,177,105,165,44"/>
+<area shape="rect" id="Node000003" href="$cmd__line_8hpp.html" title=" " alt="" coords="59,152,168,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,118,117,152,112,152,116,117"/>
+<area shape="rect" id="Node000004" href="$all_8hpp.html" title=" " alt="" coords="5,225,72,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="93,189,53,227,49,223,90,185"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="123,188,148,224,143,227,118,191"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="151,215,126,179,130,176,155,212"/>
 </map>

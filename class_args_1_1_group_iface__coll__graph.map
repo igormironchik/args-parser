@@ -1,4 +1,5 @@
 <map id="Args::GroupIface" name="Args::GroupIface">
-<area shape="rect" id="node1" title="Interface for the groups." alt="" coords="5,79,136,104"/>
-<area shape="rect" id="node2" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="14,5,127,31"/>
+<area shape="rect" id="Node000001" title="Interface for the groups." alt="" coords="5,79,136,104"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="14,5,127,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,44,73,79,68,79,68,44"/>
 </map>

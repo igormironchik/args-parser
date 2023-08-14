@@ -1,5 +1,7 @@
 <map id="Args::AtLeastOneGroup" name="Args::AtLeastOneGroup">
-<area shape="rect" id="node1" title="Group of args where at least one argument should be defined." alt="" coords="5,152,179,177"/>
-<area shape="rect" id="node2" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="27,79,157,104"/>
-<area shape="rect" id="node3" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="35,5,149,31"/>
+<area shape="rect" id="Node000001" title="Group of args where at least one argument should be defined." alt="" coords="5,152,179,177"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="27,79,157,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,118,95,152,89,152,89,118"/>
+<area shape="rect" id="Node000003" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="35,5,149,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,44,95,79,89,79,89,44"/>
 </map>

@@ -9,10 +9,10 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 23)">
 <title>Graphical Class Hierarchy</title>
 <!-- Node0 -->
-<g id="node1" class="node">
+<g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="struct_args_1_1details_1_1_dummy_string.html" target="_top" xlink:title=" ">
-<polygon fill="none" stroke="black" points="179,-19 0,-19 0,0 179,0 179,-19"/>
+<g id="a_Node000000"><a xlink:href="struct_args_1_1details_1_1_dummy_string.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="179,-19 0,-19 0,0 179,0 179,-19"/>
 <text text-anchor="middle" x="89.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Args::details::DummyString&lt; T &gt;</text>
 </a>
 </g>

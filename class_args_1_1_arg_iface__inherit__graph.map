@@ -1,11 +1,19 @@
 <map id="Args::ArgIface" name="Args::ArgIface">
-<area shape="rect" id="node1" title="Interface for arguments." alt="" coords="5,104,119,129"/>
-<area shape="rect" id="node2" href="$class_args_1_1_arg.html" title="Argument with one value that can be present only once in the command line." alt="" coords="191,55,273,80"/>
-<area shape="rect" id="node5" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="167,153,297,179"/>
-<area shape="rect" id="node3" href="$class_args_1_1_help.html" title="Help argument." alt="" coords="387,5,477,31"/>
-<area shape="rect" id="node4" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="375,55,489,80"/>
-<area shape="rect" id="node6" href="$class_args_1_1_all_of_group.html" title="Group of args where all arguments should be defined." alt="" coords="367,104,497,129"/>
-<area shape="rect" id="node7" href="$class_args_1_1_at_least_one_group.html" title="Group of args where at least one argument should be defined." alt="" coords="345,153,519,179"/>
-<area shape="rect" id="node8" href="$class_args_1_1_command.html" title="Command in the command line interface." alt="" coords="369,203,495,228"/>
-<area shape="rect" id="node9" href="$class_args_1_1_only_one_group.html" title="Group of args where only one argument can be defined." alt="" coords="355,252,509,277"/>
+<area shape="rect" id="Node000001" title="Interface for arguments." alt="" coords="5,104,119,129"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_arg.html" title="Argument with one value that can be present only once in the command line." alt="" coords="191,55,273,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,97,190,76,192,82,121,103"/>
+<area shape="rect" id="Node000005" href="$class_args_1_1_group_iface.html" title="Interface for the groups." alt="" coords="167,153,297,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="120,131,188,151,186,156,119,136"/>
+<area shape="rect" id="Node000003" href="$class_args_1_1_help.html" title="Help argument." alt="" coords="387,5,477,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="285,52,387,26,388,31,286,57"/>
+<area shape="rect" id="Node000004" href="$class_args_1_1_multi_arg.html" title="MultiArg is a class that presents argument in the command line taht can be presented more than once o..." alt="" coords="375,55,489,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="286,65,374,65,374,70,286,70"/>
+<area shape="rect" id="Node000006" href="$class_args_1_1_all_of_group.html" title="Group of args where all arguments should be defined." alt="" coords="367,104,497,129"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="297,147,379,127,380,132,298,153"/>
+<area shape="rect" id="Node000007" href="$class_args_1_1_at_least_one_group.html" title="Group of args where at least one argument should be defined." alt="" coords="345,153,519,179"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="311,163,345,163,345,169,311,169"/>
+<area shape="rect" id="Node000008" href="$class_args_1_1_command.html" title="Command in the command line interface." alt="" coords="369,203,495,228"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="298,179,380,200,379,205,297,185"/>
+<area shape="rect" id="Node000009" href="$class_args_1_1_only_one_group.html" title="Group of args where only one argument can be defined." alt="" coords="355,252,509,277"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="262,185,301,212,346,237,380,249,378,254,344,242,298,216,259,189"/>
 </map>

@@ -1,5 +1,7 @@
 <map id="Args::Help" name="Args::Help">
-<area shape="rect" id="node1" title="Help argument." alt="" coords="17,152,107,177"/>
-<area shape="rect" id="node2" href="$class_args_1_1_arg.html" title="Argument with one value that can be present only once in the command line." alt="" coords="21,79,103,104"/>
-<area shape="rect" id="node3" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="5,5,119,31"/>
+<area shape="rect" id="Node000001" title="Help argument." alt="" coords="17,152,107,177"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_arg.html" title="Argument with one value that can be present only once in the command line." alt="" coords="21,79,103,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,118,65,152,59,152,59,118"/>
+<area shape="rect" id="Node000003" href="$class_args_1_1_arg_iface.html" title="Interface for arguments." alt="" coords="5,5,119,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="65,44,65,79,59,79,59,44"/>
 </map>
