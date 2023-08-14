@@ -383,7 +383,7 @@ int main( int argc, char ** argv )
 
 Help output for the example with the old syntax.
 
-```
+```txt
 This application just show the power of `args-parser`.
 
 USAGE: sample.help.exe -s, --host <arg> -p, --port <arg> [ -h, --help <arg> ]
