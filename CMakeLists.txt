@@ -1,7 +1,7 @@
 
 cmake_minimum_required( VERSION 3.19 )
 
-set( ARGS_VERSION "6.3.2" )
+set( ARGS_VERSION "6.3.3" )
 
 option( BUILD_EXAMPLES "Build examples? Default ON." ON )
 option( BUILD_TESTS "Build tests? Default ON." ON )
