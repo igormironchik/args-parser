@@ -77,7 +77,7 @@ add include directory path to your project with
 `include_directories( ${args-parser_INCLUDE_DIRECTORIES} )`.
 
  * You can clone/download `args-parser`, build and install it with CMake. In this
-case it will be possible to use `find_package( `args-parser` )` in `CMakeLists.txt` of
+case it will be possible to use `find_package( args-parser )` in `CMakeLists.txt` of
 your project.
 
  * You can use `Conan` package manager.
@@ -131,7 +131,7 @@ what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. l
 I decided that this aspect is very application specific. There is no need for such library
 to do any conversions of arguments' values, to bind them to some variables. This will
 do API very complex only. I know what you will say: this is very nice feature, it helps...
-Really? How often and hom much it helped you? Arguments parser should handle the string
+Really? How often and how much it helped you? Arguments parser should handle the string
 that user provided to the application, it should separate arguments, commands, values,
 store it in internal state of parser, and allow to developer just write some `if`
 operators to choose branch of the programm logic. What will give you, as to developer,
