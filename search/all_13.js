@@ -1,16 +1,8 @@
 var searchData=
 [
-  ['_7eallofgroup_0',['~AllOfGroup',['../class_args_1_1_all_of_group.html#a9a962b08718c2294bee5348d27e079a0',1,'Args::AllOfGroup']]],
-  ['_7eapi_1',['~API',['../class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_command_00_01_a_r_g_p_t_r_00_01false_01_4.html#acffeed9dfb1a7f3c1748f66afea7461a',1,'Args::details::API&lt; PARENT, Command, ARGPTR, false &gt;::~API()'],['../class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01false_01_4.html#a19ea32aa7010d769770769dc47695643',1,'Args::details::API&lt; PARENT, SELF, ARGPTR, false &gt;::~API()'],['../class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01true_01_4.html#a7e8ade2cc3ecf6c91742b8b3c5888aca',1,'Args::details::API&lt; PARENT, SELF, ARGPTR, true &gt;::~API()']]],
-  ['_7earg_2',['~Arg',['../class_args_1_1_arg.html#affef39dbd97a3c173ec235ed9110138e',1,'Args::Arg']]],
-  ['_7eargiface_3',['~ArgIface',['../class_args_1_1_arg_iface.html#a6044f97f138745cce1ae4c9035bf8dcd',1,'Args::ArgIface']]],
-  ['_7eatleastonegroup_4',['~AtLeastOneGroup',['../class_args_1_1_at_least_one_group.html#a6ec338b263f1ead799372efac016f662',1,'Args::AtLeastOneGroup']]],
-  ['_7ebaseexception_5',['~BaseException',['../class_args_1_1_base_exception.html#a50db43205726235c3117c724098684e5',1,'Args::BaseException']]],
-  ['_7ecmdline_6',['~CmdLine',['../class_args_1_1_cmd_line.html#ad9aa8b6070549efc953051051574cd1a',1,'Args::CmdLine']]],
-  ['_7ecommand_7',['~Command',['../class_args_1_1_command.html#ae4493f136fed851d1222f8ad1609b2f6',1,'Args::Command']]],
-  ['_7egroupiface_8',['~GroupIface',['../class_args_1_1_group_iface.html#af9cdc945c531d944c10dbed283f3621f',1,'Args::GroupIface']]],
-  ['_7ehelpprinter_9',['~HelpPrinter',['../class_args_1_1_help_printer.html#aceac735f18fae837ba365bb5cc1c0d3d',1,'Args::HelpPrinter']]],
-  ['_7ehelpprinteriface_10',['~HelpPrinterIface',['../class_args_1_1_help_printer_iface.html#aad0bfdbd5a9d6d29c09973857d0d72c5',1,'Args::HelpPrinterIface']]],
-  ['_7emultiarg_11',['~MultiArg',['../class_args_1_1_multi_arg.html#aa12b7c91f15e68bba4928be42c7cb8db',1,'Args::MultiArg']]],
-  ['_7eonlyonegroup_12',['~OnlyOneGroup',['../class_args_1_1_only_one_group.html#ad4bd37babec88ed869b319111f80921c',1,'Args::OnlyOneGroup']]]
+  ['value_0',['value',['../class_args_1_1_arg.html#a1328c33b38d07bd10ce26699c384771b',1,'Args::Arg::value()'],['../class_args_1_1_cmd_line.html#a4eb7818afd00b4c84b038c9f358e2c4f',1,'Args::CmdLine::value()'],['../class_args_1_1_command.html#a768de28ade01576e6c6078cfee0e3fc9',1,'Args::Command::value()'],['../class_args_1_1_multi_arg.html#a379434d2bf606e8880fdb1b43cfd9a82',1,'Args::MultiArg::value()']]],
+  ['value_5futils_2ehpp_1',['value_utils.hpp',['../value__utils_8hpp.html',1,'']]],
+  ['valueoptions_2',['ValueOptions',['../namespace_args.html#a5481495a11baecb3c28e0f4b39ff7dd0',1,'Args']]],
+  ['values_3',['values',['../class_args_1_1_cmd_line.html#a78130fd726d583e25f09818b4e9374bc',1,'Args::CmdLine::values()'],['../class_args_1_1_command.html#a8f95a224497f082ff1e2677b811e426d',1,'Args::Command::values()'],['../class_args_1_1_multi_arg.html#a9b0e3c4709223da480bd9cf150598c7f',1,'Args::MultiArg::values()']]],
+  ['valuespecifier_4',['valuespecifier',['../class_args_1_1_arg.html#a1da8e9e266c3095c30d94a4c60c2f14b',1,'Args::Arg::valueSpecifier()'],['../class_args_1_1_arg_iface.html#a3a1b88344ef65a25ff06898ef8074b8f',1,'Args::ArgIface::valueSpecifier()'],['../class_args_1_1_command.html#aad5c0a9a609b05f86fb22777dfa10c4d',1,'Args::Command::valueSpecifier()'],['../class_args_1_1_group_iface.html#a69d3c0ac7f882b5aaef0ad3ee1ad9fd8',1,'Args::GroupIface::valueSpecifier()']]]
 ];
