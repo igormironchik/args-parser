@@ -4,6 +4,22 @@ This is `args-parser`.
 
 `args-parser` is a small C++ header-only library for parsing command line arguments.
 
+* [Syntax](#syntax)
+* [Different types of strings.](#different-types-of-strings)
+* [Different types of list of strings.](#different-types-of-list-of-strings)
+* [Q/A](#qa)
+  * [Why not to add description, long description, etc into constructors of arguments, so it will be possible to initialize argument in one line?](#why-not-to-add-description-long-description-etc-into-constructors-of-arguments-so-it-will-be-possible-to-initialize-argument-in-one-line)
+  * [How can I add `args-parser` to my project?](#how-can-i-add-args-parser-to-my-project)
+  * [Why should I use this library?](#why-should-i-use-this-library)
+  * [How to print help programmatically?](#how-to-print-help-programmatically)
+  * [Why doesn't `args-parser` provide bindings of variables to arguments?](#why-doesnt-args-parser-provide-bindings-of-variables-to-arguments)
+  * [Why don't you provide comparisons with other CLI libraries?](#why-dont-you-provide-comparisons-with-other-cli-libraries)
+* [Changelog](#changelog)
+* [Example](#example)
+  * [One-line syntax with commands](#one-line-syntax-with-commands)
+  * [One-line syntax with arguments](#one-line-syntax-with-arguments)
+  * [And with the old syntax](#and-with-the-old-syntax)
+
 # Syntax
 
  * An argument starts with two dashes. For example `--argument`.
@@ -62,13 +78,15 @@ as `StringList`
 
 # Q/A
 
-**Why not to add description, long description, etc into constructors of
-arguments, so it will be possible to initialize argument in one line?**
+Why not to add description, long description, etc into constructors of arguments,
+so it will be possible to initialize argument in one line?
+---
 
  * This is impossible because constructors will be ambiguous but you can use
 auxiliary API that allows to define arguments in one line of code.
 
-**How can I add `args-parser` to my project?**
+How can I add `args-parser` to my project?
+---
 
  * The simplest way is just copy `args-parser` directory with headers to any location in
 your project. With CMake you can clone entire `args-parser` project somewhere in your
@@ -82,7 +100,8 @@ your project.
 
  * You can use `Conan` package manager.
 
-**Why should I use this library?**
+Why should I use this library?
+---
 
  * There are tons of libraries for parsing command line arguments on the
 Internet. But `args-parser` also provides the possibility to define commands, like
@@ -98,7 +117,8 @@ Internet. But `args-parser` also provides the possibility to define commands, li
     If you need only simple arguments in style `--do-it <value>` then possibly
     you will find another library more useful for you, but who knows...
 
-**How to print help programmatically?**
+How to print help programmatically?
+---
 
  * For those, who use old style syntax the answer should be on the plate, as developer
 can look at the code of `Help` class, that implements help argument. But for those, who
@@ -125,7 +145,8 @@ what syntax you use, new (one-line) syntax is just a wrapper for old one. I.e. l
    printer.print( outStream() );
    ```
 
-**Why doesn't `args-parser` provide bindings of variables to arguments?**
+Why doesn't `args-parser` provide bindings of variables to arguments?
+---
 
  * This is a question of why doesn't `args-parser` provide validators? It's the same.
 I decided that this aspect is very application specific. There is no need for such library
@@ -138,7 +159,8 @@ operators to choose branch of the programm logic. What will give you, as to deve
 if values will be bind to concrete variables? Will not you write the same code with `if`
 operators? So why I should do the library more complex?
 
-**Why don't you provide comparisons with other CLI libraries?**
+Why don't you provide comparisons with other CLI libraries?
+---
 
  * I found only one library at GitHub that can compete with `args-parser`, and this is
 [CLI11](https://github.com/CLIUtils/CLI11). And here is the question of the taste more.
