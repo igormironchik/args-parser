@@ -8,7 +8,7 @@ This is `args-parser`.
 * [Different types of strings.](#different-types-of-strings)
 * [Different types of list of strings.](#different-types-of-list-of-strings)
 * [Q/A](#qa)
-  * [Why not to add description, long description, etc into constructors of arguments, so it will be possible to initialize argument in one line?](#why-not-to-add-description-long-description-etc-into-constructors-of-arguments-so-it-will-be-possible-to-initialize-argument-in-one-line)
+  * [Why not to add description, long description, etc into constructors of arguments, so it will be possible to initialize argument in one line?](#why-not-to-add-description-long-description-etc-into-constructors-of-argumentsso-it-will-be-possible-to-initialize-argument-in-one-line)
   * [How can I add `args-parser` to my project?](#how-can-i-add-args-parser-to-my-project)
   * [Why should I use this library?](#why-should-i-use-this-library)
   * [How to print help programmatically?](#how-to-print-help-programmatically)
