@@ -1,3 +1,7 @@
+/*
+	SPDX-FileCopyrightText: 2022-2024 Igor Mironchik <igor.mironchik@gmail.com>, 2016-2017 Taylor C. Richberger <taywee@gmx.com> and Pavel Belikov
+	SPDX-License-Identifier: MIT
+*/
 
 #undef NDEBUG
 #include <iostream>
