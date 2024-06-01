@@ -17,6 +17,8 @@ namespace Args {
 
 class Context;
 class CmdLine;
+class GroupIface;
+class Command;
 
 
 //
