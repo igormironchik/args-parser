@@ -199,6 +199,7 @@ the same, but is it needed?
 
 | Version | Changes |
 | --- | --- |
+| **6.3.4** | Fix issue with `MSVC` when globally defined `::Command` class was detected as friend of `ArgIface` instead of `Args::Command` |
 | **6.3.3** | Minor fix for compillation with `-Werror=shadow` |
 | **6.3.2** | Fixed multiple definitions when included from different compile units. |
 | **6.3.1** | Improved performance. Added possibility to set positional arguments string for the help. Added benchmark. |
