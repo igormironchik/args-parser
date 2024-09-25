@@ -1,0 +1,34 @@
+version = 1
+SPDX-PackageName = "args-parser"
+SPDX-PackageSupplier = "Igor Mironchik <igor.mironchik@gmail.com>"
+SPDX-PackageDownloadLocation = "https://github.com/igormironchik/args-parser"
+
+[[annotations]]
+path = "tests/md_benchmark/3rdparty/md4c/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2016-2020 Martin Mitáš"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "3rdparty/doctest/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2016-2021 Viktor Kirilov"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = [".github/**", ".gitignore", "codecov.yml", "doc/**", "REUSE.toml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022-2024 Igor Mironchik <igor.mironchik@gmail.com>"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "tests/benchmark/args.hxx"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2016-2017 Taylor C. Richberger <taywee@gmx.com> and Pavel Belikov"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "tests/benchmark/tclap/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2003-2012 Michael E. Smoot, 2004-2016 Daniel Aarno, 2017-2021 Google LLC"
+SPDX-License-Identifier = "MIT"
