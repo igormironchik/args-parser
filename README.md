@@ -160,7 +160,7 @@ do API very complex only. I know what you will say: this is very nice feature, i
 Really? How often and how much it helped you? Arguments parser should handle the string
 that user provided to the application, it should separate arguments, commands, values,
 store it in internal state of parser, and allow to developer just write some `if`
-operators to choose branch of the programm logic. What will give you, as to developer,
+operators to choose branch of the program logic. What will give you, as to developer,
 if values will be bind to concrete variables? Will not you write the same code with `if`
 operators? So why I should do the library more complex?
 
@@ -187,7 +187,7 @@ the same, but is it needed?
    Uh, oh, I found one more interesting arguments parsing library, This is
    [Taywee/Args](https://github.com/Taywee/args). Guys, this is a question of taste.
    And, as said in `CLI11` documentation about `Taywee/Args`, `args-parser` as
-   `CLI11` less verbose. `Taywee/Args` has benchamrk to compare performance with
+   `CLI11` less verbose. `Taywee/Args` has benchmark to compare performance with
    `TCLAP` and `boost::program_options.`, I want to say that `args-parser` 2 times
    faster than `Taywee/Args`, dry numbers says that `Tyawee/Args` runs 0.635314
    second, whereas `args-parser` runs 0.346813 second.
@@ -200,7 +200,7 @@ the same, but is it needed?
 | Version | Changes |
 | --- | --- |
 | **6.3.4** | Fixed issue with `MSVC` when globally defined `::Command` class was detected as friend of `ArgIface` instead of `Args::Command` |
-| **6.3.3** | Minor fix for compillation with `-Werror=shadow` |
+| **6.3.3** | Minor fix for compilation with `-Werror=shadow` |
 | **6.3.2** | Fixed multiple definitions when included from different compile units. |
 | **6.3.1** | Improved performance. Added possibility to set positional arguments string for the help. Added benchmark. |
 | **6.3.0** | Added possibility to handle positional arguments. |
