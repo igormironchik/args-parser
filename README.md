@@ -13,7 +13,7 @@ This is `args-parser`.
 * [Different types of strings.](#different-types-of-strings)
 * [Different types of list of strings.](#different-types-of-list-of-strings)
 * [Q/A](#qa)
-  * [Why not to add description, long description, etc into constructors of arguments, so it will be possible to initialize argument in one line?](#why-not-to-add-description-long-description-etc-into-constructors-of-argumentsso-it-will-be-possible-to-initialize-argument-in-one-line)
+  * [Why not to add description, long description, etc. into constructors of arguments, so it will be possible to initialize argument in one line?](#why-not-to-add-description-long-description-etc-into-constructors-of-argumentsso-it-will-be-possible-to-initialize-argument-in-one-line)
   * [How can I add `args-parser` to my project?](#how-can-i-add-args-parser-to-my-project)
   * [Why should I use this library?](#why-should-i-use-this-library)
   * [How to print help programmatically?](#how-to-print-help-programmatically)
@@ -83,7 +83,7 @@ as `StringList`
 
 # Q/A
 
-Why not to add description, long description, etc into constructors of arguments,
+Why not to add description, long description, etc. into constructors of arguments,
 so it will be possible to initialize argument in one line?
 ---
 
@@ -209,7 +209,7 @@ the same, but is it needed?
 | **6.1.1.1** | Added possibility to set up custom help printer in help argument. |
 | **6.1.1.0** | Improved API with new syntax, now it's impossible to mess with end() methods. Fixed issue with printing help of global argument under command. |
 | **6.1.0.0** | Added possibility to add `Command` into groups. |
-| **6.0.0.0** | In this version was removed `ArgAsCommand` class, and was added fully-featured support for sub-commands, that can be created with `Command` class, i.e. `Command` can has `Command` as child. So it's possible to create such cli as `git submodule update --init --recursive`. |
+| **6.0.0.0** | In this version was removed `ArgAsCommand` class, and was added fully-featured support for sub-commands, that can be created with `Command` class, i.e. `Command` can has `Command` as child. So it's possible to create such CLI as `git submodule update --init --recursive`. |
 
 # Example
 
