@@ -1,85 +1,85 @@
 
 /*
-	SPDX-FileCopyrightText: 2013-2024 Igor Mironchik <igor.mironchik@gmail.com>
-	SPDX-License-Identifier: MIT
+    SPDX-FileCopyrightText: 2013-2024 Igor Mironchik <igor.mironchik@gmail.com>
+    SPDX-License-Identifier: MIT
 */
 
 #ifndef ARGS__VALUE_UTILS_HPP__INCLUDED
 #define ARGS__VALUE_UTILS_HPP__INCLUDED
 
 // Args include.
-#include "utils.hpp"
 #include "exceptions.hpp"
 #include "types.hpp"
+#include "utils.hpp"
 
 // C++ include.
 #include <algorithm>
 
-
-namespace Args {
+namespace Args
+{
 
 //
 // eatValues
 //
 
 //! Eat values in context.
-template< typename Container, typename Cmd, typename Ctx >
-bool eatValues( Ctx & context, Container & container,
-	const String & errorDescription, Cmd * cmdLine )
+template<typename Container,
+         typename Cmd,
+         typename Ctx>
+bool eatValues(Ctx &context,
+               Container &container,
+               const String &errorDescription,
+               Cmd *cmdLine)
 {
-	if( !context.atEnd() )
-	{
-		auto begin = context.begin();
+    if (!context.atEnd()) {
+        auto begin = context.begin();
 
-		auto last = std::find_if( context.begin(), context.end(),
-			[ & ] ( const String & v ) -> bool
-			{
-				return( cmdLine->findArgument( v ) != nullptr );
-			}
-		);
+        auto last = std::find_if(context.begin(), context.end(), [&](const String &v) -> bool {
+            return (cmdLine->findArgument(v) != nullptr);
+        });
 
-		if( last != begin )
-		{
-			begin = context.next();
+        if (last != begin) {
+            begin = context.next();
 
-			while( begin != last )
-			{
-				container.push_back( *begin );
+            while (begin != last) {
+                container.push_back(*begin);
 
-				begin = context.next();
-			}
+                begin = context.next();
+            }
 
-			if( last != context.end() )
-				context.putBack();
+            if (last != context.end()) {
+                context.putBack();
+            }
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 
-	throw BaseException( errorDescription );
+    throw BaseException(errorDescription);
 }
-
 
 //
 // eatOneValue
 //
 
 //! Eat one value.
-template< typename Cmd, typename Ctx >
-String eatOneValue( Ctx & context,
-	const String & errorDescription, Cmd * cmdLine )
+template<typename Cmd,
+         typename Ctx>
+String eatOneValue(Ctx &context,
+                   const String &errorDescription,
+                   Cmd *cmdLine)
 {
-	if( !context.atEnd() )
-	{
-		auto val = context.next();
+    if (!context.atEnd()) {
+        auto val = context.next();
 
-		if( !cmdLine->findArgument( *val ) )
-			return *val;
+        if (!cmdLine->findArgument(*val)) {
+            return *val;
+        }
 
-		context.putBack();
-	}
+        context.putBack();
+    }
 
-	throw BaseException( errorDescription );
+    throw BaseException(errorDescription);
 }
 
 } /* namespace Args */

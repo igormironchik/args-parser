@@ -5,3 +5,4 @@
 /**/*.user
 /**/test.*
 /**/sample.*
+/build/

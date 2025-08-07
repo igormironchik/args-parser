@@ -13,53 +13,50 @@
 // Args include.
 #include "types.hpp"
 
-
-namespace Args {
+namespace Args
+{
 
 //
 // BaseException
 //
 
 //! Base exception of the library.
-class BaseException
-	:	public std::logic_error
+class BaseException : public std::logic_error
 {
-public:	
-	explicit BaseException( String what )
-		:	std::logic_error( "Please use desc() method of the exception." )
-		,	m_what( std::move( what ) )
-	{
-	}
+public:
+    explicit BaseException(String what)
+        : std::logic_error("Please use desc() method of the exception.")
+        , m_what(std::move(what))
+    {
+    }
 
-	virtual ~BaseException() noexcept
-	{
-	}
+    virtual ~BaseException() noexcept
+    {
+    }
 
-	//! \return What as std::wstring.
-	const String & desc() const noexcept
-	{
-		return m_what;
-	}
+    //! \return What as std::wstring.
+    const String &desc() const noexcept
+    {
+        return m_what;
+    }
 
 private:
-	//! What happened?
-	String m_what;
+    //! What happened?
+    String m_what;
 }; // class BaseException
-
 
 //
 // HelpHasBeenPrintedException
 //
 
 //! This exception notifies about that help has been printed.
-class HelpHasBeenPrintedException final
-	:	public BaseException
+class HelpHasBeenPrintedException final : public BaseException
 {
 public:
-	HelpHasBeenPrintedException()
-		:	BaseException( SL( "Help has been printed." ) )
-	{
-	}
+    HelpHasBeenPrintedException()
+        : BaseException(SL("Help has been printed."))
+    {
+    }
 }; // class HelpHasBeenPrintedException
 
 } /* namespace Args */

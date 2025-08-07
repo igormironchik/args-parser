@@ -1,17 +1,18 @@
 /*
-	SPDX-FileCopyrightText: 2022-2024 Igor Mironchik <igor.mironchik@gmail.com>
-	SPDX-License-Identifier: MIT
+    SPDX-FileCopyrightText: 2022-2024 Igor Mironchik <igor.mironchik@gmail.com>
+    SPDX-License-Identifier: MIT
 */
 
 #include <args-parser/all.hpp>
 
 #include "setup.hpp"
 
-int main( int argc, char * argv[] )
+int main(int argc,
+         char *argv[])
 {
-	Args::CmdLine cmd{ argc, argv };
+    Args::CmdLine cmd{argc, argv};
 
-	SetupCMD( cmd );
+    SetupCMD(cmd);
 
-	return 0;
+    return 0;
 }

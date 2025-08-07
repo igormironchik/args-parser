@@ -1,7 +1,7 @@
 
 /*
-	SPDX-FileCopyrightText: 2013-2024 Igor Mironchik <igor.mironchik@gmail.com>
-	SPDX-License-Identifier: MIT
+    SPDX-FileCopyrightText: 2013-2024 Igor Mironchik <igor.mironchik@gmail.com>
+    SPDX-License-Identifier: MIT
 */
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
@@ -11,30 +11,28 @@
 // Args include.
 #include <args-parser/all.hpp>
 
-
 using namespace Args;
 
 #ifdef ARGS_WSTRING_BUILD
-	using CHAR = String::value_type;
+using CHAR = String::value_type;
 #else
-	using CHAR = char;
+using CHAR = char;
 #endif
 
-
-TEST_CASE( "TestFormatCorrectNames" )
+TEST_CASE("TestFormatCorrectNames")
 {
-	StringList list;
+    StringList list;
 
-	REQUIRE( details::formatCorrectNamesString( list ).empty() );
+    REQUIRE(details::formatCorrectNamesString(list).empty());
 
-	list.push_back( SL( "one" ) );
-	list.push_back( SL( "two" ) );
+    list.push_back(SL("one"));
+    list.push_back(SL("two"));
 
-	REQUIRE( details::formatCorrectNamesString( list ) == SL( "one or two" ) );
+    REQUIRE(details::formatCorrectNamesString(list) == SL("one or two"));
 }
 
-TEST_CASE( "TestMisspelledName" )
+TEST_CASE("TestMisspelledName")
 {
-	REQUIRE( details::isMisspelledName( SL( "oen" ), SL( "one" ) ) );
-	REQUIRE( !details::isMisspelledName( SL( "" ), SL( "" ) ) );
+    REQUIRE(details::isMisspelledName(SL("oen"), SL("one")));
+    REQUIRE(!details::isMisspelledName(SL(""), SL("")));
 }
