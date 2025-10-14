@@ -3,8 +3,6 @@
 	SPDX-License-Identifier: MIT
 -->
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
 This is `args-parser`.
 
 `args-parser` is a small C++ header-only library for parsing command line arguments.
