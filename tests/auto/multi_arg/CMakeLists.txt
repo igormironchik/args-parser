@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2013-2024 Igor Mironchik <igor.mironchik@gmail.com>
+# SPDX-FileCopyrightText: 2026 Igor Mironchik <igor.mironchik@gmail.com>
 # SPDX-License-Identifier: MIT
 
 project( test.multi_arg )
