@@ -41,7 +41,7 @@ jobs:
       with:
         version: '6.2.1'
         
-    - run: sudo apt install lcov
+    # - run: sudo apt install lcov
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
@@ -60,15 +60,15 @@ jobs:
        cmake -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug .
        make
        ctest --output-on-failure --verbose
-       lcov --directory . --capture --output-file coverage.info
-       lcov --remove coverage.info '/usr/*' --output-file coverage.info
-       lcov --list coverage.info
+    #   lcov --directory . --capture --output-file coverage.info
+    #   lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    #   lcov --list coverage.info
 
-    - name: Codecov Upload
-      uses: codecov/codecov-action@v4
-      with:
-        fail_ci_if_error: true
-        token: ${{ secrets.CODECOV_TOKEN }}
+    # - name: Codecov Upload
+    #   uses: codecov/codecov-action@v4
+    #   with:
+    #     fail_ci_if_error: true
+    #     token: ${{ secrets.CODECOV_TOKEN }}
 
   windows:
     name: windows
