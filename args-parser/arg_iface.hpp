@@ -76,6 +76,12 @@ public:
     //! \return Long description of the argument.
     virtual const String &longDescription() const = 0;
 
+    //! \return Default value.
+    virtual const String &defaultValue() const
+    {
+        return m_dummy;
+    }
+
     //! \return Command line parser.
     CmdLine *cmdLine() const
     {
@@ -143,6 +149,8 @@ private:
 
     //! Command line parser.
     CmdLine *m_cmdLine;
+    //! Dummy string object.
+    String m_dummy;
 }; // class ArgIface
 
 } /* namespace Args */

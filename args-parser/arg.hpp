@@ -125,7 +125,7 @@ public:
     void setLongDescription(const String &desc);
 
     //! \return Default value.
-    virtual const String &defaultValue() const
+    const String &defaultValue() const override
     {
         return m_defaultValue;
     }

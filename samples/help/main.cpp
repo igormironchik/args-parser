@@ -40,11 +40,13 @@ int main(int argc,
                        // Argument is required.
                        true);
         // Set description of the argument.
-        host.setDescription(SL("Host. Can be \"localhost\", \"any\" or regular IP."));
+        host.setDescription(SL("Host.\nCan be \"localhost\", \"any\" or regular IP."));
         // We can specify long description too.
         host.setLongDescription(
             SL("Host. This argument told to the application "
                "where to open socket for communication."));
+        // We can set a default value.
+        host.setDefaultValue("localhost");
 
         Args::Arg port(SL('p'), SL("port"), true, true);
         port.setDescription(SL("Port number to create socket."));

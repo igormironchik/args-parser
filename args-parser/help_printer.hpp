@@ -92,6 +92,12 @@ private:
     //! Print help for the argument.
     void print(ArgIface *arg,
                OutStreamType &to) const;
+    //! Print default value.
+    void printDefaultValue(ArgIface *arg,
+                           OutStreamType &to,
+                           String::size_type currentPos,
+                           String::size_type leftMargin,
+                           String::size_type rightMargin) const;
     //! Sort argument.
     void sortArg(const ArgPtr &arg,
                  std::vector<Command *> &commands,
@@ -141,11 +147,12 @@ inline HelpPrinter::~HelpPrinter()
 }
 
 static inline void printOffset(OutStreamType &to,
-                               String::size_type currentPos,
+                               String::size_type &currentPos,
                                String::size_type leftMargin)
 {
     if (currentPos < leftMargin) {
         to << String(leftMargin - currentPos, ' ');
+        currentPos = leftMargin;
     }
 }
 
@@ -275,6 +282,8 @@ inline void HelpPrinter::printOnlyFor(ArgIface *arg,
     printString(to, splitToWords(arg->description()), pos, beforeDescription, 0);
 
     to << "\n" << "\n";
+
+    printDefaultValue(arg, to, 0, beforeDescription, 0);
 
     to.flush();
 }
@@ -637,6 +646,28 @@ inline void HelpPrinter::print(const String &name,
     }
 }
 
+inline void HelpPrinter::printDefaultValue(ArgIface *arg,
+                                           OutStreamType &to,
+                                           String::size_type currentPos,
+                                           String::size_type leftMargin,
+                                           String::size_type rightMargin) const
+{
+    if (!arg->defaultValue().empty()) {
+        StringList words;
+        words.push_back(String("Default"));
+        words.push_back(String("value:"));
+        words.push_back(arg->defaultValue());
+
+        if (arg->valueSpecifier() != SL("arg")) {
+            words.push_back(arg->valueSpecifier());
+        }
+
+        printString(to, words, currentPos, leftMargin, rightMargin);
+
+        to << "\n" << "\n";
+    }
+}
+
 inline void HelpPrinter::print(ArgIface *arg,
                                OutStreamType &to) const
 {
@@ -653,6 +684,8 @@ inline void HelpPrinter::print(ArgIface *arg,
     printString(to, splitToWords(arg->longDescription()), 0, 7, 7);
 
     to << "\n" << "\n";
+
+    printDefaultValue(arg, to, 0, 7, 7);
 
     to.flush();
 }
@@ -729,7 +762,7 @@ inline StringList HelpPrinter::createUsageString(ArgIface *arg,
 
 static inline bool isSpaceChar(const Char &c)
 {
-    static const String spaceChars = SL(" \n\t\r");
+    static const String spaceChars = SL(" \t");
 
     return (spaceChars.find(c) != String::npos);
 }
@@ -739,21 +772,29 @@ inline StringList HelpPrinter::splitToWords(const String &s) const
     String word;
     StringList result;
 
-    std::for_each(s.cbegin(), s.cend(), [&word, &result](const Char &c) {
-        if (isSpaceChar(c)) {
-            if (!word.empty()) {
-                result.push_back(word);
-            }
+    const auto pushWord = [&word, &result]() {
+        if (!word.empty()) {
+            result.push_back(word);
+        }
 
-            word.clear();
+        word.clear();
+    };
+
+    std::for_each(s.cbegin(), s.cend(), [&](const Char &c) {
+        if (isSpaceChar(c)) {
+            pushWord();
         } else {
-            word.append(1, c);
+            if (c == '\n') {
+                pushWord();
+
+                result.push_back(String(1, c));
+            } else {
+                word.append(1, c);
+            }
         }
     });
 
-    if (!word.empty()) {
-        result.push_back(word);
-    }
+    pushWord();
 
     return result;
 }
@@ -764,14 +805,12 @@ inline void HelpPrinter::printString(OutStreamType &to,
                                      String::size_type leftMargin,
                                      String::size_type rightMargin) const
 {
-    const String::size_type occupied = leftMargin + rightMargin;
+    String::size_type maxLineLength = (rightMargin < m_lineLength ? m_lineLength - rightMargin : 0);
 
-    String::size_type maxLineLength = (occupied < m_lineLength ? m_lineLength - occupied : 0);
-
-    if (maxLineLength < 20) {
+    if (maxLineLength - leftMargin < 20) {
         to << "\n\n";
 
-        maxLineLength = m_lineLength - 20;
+        maxLineLength = m_lineLength;
 
         currentPos = 0;
         leftMargin = 20;
@@ -782,41 +821,64 @@ inline void HelpPrinter::printString(OutStreamType &to,
 
     bool makeOffset = (currentPos < leftMargin);
 
+    const auto moveToNewLine = [&]() {
+        currentPos = 0;
+
+        to << "\n";
+
+        printOffset(to, currentPos, leftMargin);
+
+        length = leftMargin;
+    };
+
+    std::function<void(const String &)> printWord;
+
+    printWord = [&](const String &word) {
+        const auto print = [&]() {
+            length += word.length();
+
+            to << word;
+
+            if (length < maxLineLength) {
+                ++length;
+                to << ' ';
+            }
+        };
+
+        if (length + word.length() < maxLineLength) {
+            print();
+        } else {
+            if (length != leftMargin) {
+                moveToNewLine();
+            }
+
+            const auto available = maxLineLength - length;
+
+            if (available < word.length()) {
+                to << word.substr(0, available);
+                length += available;
+
+                printWord(word.substr(available));
+            } else {
+                print();
+            }
+        }
+    };
+
     std::for_each(words.cbegin(), words.cend(), [&](const String &word) {
         if (makeOffset) {
             printOffset(to, currentPos, leftMargin);
 
+            length = leftMargin;
+
             makeOffset = false;
         }
 
-        if (length + word.length() < maxLineLength) {
-            length += word.length();
-
-            to << word;
-
-            if (length < maxLineLength) {
-                ++length;
-                to << ' ';
-            }
+        if (word == "\n") {
+            moveToNewLine();
+            moveToNewLine();
         } else {
-            currentPos = 0;
-
-            length = 0;
-
-            maxLineLength = m_lineLength - leftMargin - rightMargin;
-
-            to << "\n";
-
-            printOffset(to, currentPos, leftMargin);
-
-            to << word;
-
-            length += word.length();
-
-            if (length < maxLineLength) {
-                ++length;
-                to << ' ';
-            }
+            printWord(word);
         }
     });
 }
