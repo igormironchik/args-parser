@@ -89,9 +89,10 @@ public:
     }
 
     //! Set required flag.
-    void setRequired(bool on = true) override
+    GroupIface &setRequired(bool on = true) override
     {
         UNUSED(on)
+        return *this;
     }
 
     //! \return Value specifier.
@@ -100,9 +101,10 @@ public:
         return m_valueSpecifier;
     }
     //! Set value specifier.
-    void setValueSpecifier(const String &vs)
+    Command &setValueSpecifier(const String &vs)
     {
         m_valueSpecifier = vs;
+        return *this;
     }
 
     //! \return Description of the argument.
@@ -111,9 +113,10 @@ public:
         return m_description;
     }
     //! Set description.
-    void setDescription(const String &desc)
+    Command &setDescription(const String &desc)
     {
         m_description = desc;
+        return *this;
     }
 
     //! \return Long description of the argument.
@@ -126,9 +129,10 @@ public:
         }
     }
     //! Set long description.
-    void setLongDescription(const String &desc)
+    Command &setLongDescription(const String &desc)
     {
         m_longDescription = desc;
+        return *this;
     }
 
     //! \return First value of this argument.
@@ -154,7 +158,7 @@ public:
     }
 
     //! \return Default value.
-    const String &defaultValue() const
+    const String &defaultValue() const override
     {
         if (!m_defaultValues.empty()) {
             return m_defaultValues.front();
@@ -165,9 +169,10 @@ public:
 
     //! Set default value. \note Value will be pushed back to the list
     //! of default values.
-    void setDefaultValue(const String &v)
+    Command &setDefaultValue(const String &v)
     {
         m_defaultValues.push_back(v);
+        return *this;
     }
 
     //! \return Default values.
@@ -177,9 +182,10 @@ public:
     }
 
     //! Set default values.
-    void setDefaultValues(const StringList &v)
+    Command &setDefaultValues(const StringList &v)
     {
         m_defaultValues = v;
+        return *this;
     }
 
     //! \return Is given name a misspelled name of the argument.
@@ -233,7 +239,7 @@ public:
     using GroupIface::addArg;
 
     //! Add argument.
-    void addArg(ArgPtr arg) override
+    GroupIface &addArg(ArgPtr arg) override
     {
         if (arg->type() == ArgType::Command && m_opt != ValueOptions::NoValue) {
             throw BaseException(
@@ -248,6 +254,7 @@ public:
 
             m_children.push_back(std::move(arg));
         }
+        return *this;
     }
 
 protected:

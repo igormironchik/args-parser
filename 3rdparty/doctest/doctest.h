@@ -3718,7 +3718,9 @@ String toString(double long in) { return fpToString(in, 15); }
 #define DOCTEST_TO_STRING_OVERLOAD(type, fmt)                                                      \
     String toString(type in) {                                                                     \
         char buf[64];                                                                              \
-        std::sprintf(buf, fmt, in);                                                                \
+        const int required_size = std::snprintf(nullptr, 0, fmt, in);                              \
+        const auto actual_size = std::min(64, required_size);                                      \
+        std::snprintf(buf, actual_size, fmt, in);                                                  \
         return buf;                                                                                \
     }
 

@@ -40,13 +40,12 @@ int main(int argc,
                        // Argument is required.
                        true);
         // Set description of the argument.
-        host.setDescription(SL("Host.\nCan be \"localhost\", \"any\" or regular IP."));
-        // We can specify long description too.
-        host.setLongDescription(
-            SL("Host. This argument told to the application "
-               "where to open socket for communication."));
-        // We can set a default value.
-        host.setDefaultValue("localhost");
+        host
+            .setDescription(SL("Host.\nCan be \"localhost\", \"any\" or regular IP."))
+            .setLongDescription(        // We can specify long description too.
+                SL("Host. This argument told to the application "
+                "where to open socket for communication."))
+            .setDefaultValue("localhost"); // We can set a default value.
 
         Args::Arg port(SL('p'), SL("port"), true, true);
         port.setDescription(SL("Port number to create socket."));
@@ -57,34 +56,31 @@ int main(int argc,
         */
         Args::Arg timeout(SL("timeout"), true);
         //! This argument want to specify value specifier in the help. Let's do it.
-        timeout.setValueSpecifier(SL("ms"));
-        timeout.setDescription(
-            SL("Timeout before new messages will be sent "
-               "in milliseconds."));
+        timeout
+            .setValueSpecifier(SL("ms"))
+            .setDescription(
+                SL("Timeout before new messages will be sent "
+                "in milliseconds."));
 
         /*
             We create help now.
         */
         Args::Help help;
-        // Set executable name to the help printer.
-        help.setExecutable(argv[0]);
-        //! And set description of the application.
-        help.setAppDescription(
+        
+        help.setExecutable(argv[0])     // Set executable name to the help printer.
+            .setAppDescription(         //! And set description of the application.
             SL("This application just show "
                "the power of Args."));
 
         /*
-            Now add our argument to the command line.
+            Now add our arguments to the command line, and parse when we're done.
         */
-        cmd.addArg(host);
-        cmd.addArg(port);
-        cmd.addArg(timeout);
-        cmd.addArg(help);
+        cmd.addArg(host)
+            .addArg(port)
+            .addArg(timeout)
+            .addArg(help)
+            .parse();
 
-        /*
-            Now parse our arguments.
-        */
-        cmd.parse();
     } catch (const Args::HelpHasBeenPrintedException &) {
         return 0;
     } catch (const Args::BaseException &x) {
