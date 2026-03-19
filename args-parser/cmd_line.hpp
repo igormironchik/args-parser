@@ -151,13 +151,13 @@ public:
     }
 
     //! Add argument. \note Developer should handle lifetime of the argument.
-    void addArg(ArgIface *arg);
+    CmdLine &addArg(ArgIface *arg);
 
     //! Add argument. \note Developer should handle lifetime of the argument.
-    void addArg(ArgIface &arg);
+    CmdLine &addArg(ArgIface &arg);
 
     //! Add argument.
-    void addArg(ArgPtr arg)
+    CmdLine &addArg(ArgPtr arg)
     {
         if (std::find(m_args.begin(), m_args.end(), arg) == m_args.end()) {
             arg->setCmdLine(this);
@@ -166,6 +166,7 @@ public:
         } else {
             throw BaseException(String(SL("Argument \"")) + arg->name() + SL("\" already in the command line parser."));
         }
+        return *this;
     }
 
     //! Parse arguments.
@@ -199,9 +200,10 @@ public:
     }
 
     //! Set positional string description for the help.
-    void setPositionalDescription(const String &d)
+    CmdLine &setPositionalDescription(const String &d)
     {
         m_positionalDescription = d;
+        return *this;
     }
 
     //! \return Argument for the given name.
@@ -507,7 +509,7 @@ inline
 {
 }
 
-inline void CmdLine::addArg(ArgIface *arg)
+inline CmdLine &CmdLine::addArg(ArgIface *arg)
 {
     if (arg) {
         if (std::find(m_args.begin(), m_args.end(), ArgPtr(arg, details::Deleter<ArgIface>(false))) == m_args.end()) {
@@ -522,11 +524,12 @@ inline void CmdLine::addArg(ArgIface *arg)
             String(SL("Attempt to add nullptr to the "
                       "command line as argument.")));
     }
+    return *this;
 }
 
-inline void CmdLine::addArg(ArgIface &arg)
+inline CmdLine &CmdLine::addArg(ArgIface &arg)
 {
-    addArg(&arg);
+    return addArg(&arg);
 }
 
 inline void CmdLine::parse()

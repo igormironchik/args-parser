@@ -57,19 +57,19 @@ public:
     }
 
     //! Add argument. \note Developer should handle lifetime of the argument.
-    void addArg(ArgIface &arg)
+    GroupIface &addArg(ArgIface &arg)
     {
-        addArg(ArgPtr(&arg, details::Deleter<ArgIface>(false)));
+        return addArg(ArgPtr(&arg, details::Deleter<ArgIface>(false)));
     }
 
     //! Add argument. \note Developer should handle lifetime of the argument.
-    void addArg(ArgIface *arg)
+    GroupIface &addArg(ArgIface *arg)
     {
-        addArg(ArgPtr(arg, details::Deleter<ArgIface>(false)));
+        return addArg(ArgPtr(arg, details::Deleter<ArgIface>(false)));
     }
 
     //! Add argument.
-    virtual void addArg(ArgPtr arg)
+    virtual GroupIface &addArg(ArgPtr arg)
     {
         if (std::find(m_children.cbegin(), m_children.cend(), arg) == m_children.cend()) {
             if (cmdLine()) {
@@ -78,6 +78,7 @@ public:
 
             m_children.push_back(std::move(arg));
         }
+        return *this;
     }
 
     /*!
@@ -104,9 +105,10 @@ public:
     }
 
     //! Set required flag.
-    virtual void setRequired(bool on = true)
+    virtual GroupIface &setRequired(bool on = true)
     {
         m_required = on;
+        return *this;
     }
 
     //! \return Flag.

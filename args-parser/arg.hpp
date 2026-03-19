@@ -82,47 +82,47 @@ public:
     //! \return Is this argument with value?
     bool isWithValue() const override;
     //! Set is this argument with value.
-    void setWithValue(bool on = true);
+    Arg &setWithValue(bool on = true);
 
     //! \return Is this argument required?
     bool isRequired() const override;
     //! Set required.
-    void setRequired(bool on = true);
+    Arg &setRequired(bool on = true);
 
     //! \return Is this argument defined?
     bool isDefined() const override;
     //! Set defined.
-    void setDefined(bool on = true);
+    Arg &setDefined(bool on = true);
 
     //! \return Value of this argument.
     virtual const String &value() const;
     //! Set value.
-    virtual void setValue(const String &v);
+    virtual Arg &setValue(const String &v);
 
     //! \return Flag.
     const String &flag() const override;
     //! Set flag.
-    void setFlag(Char f);
+    Arg &setFlag(Char f);
 
     //! \return Argument name.
     const String &argumentName() const override;
     //! Set argument name.
-    void setArgumentName(const String &name);
+    Arg &setArgumentName(const String &name);
 
     //! \return Value specifier.
     const String &valueSpecifier() const override;
     //! Set value specifier.
-    void setValueSpecifier(const String &vs);
+    Arg &setValueSpecifier(const String &vs);
 
     //! \return Description of the argument.
     const String &description() const override;
     //! Set description.
-    void setDescription(const String &desc);
+    Arg &setDescription(const String &desc);
 
     //! \return Long description of the argument.
     const String &longDescription() const override;
     //! Set long description.
-    void setLongDescription(const String &desc);
+    Arg &setLongDescription(const String &desc);
 
     //! \return Default value.
     const String &defaultValue() const override
@@ -131,9 +131,10 @@ public:
     }
 
     //! Set default value.
-    virtual void setDefaultValue(const String &v)
+    virtual Arg &setDefaultValue(const String &v)
     {
         m_defaultValue = v;
+        return *this;
     }
 
     //! \return Is given name a misspelled name of the argument.
@@ -369,9 +370,10 @@ inline bool Arg::isWithValue() const
     return m_isWithValue;
 }
 
-inline void Arg::setWithValue(bool on)
+inline Arg &Arg::setWithValue(bool on)
 {
     m_isWithValue = on;
+    return *this;
 }
 
 inline bool Arg::isRequired() const
@@ -379,9 +381,10 @@ inline bool Arg::isRequired() const
     return m_isRequired;
 }
 
-inline void Arg::setRequired(bool on)
+inline Arg &Arg::setRequired(bool on)
 {
     m_isRequired = on;
+    return *this;
 }
 
 inline bool Arg::isDefined() const
@@ -389,9 +392,10 @@ inline bool Arg::isDefined() const
     return m_isDefined;
 }
 
-inline void Arg::setDefined(bool on)
+inline Arg &Arg::setDefined(bool on)
 {
     m_isDefined = on;
+    return *this;
 }
 
 inline const String &Arg::value() const
@@ -403,9 +407,10 @@ inline const String &Arg::value() const
     }
 }
 
-inline void Arg::setValue(const String &v)
+inline Arg &Arg::setValue(const String &v)
 {
     m_value = v;
+    return *this;
 }
 
 inline const String &Arg::flag() const
@@ -413,9 +418,10 @@ inline const String &Arg::flag() const
     return m_flag;
 }
 
-inline void Arg::setFlag(Char f)
+inline Arg &Arg::setFlag(Char f)
 {
     m_flag = String(1, f);
+    return *this;
 }
 
 inline const String &Arg::argumentName() const
@@ -423,9 +429,10 @@ inline const String &Arg::argumentName() const
     return m_name;
 }
 
-inline void Arg::setArgumentName(const String &name)
+inline Arg &Arg::setArgumentName(const String &name)
 {
     m_name = name;
+    return *this;
 }
 
 inline const String &Arg::valueSpecifier() const
@@ -433,9 +440,10 @@ inline const String &Arg::valueSpecifier() const
     return m_valueSpecifier;
 }
 
-inline void Arg::setValueSpecifier(const String &vs)
+inline Arg &Arg::setValueSpecifier(const String &vs)
 {
     m_valueSpecifier = vs;
+    return *this;
 }
 
 inline const String &Arg::description() const
@@ -443,9 +451,10 @@ inline const String &Arg::description() const
     return m_description;
 }
 
-inline void Arg::setDescription(const String &desc)
+inline Arg &Arg::setDescription(const String &desc)
 {
     m_description = desc;
+    return *this;
 }
 
 inline const String &Arg::longDescription() const
@@ -457,9 +466,10 @@ inline const String &Arg::longDescription() const
     }
 }
 
-inline void Arg::setLongDescription(const String &desc)
+inline Arg &Arg::setLongDescription(const String &desc)
 {
     m_longDescription = desc;
+    return *this;
 }
 
 } /* namespace Args */

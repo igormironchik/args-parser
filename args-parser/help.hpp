@@ -52,16 +52,16 @@ public:
     explicit Help(bool throwExceptionOnPrint = true);
 
     //! Set executable name.
-    void setExecutable(const String &exe);
+    Help &setExecutable(const String &exe);
 
     //! Set description for the application.
-    void setAppDescription(const String &desc);
+    Help &setAppDescription(const String &desc);
 
     //! Set line length for the help.
-    void setLineLength(String::size_type length);
+    Help &setLineLength(String::size_type length);
 
     //! Set printer.
-    void setPrinter(std::unique_ptr<HelpPrinterIface> p);
+    Help &setPrinter(std::unique_ptr<HelpPrinterIface> p);
 
 protected:
     /*!
@@ -92,24 +92,28 @@ private:
 // Help
 //
 
-inline void Help::setExecutable(const String &exe)
+inline Help &Help::setExecutable(const String &exe)
 {
     m_printer->setExecutable(exe);
+    return *this;
 }
 
-inline void Help::setAppDescription(const String &desc)
+inline Help &Help::setAppDescription(const String &desc)
 {
     m_printer->setAppDescription(desc);
+    return *this;
 }
 
-inline void Help::setLineLength(String::size_type length)
+inline Help &Help::setLineLength(String::size_type length)
 {
     m_printer->setLineLength(length);
+    return *this;
 }
 
-inline void Help::setPrinter(std::unique_ptr<HelpPrinterIface> p)
+inline Help &Help::setPrinter(std::unique_ptr<HelpPrinterIface> p)
 {
     m_printer.reset(p.release());
+    return *this;
 }
 
 inline void Help::process(Context &context)

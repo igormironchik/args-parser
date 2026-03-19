@@ -75,7 +75,7 @@ public:
     //! \return First value of this argument.
     const String &value() const override;
     //! Set value. \note Value will be pushed back to the list of values.
-    void setValue(const String &v) override;
+    MultiArg &setValue(const String &v) override;
 
     //! \return All values for this argument.
     virtual const StringList &values() const;
@@ -99,9 +99,10 @@ public:
 
     //! Set default value. \note Value will be pushed back to the list
     //! of default values.
-    void setDefaultValue(const String &v) override
+    MultiArg &setDefaultValue(const String &v) override
     {
         m_defaultValues.push_back(v);
+        return *this;
     }
 
     //! \return Default values.
@@ -111,9 +112,10 @@ public:
     }
 
     //! Set default values.
-    void setDefaultValues(const StringList &v)
+    MultiArg &setDefaultValues(const StringList &v)
     {
         m_defaultValues = v;
+        return *this;
     }
 
     //! Clear state of the argument.
@@ -198,9 +200,10 @@ inline const String &MultiArg::value() const
     }
 }
 
-inline void MultiArg::setValue(const String &v)
+inline MultiArg &MultiArg::setValue(const String &v)
 {
     m_values.push_back(v);
+    return *this;
 }
 
 inline const StringList &MultiArg::values() const
