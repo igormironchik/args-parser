@@ -197,6 +197,7 @@ the same, but is it needed?
 
 | Version | Changes |
 | --- | --- |
+| **6.3.6** | Added possibility for more chain cases. Fixed minor issue in one-line syntax API. |
 | **6.3.5** | Added printing of default value in the help. Added possibility to split description by paragraphs with `\n` in the description. Too long words in the help splits now if they don't fit in. |
 | **6.3.4** | Fixed issue with `MSVC` when globally defined `::Command` class was detected as friend of `ArgIface` instead of `Args::Command` |
 | **6.3.3** | Minor fix for compilation with `-Werror=shadow` |
