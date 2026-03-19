@@ -89,7 +89,7 @@ public:
     }
 
     //! Set required flag.
-    GroupIface &setRequired(bool on = true) override
+    Command &setRequired(bool on = true) override
     {
         UNUSED(on)
         return *this;
@@ -239,7 +239,7 @@ public:
     using GroupIface::addArg;
 
     //! Add argument.
-    GroupIface &addArg(ArgPtr arg) override
+    Command &addArg(ArgPtr arg) override
     {
         if (arg->type() == ArgType::Command && m_opt != ValueOptions::NoValue) {
             throw BaseException(
