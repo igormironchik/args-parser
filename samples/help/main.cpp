@@ -37,8 +37,8 @@ int main(int argc,
                        SL("host"),
                        // Argument is with value.
                        true,
-                       // Argument is required.
-                       true);
+                       // Argument is not required.
+                       false);
         // Set description of the argument.
         host.setDescription(SL("Host.\nCan be \"localhost\", \"any\" or regular IP."))
             .setLongDescription( // We can specify long description too.
