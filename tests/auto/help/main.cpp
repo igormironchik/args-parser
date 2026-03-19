@@ -1617,3 +1617,75 @@ TEST_CASE("TestHelpShortLine")
 
     REQUIRE(false);
 }
+
+TEST_CASE("TestSimpleHelpWithDefaultValue")
+{
+    // Suppressing warning.
+    OutStreamType &stream = outStream();
+    (void)stream;
+
+    const int argc = 2;
+    const CHAR *argv[argc] = {SL("program.exe"), SL("-h")};
+
+    try {
+        CmdLine cmd(argc, argv);
+
+        Arg host(SL('s'), SL("host"), true, false);
+        host.setDescription(
+            SL("Host.\nCan be \"localhost\", "
+               "\"any\" or regular IP."));
+        host.setLongDescription(
+            SL("Host.\nThis argument told to the "
+               "application where to open socket for communication."));
+        host.setDefaultValue(SL("localhost"));
+
+        Help help;
+        help.setExecutable(SL("executable"));
+        help.setAppDescription(
+            SL("This application just show "
+               "the power of Args."));
+
+        cmd.addArg(host);
+        cmd.addArg(help);
+
+        cmd.parse();
+    } catch (const HelpHasBeenPrintedException &) {
+#ifdef ARGS_QSTRING_BUILD
+        REQUIRE(g_string
+                == "This application just show the power of Args. \n"
+                   "\n"
+                   "USAGE: executable [ -h, --help <arg> ] [ -s, --host <arg> ] \n"
+                   "\n"
+                   "OPTIONAL:\n"
+                   " -h, --help <arg> Print this help. \n"
+                   "\n"
+                   " -s, --host <arg> Host. \n"
+                   "                  \n"
+                   "                  Can be \"localhost\", \"any\" or regular IP. \n"
+                   "\n"
+                   "                  Default value: localhost \n\n");
+
+        g_string.clear();
+#else
+        REQUIRE(g_argsOutStream.str()
+                == SL("This application just show the power of Args. \n"
+                      "\n"
+                      "USAGE: executable [ -h, --help <arg> ] [ -s, --host <arg> ] \n"
+                      "\n"
+                      "OPTIONAL:\n"
+                      " -h, --help <arg> Print this help. \n"
+                      "\n"
+                      " -s, --host <arg> Host. \n"
+                      "                  \n"
+                      "                  Can be \"localhost\", \"any\" or regular IP. \n"
+                      "\n"
+                      "                  Default value: localhost \n\n"));
+
+        g_argsOutStream.str(SL(""));
+#endif
+
+        return;
+    }
+
+    REQUIRE(false);
+}

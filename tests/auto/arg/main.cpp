@@ -282,3 +282,35 @@ TEST_CASE("TestUndefinedValue")
 
     REQUIRE(false);
 }
+
+TEST_CASE("TestPositionalArgument")
+{
+    const int argc = 3;
+    const CHAR *argv[argc] = {SL("program.exe"), SL("something1"), SL("something2")};
+
+    CmdLine cmd(argc, argv, CmdLine::HandlePositionalArguments);
+
+    cmd.parse();
+
+    REQUIRE(cmd.positional().size() == 2);
+    REQUIRE(cmd.positional().at(0) == argv[1]);
+    REQUIRE(cmd.positional().at(1) == argv[2]);
+}
+
+TEST_CASE("TestWrongPositionalArgument")
+{
+    const int argc = 3;
+    const CHAR *argv[argc] = {SL("program.exe"), SL("something1"), SL("something2")};
+
+    CmdLine cmd(argc, argv);
+
+    try {
+        cmd.parse();
+    } catch (const BaseException &x) {
+        REQUIRE(x.desc() == String(SL("Unknown argument \"something1\".")));
+
+        return;
+    }
+
+    REQUIRE(false);
+}
