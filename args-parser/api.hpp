@@ -579,7 +579,7 @@ public:
     API<PARENT,
         Command,
         ARGPTR,
-        false>
+        false> &
     addArg(ArgIface &arg)
     {
         m_self.addArg(arg);
@@ -591,7 +591,7 @@ public:
     API<PARENT,
         Command,
         ARGPTR,
-        false>
+        false> &
     addArg(ArgIface *arg)
     {
         m_self.addArg(arg);
@@ -603,7 +603,7 @@ public:
     API<PARENT,
         Command,
         ARGPTR,
-        false>
+        false> &
     addArg(GroupIface::ArgPtr arg)
     {
         m_self.addArg(std::move(arg));
@@ -1281,7 +1281,7 @@ public:
     API<PARENT,
         SELF,
         ARGPTR,
-        false>
+        false> &
     addArg(ArgIface &arg)
     {
         m_self.addArg(arg);
@@ -1293,7 +1293,7 @@ public:
     API<PARENT,
         SELF,
         ARGPTR,
-        false>
+        false> &
     addArg(ArgIface *arg)
     {
         m_self.addArg(arg);
@@ -1305,7 +1305,7 @@ public:
     API<PARENT,
         SELF,
         ARGPTR,
-        false>
+        false> &
     addArg(GroupIface::ArgPtr arg)
     {
         m_self.addArg(std::move(arg));
