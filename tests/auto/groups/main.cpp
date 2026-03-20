@@ -39,6 +39,7 @@ TEST_CASE("TestOnlyOneAllIsOk")
 
     cmd.parse();
 
+    REQUIRE(g.defaultValue() == SL(""));
     REQUIRE(timeout.isDefined() == true);
     REQUIRE(timeout.value() == SL("100"));
 
