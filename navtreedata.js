@@ -28,18 +28,26 @@ var NAVTREE =
     [ "Syntax", "index.html#autotoc_md0", null ],
     [ "Different types of strings.", "index.html#autotoc_md1", null ],
     [ "Different types of list of strings.", "index.html#autotoc_md2", null ],
-    [ "Q/A", "index.html#autotoc_md3", null ],
-    [ "Changelog", "index.html#autotoc_md4", null ],
-    [ "Example", "index.html#autotoc_md5", [
-      [ "One-line syntax with commands", "index.html#autotoc_md6", null ],
-      [ "One-line syntax with arguments", "index.html#autotoc_md7", null ],
-      [ "And with the old syntax", "index.html#autotoc_md8", null ]
+    [ "Q/A", "index.html#autotoc_md3", [
+      [ "so it will be possible to initialize argument in one line?", "index.html#autotoc_md4", null ],
+      [ "How can I add <span class=\"tt\">args-parser</span> to my project?", "index.html#autotoc_md5", null ],
+      [ "Why should I use this library?", "index.html#autotoc_md6", null ],
+      [ "How to print help programmatically?", "index.html#autotoc_md7", null ],
+      [ "Why doesn't <span class=\"tt\">args-parser</span> provide bindings of variables to arguments?", "index.html#autotoc_md8", null ],
+      [ "Why don't you provide comparisons with other CLI libraries?", "index.html#autotoc_md9", null ]
+    ] ],
+    [ "Changelog", "index.html#autotoc_md10", null ],
+    [ "Example", "index.html#autotoc_md11", [
+      [ "One-line syntax with commands", "index.html#autotoc_md12", null ],
+      [ "One-line syntax with arguments", "index.html#autotoc_md13", null ],
+      [ "And with the old syntax", "index.html#autotoc_md14", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
         [ "Typedefs", "namespacemembers_type.html", null ],
         [ "Enumerations", "namespacemembers_enum.html", null ]
       ] ]
@@ -70,9 +78,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_8hpp.html",
-"class_args_1_1_command.html#a853e728bb0c826ae9a31bda99cf9f593",
-"class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_command_00_01_a_r_g_p_t_r_00_01false_01_4.html#ae007c6a26683d3463823f9755f6d2437"
+"class_args_1_1_command.html#a707cc6d19c1e2c2785abd7c8ec68dc05",
+"class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_command_00_01_a_r_g_p_t_r_00_01false_01_4.html#af1625db81ef9e0cb735302f21df6b86a"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,13,124,38"/>
-<area shape="rect" id="Node000001" href="$class_args_1_1_base_exception.html" title="Base exception of the library." alt="" coords="172,13,327,38"/>
-<area shape="poly" id="edge11_Node000000_Node000001" title=" " alt="" coords="138,23,172,23,172,28,138,28"/>
-<area shape="rect" id="Node000002" href="$class_args_1_1_help_has_been_printed_exception.html" title="This exception notifies about that help has been printed." alt="" coords="375,5,568,45"/>
-<area shape="poly" id="edge12_Node000001_Node000002" title=" " alt="" coords="340,23,374,23,374,28,340,28"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,13,113,40"/>
+<area shape="rect" id="Node000001" href="$class_args_1_1_base_exception.html" title="Base exception of the library." alt="" coords="161,13,305,40"/>
+<area shape="poly" id="edge11_Node000000_Node000001" title=" " alt="" coords="128,24,163,26,158,27,128,29"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_help_has_been_printed_exception.html" title="This exception notifies about that help has been printed." alt="" coords="353,5,531,48"/>
+<area shape="poly" id="edge12_Node000001_Node000002" title=" " alt="" coords="320,24,355,27,350,27,321,29"/>
 </map>

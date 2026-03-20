@@ -1,7 +1,7 @@
 var class_args_1_1_cmd_line =
 [
     [ "ArgPtr", "class_args_1_1_cmd_line.html#a946b94f53f6c598ae969b6e7752fcb4b", null ],
-    [ "Arguments", "class_args_1_1_cmd_line.html#ac931f5762dbdf1179a085f85ca70451e", null ],
+    [ "Arguments", "class_args_1_1_cmd_line.html#a890fbd1c48836b844464432569bfe69a", null ],
     [ "CmdLineOpts", "class_args_1_1_cmd_line.html#a788b17034e4c4a76684a91ea16d27f39", null ],
     [ "CmdLineOpt", "class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0", [
       [ "Empty", "class_args_1_1_cmd_line.html#a6f5b91b26d66399d5d35e62f38f819f0a6aae9cfcdc27cde1ca447055bdb9747f", null ],
@@ -11,9 +11,9 @@ var class_args_1_1_cmd_line =
     [ "CmdLine", "class_args_1_1_cmd_line.html#a50150b076991c560f1a31baa2eef49e2", null ],
     [ "CmdLine", "class_args_1_1_cmd_line.html#a8356deaaffcbb41a6dfbeb7c7fb7e9de", null ],
     [ "~CmdLine", "class_args_1_1_cmd_line.html#ad9aa8b6070549efc953051051574cd1a", null ],
-    [ "addArg", "class_args_1_1_cmd_line.html#abaee0982c710c5d12f045fae9b5ce01b", null ],
-    [ "addArg", "class_args_1_1_cmd_line.html#a400e04c0ce3f4097e258a5ebcd1ed579", null ],
-    [ "addArg", "class_args_1_1_cmd_line.html#abc86296682a6d42df7707b8edd6795a6", null ],
+    [ "addArg", "class_args_1_1_cmd_line.html#a95d728b8d0e9c7821c55bcd8c061e544", null ],
+    [ "addArg", "class_args_1_1_cmd_line.html#a04b7693da18b5e3548a45e9a2f4bf249", null ],
+    [ "addArg", "class_args_1_1_cmd_line.html#ac4bc0fccb05a99125e04022be94f2452", null ],
     [ "addHelp", "class_args_1_1_cmd_line.html#a01ea65ee568958651dbd6ebf91968712", null ],
     [ "addHelp", "class_args_1_1_cmd_line.html#a73577762e4c08477f2b882d7de7934a4", null ],
     [ "arguments", "class_args_1_1_cmd_line.html#abe598c4bcdc1e2541d5e4790d7e60349", null ],
@@ -27,7 +27,7 @@ var class_args_1_1_cmd_line =
     [ "parserOptions", "class_args_1_1_cmd_line.html#ad3d1d62090e1c4ababa7c3be479d6e70", null ],
     [ "positional", "class_args_1_1_cmd_line.html#a01c7e241a376a51f3417ed16271c479b", null ],
     [ "positionalDescription", "class_args_1_1_cmd_line.html#aaab9bb5414ff2cd56f36714f86af0f2e", null ],
-    [ "setPositionalDescription", "class_args_1_1_cmd_line.html#a83fd36b93b4eadd658e2dce77c93ecd8", null ],
+    [ "setPositionalDescription", "class_args_1_1_cmd_line.html#a316c87b007b4f2a10952b90dc15947f0", null ],
     [ "value", "class_args_1_1_cmd_line.html#a4eb7818afd00b4c84b038c9f358e2c4f", null ],
     [ "values", "class_args_1_1_cmd_line.html#a78130fd726d583e25f09818b4e9374bc", null ]
 ];

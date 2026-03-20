@@ -1,6 +1,6 @@
 var class_args_1_1_help_printer =
 [
-    [ "ArgPtr", "class_args_1_1_help_printer.html#a59901eee7b01933fd3ce96fbe6286eda", null ],
+    [ "ArgPtr", "class_args_1_1_help_printer.html#a3c409e2270235b29d195bb2524ffaf34", null ],
     [ "HelpPrinter", "class_args_1_1_help_printer.html#ac200ef599034d42d0ad189198fdb9351", null ],
     [ "~HelpPrinter", "class_args_1_1_help_printer.html#aceac735f18fae837ba365bb5cc1c0d3d", null ],
     [ "findArgument", "class_args_1_1_help_printer.html#a6e73f7d479eab82eeddebc5cd7dd3153", null ],

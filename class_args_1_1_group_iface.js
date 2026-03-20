@@ -1,12 +1,12 @@
 var class_args_1_1_group_iface =
 [
-    [ "ArgPtr", "class_args_1_1_group_iface.html#a539cbb2d7e60f80eb8eb1ac10cfd574e", null ],
-    [ "Arguments", "class_args_1_1_group_iface.html#abed85fa1e10d61d9b8cb61f0f1d50b6e", null ],
+    [ "ArgPtr", "class_args_1_1_group_iface.html#ac065892418b9265d06d083cbd26fd759", null ],
+    [ "Arguments", "class_args_1_1_group_iface.html#ac37030081f33e2e092534a6705aef12c", null ],
     [ "GroupIface", "class_args_1_1_group_iface.html#add4e157dd242be0be3b0f076052044d9", null ],
     [ "~GroupIface", "class_args_1_1_group_iface.html#af9cdc945c531d944c10dbed283f3621f", null ],
-    [ "addArg", "class_args_1_1_group_iface.html#aba0cc1ea646f541bcb1c37b57903074d", null ],
-    [ "addArg", "class_args_1_1_group_iface.html#aea3cb62cdf8e95383894c36667fe73b9", null ],
-    [ "addArg", "class_args_1_1_group_iface.html#a5924b07475c3ca05e1c99305cf7bc8d5", null ],
+    [ "addArg", "class_args_1_1_group_iface.html#a707cc6d19c1e2c2785abd7c8ec68dc05", null ],
+    [ "addArg", "class_args_1_1_group_iface.html#a318af1859690725a49695f1ca6715943", null ],
+    [ "addArg", "class_args_1_1_group_iface.html#a315b0e7c95b41f71b6c4bb8bc7b3ccad", null ],
     [ "argumentName", "class_args_1_1_group_iface.html#aba39c2b9f511924da9d04d5f3c4a62d1", null ],
     [ "checkCorrectnessAfterParsing", "class_args_1_1_group_iface.html#ae7cc78f54741e35464de5158ea4d5f64", null ],
     [ "checkCorrectnessBeforeParsing", "class_args_1_1_group_iface.html#acecfc2b3d15ec7d47e1b475ef16d48c0", null ],
@@ -22,7 +22,7 @@ var class_args_1_1_group_iface =
     [ "name", "class_args_1_1_group_iface.html#a35ab6895f43b83efe410595ab9b04f2d", null ],
     [ "process", "class_args_1_1_group_iface.html#a86a3207f8a38ad28908030ee1666c699", null ],
     [ "setCmdLine", "class_args_1_1_group_iface.html#a20c5a5712d16e37e4dd401f3520df741", null ],
-    [ "setRequired", "class_args_1_1_group_iface.html#a6bab0ea5df847bf2740eedc6b7ee5d46", null ],
+    [ "setRequired", "class_args_1_1_group_iface.html#a07fbfa9a6235ae1cc4a7c4e5eeab54b7", null ],
     [ "valueSpecifier", "class_args_1_1_group_iface.html#a69d3c0ac7f882b5aaef0ad3ee1ad9fd8", null ],
     [ "m_children", "class_args_1_1_group_iface.html#aa93708982373f4c296e671cb26262957", null ]
 ];

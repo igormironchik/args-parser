@@ -1,5 +1,5 @@
 <map id="Args::BaseException" name="Args::BaseException">
-<area shape="rect" id="Node000001" title="Base exception of the library." alt="" coords="25,5,179,31"/>
-<area shape="rect" id="Node000002" href="$class_args_1_1_help_has_been_printed_exception.html" title="This exception notifies about that help has been printed." alt="" coords="5,79,199,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,44,105,79,99,79,99,44"/>
+<area shape="rect" id="Node000001" title="Base exception of the library." alt="" coords="22,5,167,32"/>
+<area shape="rect" id="Node000002" href="$class_args_1_1_help_has_been_printed_exception.html" title="This exception notifies about that help has been printed." alt="" coords="5,80,184,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,46,97,81,92,79,93,50"/>
 </map>

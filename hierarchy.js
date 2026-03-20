@@ -1,9 +1,9 @@
 var hierarchy =
 [
-    [ "Args::details::API< PARENT, SELF, ARGPTR, RETPARENT >", "class_args_1_1details_1_1_a_p_i.html", null ],
-    [ "Args::details::API< PARENT, Command, ARGPTR, false >", "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_command_00_01_a_r_g_p_t_r_00_01false_01_4.html", null ],
-    [ "Args::details::API< PARENT, SELF, ARGPTR, false >", "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01false_01_4.html", null ],
-    [ "Args::details::API< PARENT, SELF, ARGPTR, true >", "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01true_01_4.html", [
+    [ "Args::details::API&lt; PARENT, SELF, ARGPTR, RETPARENT &gt;", "class_args_1_1details_1_1_a_p_i.html", null ],
+    [ "Args::details::API&lt; PARENT, Command, ARGPTR, false &gt;", "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_command_00_01_a_r_g_p_t_r_00_01false_01_4.html", null ],
+    [ "Args::details::API&lt; PARENT, SELF, ARGPTR, false &gt;", "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01false_01_4.html", null ],
+    [ "Args::details::API&lt; PARENT, SELF, ARGPTR, true &gt;", "class_args_1_1details_1_1_a_p_i_3_01_p_a_r_e_n_t_00_01_s_e_l_f_00_01_a_r_g_p_t_r_00_01true_01_4.html", [
       [ "Args::CmdLine", "class_args_1_1_cmd_line.html", null ]
     ] ],
     [ "Args::ArgIface", "class_args_1_1_arg_iface.html", [
@@ -19,8 +19,8 @@ var hierarchy =
       ] ]
     ] ],
     [ "Args::Context", "class_args_1_1_context.html", null ],
-    [ "Args::details::Deleter< T >", "class_args_1_1details_1_1_deleter.html", null ],
-    [ "Args::details::DummyString< T >", "struct_args_1_1details_1_1_dummy_string.html", null ],
+    [ "Args::details::Deleter&lt; T &gt;", "class_args_1_1details_1_1_deleter.html", null ],
+    [ "Args::details::DummyString&lt; T &gt;", "struct_args_1_1details_1_1_dummy_string.html", null ],
     [ "Args::HelpPrinterIface", "class_args_1_1_help_printer_iface.html", [
       [ "Args::HelpPrinter", "class_args_1_1_help_printer.html", null ]
     ] ],

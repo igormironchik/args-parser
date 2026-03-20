@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['parse_0',['parse',['../class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799',1,'Args::CmdLine::parse(int argc, const char *const *argv)'],['../class_args_1_1_cmd_line.html#a516ee1a93770584b35bbf334be99d102',1,'Args::CmdLine::parse()']]],
+  ['parse_0',['parse',['../class_args_1_1_cmd_line.html#a516ee1a93770584b35bbf334be99d102',1,'Args::CmdLine::parse()'],['../class_args_1_1_cmd_line.html#a0170ab1f92b0f49d9e02f67af11ec799',1,'Args::CmdLine::parse(int argc, const char *const *argv)']]],
   ['parser_1',['args-parser',['../index.html',1,'']]],
-  ['parseroptions_2',['parserOptions',['../class_args_1_1_cmd_line.html#ad3d1d62090e1c4ababa7c3be479d6e70',1,'Args::CmdLine']]],
-  ['positional_3',['positional',['../class_args_1_1_cmd_line.html#a01c7e241a376a51f3417ed16271c479b',1,'Args::CmdLine']]],
-  ['positionaldescription_4',['positionalDescription',['../class_args_1_1_cmd_line.html#aaab9bb5414ff2cd56f36714f86af0f2e',1,'Args::CmdLine']]],
-  ['prepend_5',['prepend',['../class_args_1_1_context.html#a412ec734e04688fc7876a3cec86e9f46',1,'Args::Context']]],
-  ['print_6',['print',['../class_args_1_1_help_printer.html#ad9df0fd989c325686a2992b968ac0728',1,'Args::HelpPrinter::print(OutStreamType &amp;to) override'],['../class_args_1_1_help_printer.html#a530ca3f32fb58a6737e6c794209958ab',1,'Args::HelpPrinter::print(const String &amp;name, OutStreamType &amp;to, Command *parent=nullptr) override'],['../class_args_1_1_help_printer_iface.html#ade5c4e6ad7eb9da9880bee0c76f2a30d',1,'Args::HelpPrinterIface::print(OutStreamType &amp;to)=0'],['../class_args_1_1_help_printer_iface.html#a79559cf5692e31f65ee5be8c711ef95c',1,'Args::HelpPrinterIface::print(const String &amp;name, OutStreamType &amp;to, Command *parent=nullptr)=0']]],
-  ['process_7',['process',['../class_args_1_1_arg.html#a8e2f9d338e41202ae3375230f30b5b23',1,'Args::Arg::process()'],['../class_args_1_1_arg_iface.html#a5082f3a4e08984b8acb046efe7ace3f5',1,'Args::ArgIface::process()'],['../class_args_1_1_command.html#a360a2d7df9f6dc442c3d926dad1f5d15',1,'Args::Command::process()'],['../class_args_1_1_group_iface.html#a86a3207f8a38ad28908030ee1666c699',1,'Args::GroupIface::process()'],['../class_args_1_1_help.html#a1df5a38c637353b03528cf16fca797c0',1,'Args::Help::process()'],['../class_args_1_1_multi_arg.html#aaffa97a2b9dcfb2946351ed8c2df2ee0',1,'Args::MultiArg::process()']]],
-  ['putback_8',['putBack',['../class_args_1_1_context.html#ad4e57868464f539a793e8d43c622f97c',1,'Args::Context']]]
+  ['parser_20provide_20bindings_20of_20variables_20to_20arguments_2',['Why doesn&apos;t &lt;span class=&quot;tt&quot;&gt;args-parser&lt;/span&gt; provide bindings of variables to arguments?',['../index.html#autotoc_md8',1,'']]],
+  ['parser_20to_20my_20project_3',['How can I add &lt;span class=&quot;tt&quot;&gt;args-parser&lt;/span&gt; to my project?',['../index.html#autotoc_md5',1,'']]],
+  ['parseroptions_4',['parserOptions',['../class_args_1_1_cmd_line.html#ad3d1d62090e1c4ababa7c3be479d6e70',1,'Args::CmdLine']]],
+  ['positional_5',['positional',['../class_args_1_1_cmd_line.html#a01c7e241a376a51f3417ed16271c479b',1,'Args::CmdLine']]],
+  ['positionaldescription_6',['positionalDescription',['../class_args_1_1_cmd_line.html#aaab9bb5414ff2cd56f36714f86af0f2e',1,'Args::CmdLine']]],
+  ['possible_20to_20initialize_20argument_20in_20one_20line_7',['so it will be possible to initialize argument in one line?',['../index.html#autotoc_md4',1,'']]],
+  ['prepend_8',['prepend',['../class_args_1_1_context.html#a412ec734e04688fc7876a3cec86e9f46',1,'Args::Context']]],
+  ['print_9',['print',['../class_args_1_1_help_printer.html#ad9df0fd989c325686a2992b968ac0728',1,'Args::HelpPrinter::print(OutStreamType &amp;to) override'],['../class_args_1_1_help_printer.html#a530ca3f32fb58a6737e6c794209958ab',1,'Args::HelpPrinter::print(const String &amp;name, OutStreamType &amp;to, Command *parent=nullptr) override'],['../class_args_1_1_help_printer_iface.html#ade5c4e6ad7eb9da9880bee0c76f2a30d',1,'Args::HelpPrinterIface::print(OutStreamType &amp;to)=0'],['../class_args_1_1_help_printer_iface.html#a79559cf5692e31f65ee5be8c711ef95c',1,'Args::HelpPrinterIface::print(const String &amp;name, OutStreamType &amp;to, Command *parent=nullptr)=0']]],
+  ['print_20help_20programmatically_10',['How to print help programmatically?',['../index.html#autotoc_md7',1,'']]],
+  ['process_11',['process',['../class_args_1_1_arg.html#a8e2f9d338e41202ae3375230f30b5b23',1,'Args::Arg::process()'],['../class_args_1_1_arg_iface.html#a5082f3a4e08984b8acb046efe7ace3f5',1,'Args::ArgIface::process()'],['../class_args_1_1_command.html#a360a2d7df9f6dc442c3d926dad1f5d15',1,'Args::Command::process()'],['../class_args_1_1_group_iface.html#a86a3207f8a38ad28908030ee1666c699',1,'Args::GroupIface::process()'],['../class_args_1_1_help.html#a1df5a38c637353b03528cf16fca797c0',1,'Args::Help::process()'],['../class_args_1_1_multi_arg.html#aaffa97a2b9dcfb2946351ed8c2df2ee0',1,'Args::MultiArg::process()']]],
+  ['programmatically_12',['How to print help programmatically?',['../index.html#autotoc_md7',1,'']]],
+  ['project_13',['How can I add &lt;span class=&quot;tt&quot;&gt;args-parser&lt;/span&gt; to my project?',['../index.html#autotoc_md5',1,'']]],
+  ['provide_20bindings_20of_20variables_20to_20arguments_14',['Why doesn&apos;t &lt;span class=&quot;tt&quot;&gt;args-parser&lt;/span&gt; provide bindings of variables to arguments?',['../index.html#autotoc_md8',1,'']]],
+  ['provide_20comparisons_20with_20other_20cli_20libraries_15',['Why don&apos;t you provide comparisons with other CLI libraries?',['../index.html#autotoc_md9',1,'']]],
+  ['putback_16',['putBack',['../class_args_1_1_context.html#ad4e57868464f539a793e8d43c622f97c',1,'Args::Context']]]
 ];
