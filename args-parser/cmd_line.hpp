@@ -641,71 +641,65 @@ inline void CmdLine::parse()
                 }
             };
 
-            if (tmp) {
-                if (tmp->type() == ArgType::Command) {
-                    bool stopProcessing = false;
+            if (tmp && tmp->type() == ArgType::Command) {
+                bool stopProcessing = false;
 
-                    try {
-                        if (!m_prevCommand.empty()) {
-                            for (const auto &prev : m_prevCommand) {
-                                const auto &args = prev->children();
+                try {
+                    if (!m_prevCommand.empty()) {
+                        for (const auto &prev : m_prevCommand) {
+                            const auto &args = prev->children();
 
-                                const auto it =
-                                    std::find_if(args.cbegin(), args.cend(), [&tmp](const auto &arg) -> bool {
-                                        return (arg.get() == tmp);
-                                    });
+                            const auto it =
+                                std::find_if(args.cbegin(), args.cend(), [&tmp](const auto &arg) -> bool {
+                                    return (arg.get() == tmp);
+                                });
 
-                                if (it != args.cend() && !m_currCommand->findChild(word)) {
-                                    throw BaseException(String(SL("Only one command from one level can be specified. "
-                                                                  "But you defined \""))
-                                                        + word
-                                                        + SL("\" and \"")
-                                                        + prev->name()
-                                                        + SL("\"."));
-                                }
+                            if (it != args.cend() && !m_currCommand->findChild(word)) {
+                                throw BaseException(String(SL("Only one command from one level can be specified. "
+                                                              "But you defined \""))
+                                                    + word
+                                                    + SL("\" and \"")
+                                                    + prev->name()
+                                                    + SL("\"."));
                             }
-
-                            check();
-                        } else {
-                            check();
                         }
-                    } catch (const BaseException &) {
-                        if (m_opt & HandlePositionalArguments) {
-                            savePositionalArguments(word, splitted, valuePrepended);
 
-                            stopProcessing = true;
-                        } else {
-                            throw;
-                        }
-                    }
-
-                    if (stopProcessing) {
-                        continue;
-                    }
-
-                    if (!m_command) {
-                        m_command = static_cast<Command *>(tmp);
-
-                        m_currCommand = m_command;
-
-                        m_prevCommand.push_back(m_command);
-
-                        m_command->process(m_context);
+                        check();
                     } else {
-                        auto *cmd = static_cast<Command *>(tmp);
-
-                        m_currCommand->setCurrentSubCommand(cmd);
-
-                        m_currCommand = cmd;
-
-                        m_prevCommand.push_back(m_currCommand);
-
-                        m_currCommand->process(m_context);
+                        check();
                     }
-                } else if (m_opt & HandlePositionalArguments) {
-                    savePositionalArguments(word, splitted, valuePrepended);
+                } catch (const BaseException &) {
+                    if (m_opt & HandlePositionalArguments) {
+                        savePositionalArguments(word, splitted, valuePrepended);
+
+                        stopProcessing = true;
+                    } else {
+                        throw;
+                    }
+                }
+
+                if (stopProcessing) {
+                    continue;
+                }
+
+                if (!m_command) {
+                    m_command = static_cast<Command *>(tmp);
+
+                    m_currCommand = m_command;
+
+                    m_prevCommand.push_back(m_command);
+
+                    m_command->process(m_context);
                 } else {
-                    printInfoAboutUnknownArgument(word);
+                    auto *cmd = static_cast<Command *>(tmp);
+
+                    m_currCommand->setCurrentSubCommand(cmd);
+
+                    m_currCommand = cmd;
+
+                    m_prevCommand.push_back(m_currCommand);
+
+                    m_currCommand->process(m_context);
                 }
             } else if (m_opt & HandlePositionalArguments) {
                 savePositionalArguments(word, splitted, valuePrepended);
