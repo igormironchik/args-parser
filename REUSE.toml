@@ -16,7 +16,7 @@ SPDX-FileCopyrightText = "2016-2021 Viktor Kirilov"
 SPDX-License-Identifier = "MIT"
 
 [[annotations]]
-path = [".github/**", ".gitignore", "codecov.yml", "doc/**", "REUSE.toml"]
+path = [".github/**", ".gitignore", "codecov.yml", "doc/**", "REUSE.toml", "apply-clang-format.sh"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Igor Mironchik <igor.mironchik@gmail.com>"
 SPDX-License-Identifier = "MIT"
