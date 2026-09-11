@@ -3,10 +3,8 @@
 	SPDX-License-Identifier: MIT
 -->
 
-This is `args-parser`.
-
-`args-parser` is a small C++ header-only library for parsing command line arguments.
-
+* [About](#about)
+* [License](#license)
 * [Syntax](#syntax)
 * [Different types of strings.](#different-types-of-strings)
 * [Different types of list of strings.](#different-types-of-list-of-strings)
@@ -22,6 +20,21 @@ This is `args-parser`.
   * [One-line syntax with commands](#one-line-syntax-with-commands)
   * [One-line syntax with arguments](#one-line-syntax-with-arguments)
   * [And with the old syntax](#and-with-the-old-syntax)
+
+# About
+
+This is `args-parser`.
+
+`args-parser` is a small C++ header-only library for parsing command line arguments.
+
+# License
+
+```
+/*
+    SPDX-FileCopyrightText: 2026 Igor Mironchik <igor.mironchik@gmail.com>
+    SPDX-License-Identifier: MIT
+*/
+```
 
 # Syntax
 
